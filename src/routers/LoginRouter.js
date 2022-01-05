@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { LoginScreen } from "../components/auth/LoginScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 
 export const LoginRouter = () => {
