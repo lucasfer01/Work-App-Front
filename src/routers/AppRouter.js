@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+// import { NavBar } from "../components/auth/NavBar/NavBar.js";
+
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -41,8 +43,10 @@ export const AppRouter = () => {
             path="/auth/*"
             element={
               <PublicRoute isAuthenticated={isLoggedIn}>
+                {/* <NavBar /> */}
                 <AuthRouter />
               </PublicRoute>
+              
             }
           />
           <Route
