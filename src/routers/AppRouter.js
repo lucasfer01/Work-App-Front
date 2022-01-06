@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import { AuthRouter } from "./AuthRouter";
 import { LoginRouter } from "./LoginRouter";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
@@ -10,7 +9,8 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 // import { NavBar } from "../components/auth/NavBar/NavBar.js";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails.js"
-
+import Landing from '../components/Landing/Landing'
+import { RegisterScreen } from "../components/auth/RegisterScreen";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -41,17 +41,24 @@ export const AppRouter = () => {
       <Router>
         <Routes>
           <Route
-            path="/auth/*"
+            path="/"
             element={
               <PublicRoute isAuthenticated={isLoggedIn}>
-                {/* <NavBar /> */}
-                <AuthRouter />
+                <Landing isAuthenticated={isLoggedIn}/>
               </PublicRoute>
               
             }
           />
           <Route
-            path="/*"
+            path="/register"
+            element={
+              <PublicRoute isAuthenticated={isLoggedIn}>
+                <RegisterScreen/>
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/home/*"
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
                 <LoginRouter />

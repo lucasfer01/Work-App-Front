@@ -2,10 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import './LoginScreen.css'
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import Boton from '../Boton/Boton'
+import { getAuth } from "@firebase/auth";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -74,7 +76,7 @@ export const LoginScreen = () => {
             </p>
           </div>
         </div>
-        <Link to="/auth/register" className="link_new_account">
+        <Link to="/register" className="link_new_account">
           Create new account
         </Link>
       </form>
