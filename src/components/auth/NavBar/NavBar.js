@@ -9,7 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
@@ -97,8 +97,9 @@ export const NavBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+       {/* Lo que aparece cuando apreto el profile */}
+      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Mi cuenta</MenuItem>
     </Menu>
   );
 
@@ -120,24 +121,23 @@ export const NavBar = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+        <IconButton size="large"  color="inherit">
+          <Badge color="error">
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Mensaje</p>
       </MenuItem>
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Notificaciones</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -149,7 +149,7 @@ export const NavBar = () => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Perfil</p>
       </MenuItem>
     </Menu>
   );
@@ -165,7 +165,7 @@ export const NavBar = () => {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            {/* Ícono de menú sacado <MenuIcon /> */}
           </IconButton>
           <Typography
             variant="h6"
@@ -173,30 +173,29 @@ export const NavBar = () => {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Jobs-App
           </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Buscar…"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+            <IconButton size="large" color="inherit">
+              <Badge color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge  color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
