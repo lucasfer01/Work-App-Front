@@ -1,0 +1,31 @@
+#Login_card{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+}
+
+.auth__title{
+    text-align: center;
+    font-size: 30px;
+}
+
+#Login_card form{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+#Login_card form input{
+    margin: 3px;
+    border-radius: 10px;
+    border: solid white; 
+}
+
+.auth__social-networks{
+    height: 90px;
+}
+
+.link_new_account{
+    text-align: center;
+}
