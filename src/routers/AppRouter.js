@@ -9,6 +9,7 @@ import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 // import { NavBar } from "../components/auth/NavBar/NavBar.js";
+import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails.js"
 
 
 export const AppRouter = () => {
@@ -56,6 +57,14 @@ export const AppRouter = () => {
                 <LoginRouter />
               </PrivateRoute>
             }
+          />
+          <Route
+          path= "/profile/*"
+          element={
+            <PrivateRoute isAuthenticated={isLoggedIn}>
+              <ProfileDetails></ProfileDetails>
+            </PrivateRoute>
+          }
           />
         </Routes>
       </Router>
