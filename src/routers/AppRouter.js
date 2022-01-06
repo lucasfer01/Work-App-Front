@@ -8,8 +8,9 @@ import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
-// import { NavBar } from "../components/auth/NavBar/NavBar.js";
+import { NavBar } from "../components/auth/NavBar/NavBar.js";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails.js"
+import Landing from "../components/Landing/Landing.js";
 
 
 export const AppRouter = () => {
@@ -41,11 +42,11 @@ export const AppRouter = () => {
       <Router>
         <Routes>
           <Route
-            path="/auth/*"
+            path="/"
             element={
               <PublicRoute isAuthenticated={isLoggedIn}>
                 {/* <NavBar /> */}
-                <AuthRouter />
+                <Landing />
               </PublicRoute>
               
             }
