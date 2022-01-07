@@ -1,14 +1,8 @@
 import React from "react";
 import './Landing.css'
 import { LoginScreen } from "../auth/LoginScreen";
-import {useNavigate} from 'react-router'
 
-export default function Landing(isAuthenticated){
-    const navigate = useNavigate(); 
-    React.useEffect(()=>{
-        if(isAuthenticated.isAuthenticated){navigate('/home')}
-
-    },[isAuthenticated])
+export default function Landing(){
     return (
         <div className='main_landing_container'>
             <div  className="about_landing">

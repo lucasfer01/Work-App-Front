@@ -44,7 +44,7 @@ export const AppRouter = () => {
             path="/"
             element={
               <PublicRoute isAuthenticated={isLoggedIn}>
-                <Landing isAuthenticated={isLoggedIn}/>
+                <Landing/>
               </PublicRoute>
               
             }
@@ -58,21 +58,14 @@ export const AppRouter = () => {
             }
           />
           <Route
-            path="/home/*"
+            path="/*"
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
                 <LoginRouter />
               </PrivateRoute>
             }
           />
-          <Route
-          path= "/profile/*"
-          element={
-            <PrivateRoute isAuthenticated={isLoggedIn}>
-              <ProfileDetails></ProfileDetails>
-            </PrivateRoute>
-          }
-          />
+          {/* No poner más rutas aquí, pornerlas en LoginRouter.js */}
         </Routes>
       </Router>
     </div>
