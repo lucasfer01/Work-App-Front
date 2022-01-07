@@ -2,14 +2,18 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "../components/navbar/Navbar";
 import { HomeScreen } from "../components/home/HomeScreen";
+import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 
 export const LoginRouter = () => {
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="*" element={<HomeScreen />} />
-      </Routes>
-    </>
+    <div>
+      <div>
+        <Routes>
+          <Route path="home" element={<HomeScreen />} />
+          <Route path="profile" element={<ProfileDetails />} />
+          {/* {Todas las rutas privadas deben ir aquí} */}
+        </Routes>
+      </div>
+    </div>
   );
 };

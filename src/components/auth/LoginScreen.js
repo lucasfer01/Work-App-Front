@@ -1,10 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import "./LoginScreen.css";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
+import Boton from "../Boton/Boton";
+import { getAuth } from "@firebase/auth";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -27,7 +30,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <>
+    <div id="Login_card">
       <h3 className="auth__title">Login</h3>
       <form
         className="animate__animated animate__fadeIn animate__faster"
@@ -50,13 +53,13 @@ export const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <button
+        <Boton
           type="submit"
           className="btn btn-primary btn-block"
           disabled={loading}
         >
           Login
-        </button>
+        </Boton>
 
         <div className="auth__social-networks">
           <p>Login with social networks</p>
@@ -73,10 +76,10 @@ export const LoginScreen = () => {
             </p>
           </div>
         </div>
-        <Link to="/auth/register" className="link">
+        <Link to="/register" className="link_new_account">
           Create new account
         </Link>
       </form>
-    </>
+    </div>
   );
 };
