@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 import { AuthRouter } from "./AuthRouter";
 import { LoginRouter } from "./LoginRouter";
 import { useDispatch } from "react-redux";
