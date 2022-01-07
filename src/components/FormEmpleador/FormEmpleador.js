@@ -22,7 +22,7 @@ export default function FormEmpleador(){
                 <input type='file' onChange={event=> setPost({...post, foto: event.target.files[0]})}/>
             </div>
             <div className='formEmpleado_boton'>
-                <Boton colorBtn={'btn_azul'}> Postear</Boton>
+                <div><Boton colorBtn={'btn_azul'}> Postear</Boton></div>
             </div>
         </div>
     )
