@@ -1,6 +1,10 @@
 import { types } from "../types/types";
 
-export const authReducer = (state = {}, action) => {
+const initialState = {
+  loginScreenActive: false,
+};
+
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.login:
       return {
@@ -9,6 +13,9 @@ export const authReducer = (state = {}, action) => {
       };
     case types.logout:
       return {};
+
+    case types.loginFormScreen:
+      return { ...state, loginScreenActive: !state.loginScreenActive };
 
     default:
       return state;

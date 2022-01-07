@@ -1,10 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import validator from "validator";
-import { startRegisterWithEmailPasswordName } from "../../actions/auth";
-import { removeError, setError } from "../../actions/ui";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  loginFormScreen,
+  startRegisterWithEmailPasswordName,
+} from "../../actions/auth";
+import { removeError, setError } from "../../actions/ui";
 import { useForm } from "../../hooks/useForm";
 
 export const RegisterScreen = () => {
@@ -27,6 +29,10 @@ export const RegisterScreen = () => {
     }
   };
 
+  const handleRegisterForm = () => {
+    dispatch(loginFormScreen("login"));
+  };
+
   const isFormValid = () => {
     if (name.trim().length === 0) {
       dispatch(setError("Name is required"));
@@ -34,7 +40,7 @@ export const RegisterScreen = () => {
     } else if (!validator.isEmail(email)) {
       dispatch(setError("Email is not valid"));
       return false;
-    } else if (password !== password2 || password.length < 7) {
+    } else if (password !== password2 || password.length < 6) {
       dispatch(
         setError(
           "Password should be at least 6 characters and match each other"
@@ -48,9 +54,9 @@ export const RegisterScreen = () => {
 
   return (
     <>
-      <h3 className="auth__title">Register</h3>
+      <h3 className="text-center my-2">Register</h3>
       <form
-        className="animate__animated animate__fadeIn animate__faster"
+        className="animate__animated animate__fadeIn animate__faster mt-2"
         onSubmit={handleRegister}
       >
         {msgError && <div className="auth__alert-error">{msgError}</div>}
@@ -58,7 +64,7 @@ export const RegisterScreen = () => {
           type="text"
           placeholder="Name"
           name="name"
-          className="auth__input"
+          className="auth__input mt-2"
           autoComplete="off"
           value={name}
           onChange={handleInputChange}
@@ -91,9 +97,14 @@ export const RegisterScreen = () => {
         <button type="submit" className="btn btn-primary btn-block">
           Register
         </button>
-        <Link to="/auth/login" className="link">
+        <hr />
+        <button
+          type="button"
+          onClick={handleRegisterForm}
+          className="link btn btn-success text-white my-2 mx-auto w-50"
+        >
           Already Register?
-        </Link>
+        </button>
       </form>
     </>
   );

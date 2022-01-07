@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import "./LoginScreen.css";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
+
+import {
+  loginFormScreen,
+  startGoogleLogin,
+  startLoginEmailPassword,
+} from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
-import Boton from "../Boton/Boton";
-import { getAuth } from "@firebase/auth";
+import { ForgetPassScreen } from "./ForgetPassScreen";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -29,18 +30,22 @@ export const LoginScreen = () => {
     dispatch(startGoogleLogin());
   };
 
+  const handleLoginForm = () => {
+    dispatch(loginFormScreen("register"));
+  };
+
   return (
-    <div id="Login_card">
-      <h3 className="auth__title">Login</h3>
+    <>
+      <h3 className="text-center my-2">Login</h3>
       <form
-        className="animate__animated animate__fadeIn animate__faster"
+        className="animate__animated animate__fadeIn animate__faster mt-2"
         onSubmit={handleLogin}
       >
         <input
           type="text"
           placeholder="Email"
           name="email"
-          className="auth__input"
+          className="auth__input mt-2"
           autoComplete="off"
           value={email}
           onChange={handleInputChange}
@@ -53,13 +58,24 @@ export const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <Boton
+        <button
           type="submit"
           className="btn btn-primary btn-block"
           disabled={loading}
         >
           Login
-        </Boton>
+        </button>
+
+        <button
+          type="button"
+          className="btn btn-link mt-2"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Forget password?
+        </button>
+
+        <hr />
 
         <div className="auth__social-networks">
           <p>Login with social networks</p>
@@ -76,10 +92,17 @@ export const LoginScreen = () => {
             </p>
           </div>
         </div>
-        <Link to="/register" className="link_new_account">
+        <hr />
+        <button
+          type="button"
+          onClick={handleLoginForm}
+          className="btn btn-success text-white link my-2 mx-auto w-50"
+        >
           Create new account
-        </Link>
+        </button>
       </form>
-    </div>
+      
+      <ForgetPassScreen />
+    </>
   );
 };
