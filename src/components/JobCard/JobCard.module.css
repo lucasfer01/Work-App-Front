@@ -1,0 +1,29 @@
+.divCard {
+    background-image: url("https://cursosvirtualesgratis.com/wp-content/uploads/2020/09/donde-aprender-carpinteria-cursos-de-carpinteria.jpg");
+    background-size: 100% 100%;
+    border-radius: 1rem;
+    height: 3em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+@media (min-width: 680px){
+    .divCard {
+        height: 4em;
+        width: 12em;
+    }
+}
+
+@media (min-width: 920px){
+    .divCard {
+        height: 4em;
+        width: 12em;
+    }
+}
