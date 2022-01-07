@@ -55,7 +55,7 @@ export const LoginScreen = () => {
         />
         <Boton
           type="submit"
-          colorBtn ={"btn_azul"}
+          colorBtn ={"btn_azulLine"}
           disabled={loading}
         >
           Login

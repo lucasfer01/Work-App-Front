@@ -1,13 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomeScreen } from "../components/home/HomeScreen";
+import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 
 export const LoginRouter = () => {
   return (
-    <div className="auth__main">
-      <div className="auth__box-container">
+    <div>
+      <div>
         <Routes>
-          <Route path="*" element={<HomeScreen />} />
+          <Route path="home" element={<HomeScreen />} />
+          <Route path='profile' element={ <ProfileDetails/>}/>
+          {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
     </div>
