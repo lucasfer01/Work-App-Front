@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getJobs } from "../../controllers";
 import JobCard from "../JobCard/JobCard";
-import axios from "axios";
+import styles from "./Jobs.module.css";
+
 
 
 export default function Jobs() {
@@ -22,9 +23,9 @@ export default function Jobs() {
     }, []);
 
     return (
-        <div>
+        <div className={styles.container}>
             {
-                jobs.map((job) => {
+                jobs?.map((job) => {
                     return (
                         <JobCard
                             key={job.job_id}
