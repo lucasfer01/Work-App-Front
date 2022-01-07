@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { googleAuthProvider } from "../firebase/firebaseConfig";
 import { types } from "../types/types";
@@ -40,9 +41,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
       })
       .catch((err) => {
         console.log(err);
-        if (password.length < 6)
-          Swal.fire("Error", "Password to short", "error");
-        else Swal.fire("Error", "Email already registered", "error");
+        Swal.fire("Error", "Email already registered", "error");
       });
   };
 };
@@ -53,6 +52,13 @@ export const startGoogleLogin = () => {
     signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
       dispatch(login(user.uid, user.displayName));
     });
+  };
+};
+
+export const startResetPassword = (email) => {
+  return () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email);
   };
 };
 
@@ -74,4 +80,8 @@ export const startLogout = () => {
 
 export const logout = () => ({
   type: types.logout,
+});
+
+export const loginFormScreen = () => ({
+  type: types.loginFormScreen,
 });

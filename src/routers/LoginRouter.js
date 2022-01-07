@@ -9,7 +9,7 @@ export const LoginRouter = () => {
       <div>
         <Routes>
           <Route path="home" element={<HomeScreen />} />
-          <Route path='profile' element={ <ProfileDetails/>}/>
+          <Route path="profile" element={<ProfileDetails />} />
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
