@@ -1,0 +1,21 @@
+.jobsContainer {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    gap: 2vw;
+}
+
+@media (min-width: 680px){
+    .container {
+        display: inline-grid;
+        grid-template-columns: auto auto auto;
+        gap: 2vw;
+    }
+}
+
+@media (min-width: 920px){
+    .container {
+        display: inline-grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 2vw;
+    }
+}
