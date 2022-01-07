@@ -88,10 +88,9 @@ export const RegisterScreen = () => {
           value={password2}
           onChange={handleInputChange}
         />
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary btn-block">
           Register
         </button>
-
         <Link to="/auth/login" className="link">
           Already Register?
         </Link>
