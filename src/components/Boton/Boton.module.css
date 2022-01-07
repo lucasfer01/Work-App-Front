@@ -1,10 +1,9 @@
 .btn{
     border: none;
+    border-radius: 5px;
     padding: 10px 27px;
-    /* transition: var(--transition); */
     display: inline-block;
-    margin: 10px;
-    /* font-family: var(--fonttitle); */
+    margin: 5px;
     font-size: 17px;
     letter-spacing: 0.5px;
     cursor: pointer
@@ -17,16 +16,22 @@
 .btn_azul{
     background-color: #014B7C;
     color: white;
+    border: solid #014B7C; 
 }
 .btn_azul:hover{
-    background-color: #D42232;
+    background-color: white;
+    color: #014B7C;
+    border: solid #014B7C;
 }
 .btn_rojo{
     background-color: #D42232;
     color: white;
+    border: solid #D42232; 
 }
 .btn_rojo:hover{
-    background-color: #014B7C;
+    background-color: white;
+    color: #D42232;
+    border: solid #D42232;
 }
 
 .btn_azulLine{
@@ -50,5 +55,3 @@
     background-color: #D42232;
     color: white;
 }
-
-
