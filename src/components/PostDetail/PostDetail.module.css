@@ -1,0 +1,31 @@
+.container {
+    width: 45vw;
+    background-color: aquamarine;
+    margin-top: 5em;
+    margin-left: 5em;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.divimg {
+    width: 5em;
+}
+
+img {
+    width: 25em;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    margin-left: 3em;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
