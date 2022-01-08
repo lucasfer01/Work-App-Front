@@ -1,8 +1,43 @@
-.divCard {
-    border-radius: 1rem;
-    height: 10em;
-    width: 40em;
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    background-color: thistle;
+    width: 100vw;
+    height: 25vh;
+}
+
+img {
+    width: 35vw;
+}
+
+.title {
+    background-color: steelblue;
+    color : white;
+}
+
+.foot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+@media (min-width: 360px){
+    .description {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    img {
+        width: 25vw;
+    }
+}
+
+@media (min-width: 780px){
+    .container {
+        width: 45vw;
+        height: 28vh;
+    }
+    img {
+        width: 10em;
+    }
 }
