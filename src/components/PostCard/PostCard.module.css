@@ -6,13 +6,13 @@
     height: 25vh;
 }
 
-img {
-    width: 35vw;
-}
-
 .title {
     background-color: steelblue;
     color : white;
+}
+
+.description > img {
+    height: 6em;
 }
 
 .foot {
@@ -27,17 +27,11 @@ img {
         flex-direction: row;
         justify-content: space-evenly;
     }
-    img {
-        width: 25vw;
-    }
 }
 
 @media (min-width: 780px){
     .container {
         width: 45vw;
         height: 28vh;
-    }
-    img {
-        width: 10em;
     }
 }
