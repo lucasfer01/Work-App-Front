@@ -9,11 +9,8 @@
     gap: 2em;
 }
 
-.divimg {
-    width: 5em;
-}
 
-img {
+.divimg > img {
     width: 25em;
 }
 
