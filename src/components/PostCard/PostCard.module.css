@@ -1,0 +1,8 @@
+.divCard {
+    border-radius: 1rem;
+    height: 10em;
+    width: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
