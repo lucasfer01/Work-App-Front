@@ -8,7 +8,8 @@ import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 // import { NavBar } from "../components/auth/NavBar/NavBar.js";
-import Landing from '../components/Landing/Landing'
+import Landing from "../components/Landing/Landing";
+import { LoadingScreen } from "../components/loadingScreen/LoadingScreen";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const AppRouter = () => {
   }, [dispatch, setchecking, setIsLoggedIn]);
 
   if (checking) {
-    return <h1>Esperando.....</h1>;
+    return <LoadingScreen />;
   }
 
   return (
@@ -41,9 +42,8 @@ export const AppRouter = () => {
             path="/"
             element={
               <PublicRoute isAuthenticated={isLoggedIn}>
-                <Landing/>
+                <Landing />
               </PublicRoute>
-              
             }
           />
           <Route
