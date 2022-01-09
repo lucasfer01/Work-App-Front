@@ -5,8 +5,6 @@ import Home from "../components/home/Home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 
-import { LoadingScreen } from "../components/loadingScreen/LoadingScreen";
-
 export const LoginRouter = () => {
   return (
     <div>
@@ -16,9 +14,6 @@ export const LoginRouter = () => {
           <Route path="jobs" element={<Home type="jobs" />} />
           <Route path="profile" element={<ProfileDetails type="jobs" />} />
           <Route path="post/:id" element={<PostDetail />} />
-
-          <Route path="loading" element={<LoadingScreen />} />
-
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
