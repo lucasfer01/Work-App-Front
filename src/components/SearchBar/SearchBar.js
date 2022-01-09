@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SearchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+// SearchBar Actions
+import axios from "axios";
+// urls
+import { JOB_URL} from '../../enviroment';
 
 export const SearchBar = () => {
-  const jobs = [
-    { name: "Carpintero", description: "Muebles a medida" },
-    { name: "Chofer", description: "Colectivo larga distancia" },
-    { name: "Mecánico", description: "Automoviles y Motocicletas" },
-    { name: "Albañil", description: "En geeneral" },
-    { name: "Plomero", description: "Trabajos de todo tipo" },
-    { name: "Mantenimiento", description: "En un hospital" },
-  ];
+  
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    // Hacemos peticion de los trabajos en el back
+    axios.get(JOB_URL)
+      .then(jobs => setJobs(jobs.data))
+
+  }, []);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = jobs.filter((value) => {
-      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+      return value.job_name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
     if (searchWord === "") {
@@ -36,6 +41,7 @@ export const SearchBar = () => {
 
   return (
     <div className="search">
+
       <div className="searchInputs">
         <input
           type="text"
@@ -55,8 +61,8 @@ export const SearchBar = () => {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a className="dataItem" target="_blank">
-                <p>{value.name} </p>
+              <a key={value.job_id} href='#' className="dataItem" target="_blank">
+                <p>{value.job_name} </p>
               </a>
             );
           })}

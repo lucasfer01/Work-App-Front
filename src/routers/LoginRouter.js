@@ -13,7 +13,7 @@ export const LoginRouter = () => {
 
           <Route path="home" element={<Home type="posts" />} />
           <Route path="jobs" element={<Home type="jobs" />} />
-          <Route path="profile" element={<ProfileDetails type="jobs"/>} />
+          <Route path="profile" element={<ProfileDetails type="jobs" />} />
           <Route path="post/:id" element={<PostDetail />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
