@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
+import { profileReducer } from "../../reducers/profileReducer";
 import { NavBar } from "../auth/NavBar/NavBar";
 import Boton from "../Boton/Boton";
 import Cards from "../Cards/Cards";
@@ -12,12 +13,12 @@ import s from "./ProfileDetails.module.css"
 
 export const ProfileDetails = ({type}) => {
   const {userId} = useParams()
+  let user= useSelector((state) => state.profile.user)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
   }, []);
-  let user = useSelector((state) => state.user)
-
+  console.log(user)
 
 
   const [jobs, setJobs] = useState([]);
@@ -60,7 +61,7 @@ export const ProfileDetails = ({type}) => {
     <div className={s.Content}>
       <div className={s.Header}>
         <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fqph.fs.quoracdn.net%2Fmain-qimg-7ca600a4562ef6a81f4dc2bd5c99fee9-c&f=1&nofb=1"
+          src={user.usr_photo}
           alt="profilePicture"
         ></img>
         
@@ -68,8 +69,8 @@ export const ProfileDetails = ({type}) => {
         <Boton  colorBtn={"btn_azulLine"} onClick={()=>{"aqui tu función"}}>Edit Profile</Boton>
         </div>
       </div>
-      <h2 className={s.UserName}>User Nme</h2>
-      <div className={s.ProfileInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      <h2 className={s.UserName}>{user.usr_username}</h2>
+      <div className={s.ProfileInfo}>{user.usr_description}</div>
 
 
       {/* Cards de jobs y posts ↓ */}
