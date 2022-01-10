@@ -5,9 +5,10 @@ export function profileUser(userId){
     return function(dispatch){
         axios.get(`http://localhost:3000/user/${userId}`)
         .then((user) =>{
+            console.log("action user", user)
             dispatch({
                 type: types.profileUser,
-                payload: user
+                payload: user.data
             })
         })
         .catch((error) => {
