@@ -7,4 +7,8 @@ export const types = {
   uiRemoveError: "[UI] Remove Error",
   uiStartLoading: "[UI] Start loading",
   uiFinishLoading: "[UI] Finish loading",
+
+  profileUser: "[P] User",
+  profileJobs: "[P] Jobs",
+  profilePosts: "[P] Posts",
 };

@@ -4,6 +4,7 @@ import { startLogout } from "../../actions/auth";
 import Cards from "../Cards/Cards";
 import styles from "./Home.module.css";
 import { getJobs, getPosts } from "../../controllers";
+import { SearchBar } from "../SearchBar/SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ export default function Home() {
 
   return (
     <div>
+      <div className={styles.search}>
+      <SearchBar  />
+      </div>
       <div>
         <h3>Filters here</h3>
       </div>
