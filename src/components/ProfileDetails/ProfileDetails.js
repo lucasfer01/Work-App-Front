@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
+import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
 import { NavBar } from "../auth/NavBar/NavBar";
 import Boton from "../Boton/Boton";
@@ -9,7 +11,15 @@ import s from "./ProfileDetails.module.css"
 
 
 export const ProfileDetails = ({type}) => {
+  const {userId} = useParams()
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(profileUser(userId))
+  }, []);
+  let user = useSelector((state) => state.user)
+
+
+
   const [jobs, setJobs] = useState([]);
   const [posts, setPosts] = useState([]);
   let data;
@@ -44,10 +54,7 @@ export const ProfileDetails = ({type}) => {
 
   return (
     <div>
-
-      <div>
-        <NavBar />
-      </div>
+      
     <div className={s.Content}>
       <div className={s.Header}>
         <img
