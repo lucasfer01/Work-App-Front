@@ -9,6 +9,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 // import { NavBar } from "../components/auth/NavBar/NavBar.js";
 import Landing from '../components/Landing/Landing'
+import Sidebar from "../components/nav/Sidebar";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export const AppRouter = () => {
   return (
     <div>
       <Router>
+      <Sidebar />
         <Routes>
           <Route
             path="/"
