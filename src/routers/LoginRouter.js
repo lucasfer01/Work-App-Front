@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../components/home/Home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
+import { NavBar } from "../components/auth/NavBar/NavBar";
 
 export const LoginRouter = () => {
   return (
@@ -13,7 +14,7 @@ export const LoginRouter = () => {
 
           <Route path="home" element={<Home type="posts" />} />
           <Route path="jobs" element={<Home type="jobs" />} />
-          <Route path="profile" element={<ProfileDetails type="jobs"/>} />
+          <Route path="profile" element={<ProfileDetails type="jobs" />} />
           <Route path="post/:id" element={<PostDetail />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
