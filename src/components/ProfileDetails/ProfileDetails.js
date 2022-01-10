@@ -54,7 +54,9 @@ export const ProfileDetails = ({type}) => {
 
   return (
     <div>
-      
+      {/* <div>
+        <NavBar />
+      </div> */}
     <div className={s.Content}>
       <div className={s.Header}>
         <img
@@ -66,7 +68,7 @@ export const ProfileDetails = ({type}) => {
         <Boton  colorBtn={"btn_azulLine"} onClick={()=>{"aqui tu función"}}>Edit Profile</Boton>
         </div>
       </div>
-      <h2 className={s.UserName}>User Name</h2>
+      <h2 className={s.UserName}>User Nme</h2>
       <div className={s.ProfileInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
 
 
