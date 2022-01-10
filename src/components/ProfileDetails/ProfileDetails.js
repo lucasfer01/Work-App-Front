@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../actions/auth";
 import { getJobs, getPosts } from "../../controllers";
-import { NavBar } from "../auth/NavBar/NavBar";
 import Boton from "../Boton/Boton";
 import Cards from "../Cards/Cards";
 import s from "./ProfileDetails.module.css"
@@ -45,9 +44,6 @@ export const ProfileDetails = ({type}) => {
   return (
     <div>
 
-      <div>
-        <NavBar />
-      </div>
     <div className={s.Content}>
       <div className={s.Header}>
         <img
