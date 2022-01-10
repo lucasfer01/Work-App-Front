@@ -8,9 +8,12 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import axios from "axios";
+
 import { googleAuthProvider } from "../firebase/firebaseConfig";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
+import { POST_USER } from "../enviroment";
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
@@ -36,6 +39,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         console.log(user);
+        registerUserDB(user);
         await updateProfile(user, { displayName: name });
         dispatch(login(user.uid, user.displayName));
       })
@@ -50,9 +54,29 @@ export const startGoogleLogin = () => {
   return (dispatch) => {
     const auth = getAuth();
     signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
+      registerUserDB(user);
       dispatch(login(user.uid, user.displayName));
     });
   };
+};
+
+export const registerUserDB = async (user) => {
+  const { uid, displayName, photoURL, email } = user;
+  const data = {
+    usr_id: uid,
+    usr_email: email,
+    usr_username: displayName,
+    usr_photo: photoURL,
+  };
+
+  await axios
+    .post(POST_USER, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 export const startResetPassword = (email) => {

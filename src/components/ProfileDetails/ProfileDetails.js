@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
+import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
-import { NavBar } from "../auth/NavBar/NavBar";
 import Boton from "../Boton/Boton";
 import Cards from "../Cards/Cards";
 import s from "./ProfileDetails.module.css"
 
 
 export const ProfileDetails = ({type}) => {
+  const {userId} = useParams()
+  let user= useSelector((state) => state.profile.user)
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(profileUser(userId))
+  }, []);
+  console.log(user)
+
+
   const [jobs, setJobs] = useState([]);
   const [posts, setPosts] = useState([]);
   let data;
@@ -45,13 +54,10 @@ export const ProfileDetails = ({type}) => {
   return (
     <div>
 
-      <div>
-        <NavBar />
-      </div>
     <div className={s.Content}>
       <div className={s.Header}>
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fqph.fs.quoracdn.net%2Fmain-qimg-7ca600a4562ef6a81f4dc2bd5c99fee9-c&f=1&nofb=1"
+        <img className={s.ProfileImg}
+          src={user.usr_photo}
           alt="profilePicture"
         ></img>
         
@@ -59,14 +65,14 @@ export const ProfileDetails = ({type}) => {
         <Boton  colorBtn={"btn_azulLine"} onClick={()=>{"aqui tu función"}}>Edit Profile</Boton>
         </div>
       </div>
-      <h2 className={s.UserName}>User Name</h2>
-      <div className={s.ProfileInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      <h2 className={s.UserName}>{user.usr_username}</h2>
+      <div className={s.ProfileInfo}>{user.usr_description}</div>
 
 
       {/* Cards de jobs y posts ↓ */}
       <div className={s.Cards}>
       <div className={s.JobsCard}> 
-        <Cards type={type} data={data}></Cards>
+        {/* <Cards type={type} data={data}></Cards> */}
       </div>
       <div className={s.PostsCard}>
         <div>Post 1</div>
