@@ -7,6 +7,7 @@ import { POST_URL, JOB_URL } from '../enviroment';
 export const getJobs = async () => {
     // Peticion de todos los oficios
     const { data } = await axios.get(JOB_URL);
+    console.log('datajobs', data)
     return data;
 }
 

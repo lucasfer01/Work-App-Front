@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
+import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
 import Boton from "../Boton/Boton";
 import Cards from "../Cards/Cards";
@@ -8,7 +10,15 @@ import s from "./ProfileDetails.module.css"
 
 
 export const ProfileDetails = ({type}) => {
+  const {userId} = useParams()
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(profileUser(userId))
+  }, []);
+  let user = useSelector((state) => state.user)
+
+
+
   const [jobs, setJobs] = useState([]);
   const [posts, setPosts] = useState([]);
   let data;
@@ -43,7 +53,6 @@ export const ProfileDetails = ({type}) => {
 
   return (
     <div>
-
     <div className={s.Content}>
       <div className={s.Header}>
         <img
@@ -55,7 +64,7 @@ export const ProfileDetails = ({type}) => {
         <Boton  colorBtn={"btn_azulLine"} onClick={()=>{"aqui tu función"}}>Edit Profile</Boton>
         </div>
       </div>
-      <h2 className={s.UserName}>User Name</h2>
+      <h2 className={s.UserName}>User Nme</h2>
       <div className={s.ProfileInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
 
 
