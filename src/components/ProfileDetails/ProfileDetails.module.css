@@ -5,6 +5,9 @@
     /* justify-content: center; */
 }
 
+.ProfileImg{
+    max-width: 200px;
+}
 .Header{
     position: relative;
     margin: 30px;
