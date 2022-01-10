@@ -19,5 +19,5 @@ Instalar dependencias
 Correr la aplicación
 
 ```bash
-  En la misma consola escribir "npm start"
+  En la misma consola escribir "npm start"test1
 ```
