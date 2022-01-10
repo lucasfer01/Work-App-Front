@@ -45,9 +45,9 @@ export const ProfileDetails = ({type}) => {
   return (
     <div>
 
-      <div>
+      {/* <div>
         <NavBar />
-      </div>
+      </div> */}
     <div className={s.Content}>
       <div className={s.Header}>
         <img

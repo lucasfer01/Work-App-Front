@@ -24,3 +24,25 @@ p{
 .formEmpleado_boton div{
     grid-column: x2/x3;
 }
+
+.formEmpleado_fotos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.boxfoto {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: solid black;
+}
+
+.boxfoto > input {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.boxfoto > button {
+    width: 30px;
+    height: 30px;
+}
