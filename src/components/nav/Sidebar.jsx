@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { BsPersonBoundingBox } from "react-icons/bs";
 import { SidebarData } from './data';
 import SubMenu from './Submenu';
 import { IconContext } from 'react-icons/lib';
@@ -28,7 +27,7 @@ const NavIcon = styled(Link)`
 const Center = styled.div`
   flex: 5;
   text-align: center;
-  margin-left: 15%;
+  margin-left: 0%;
 `;
 
 const Logo = styled.h1`
@@ -38,20 +37,6 @@ const Logo = styled.h1`
   letter-spacing: 5px;
 `;
 
-const Right = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 45px;
-`;
-
-const MenuItem = styled.div`
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 1px;
-  color: white;
-`;
 
 const SidebarNav = styled.nav`
   background: #003874;
@@ -87,17 +72,6 @@ const Sidebar = () => {
           <Logo>WORKINLING.</Logo>
           </Link>
         </Center>
-        <Right>
-          <Link to="/register">
-          <MenuItem>
-          <BsPersonBoundingBox />
-          REGISTER
-          </MenuItem>
-          </Link>
-          <Link to="/login">
-          <MenuItem>SIGN IN</MenuItem>
-          </Link>
-        </Right>
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>

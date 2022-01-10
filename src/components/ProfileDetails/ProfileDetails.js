@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
-import { profileReducer } from "../../reducers/profileReducer";
-import { NavBar } from "../auth/NavBar/NavBar";
 import Boton from "../Boton/Boton";
 import Cards from "../Cards/Cards";
 import s from "./ProfileDetails.module.css"
@@ -55,9 +53,6 @@ export const ProfileDetails = ({type}) => {
 
   return (
     <div>
-      {/* <div>
-        <NavBar />
-      </div> */}
     <div className={s.Content}>
       <div className={s.Header}>
         <img

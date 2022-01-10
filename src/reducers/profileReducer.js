@@ -1,5 +1,4 @@
 import { types } from "../types/types";
-import { profileUser } from "../actions/profileActions";
 
 const initialState = {
     user: {},
