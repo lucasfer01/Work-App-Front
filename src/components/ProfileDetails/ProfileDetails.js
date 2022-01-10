@@ -53,6 +53,7 @@ export const ProfileDetails = ({type}) => {
 
   return (
     <div>
+
     <div className={s.Content}>
       <div className={s.Header}>
         <img
