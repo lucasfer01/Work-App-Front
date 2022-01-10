@@ -55,7 +55,7 @@ export const ProfileDetails = ({type}) => {
     <div>
     <div className={s.Content}>
       <div className={s.Header}>
-        <img
+        <img className={s.ProfileImg}
           src={user.usr_photo}
           alt="profilePicture"
         ></img>
@@ -71,7 +71,7 @@ export const ProfileDetails = ({type}) => {
       {/* Cards de jobs y posts ↓ */}
       <div className={s.Cards}>
       <div className={s.JobsCard}> 
-        <Cards type={type} data={data}></Cards>
+        {/* <Cards type={type} data={data}></Cards> */}
       </div>
       <div className={s.PostsCard}>
         <div>Post 1</div>
