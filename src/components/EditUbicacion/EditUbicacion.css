@@ -1,0 +1,25 @@
+.editUbicacion_main{
+    border: solid #014B7C;
+    border-width: 5px;
+    border-radius: 10px;
+    width: 340px;
+    height: 500px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.editUbicacion_main h3 {
+    text-align: center;
+}
+
+.editUbicacion_form{
+    position: relative;
+    left: 3%; 
+}
+
+.editUbicacion_map{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
