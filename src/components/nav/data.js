@@ -8,14 +8,14 @@ import { BsBriefcaseFill } from "react-icons/bs";
 import { BsPersonBoundingBox } from "react-icons/bs";
 export const SidebarData = [
     {
-      title: 'Home',
+      title: 'Busca Trabajo',
       path: '/home',
       icon: <AiIcons.AiFillHome />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />,
     },
     {
-      title: 'Trabajos',
+      title: 'Busca Trabajador',
       path: '/jobs',
       icon: <BsBriefcaseFill />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
