@@ -9,14 +9,14 @@ import Cards from "../Cards/Cards";
 import s from "./ProfileDetails.module.css"
 
 
-export const ProfileDetails = ({ type }) => {
-  const { userId } = useParams()
+export const ProfileDetails = ({type}) => {
+  const {userId} = useParams()
+  let user= useSelector((state) => state.profile.user)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
   }, []);
-  let user = useSelector((state) => state.user)
-
+  console.log(user)
 
 
   const [jobs, setJobs] = useState([]);
