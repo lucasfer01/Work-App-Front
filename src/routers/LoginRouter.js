@@ -12,13 +12,11 @@ export const LoginRouter = () => {
     <div>
       <div>
         <Routes>
-
           <Route path="home" element={<Home />} />
           <Route path="jobs" element={<Home type="jobs" />} />
           <Route path="profile/:userId" element={<ProfileDetails type="jobs" />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
-
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
