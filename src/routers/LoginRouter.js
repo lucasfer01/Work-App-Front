@@ -21,8 +21,6 @@ export const LoginRouter = () => {
           />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
-
-          <Route path="prueba" element={<FormJobs/>} />
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
