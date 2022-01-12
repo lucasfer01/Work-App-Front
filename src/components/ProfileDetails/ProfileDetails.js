@@ -21,7 +21,7 @@ export const ProfileDetails = () => {
   const handleLogout = () => {
     dispatch(startLogout());
   };
-console.log("user", user)
+// console.log("user", user)
   return (
     <div>
       <div className={s.Content}>
@@ -31,7 +31,8 @@ console.log("user", user)
             alt="profilePicture"
           ></img>
           <div className={s.EditProfile}>
-            <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Edit Profile</Boton>
+            <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Contactar</Boton>
+            {/* <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Editar Perfil</Boton> */}
           </div>
         </div>
         <h2 className={s.UserName}>{user.usr_username}</h2>
@@ -41,10 +42,10 @@ console.log("user", user)
         {/* Cards de jobs y posts ↓ */}
         <div className={s.Cards}>
           <div className={s.JobsCard}>
-            <Cards profiledata={user.jobs} profileType={"jobs"}></Cards>
+            <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
           </div>
           <div>
-          <Cards  profiledata={user.posts} profileType={"post"}></Cards>
+          <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
           </div>
         </div>
         <div className={s.Logout}>

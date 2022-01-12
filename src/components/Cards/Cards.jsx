@@ -26,17 +26,17 @@ export default function Cards(profiledata) {
     }   else if (type === "profilejobs") {
         data = profiledata
     }
-    console.log(jobs);
-    console.log(posts);
+    // console.log(jobs);
+    // console.log(posts);
+    // console.log("data", data)
 
-    console.log("data", data)
     useEffect(() => {
         const getData = async () => {
             try {
                 const jobsData = await getJobs();
                 const postsData = await getPosts();
-                console.log("jobs:", jobsData)
-                console.log("posts:", postsData)
+                // console.log("jobs:", jobsData)
+                // console.log("posts:", postsData)
                 setJobs(jobsData);
                 setPosts(postsData);
             } catch (error) {
@@ -84,8 +84,10 @@ export default function Cards(profiledata) {
             </div>
         );
     }
-    else if (type === "profilejobs") {
-        return (
+
+    else if(type === "profilejobs"){
+        if(data.profileType === "jobs"){
+            return (
             <div className={styles.jobsContainer}>
                 {
                     data.profiledata?.map((job) => {
@@ -101,5 +103,27 @@ export default function Cards(profiledata) {
                 }
             </div>
         );
+        }
+        else if(data.profileType === "posts"){
+            return (
+            <div className={styles.postsContainer}>
+                {
+                    data.profiledata?.map((post) => {
+                        return (
+                            <PostCard
+                                key={post.post_id}
+                                id={post.post_id}
+                                title={post.post_title}
+                                description={post.post_description}
+                                photo={post.post_photo}
+                                fee={post.post_fee}
+                                priority={post.post_priority}
+                            />
+                        );
+                    })
+                }
+            </div>
+        );
+        }
     }
 };
