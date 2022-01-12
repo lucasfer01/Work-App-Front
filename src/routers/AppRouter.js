@@ -50,6 +50,7 @@ export const AppRouter = () => {
             path="/*"
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
+                <Sidebar />
                 <LoginRouter />
               </PrivateRoute>
             }

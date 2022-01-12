@@ -1,6 +1,6 @@
-import React from 'react';
-import * as AiIcons from 'react-icons/ai';
-import * as RiIcons from 'react-icons/ri';
+import React from "react";
+import * as AiIcons from "react-icons/ai";
+import * as RiIcons from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { FaPowerOff } from "react-icons/fa";
 import { FaImages } from "react-icons/fa";
@@ -8,14 +8,14 @@ import { BsBriefcaseFill } from "react-icons/bs";
 import { BsPersonBoundingBox } from "react-icons/bs";
 export const SidebarData = [
     {
-      title: 'Home',
+      title: 'Busca Trabajo',
       path: '/home',
       icon: <AiIcons.AiFillHome />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
       iconOpened: <RiIcons.RiArrowUpSFill />,
     },
     {
-      title: 'Trabajos',
+      title: 'Busca Trabajador',
       path: '/jobs',
       icon: <BsBriefcaseFill />,
       iconClosed: <RiIcons.RiArrowDownSFill />,
@@ -45,3 +45,4 @@ export const SidebarData = [
       icon: <FaPowerOff />,
     }
   ];
+
