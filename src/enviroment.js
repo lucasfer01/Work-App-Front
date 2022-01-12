@@ -1,5 +1,5 @@
 // url base
-export const BASE_URL = "https://workapp-back-end.herokuapp.com/";
+export const BASE_URL = "https://workapp-back-end.herokuapp.com";
 
 // Url de oficios
 export const JOB_URL = `${BASE_URL}/job`;
