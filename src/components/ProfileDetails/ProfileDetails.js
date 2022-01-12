@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
@@ -18,10 +18,6 @@ export const ProfileDetails = () => {
     dispatch(profileUser(userId))
   }, []);
 
-  const handleLogout = () => {
-    dispatch(startLogout());
-  };
-
   const contactUser = () =>{
     alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
   }
@@ -37,7 +33,9 @@ export const ProfileDetails = () => {
           ></img>
           <div className={s.EditProfile}>
             <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
-            {/* <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Editar Perfil</Boton> */}
+            <Link to={`/editprofile/${user.usr_id}`}>
+            <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
+            </Link>
           </div>
         </div>
         <h2 className={s.UserName}>{user.usr_username}</h2>
@@ -52,9 +50,6 @@ export const ProfileDetails = () => {
           <div>
           <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
           </div>
-        </div>
-        <div className={s.Logout}>
-          <Boton colorBtn={"btn_azulLine"} onClick={handleLogout}>Logout</Boton>
         </div>
       </div>
     </div>
