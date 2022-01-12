@@ -20,6 +20,11 @@ export const profileReducer = (state = initialState, action) => {
             return{ ...state,
             posts: action.payload
         }
+        case types.editProfile:
+            return{
+                ...state
+                
+            }
         default: 
         return state
     }

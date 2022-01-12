@@ -5,6 +5,7 @@ import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
+import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 
 export const LoginRouter = () => {
   return (
@@ -17,6 +18,10 @@ export const LoginRouter = () => {
           <Route
             path="profile/:userId"
             element={<ProfileDetails  />}
+          />
+          <Route
+          path="editprofile/:userId"
+          element={<EditProfile/>}
           />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
