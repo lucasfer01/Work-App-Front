@@ -88,3 +88,12 @@ export const getPostDetail = async (id) => {
     // }
 
 }
+
+export const sendNotification = async (notification) => {
+    try {
+        await axios.post("http://localhost:3000/new-message", notification);
+        console.log("Notification sent");
+    } catch (error) {
+        console.log(error);
+    }
+}
