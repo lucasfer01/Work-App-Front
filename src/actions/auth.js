@@ -22,7 +22,7 @@ export const startLoginEmailPassword = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
-        dispatch(login(user.uid, user.displayName));
+        dispatch(login(user.uid, user.displayName, user.email));
         dispatch(finishLoading());
       })
       .catch((err) => {
@@ -41,7 +41,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
         console.log(user);
         await updateProfile(user, { displayName: name });
         registerUserDB(user);
-        dispatch(login(user.uid, user.displayName));
+        dispatch(login(user.uid, user.displayName, user.email));
       })
       .catch((err) => {
         console.log(err);
@@ -55,15 +55,14 @@ export const startGoogleLogin = () => {
     const auth = getAuth();
     signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
       registerUserDB(user);
-      dispatch(login(user.uid, user.displayName));
+      dispatch(login(user.uid, user.displayName, user.email));
     });
   };
 };
 
 export const registerUserDB = async (user) => {
-  const { uid, displayName, photoURL, email } = user;
+  const { displayName, photoURL, email } = user;
   const data = {
-    usr_id: uid,
     usr_email: email,
     usr_username: displayName,
     usr_photo: photoURL,
@@ -86,11 +85,12 @@ export const startResetPassword = (email) => {
   };
 };
 
-export const login = (uid, displayName) => ({
+export const login = (uid, displayName, email) => ({
   type: types.login,
   payload: {
     uid,
     displayName,
+    email,
   },
 });
 
