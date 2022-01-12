@@ -1,14 +1,18 @@
 import React from "react";
 import './FormEmpleador.css'
-import Boton from '../Boton/Boton'
+import Boton from '../Boton/Boton';
+import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
 
 export default function FormEmpleador() {
+    const navigate = useNavigate();
     const [post, setPost] = React.useState({
         post_description: "",
+        post_shortDescription: "",
         post_photo: [],
-        post_title: ''
+        post_title: '',
+        post_type: "",
     });
     const [file, setFile] = React.useState("");
 
@@ -19,6 +23,7 @@ export default function FormEmpleador() {
             const createPost = await postPost({
                 ...post
             });
+            navigate("/profile");
 
             return createPost;
 
@@ -57,12 +62,27 @@ export default function FormEmpleador() {
             <div className='formEmpleado_title'>
                 <p>Postea el trabajo que necesitas</p>
             </div>
+            <div className='formEmpleado_type'>
+                    <p>¿Buscas un servicio u ofreces uno?</p>
+                <div className="item">
+                    <input type="radio" name="type" id="hire" value="contratar" onChange={event => setPost({ ...post, post_type: event.target.value })} />
+                    <label for="hire">Requiero de un servicio</label>
+                </div>
+                <div className="item">
+                    <input type="radio" name="type" id="offer" value="ofrecer" onChange={event => setPost({ ...post, post_type: event.target.value })} />
+                    <label for="html">Ofrezco mis servicios</label>
+                </div>
+            </div>
             <div className='formEmpleado_foto'>
                 <p>Título del post: </p>
                 <input type='text' onChange={event => setPost({ ...post, post_title: event.target.value })} />
             </div>
+            <div className='formEmpleado_foto'>
+                <p>Resumen: </p>
+                <input type='text' onChange={event => setPost({ ...post, post_shortDescription: event.target.value })} />
+            </div>
             <div className='formEmpleado_description'>
-                <p>Añade una descripción: </p>
+                <p>Añade una descripción detallada: </p>
                 <textarea cols='50' value={post.post_description} onChange={(event) => setPost({ ...post, post_description: event.target.value })}></textarea>
             </div>
             <div className='formEmpleado_foto'>

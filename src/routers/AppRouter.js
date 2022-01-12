@@ -39,7 +39,6 @@ export const AppRouter = () => {
   return (
     <div>
       <Router>
-      <Sidebar />
         <Routes>
           <Route
             path="/"
@@ -53,6 +52,7 @@ export const AppRouter = () => {
             path="/*"
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
+                <Sidebar />
                 <LoginRouter />
               </PrivateRoute>
             }
