@@ -21,6 +21,11 @@ export const ProfileDetails = () => {
   const handleLogout = () => {
     dispatch(startLogout());
   };
+
+  const contactUser = () =>{
+    alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
+  }
+
 // console.log("user", user)
   return (
     <div>
@@ -31,7 +36,7 @@ export const ProfileDetails = () => {
             alt="profilePicture"
           ></img>
           <div className={s.EditProfile}>
-            <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Contactar</Boton>
+            <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
             {/* <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Editar Perfil</Boton> */}
           </div>
         </div>
