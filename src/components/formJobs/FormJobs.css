@@ -1,0 +1,26 @@
+
+.addJob {
+  position: relative;
+}
+
+.jobs-list {
+  text-align: left;
+  font-weight: 600;
+  background-color: red;
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  position: absolute;
+  width: 100%;
+}
+
+.jobs-list li {
+  list-style: none;
+  margin: 0 0 0.8rem 0;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.jobs-list li:hover {
+  background-color: #007bff;
+}

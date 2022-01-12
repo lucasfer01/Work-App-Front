@@ -39,8 +39,8 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         console.log(user);
-        registerUserDB(user);
         await updateProfile(user, { displayName: name });
+        registerUserDB(user);
         dispatch(login(user.uid, user.displayName));
       })
       .catch((err) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
@@ -9,79 +9,47 @@ import Cards from "../Cards/Cards";
 import s from "./ProfileDetails.module.css"
 
 
-export const ProfileDetails = ({type}) => {
+export const ProfileDetails = () => {
+
   const {userId} = useParams()
   let user= useSelector((state) => state.profile.user)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
   }, []);
-  console.log(user)
 
-
-  const [jobs, setJobs] = useState([]);
-  const [posts, setPosts] = useState([]);
-  let data;
-  if (type === "jobs") {
-    data = jobs;
-  } else if (type === "posts") {
-    data = posts;
+  const contactUser = () =>{
+    alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
   }
-  console.log(jobs);
-  console.log(posts);
 
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const jobsData = await getJobs();
-        const postsData = await getPosts();
-        console.log("jobs:", jobsData)
-        console.log("posts:", postsData)
-        setJobs(jobsData);
-        setPosts(postsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, []);
-
-  const handleLogout = () => {
-    dispatch(startLogout());
-  };
-
+// console.log("user", user)
   return (
     <div>
-
       <div className={s.Content}>
         <div className={s.Header}>
-          <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fqph.fs.quoracdn.net%2Fmain-qimg-7ca600a4562ef6a81f4dc2bd5c99fee9-c&f=1&nofb=1"
+          <img className={s.ProfileImg}
+            src={user.usr_photo}
             alt="profilePicture"
           ></img>
-
           <div className={s.EditProfile}>
-            <Boton colorBtn={"btn_azulLine"} onClick={() => { "aqui tu función" }}>Edit Profile</Boton>
+            <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
+            <Link to={`/editprofile/${user.usr_id}`}>
+            <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
+            </Link>
           </div>
         </div>
-        <h2 className={s.UserName}>User Nme</h2>
-        <div className={s.ProfileInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <h2 className={s.UserName}>{user.usr_username}</h2>
+        <div className={s.ProfileInfo}>{user.usr_description}</div>
 
 
         {/* Cards de jobs y posts ↓ */}
         <div className={s.Cards}>
-          <div className={s.JobsCard}>
-            <Cards profiledata={user.jobs}></Cards>
+          <div>
+            <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
           </div>
-          <div className={s.PostsCard}>
-            <div>Post 1</div>
-            <div>Post 2</div>
-            <div>Post 3</div>
+          <div>
+          <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
           </div>
-        </div>
-        <div className={s.Logout}>
-          <Boton colorBtn={"btn_azulLine"} onClick={handleLogout}>Logout</Boton>
         </div>
       </div>
     </div>

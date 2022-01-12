@@ -9,7 +9,6 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.profileUser:
-            console.log("reducer user", action.payload)
             return { ...state,
                 user: action.payload
                 }
@@ -21,6 +20,11 @@ export const profileReducer = (state = initialState, action) => {
             return{ ...state,
             posts: action.payload
         }
+        case types.editProfile:
+            return{
+                ...state
+                
+            }
         default: 
         return state
     }
