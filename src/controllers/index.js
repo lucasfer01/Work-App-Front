@@ -13,7 +13,7 @@ export const getJobs = async () => {
 // Obtener todos los posts
 export const getPosts = async () => {
     // Hacemos peticion de todos los posts
-    const { data } = await axios.get('http://localhost:3000/post');
+    const { data } = await axios.get(POST_URL);
 
     // Retornamos el resultado
     return data;
