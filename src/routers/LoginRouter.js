@@ -16,7 +16,7 @@ export const LoginRouter = () => {
           <Route path="jobs" element={<Home type="jobs" />} />
           <Route
             path="profile/:userId"
-            element={<ProfileDetails type="jobs" />}
+            element={<ProfileDetails  />}
           />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />

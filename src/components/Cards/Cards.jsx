@@ -15,7 +15,7 @@ export default function Cards(profiledata) {
         type = "posts";
     } else if (location === "/jobs") {
         type = "jobs";
-    }   else if (location.includes("profil/")) {
+    }   else if (location.includes("profile/")) {
         type = "profilejobs";
     }
     let data;
@@ -29,7 +29,7 @@ export default function Cards(profiledata) {
     console.log(jobs);
     console.log(posts);
 
-
+    console.log("data", data)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -88,7 +88,7 @@ export default function Cards(profiledata) {
         return (
             <div className={styles.jobsContainer}>
                 {
-                    data?.map((job) => {
+                    data.profiledata?.map((job) => {
                         return (
                             <JobCard
                                 key={job.job_id}
