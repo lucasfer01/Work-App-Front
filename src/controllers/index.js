@@ -13,7 +13,7 @@ export const getJobs = async () => {
 // Obtener todos los posts
 export const getPosts = async () => {
     // Hacemos peticion de todos los posts
-    const { data } = await axios.get('http://localhost:3000/post');
+    const { data } = await axios.get(POST_URL);
 
     // Retornamos el resultado
     return data;
@@ -87,13 +87,4 @@ export const getPostDetail = async (id) => {
     //     updatedAt: "2020-05-05T00:00:00.000Z",
     // }
 
-}
-
-export const sendNotification = async (notification) => {
-    try {
-        await axios.post("http://localhost:3000/new-message", notification);
-        console.log("Notification sent");
-    } catch (error) {
-        console.log(error);
-    }
 }
