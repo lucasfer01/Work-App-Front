@@ -1,3 +1,8 @@
+
+.addJob {
+  position: relative;
+}
+
 .jobs-list {
   text-align: left;
   font-weight: 600;
@@ -5,6 +10,8 @@
   margin: 0;
   padding: 0;
   font-size: 1.1rem;
+  position: absolute;
+  width: 100%;
 }
 
 .jobs-list li {
