@@ -46,7 +46,7 @@ export const ProfileDetails = () => {
 
         {/* Cards de jobs y posts ↓ */}
         <div className={s.Cards}>
-          <div className={s.JobsCard}>
+          <div>
             <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
           </div>
           <div>
