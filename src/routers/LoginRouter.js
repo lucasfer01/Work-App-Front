@@ -21,8 +21,6 @@ export const LoginRouter = () => {
           <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
-
-          <Route path="test" element={<CardProfileUser />} />
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
