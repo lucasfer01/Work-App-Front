@@ -10,7 +10,6 @@ import { PublicRoute } from "./PublicRoute";
 import Landing from "../components/Landing/Landing";
 import { LoadingScreen } from "../components/loadingScreen/LoadingScreen";
 
-
 export const AppRouter = () => {
   const dispatch = useDispatch();
 
@@ -50,9 +49,8 @@ export const AppRouter = () => {
             path="/*"
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
-                <Sidebar />
                 <LoginRouter />
-              </PrivateRoute>
+              </PrivateRoute> 
             }
           />
           {/* No poner más rutas aquí, pornerlas en LoginRouter.js */}
