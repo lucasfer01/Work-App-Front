@@ -16,3 +16,12 @@ export function profileUser(userId){
         })
 }
 }
+
+export function editProfile(userId, data){
+return function(dispatch){
+    dispatch({
+        type:types.editProfile,
+        payload: {userId, data}
+    })
+}
+}
