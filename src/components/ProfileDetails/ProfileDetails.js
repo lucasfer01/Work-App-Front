@@ -4,9 +4,21 @@ import { useParams } from "react-router-dom";
 import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
 import { getJobs, getPosts } from "../../controllers";
-import Boton from "../Boton/Boton";
-import Cards from "../Cards/Cards";
-import s from "./ProfileDetails.module.css"
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
+import { FaRegGrinBeam } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaCity } from "react-icons/fa";
+import { BsGeoAlt } from "react-icons/bs";
+import { BsHouseDoor } from "react-icons/bs";
+import { BsTelephone } from "react-icons/bs";
+import { BsFillGearFill } from "react-icons/bs";
+import { ImUsers } from "react-icons/im";
+import { ImUserTie } from "react-icons/im";
+import "./profileDetails.css"
+// import Cards from "../Cards/Cards";
 
 
 export const ProfileDetails = ({type}) => {
@@ -15,7 +27,7 @@ export const ProfileDetails = ({type}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
-  }, []);
+  }, [dispatch, userId]);
   console.log(user)
 
 
@@ -51,39 +63,57 @@ export const ProfileDetails = ({type}) => {
     dispatch(startLogout());
   };
 
+  //Esta es la unica linea que no se para que sirve
+  // {/* <Cards type={type} data={data}></Cards> */}
+
   return (
     <div>
-
-    <div className={s.Content}>
-      <div className={s.Header}>
-        <img className={s.ProfileImg}
-          src={user.usr_photo}
-          alt="profilePicture"
-        ></img>
-        
-        <div className={s.EditProfile}>
-        <Boton  colorBtn={"btn_azulLine"} onClick={()=>{"aqui tu función"}}>Edit Profile</Boton>
+    <section className='seccion-perfil-usuario'>
+        <div className='perfil-usuario-header'>
+            <div className='perfil-usuario-portada'>
+            <div className='perfil-usuario-avatar'>
+                <img src={user.usr_photo} alt="img-avatar" width="50px"/>
+                <button type="button" className="boton-avatar">
+                     <FaImage />
+                </button>
+              </div>
+              <button type="button" className="boton-portada" 
+                   onClick={()=>{"aqui tu función"}}>
+                    <BsFillGearFill /> Editar Perfil
+                </button>
+            </div>
         </div>
-      </div>
-      <h2 className={s.UserName}>{user.usr_username}</h2>
-      <div className={s.ProfileInfo}>{user.usr_description}</div>
-
-
-      {/* Cards de jobs y posts ↓ */}
-      <div className={s.Cards}>
-      <div className={s.JobsCard}> 
-        {/* <Cards type={type} data={data}></Cards> */}
-      </div>
-      <div className={s.PostsCard}>
-        <div>Post 1</div>
-        <div>Post 2</div>
-        <div>Post 3</div>
-      </div>
-      </div>
-      <div className={s.Logout}>
-      <Boton colorBtn={"btn_azulLine"} onClick={handleLogout}>Logout</Boton>
-      </div>
-    </div>
+      <div className='perfil-usuario-body'>
+          <div className='perfil-usuario-bio'>
+              <h3 className='titulo'>{user.usr_username}</h3>
+              <p className='texto'>{user.usr_description}</p>
           </div>
+          <div className='perfil-usuario-footer'>
+              <ul className='lista-datos'>
+                  <li><BsHouseDoor className='icono' />Direccion de usuario:</li>
+                  <li><BsTelephone  className='icono'/> Telefono:</li>
+                  <li><FaCity className='icono' /> Trabaja en:</li>
+                  <li><ImUserTie className="icono" />Cargo:</li>
+              </ul>
+              <ul className='lista-datos'>
+                  <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li>
+                  <li><BsGeoAlt className='icono' /> Ubicacion:</li>
+                  <li><ImUsers className="icono" /> Sexo:</li>
+                  <li><FaRegGrinBeam className="icono" /> sociales:</li>
+              </ul>
+          </div>
+          <div className='redes-sociales'>
+              <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons'/></a>
+              <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
+              <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
+          </div>
+          <div className="btn-1">
+          <button className="btn-prof">
+            <span className="text" onClick={handleLogout}>Logout</span>
+            </button>
+            </div>
+      </div>
+    </section>
+</div>
   );
 };

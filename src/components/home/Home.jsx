@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../actions/auth";
 import Cards from "../Cards/Cards";
 import styles from "./Home.module.css";
-import { getJobs, getPosts } from "../../controllers";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 export default function Home() {

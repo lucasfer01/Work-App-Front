@@ -22,9 +22,7 @@
 
 @media (min-width: 780px){
     .postsContainer {
-        display: inline-grid;
-        grid-template-columns: auto auto;
-        gap: 2vw;
+       margin-top: 5%;
     }
 }
 
