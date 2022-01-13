@@ -1,4 +1,5 @@
 import axios from "axios";
+import { POST_USER } from "../enviroment";
 import { types } from "../types/types";
 
 const initialState = {
@@ -23,7 +24,7 @@ export const profileReducer = (state = initialState, action) => {
         }
         case types.editProfile:
             const {userId, data} = action.payload
-            axios.put(`http://localhost:3000/user/${userId}`, data)
+            axios.put(`${POST_USER}/${userId}`, data)
             return{
                 ...state
             }

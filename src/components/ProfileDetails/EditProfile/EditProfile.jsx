@@ -57,7 +57,7 @@ function onSubmit(){
           <input name="usr_location" type="text" onChange={onInputChange} />
         </div> */}
         <Link to={`/profile/${userId}`}>
-        <button onClick={onSubmit}>Guardar</button>
+        <button type="submit" onClick={onSubmit}>Guardar</button>
         </Link>
       </form>
     </div>
