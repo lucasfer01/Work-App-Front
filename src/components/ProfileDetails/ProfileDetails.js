@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { startLogout } from "../../actions/auth";
+// import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
-import { getJobs, getPosts } from "../../controllers";
-import Boton from "../Boton/Boton";
+// import { getJobs, getPosts } from "../../controllers";
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
+import { FaRegGrinBeam } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaCity } from "react-icons/fa";
+import { BsGeoAlt } from "react-icons/bs";
+import { BsHouseDoor } from "react-icons/bs";
+import { BsTelephone } from "react-icons/bs";
+import { BsFillGearFill } from "react-icons/bs";
+import { ImUsers } from "react-icons/im";
+import { ImUserTie } from "react-icons/im";
+// import Boton from "../Boton/Boton";
+import "./profileDetails.css"
 import Cards from "../Cards/Cards";
-import s from "./ProfileDetails.module.css"
 
 
 export const ProfileDetails = () => {
@@ -31,45 +44,102 @@ export const ProfileDetails = () => {
     if(user.usr_email === email){
       return(
         <Link to={`/editprofile/${user.usr_id}`}>
-            <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
+            <button type="button" className="boton-portada">
+                    <BsFillGearFill /> Editar Perfil
+                </button>
             </Link>
       )
     } else return (
-      <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
+      <button className="btn-prof">
+            <span className="text" onClick={contactUser}>CONTACTAR</span>
+            </button>
     )
   }
+  // <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
 
 
   return (
-    <div>
-      <div className={s.Content}>
-        <div className={s.Header}>
-          <img className={s.ProfileImg}
-            src={user.usr_photo}
-            alt="profilePicture"
-          ></img>
-          <div className={s.EditProfile}>
-            {button()}
-            {/* <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
-            <Link to={`/editprofile/${user.usr_id}`}>
-            <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
-            </Link> */}
-          </div>
+   <div>
+     <section className='seccion-perfil-usuario'>
+         <div className='perfil-usuario-header'>
+             <div className='perfil-usuario-portada'>
+             <div className='perfil-usuario-avatar'>
+                 <img src={user.usr_photo} alt="img-avatar" width="50px"/>
+                 <button type="button" className="boton-avatar">
+                      <FaImage />
+                 </button>
+              </div>
+              {button()}
+            </div>
         </div>
-        <h2 className={s.UserName}>{user.usr_username}</h2>
-        <div className={s.ProfileInfo}>{user.usr_description}</div>
-
-
-        {/* Cards de jobs y posts ↓ */}
-        <div className={s.Cards}>
-          <div>
-            <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
+      <div className='perfil-usuario-body'>
+          <div className='perfil-usuario-bio'>
+                
+              <h3 className='titulo'>{user.usr_username}</h3>
+              <p className='texto'>{user.usr_description}</p>
+          </div>
+          <div className='perfil-usuario-footer'>
+              <ul className='lista-datos'>
+                  <li><BsHouseDoor className='icono' />Direccion de usuario:</li>
+                  <li><BsTelephone  className='icono'/> Telefono:</li>
+                  <li><FaCity className='icono' /> Trabaja en:</li>
+                  <li><ImUserTie className="icono" />Cargo:</li>
+              </ul>
+              <ul className='lista-datos'>
+                  <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li>
+                  <li><BsGeoAlt className='icono' /> Ubicacion:</li>
+                  <li><ImUsers className="icono" /> Sexo:</li>
+                  <li><FaRegGrinBeam className="icono" /> sociales:</li>
+              </ul>
           </div>
           <div>
+           <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
+           </div>
+           <div>
           <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
           </div>
-        </div>
+          <div className='redes-sociales'>
+              <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons'/></a>
+              <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
+              <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
+          </div>
       </div>
-    </div>
+    </section>
+</div>
   );
 };
+
+
+
+
+
+ // <div>
+    //   <div className={s.Content}>
+    //     <div className={s.Header}>
+    //       <img className={s.ProfileImg}
+    //         src={user.usr_photo}
+    //         alt="profilePicture"
+    //       ></img>
+    //       <div className={s.EditProfile}>
+    //         {button()}
+    //         {/* <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
+    //         <Link to={`/editprofile/${user.usr_id}`}>
+    //         <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
+    //         </Link> */}
+    //       </div>
+    //     </div>
+    //     <h2 className={s.UserName}>{user.usr_username}</h2>
+    //     <div className={s.ProfileInfo}>{user.usr_description}</div>
+
+
+    //     {/* Cards de jobs y posts ↓ */}
+    //     <div className={s.Cards}>
+    //       <div>
+    //         <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
+    //       </div>
+    //       <div>
+    //       <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>

@@ -23,7 +23,7 @@ export const SidebarData = [
     },
     {
         title: 'Perfil',
-        path: '/profile',
+        path: '/profile/:userId',
         icon: <BsPersonBoundingBox />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
