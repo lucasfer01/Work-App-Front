@@ -63,12 +63,11 @@ export const startGoogleLogin = () => {
 export const registerUserDB = async (user) => {
   const { displayName, photoURL, email, uid } = user;
   const data = {
-    usr_user_id: uid,
+    usr_id: uid,
     usr_email: email,
     usr_username: displayName,
     usr_photo: photoURL,
   };
-  console.log(data)
 
   await axios
     .post(POST_USER, data)
