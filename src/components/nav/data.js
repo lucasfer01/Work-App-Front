@@ -6,11 +6,14 @@ import { FaImages } from "react-icons/fa";
 import { BsBriefcaseFill } from "react-icons/bs";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
-import { store } from "../../store/store"; 
+import { useSelector } from "react-redux";
 
-const state = store.getState();
 
-export const SidebarData = [
+export const SidebarData = () => {
+
+  const { uid }= useSelector((state) => state.auth)
+  
+  return [
     {
       title: 'Busca Trabajo',
       path: '/home',
@@ -27,7 +30,7 @@ export const SidebarData = [
     },
     {
         title: 'Perfil',
-        path: ('/profile/' + state.auth.uid),
+        path: ('/profile/' + uid),
         icon: <BsPersonBoundingBox />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -43,4 +46,4 @@ export const SidebarData = [
       path: "/logOut",
     },
   ];
-
+}
