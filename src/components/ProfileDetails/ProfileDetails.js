@@ -21,6 +21,7 @@ export const ProfileDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
+    console.log("dispatch profile")
   }, []);
 
   const contactUser = () =>{
@@ -28,7 +29,7 @@ export const ProfileDetails = () => {
   }
 
   function button(){
-    if(user.usr_email === email){
+    if(user?.usr_email === email){
       return(
         <Link to={`/editprofile/${user.usr_id}`}>
             <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
@@ -45,7 +46,7 @@ export const ProfileDetails = () => {
       <div className={s.Content}>
         <div className={s.Header}>
           <img className={s.ProfileImg}
-            src={user.usr_photo}
+            src={user?.usr_photo}
             alt="profilePicture"
           ></img>
           <div className={s.EditProfile}>
@@ -56,17 +57,17 @@ export const ProfileDetails = () => {
             </Link> */}
           </div>
         </div>
-        <h2 className={s.UserName}>{user.usr_username}</h2>
-        <div className={s.ProfileInfo}>{user.usr_description}</div>
+        <h2 className={s.UserName}>{user?.usr_username}</h2>
+        <div className={s.ProfileInfo}>{user?.usr_description}</div>
 
 
         {/* Cards de jobs y posts ↓ */}
         <div className={s.Cards}>
           <div>
-            <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
+            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
           </div>
           <div>
-          <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
+          <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
           </div>
         </div>
       </div>
