@@ -5,6 +5,7 @@ import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
+import Checkout from "../components/mercadopago/Mercadopago";
 
 export const LoginRouter = () => {
   return (
@@ -20,6 +21,9 @@ export const LoginRouter = () => {
           />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
+
+
+          <Route path="prueba" element={<Checkout />} />
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>

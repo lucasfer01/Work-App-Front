@@ -12,3 +12,6 @@ export const POST_USER = `${BASE_URL}/user`;
 
 // Url user-jobs
 export const POST_USER_JOB = `${BASE_URL}/user-job`;
+
+// Url Checkout mercadopago
+export const CHECKOUT_URL = `${BASE_URL}/checkout`
