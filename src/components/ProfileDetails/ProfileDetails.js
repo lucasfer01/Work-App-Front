@@ -13,6 +13,11 @@ export const ProfileDetails = () => {
 
   const {userId} = useParams()
   let user= useSelector((state) => state.profile.user)
+
+  let { email }= useSelector((state) => state.auth)
+
+  console.log(user)
+  console.log(email)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
@@ -22,7 +27,19 @@ export const ProfileDetails = () => {
     alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
   }
 
-// console.log("user", user)
+  function button(){
+    if(user.usr_email === email){
+      return(
+        <Link to={`/editprofile/${user.usr_id}`}>
+            <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
+            </Link>
+      )
+    } else return (
+      <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
+    )
+  }
+
+
   return (
     <div>
       <div className={s.Content}>
@@ -32,10 +49,11 @@ export const ProfileDetails = () => {
             alt="profilePicture"
           ></img>
           <div className={s.EditProfile}>
-            <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
+            {button()}
+            {/* <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
             <Link to={`/editprofile/${user.usr_id}`}>
             <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <h2 className={s.UserName}>{user.usr_username}</h2>
