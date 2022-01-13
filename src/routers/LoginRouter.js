@@ -6,6 +6,8 @@ import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
+import {store} from '../store/store'
+import { startLogout } from "../actions/auth"; 
 
 import { CardProfileUser } from "../components/cardProfileUser/CardProfileUser";
 
@@ -21,6 +23,7 @@ export const LoginRouter = () => {
           <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
+          <Route path='logOut' element={<div>{()=>console.log("logOut")}</div>}/>
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
