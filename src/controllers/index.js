@@ -7,14 +7,13 @@ import { POST_URL, JOB_URL } from '../enviroment';
 export const getJobs = async () => {
     // Peticion de todos los oficios
     const { data } = await axios.get(JOB_URL);
-    console.log('datajobs', data)
     return data;
 }
 
 // Obtener todos los posts
 export const getPosts = async () => {
     // Hacemos peticion de todos los posts
-    const { data } = await axios.get('http://localhost:3000/post');
+    const { data } = await axios.get(POST_URL);
 
     // Retornamos el resultado
     return data;

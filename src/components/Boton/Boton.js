@@ -2,10 +2,10 @@ import { QueryDocumentSnapshot } from "@firebase/firestore";
 import React from "react";
 import styles from "./Boton.module.css"
 
-export default function Boton({children, colorBtn, onClick}){
-
+export default function Boton({children, colorBtn, onClick, ...props}){
+    console.log("props", props)
     return (
-        <button className={`${styles.btn} ${styles[colorBtn]}`} onClick={onClick}>
+        <button className={`${styles.btn} ${styles[colorBtn]}`} onClick={onClick} {...props}>
             {children}
         </button>
     )
