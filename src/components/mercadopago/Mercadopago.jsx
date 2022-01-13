@@ -3,10 +3,8 @@ import React from 'react';
 import { CHECKOUT_URL } from '../../enviroment';
 // Axios
 import axios from 'axios';
-// react-router-dom
-import { useNavigate } from 'react-router-dom';
 
-export default function Checkout(dataPago) {
+export default function Checkout({ dataPago }) {
 
     const dataPagoPrueba = {
         title: "Dummy Title",
@@ -17,12 +15,13 @@ export default function Checkout(dataPago) {
         unit_price: 10
     }
 
+    // Controlador paraenviar formulario
     function handleOnSubmit(e) {
         e.preventDefault()
 
-        axios.post(CHECKOUT_URL, dataPagoPrueba)
-        .then(response => window.location.href = response.data.init_point)
-        .catch(error => console.log(error))
+        axios.post(CHECKOUT_URL, dataPago || dataPagoPrueba) // Enviamos la data recibida por parametro
+            .then(response => window.location.href = response.data.init_point) // Cuando la promesa se resuelva redirige a link para realizar pago
+            .catch(error => console.log(error))
     }
 
 
