@@ -4,7 +4,7 @@ import {POST_USER} from '../enviroment'
 
 export function profileUser(userId){
     return function(dispatch){
-        axios.get(`${POST_USER}/${userId}`)
+        axios.get(`http://localhost:3000/user/${userId}`)
         .then((user) =>{
             dispatch({
                 type: types.profileUser,
@@ -14,5 +14,14 @@ export function profileUser(userId){
         .catch((error) => {
             console.log(error)
         })
+}
+}
+
+export function editProfile(userId, data){
+return function(dispatch){
+    dispatch({
+        type:types.editProfile,
+        payload: {userId, data}
+    })
 }
 }

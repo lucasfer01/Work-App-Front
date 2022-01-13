@@ -16,7 +16,7 @@ export const ProfileDetails = () => {
 
   let { email }= useSelector((state) => state.auth)
 
-  console.log(user.usr_email)
+  console.log(user)
   console.log(email)
   const dispatch = useDispatch();
   useEffect(() => {

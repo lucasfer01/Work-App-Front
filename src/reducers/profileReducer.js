@@ -1,3 +1,4 @@
+import axios from "axios";
 import { types } from "../types/types";
 
 const initialState = {
@@ -21,9 +22,10 @@ export const profileReducer = (state = initialState, action) => {
             posts: action.payload
         }
         case types.editProfile:
+            const {userId, data} = action.payload
+            axios.put(`http://localhost:3000/user/${userId}`, data)
             return{
                 ...state
-                
             }
         default: 
         return state
