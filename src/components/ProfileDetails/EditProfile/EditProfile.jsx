@@ -16,7 +16,7 @@ export function EditProfile() {
 
   const [updatedUser, setUpdatedUser] = useState({
     usr_username: user.usr_username,
-    // usr_photo: user.usr_photo[0],
+    usr_photo: user.usr_photo,
     usr_description: user.usr_description,
     // usr_location: user.usr_location
   });
@@ -27,6 +27,14 @@ function onInputChange(e) {
     setUpdatedUser({
         ...updatedUser,
         [e.target.name]: e.target.value
+    })
+
+}
+function onChangePhoto(e){
+    e.preventDefault()
+    setUpdatedUser({
+        ...updatedUser,
+        usr_photo: [e.target.value] 
     })
 }
 
@@ -44,10 +52,10 @@ function onSubmit(){
           <label>Username</label>
           <input name="usr_username" type="text" value={updatedUser.usr_username} onChange={onInputChange} />
         </div>
-        {/* <div>
+        <div>
           <label>Photo</label>
-          <input name="usr_photo" type="file"  onChange={onInputChange} />
-        </div> */}
+          <input name="usr_photo" type="text" onChange={onChangePhoto} />
+        </div>
         <div>
           <label>Descripción</label>
           <input name="usr_description" type="text" value={updatedUser.usr_description} onChange={onInputChange} />
