@@ -8,6 +8,7 @@ import SubMenu from "./Submenu";
 import { IconContext } from "react-icons/lib";
 // import { FaPowerOff } from "react-icons/fa";
 
+
 const Nav = styled.div`
   background: #003874;
   height: 80px;
@@ -78,7 +79,7 @@ const Sidebar = () => {
             <NavIcon to="#">
               <AiIcons.AiOutlineClose onClick={showSidebar} />
             </NavIcon>
-            {SidebarData.map((item, index) => {
+            {SidebarData().map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}
           </SidebarWrap>

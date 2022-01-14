@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-// import { startLogout } from "../../actions/auth";
 import { profileUser } from "../../actions/profileActions";
-// import { getJobs, getPosts } from "../../controllers";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -17,7 +15,6 @@ import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
-// import Boton from "../Boton/Boton";
 import "./profileDetails.css"
 import Cards from "../Cards/Cards";
 
@@ -34,6 +31,7 @@ export const ProfileDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
+    console.log("dispatch profile")
   }, []);
 
   const contactUser = () =>{
@@ -41,7 +39,7 @@ export const ProfileDetails = () => {
   }
 
   function button(){
-    if(user.usr_email === email){
+    if(user?.usr_email === email){
       return(
         <Link to={`/editprofile/${user.usr_id}`}>
             <button type="button" className="boton-portada">
@@ -55,8 +53,6 @@ export const ProfileDetails = () => {
             </button>
     )
   }
-  // <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
-
 
   return (
    <div>
@@ -108,38 +104,3 @@ export const ProfileDetails = () => {
 </div>
   );
 };
-
-
-
-
-
- // <div>
-    //   <div className={s.Content}>
-    //     <div className={s.Header}>
-    //       <img className={s.ProfileImg}
-    //         src={user.usr_photo}
-    //         alt="profilePicture"
-    //       ></img>
-    //       <div className={s.EditProfile}>
-    //         {button()}
-    //         {/* <Boton colorBtn={"btn_azulLine"} onClick={contactUser}>Contactar</Boton>
-    //         <Link to={`/editprofile/${user.usr_id}`}>
-    //         <Boton colorBtn={"btn_azulLine"}>Editar Perfil</Boton>
-    //         </Link> */}
-    //       </div>
-    //     </div>
-    //     <h2 className={s.UserName}>{user.usr_username}</h2>
-    //     <div className={s.ProfileInfo}>{user.usr_description}</div>
-
-
-    //     {/* Cards de jobs y posts ↓ */}
-    //     <div className={s.Cards}>
-    //       <div>
-    //         <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
-    //       </div>
-    //       <div>
-    //       <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
