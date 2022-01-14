@@ -6,14 +6,12 @@ import { FaImages } from "react-icons/fa";
 import { BsBriefcaseFill } from "react-icons/bs";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { startLogout } from "../../actions/auth";
+import { useSelector } from "react-redux";
 
 
 export const SidebarData = () => {
 
   const { uid }= useSelector((state) => state.auth)
-  const dispatch = useDispatch(); 
   
   return [
     {
@@ -45,8 +43,7 @@ export const SidebarData = () => {
     {
       title: 'Cerrar Sesion',
       icon: <FaPowerOff />,
-      path: "",
-      onclick: (()=>dispatch(startLogout()))
+      path: ""
     },
   ];
 }

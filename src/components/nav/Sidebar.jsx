@@ -7,6 +7,8 @@ import { SidebarData } from "./data";
 import SubMenu from "./Submenu";
 import { IconContext } from "react-icons/lib";
 import Boton from '../Boton/Boton'
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../actions/auth";
 // import { FaPowerOff } from "react-icons/fa";
 
 
@@ -83,6 +85,11 @@ const Sidebar = () => {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(startLogout());
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -106,7 +113,7 @@ const Sidebar = () => {
                 <SubMenu item={item} key={index}/>
               )}
               else {return (
-                <Buton key = {item} onClick={()=>item.onclick}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
+                <Buton key = {item} onClick={handleLogout}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
               )}
             })}
           </SidebarWrap>
