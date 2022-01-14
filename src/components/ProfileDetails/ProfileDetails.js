@@ -22,17 +22,18 @@ import Cards from "../Cards/Cards";
 export const ProfileDetails = () => {
 
   const {userId} = useParams()
+  
   let user= useSelector((state) => state.profile.user)
-
   let { email }= useSelector((state) => state.auth)
 
-  console.log(user)
-  console.log(email)
+  console.log("user", user)
+  console.log("email", email)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
     console.log("dispatch profile")
   }, []);
+
 
   const contactUser = () =>{
     alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
@@ -60,7 +61,7 @@ export const ProfileDetails = () => {
          <div className='perfil-usuario-header'>
              <div className='perfil-usuario-portada'>
              <div className='perfil-usuario-avatar'>
-                 <img src={user.usr_photo} alt="img-avatar" width="50px"/>
+                 <img src={user?.usr_photo} alt="img-avatar" width="50px"/>
                  <button type="button" className="boton-avatar">
                       <FaImage />
                  </button>
@@ -71,8 +72,8 @@ export const ProfileDetails = () => {
       <div className='perfil-usuario-body'>
           <div className='perfil-usuario-bio'>
                 
-              <h3 className='titulo'>{user.usr_username}</h3>
-              <p className='texto'>{user.usr_description}</p>
+              <h3 className='titulo'>{user?.usr_username}</h3>
+              <p className='texto'>{user?.usr_description}</p>
           </div>
           <div className='perfil-usuario-footer'>
               <ul className='lista-datos'>
@@ -89,10 +90,10 @@ export const ProfileDetails = () => {
               </ul>
           </div>
           <div>
-           <Cards key="job" profiledata={user.jobs} profileType={"jobs"}></Cards>
+           <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
            </div>
            <div>
-          <Cards key="post" profiledata={user.posts} profileType={"posts"}></Cards>
+          <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
           </div>
           <div className='redes-sociales'>
               <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons'/></a>

@@ -4,6 +4,7 @@ import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
+import { sendNotification } from "../../controllers";
 
 export default function FormEmpleador() {
     const navigate = useNavigate();
