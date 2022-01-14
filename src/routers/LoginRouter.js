@@ -23,7 +23,6 @@ export const LoginRouter = () => {
           <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
-          <Route path='logOut' element={<div>{()=>console.log("logOut")}</div>}/>
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>

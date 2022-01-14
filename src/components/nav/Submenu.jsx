@@ -2,7 +2,7 @@ import { SignalCellularNull } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Boton from '../Boton/Boton'
+
 
 
 const SidebarLink = styled(Link)`
@@ -41,11 +41,12 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item}) => {
   const [subnav, setSubnav] = useState(false);
 
   const showSubnav = () => setSubnav(!subnav);
 
+  
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
@@ -63,7 +64,6 @@ const SubMenu = ({ item }) => {
       </SidebarLink>
       {subnav &&
         item.subNav.map((item, index) => {
-          {console.log("item", item)}
           <SidebarLink to={item.path} key={index}>
             {item.icon}
             <SidebarLabel>{item.title}</SidebarLabel>
