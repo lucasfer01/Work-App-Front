@@ -23,12 +23,12 @@ export default function FormEmpleador() {
             const createPost = await postPost({
                 ...post
             });
-            navigate("/home");
+           window.location.reload(true)
 
             return createPost;
 
         } catch (e) {
-            console.log(e);
+            alert(e);
         }
     }
 
