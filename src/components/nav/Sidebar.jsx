@@ -102,12 +102,11 @@ const Sidebar = () => {
               <AiIcons.AiOutlineClose onClick={showSidebar} />
             </NavIcon>
             {SidebarData().map((item, index) => {
-              console.log("item", item)
               if(item.path){return (
                 <SubMenu item={item} key={index}/>
               )}
               else {return (
-                <Buton onClick={item.onclick}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
+                <Buton key = {item} onClick={()=>item.onclick}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
               )}
             })}
           </SidebarWrap>
