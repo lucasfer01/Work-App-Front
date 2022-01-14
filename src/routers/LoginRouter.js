@@ -7,10 +7,7 @@ import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
-import { store } from "../store/store";
-import { startLogout } from "../actions/auth";
-import { CardProfileUser } from "../components/cardProfileUser/CardProfileUser";
-import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUser";
+import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
 
 export const LoginRouter = () => {
   return (
@@ -26,6 +23,7 @@ export const LoginRouter = () => {
           <Route path="createpost" element={<FormEmpleador />} />
 
           <Route path="prueba" element={<Checkout />} />
+          <Route path="test" element={<UploadImageTest />} />
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
