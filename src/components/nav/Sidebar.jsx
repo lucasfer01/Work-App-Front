@@ -6,7 +6,7 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./data";
 import SubMenu from "./Submenu";
 import { IconContext } from "react-icons/lib";
-import { FaPowerOff } from "react-icons/fa";
+// import { FaPowerOff } from "react-icons/fa";
 
 
 const Nav = styled.div`
