@@ -10,9 +10,6 @@ import FormEmpleador from "../FormEmpleador/FormEmpleador";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(startLogout());
-  };
 
   return (
     <div>
@@ -34,7 +31,6 @@ export default function Home() {
       <div className={styles.divJobs}>
         <Cards />
       </div>
-      <button onClick={handleLogout}>Logout</button>
       <FormEmpleador/>
     </div>
   );
