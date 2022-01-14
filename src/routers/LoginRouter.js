@@ -7,6 +7,8 @@ import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
+import {store} from '../store/store'
+import { startLogout } from "../actions/auth"; 
 import { CardProfileUser } from "../components/cardProfileUser/CardProfileUser";
 
 export const LoginRouter = () => {

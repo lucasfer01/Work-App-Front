@@ -1,27 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./PostCard.module.css";
+import "./postCard.css";
 
 export default function PostCard(props) {
     return (
-        <div className={styles.container}>
-            <div className={styles.divCard}>
+        <div className='card-emple'>
+            <div className='img-sec'>
+                <img className='imagen' src={props.photo} alt="post..." />
+            </div>
+            <div className='info'>
                 <Link to={`/post/${props.id}`}>
-                    <div className={styles.title}>
-                        <h5>{props.title}</h5>
-                    </div>
+                <h2>{props.title}</h2>
                 </Link>
-                <div className={styles.description}>
-                    <p>{props.description}</p>
-                    <img src={props.photo} alt="post" />
+                <p className='main-paragraph'>{props.description}
+                </p>
+                <div className='overviews'>
+                    <div className='overview'>
+                        <span className='pret'>Pago pretendido:
+                            <span className='sueldo'>{props.fee}</span>
+                        </span>
+                        <p className='disp'>Prioridad:<p className='tiempo'>{props.priority}</p></p>
+                    </div>
                 </div>
-                <div className={styles.foot}>
-                    <p>Pago: {props.fee}</p>
-                    <p>Prioridad: {props.priority}</p>
+                <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
                     <Link to={`/post/${props.id}`}>
-                        <p>More info</p>
+                    <span class="button-text">MAS INFORMACION</span>
                     </Link>
-                </div>
+                </button>
             </div>
         </div>
     );
