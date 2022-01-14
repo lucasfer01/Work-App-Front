@@ -6,7 +6,28 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./data";
 import SubMenu from "./Submenu";
 import { IconContext } from "react-icons/lib";
-import { FaPowerOff } from "react-icons/fa";
+import Boton from '../Boton/Boton'
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../actions/auth";
+// import { FaPowerOff } from "react-icons/fa";
+
+
+const Buton = styled(Boton)`
+  display: flex;
+  color: #e1e9fc;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+  height: 60px;
+  text-decoration: none;
+  font-size: 18px;
+  &:hover {
+    background: #252831;
+    border-left: 4px solid #632ce4;
+    cursor: pointer;
+  }
+`;
 
 const Nav = styled.div`
   background: #003874;
@@ -55,10 +76,19 @@ const SidebarWrap = styled.div`
   width: 100%;
 `;
 
+const SidebarLabel = styled.span`
+  margin-left: 16px;
+`;
+
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(startLogout());
+  };
 
   return (
     <>
@@ -78,8 +108,13 @@ const Sidebar = () => {
             <NavIcon to="#">
               <AiIcons.AiOutlineClose onClick={showSidebar} />
             </NavIcon>
-            {SidebarData.map((item, index) => {
-              return <SubMenu item={item} key={index} />;
+            {SidebarData().map((item, index) => {
+              if(item.path){return (
+                <SubMenu item={item} key={index}/>
+              )}
+              else {return (
+                <Buton key = {item} onClick={handleLogout}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
+              )}
             })}
           </SidebarWrap>
         </SidebarNav>
