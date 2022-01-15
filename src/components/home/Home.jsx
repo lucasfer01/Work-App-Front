@@ -8,6 +8,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
 import Chat from "../chat/chat";
+import Filtros from "../Filtros/Filtros";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function Home() {
       </div>
       <div>
         <Chat />
-        <h3>Filters here</h3>
+        <Filtros/>
         <div className={styles.newPostButton}>
         <Boton
           data-toggle="modal"
