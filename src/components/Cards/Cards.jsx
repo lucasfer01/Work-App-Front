@@ -83,7 +83,7 @@ export default function Cards(profiledata) {
                                 id={post.post_id}
                                 title={post.post_title}
                                 description={post.post_description}
-                                photo={post.post_photo}
+                                photo={post.post_photo[0]}
                                 fee={post.post_fee}
                                 priority={post.post_priority}
                             />

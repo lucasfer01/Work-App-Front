@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
 import { sendNotification } from "../../controllers";
+import { startUploading } from "../../helpers/imageUpload";
 
 export default function FormEmpleador() {
     const navigate = useNavigate();
@@ -37,15 +38,18 @@ export default function FormEmpleador() {
     }
 
     const handleChangePhoto = (e) => {
-        const { value } = e.target;
-        setFile(value);
+        const file = e.target.files[0];
+        setFile(file);
     }
 
-    const handleAddPhoto = (e) => {
+    const handleAddPhoto = async (e) => {
         e.preventDefault();
+
+        const urlFoto = await startUploading(file); 
+
         setPost({
             ...post,
-            post_photo: [...post.post_photo, file]
+            post_photo: [...post.post_photo, urlFoto]
         })
         setFile("");
     }
@@ -108,7 +112,7 @@ export default function FormEmpleador() {
                     </div>
                     <div className='formEmpleado_foto'>
                         <p>Sube una o más fotos: </p>
-                        <input type='text' value={file} onChange={handleChangePhoto} />
+                        <input type='file' onChange={handleChangePhoto} />
                         <button onClick={handleAddPhoto}>Añadir</button>
                         <div className="formEmpleado_fotos">|
                             {

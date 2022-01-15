@@ -27,7 +27,7 @@ export const fileUpload = async (file) => {
 export const startUploading = async (file) => {
   /*   Swal.fire({
     title: "Uploading...",
-    text: "Please wait...",
+    text: "Please wait...", 
     allowOutsideClick: false,
     showConfirmButton: false,
     willOpen: () => {
@@ -42,7 +42,7 @@ export const startUploading = async (file) => {
       Swal.close();
       return fileUrl;
     } catch (e) {
-      console.log(e);
+      alert(e);
       Swal.fire(
         "Oops...!",
         "An error occurred while uploading the image",
