@@ -27,7 +27,6 @@ export const startLoginEmailPassword = (email, password) => {
       })
       .catch((err) => {
         dispatch(finishLoading());
-        console.log("User or email are not valid");
         Swal.fire("Error", "User or email are not valid", "error");
       });
   };
@@ -66,8 +65,10 @@ export const registerUserDB = async (user) => {
     usr_id: uid,
     usr_email: email,
     usr_username: displayName,
-    usr_photo: photoURL,
+    /* usr_photo: photoURL, */
   };
+
+  console.log(data);
 
   await axios
     .post(POST_USER, data)
