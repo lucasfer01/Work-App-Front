@@ -1,0 +1,7 @@
+.filtros_main{
+    background-color: #D42232;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    height: 50px;
+}

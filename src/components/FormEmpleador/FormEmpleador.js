@@ -14,8 +14,11 @@ export default function FormEmpleador() {
         post_photo: [],
         post_title: '',
         post_type: "contratar",
+        post_priority: "Urgente",
     });
     const [file, setFile] = React.useState("");
+
+    console.log("postForm", post)
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -94,6 +97,14 @@ export default function FormEmpleador() {
                     <div className='formEmpleado_description'>
                         <p>Añade una descripción detallada: </p>
                         <textarea cols='50' value={post.post_description} onChange={(event) => setPost({ ...post, post_description: event.target.value })}></textarea>
+                    </div>
+                    <div className='formEmpleado_prioridad'>
+                        <p>Selecciones la prioridad</p>
+                        <select onChange={(event)=>setPost({...post, post_priority: event.target.value})}>
+                            <option value='Urgente'>Urgente</option>
+                            <option value='Poco Urgente'>Poco Urgente</option>
+                            <option value='Sin Urgencia'>Sin Urgencia</option>
+                        </select>
                     </div>
                     <div className='formEmpleado_foto'>
                         <p>Sube una o más fotos: </p>
