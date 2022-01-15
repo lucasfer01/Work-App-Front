@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { startUploading } from "../../actions/uploadImage";
+import { startUploading } from "../../helpers/imageUpload";
 
 export const UploadImageTest = () => {
-  const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
   const handlePictureClick = () => {
@@ -16,11 +14,14 @@ export const UploadImageTest = () => {
     e.target.value = null;
   };
 
-  const postChanges = () => {
-    if (file) {
-      dispatch(startUploading(file));
-    }
-    setFile(null);
+  /* La funcion encargada de regresar la url de la imagen es: ---> "startUploading" <----, 
+  todo lo demas es solo una representacion para guiarme en el proceso */
+
+  //Poner async await para que regrese el url en lugar de una promesa
+  const postChanges = async () => {
+    //se le pasa por parametro el archivo que viene de e.target.files[0];
+    const urlFile = await startUploading(file);
+    //Todo tu codigo aqui...
   };
 
   return (
