@@ -25,9 +25,16 @@ export const startUploading = (file) => {
 
 export const SavePost = (imgUrl) => {
   return () => {
-    setTimeout(() => {
+    try {
       console.log("saved in DB:" + imgUrl);
-      Swal.close();
-    }, 1000);
+      Swal.fire("Success", "Your post was published successfully", "success");
+    } catch (error) {
+      console.log(error);
+      Swal.fire(
+        "Oops...",
+        "Something went wrong! Please try again later",
+        "error"
+      );
+    }
   };
 };
