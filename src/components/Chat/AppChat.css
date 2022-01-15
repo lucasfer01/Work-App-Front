@@ -1,0 +1,7 @@
+.chat {
+    width: 50%;
+    min-height: 50vh;
+    max-height: 50vh;
+    overflow: scroll;
+    border: 2px solid black;
+  }

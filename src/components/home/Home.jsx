@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { startLogout } from "../../actions/auth";
 import Cards from "../Cards/Cards";
 import styles from "./Home.module.css";
-import { getJobs, getPosts } from "../../controllers";
 import { SearchBar } from "../SearchBar/SearchBar";
 import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
+import AppChat from '../Chat/AppChat.js';
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ export default function Home() {
         <Cards />
       </div>
       <FormEmpleador/>
+      <AppChat />
     </div>
   );
 };

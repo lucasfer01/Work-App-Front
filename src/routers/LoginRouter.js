@@ -16,7 +16,7 @@ export const LoginRouter = () => {
     <div>
       <div>
         <Sidebar />
-        <Routes>
+        <Routes>         
           <Route path="home" element={<Home />} />
           <Route path="jobs" element={<Home type="jobs" />} />
           <Route path="profile/:userId" element={<ProfileDetails />} />
