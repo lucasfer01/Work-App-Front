@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { profileUser } from "../../actions/profileActions";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
@@ -17,26 +17,31 @@ import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
 import "./profileDetails.css"
 import Cards from "../Cards/Cards";
+import Chat from "../chat/chat";
 
 
 export const ProfileDetails = () => {
-
+  const [viewChat, setViewChat] = useState(false);
   const {userId} = useParams()
   
   let user= useSelector((state) => state.profile.user)
   let { email }= useSelector((state) => state.auth)
 
-  console.log("user", user)
-  console.log("email", email)
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
     console.log("dispatch profile")
   }, []);
 
+  console.log("user", user)
+  console.log("email", email)
+
 
   const contactUser = () =>{
-    alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
+    //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
+    console.log("Ver chat")
+    setViewChat(!viewChat);
   }
 
   function button(){
@@ -49,8 +54,8 @@ export const ProfileDetails = () => {
             </Link>
       )
     } else return (
-      <button className="btn-prof">
-            <span className="text" onClick={contactUser}>CONTACTAR</span>
+      <button className="btn-prof" onClick={contactUser}>
+            <span className="text" >CONTACTAR</span>
             </button>
     )
   }
@@ -67,6 +72,7 @@ export const ProfileDetails = () => {
                  </button>
               </div>
               {button()}
+              {viewChat && <Chat userPRofile={user} />}
             </div>
         </div>
       <div className='perfil-usuario-body'>
