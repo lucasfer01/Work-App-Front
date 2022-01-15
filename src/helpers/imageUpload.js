@@ -1,5 +1,7 @@
+import { CLOUDINARY_URL } from "../enviroment";
+
 export const fileUpload = async (file) => {
-  const cloudUrl = "https://api.cloudinary.com/v1_1/henrypf/upload";
+  const cloudUrl = CLOUDINARY_URL;
   const formData = new FormData();
   formData.append("upload_preset", "work-app");
   formData.append("file", file);

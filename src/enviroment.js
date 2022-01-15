@@ -1,3 +1,6 @@
+//Cloudinary url
+export const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/henrypf/upload";
+
 // url base
 export const BASE_URL = "https://workapp-back-end.herokuapp.com";
 
@@ -14,4 +17,4 @@ export const POST_USER = `${BASE_URL}/user`;
 export const POST_USER_JOB = `${BASE_URL}/user-job`;
 
 // Url Checkout mercadopago
-export const CHECKOUT_URL = `${BASE_URL}/checkout`
+export const CHECKOUT_URL = `${BASE_URL}/checkout`;

@@ -19,7 +19,6 @@ export const UploadImageTest = () => {
   const postChanges = () => {
     if (file) {
       dispatch(startUploading(file));
-      console.log("Entre aqwi");
     }
     setFile(null);
   };
