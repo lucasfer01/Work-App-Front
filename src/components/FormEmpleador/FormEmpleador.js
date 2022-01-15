@@ -6,8 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { postPost } from '../../actions/formEmpleador';
 import { sendNotification } from "../../controllers";
 import { startUploading } from "../../helpers/imageUpload";
+import { useSelector } from "react-redux";
 
 export default function FormEmpleador() {
+  let { uid }= useSelector((state) => state.auth)
+
     const navigate = useNavigate();
     const [post, setPost] = React.useState({
         post_description: "",
@@ -16,6 +19,7 @@ export default function FormEmpleador() {
         post_title: '',
         post_type: "contratar",
         post_priority: "Urgente",
+        usr_id: uid
     });
     const [file, setFile] = React.useState("");
 
