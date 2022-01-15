@@ -7,21 +7,24 @@ import socket from "../socket";
 
 
 export default function Chat({ userProfile}) {
-    const [chat, setChat] = useState({
-        userName: "",
-        message: "",
-    });
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
+
+    const [chat, setChat] = useState({
+        userName: "",
+        message: "",
+        room: user.uid + "-" + userProfile?.usr_id,
+    });
 
     console.log("user", user);
     console.log("messages", messages);
 
     useEffect(() => {
-        socket.emit("join", { room: "room test"});
+        socket.emit("join", chat.room);
         socket.on("message", (data) => {
             console.log("data: ", data);
+            socket.emit("join", chat.room);
             setMessages(messages => [...messages, data]);
         });
         return () => {
@@ -37,6 +40,7 @@ export default function Chat({ userProfile}) {
 
     const handleChange = (e) => {
         setChat({
+            ...chat,
             userName: user.name,
             message: e.target.value,
         });
