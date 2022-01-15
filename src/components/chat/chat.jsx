@@ -1,40 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { profileUser } from "../../actions/profileActions";
 import "./chat.css";
 import axios from "axios";
-import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:3000";
+import socket from "../socket";
 
 
-
-export default function Chat() {
-    
+export default function Chat({ userProfile}) {
     const [chat, setChat] = useState({
         userName: "",
         message: "",
     });
-
     const [messages, setMessages] = useState([]);
-    console.log("messages: ", messages);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth);
+
+    console.log("user", user);
+    console.log("messages", messages);
 
     useEffect(() => {
-        const socket = socketIOClient(ENDPOINT);
+        socket.emit("join", { room: "room test"});
         socket.on("message", (data) => {
             console.log("data: ", data);
             setMessages(messages => [...messages, data]);
         });
+        return () => {
+            socket.off("message");
+        }
     }, []);
+
+    const divRef = useRef(null)
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const handleChange = (e) => {
         setChat({
-            ...chat,
-            [e.target.name]: e.target.value,
+            userName: user.name,
+            message: e.target.value,
         });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const socket = socketIOClient(ENDPOINT);
-        socket.emit("message", chat);
+        setMessages(messages => [...messages, chat]);
+        socket.emit("message", {
+            ...chat,
+            response: true,
+        });
     }
 
     return (
@@ -44,20 +58,21 @@ export default function Chat() {
                     {
                         messages.map((m, i) => {
                             return (
-                                <div key={i} className="chat-message">
+                                <div key={i} className={m.response ? "chat-message-response" : "chat-message"}>
                                     <p className="user-name-message">{m.userName}</p>
                                     <p className="message-body">{m.message}</p>
                                 </div>
                             )
                         })
                     }
+                    <div ref={divRef}></div>
                 </div>
                 <div className="chat-actions">
 
                 </div>
             </div>
             <form >
-                <input className="inputdata" type="text" placeholder="User name" name="userName" value={chat.userName} onChange={handleChange} />
+                <p className="inputdata">{user.name}</p>
                 <input className="inputdata" type="text" placeholder="Message" name="message" value={chat.message} onChange={handleChange} />
                 <button className="send" onClick={handleSubmit}>Send</button>
             </form>
