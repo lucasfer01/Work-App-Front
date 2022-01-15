@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./chat.css";
 import axios from "axios";
-import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:3000";
-
+import socket from "../socket";
 
 
 export default function Chat() {
@@ -17,7 +15,6 @@ export default function Chat() {
     console.log("messages: ", messages);
 
     useEffect(() => {
-        const socket = socketIOClient(ENDPOINT);
         socket.on("message", (data) => {
             console.log("data: ", data);
             setMessages(messages => [...messages, data]);
@@ -33,7 +30,6 @@ export default function Chat() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const socket = socketIOClient(ENDPOINT);
         socket.emit("message", chat);
     }
 
