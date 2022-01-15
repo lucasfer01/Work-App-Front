@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 import { CLOUDINARY_URL } from "../enviroment";
 
 export const fileUpload = async (file) => {
@@ -19,5 +21,33 @@ export const fileUpload = async (file) => {
     }
   } catch (error) {
     throw error;
+  }
+};
+
+export const startUploading = async (file) => {
+  /*   Swal.fire({
+    title: "Uploading...",
+    text: "Please wait...",
+    allowOutsideClick: false,
+    showConfirmButton: false,
+    willOpen: () => {
+      Swal.showLoading();
+    },
+  }); */
+
+  if (file) {
+    console.log("Entre al uploadImage");
+    try {
+      const fileUrl = await fileUpload(file);
+      Swal.close();
+      return fileUrl;
+    } catch (e) {
+      console.log(e);
+      Swal.fire(
+        "Oops...!",
+        "An error occurred while uploading the image",
+        "error"
+      );
+    }
   }
 };
