@@ -27,11 +27,20 @@
   margin: 0 0.2rem;
 }
 
-.starsRatingContainer  span{
-    margin-left: 0.6rem;
+.starsRatingContainer span {
+  margin-left: 0.6rem;
 }
 
 .fa-star,
 .fa-star-half-alt {
   color: #ffe234;
+}
+
+.card__user-profile {
+  width: auto;
+}
+
+.card__user-profile img {
+  max-height: 225px;
+  min-height: 225px;
 }
