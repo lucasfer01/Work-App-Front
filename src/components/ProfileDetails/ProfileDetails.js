@@ -20,6 +20,7 @@ import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
+import { FormJobs } from "../formJobs/FormJobs"
 
 
 
@@ -68,6 +69,14 @@ export const ProfileDetails = () => {
               >
                 Editar Ubicación
               </Boton>
+              <Link to='/addjob'> 
+              <Boton
+              data-toggle="modal"
+              colorBtn='btn_azul'
+              >
+                Agregar trabajo
+              </Boton>
+              </Link> 
         <EditUbicacion profile = {user} id = {userId}/>
         </div>
 
