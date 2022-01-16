@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { editProfile, profileUser } from "../../../actions/profileActions";
+import { startUploading } from "../../../helpers/imageUpload";
 
 export function EditProfile() {
+  const navigate = useNavigate();
     const {userId} = useParams()
   let user= useSelector((state) => state.profile.user)
   console.log(user)
@@ -30,16 +32,43 @@ function onInputChange(e) {
     })
 
 }
-function onChangePhoto(e){
-    e.preventDefault()
-    setUpdatedUser({
-        ...updatedUser,
-        usr_photo: [e.target.value] 
-    })
+
+const [file, setFile] = React.useState("");
+
+const handleChangePhoto = (e) => {
+  const file = e.target.files[0];
+  setFile(file);
+  console.log("file", file)
 }
 
-function onSubmit(){
-    dispatch(editProfile(userId, updatedUser))
+const handleAddPhoto = async (e) => {
+  e.preventDefault();
+
+  const urlFoto = await startUploading(file); 
+  console.log(urlFoto)
+  setUpdatedUser({
+      ...updatedUser,
+      usr_photo: [urlFoto]
+  })
+  setFile("");
+}
+
+const handleDeletePhoto = (e) => {
+  e.preventDefault();
+  const { value } = e.target;
+  console.log("photo:", value);
+  setUpdatedUser({
+      ...updatedUser,
+      usr_photo: updatedUser.usr_photo.filter(p => p !== value)
+  })
+}
+
+function onSubmit(e){
+  const edit = async () => {
+    e.preventDefault()
+    await dispatch(editProfile(userId, updatedUser))
+  }
+  edit();
 }
 
   return (
@@ -52,10 +81,23 @@ function onSubmit(){
           <label>Username</label>
           <input name="usr_username" type="text" value={updatedUser.usr_username} onChange={onInputChange} />
         </div>
-        <div>
-          <label>Photo</label>
-          <input name="usr_photo" type="text" onChange={onChangePhoto} />
-        </div>
+        <div className='formEmpleado_foto'>
+                        <label>Foto de perfil</label>
+                        <input type='file' onChange={handleChangePhoto} />
+                        <button onClick={handleAddPhoto}>Añadir</button>
+                        <div className="formEmpleado_fotos">|
+                            {
+                                updatedUser.usr_photo.length > 0 && updatedUser.usr_photo.map((photo, i) => {
+                                    return (
+                                        <div key={i} className="boxfoto">
+                                            <input type="image" src={photo} alt="img not found" />
+                                            <button value={photo} onClick={handleDeletePhoto}>X</button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
         <div>
           <label>Descripción</label>
           <input name="usr_description" type="text" value={updatedUser.usr_description} onChange={onInputChange} />
@@ -64,9 +106,7 @@ function onSubmit(){
           <label>Ubicación</label>
           <input name="usr_location" type="text" onChange={onInputChange} />
         </div> */}
-        <Link to={`/profile/${userId}`}>
         <button type="submit" onClick={onSubmit}>Guardar</button>
-        </Link>
       </form>
     </div>
   );
