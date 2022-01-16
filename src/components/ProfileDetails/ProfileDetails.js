@@ -17,7 +17,10 @@ import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
 import "./profileDetails.css"
 import Cards from "../Cards/Cards";
+import EditUbicacion from "../EditUbicacion/EditUbicacion";
+import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
+
 
 
 export const ProfileDetails = () => {
@@ -27,7 +30,12 @@ export const ProfileDetails = () => {
   let user= useSelector((state) => state.profile.user)
   let { email }= useSelector((state) => state.auth)
 
+
+
+
+
   
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
@@ -72,7 +80,17 @@ export const ProfileDetails = () => {
                  </button>
               </div>
               {button()}
+
+              <Boton
+                data-toggle="modal"
+                data-target="#editUbicacion"
+                colorBtn='btn_azul'
+              >
+                Editar Ubicación
+              </Boton>
+
               {viewChat && <Chat userPRofile={user} />}
+
             </div>
         </div>
       <div className='perfil-usuario-body'>
@@ -108,6 +126,7 @@ export const ProfileDetails = () => {
           </div>
       </div>
     </section>
+    <EditUbicacion profile = {user} id = {userId}/>
 </div>
   );
 };
