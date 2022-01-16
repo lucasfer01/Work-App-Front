@@ -55,11 +55,22 @@ export const ProfileDetails = () => {
   function button(){
     if(user?.usr_email === email){
       return(
+        <div>
         <Link to={`/editprofile/${user.usr_id}`}>
             <button type="button" className="boton-portada">
                     <BsFillGearFill /> Editar Perfil
                 </button>
             </Link>
+            <Boton
+                data-toggle="modal"
+                data-target="#editUbicacion"
+                colorBtn='btn_azul'
+              >
+                Editar Ubicación
+              </Boton>
+        <EditUbicacion profile = {user} id = {userId}/>
+        </div>
+
       )
     } else return (
       <button className="btn-prof" onClick={contactUser}>
@@ -81,13 +92,7 @@ export const ProfileDetails = () => {
               </div>
               {button()}
 
-              <Boton
-                data-toggle="modal"
-                data-target="#editUbicacion"
-                colorBtn='btn_azul'
-              >
-                Editar Ubicación
-              </Boton>
+              
 
               {viewChat && <Chat userPRofile={user} />}
 
@@ -126,7 +131,6 @@ export const ProfileDetails = () => {
           </div>
       </div>
     </section>
-    <EditUbicacion profile = {user} id = {userId}/>
 </div>
   );
 };
