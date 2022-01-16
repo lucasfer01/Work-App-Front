@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { editProfile, profileUser } from "../../../actions/profileActions";
 import { startUploading } from "../../../helpers/imageUpload";
 
@@ -63,10 +63,10 @@ const handleDeletePhoto = (e) => {
   })
 }
 
-function onSubmit(){
+function onSubmit(e){
   const edit = async () => {
+    e.preventDefault()
     await dispatch(editProfile(userId, updatedUser))
-    navigate(`/profile/${userId}`)
   }
   edit();
 }
@@ -106,9 +106,7 @@ function onSubmit(){
           <label>Ubicación</label>
           <input name="usr_location" type="text" onChange={onInputChange} />
         </div> */}
-        <Link>
         <button type="submit" onClick={onSubmit}>Guardar</button>
-        </Link>
       </form>
     </div>
   );
