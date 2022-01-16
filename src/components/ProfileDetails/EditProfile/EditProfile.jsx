@@ -69,6 +69,7 @@ function onSubmit(e){
     await dispatch(editProfile(userId, updatedUser))
   }
   edit();
+  // window.location.href = `/profile/${userId}`
 }
 
   return (
