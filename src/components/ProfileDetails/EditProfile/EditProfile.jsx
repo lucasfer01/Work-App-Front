@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { editProfile, profileUser } from "../../../actions/profileActions";
 import { startUploading } from "../../../helpers/imageUpload";
 
+
 export function EditProfile() {
   const navigate = useNavigate();
     const {userId} = useParams()
@@ -88,7 +89,7 @@ function onSubmit(e){
                         <button onClick={handleAddPhoto}>Añadir</button>
                         <div className="formEmpleado_fotos">|
                             {
-                                updatedUser.usr_photo.length > 0 && updatedUser.usr_photo.map((photo, i) => {
+                                updatedUser.usr_photo?.length > 0 && updatedUser.usr_photo.map((photo, i) => {
                                     return (
                                         <div key={i} className="boxfoto">
                                             <input type="image" src={photo} alt="img not found" />
@@ -103,6 +104,7 @@ function onSubmit(e){
           <label>Descripción</label>
           <input name="usr_description" type="text" value={updatedUser.usr_description} onChange={onInputChange} />
         </div>
+
         {/* <div>
           <label>Ubicación</label>
           <input name="usr_location" type="text" onChange={onInputChange} />
