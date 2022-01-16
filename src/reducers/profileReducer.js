@@ -25,6 +25,7 @@ export const profileReducer = (state = initialState, action) => {
         case types.editProfile:
             const {userId, data} = action.payload
             axios.put(`${POST_USER}/${userId}`, data)
+            window.location.href = `/profile/${userId}`
             return{
                 ...state
             }
