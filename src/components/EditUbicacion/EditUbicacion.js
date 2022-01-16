@@ -3,17 +3,36 @@ import Mapa from "../Mapa/Mapa";
 import './EditUbicacion.css'
 import Boton from '../Boton/Boton'
 import Geocode from 'react-geocode'
+import axios from "axios";
+import { POST_USER } from "../../enviroment";
+import {useSelector} from 'react-redux'
 
 // Renderizar este componente como un pop up, no como una ruta
 
-export default function EditUbicacion(){
+export default function EditUbicacion({profile, id}){
 
     const [state, setState] = React.useState(''); 
     const [position, setPosition] = React.useState('')
     const [disabled, setDisabled] = React.useState(true)
+    const [perfil, setPerfil] = React.useState('')
+    
+    React.useEffect(()=>{setPerfil(profile)},[profile]); 
  
     Geocode.setLanguage("es");
     Geocode.setApiKey("AIzaSyAf33rszL-PaMcLx9peQiwUgdDFwJiBxLc");
+
+    React.useEffect(()=>{
+        var a = 1; 
+        a += 1; 
+        if (a > 20) return 0
+        if(position){
+          setState(position)}
+        else {
+            if (window.navigator) {
+                window.navigator.geolocation.getCurrentPosition((pos=>setPosition({lat: pos.coords.latitude, lng: pos.coords.longitude})),(err=>alert("error al acceder a la ubicación: ", err.message))) 
+            }
+        }
+        }, [1]) 
 
     function getCords(){
         Geocode.fromAddress(state).then(
@@ -27,14 +46,41 @@ export default function EditUbicacion(){
         );
     }
 
-    function onSubmit(){
-        // poner aquí la funcionalidad redux para hacer edit del perfil
-        // de usuario y poder poner esa dirección en la base de datos
-        // se debe enviar el estado "position" que tiene dos propiedades, lat y lng. 
-        console.log("funciona")
+    async function onSubmit(){
+
+        console.log('position', position)
+        setPerfil({...perfil, usr_location: position})
+        console.log('perfil', perfil)
+        
+        await axios
+        .put((POST_USER + "/"  + id), perfil)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     return (
+        <div
+        className="modal fade"
+        id="editUbicacion"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="editUbicacionLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content p-3 formEmpleado_main">
+            <button
+              type="button"
+              className="close btn btn-link text-right text-decoration-none"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
         <div className='editUbicacion_main'>
             <h3>Selecciona tu ubicación</h3>
             <div className='editUbicacion_form'>
@@ -47,6 +93,9 @@ export default function EditUbicacion(){
                 <Mapa position={position}/>
             </div>
             <Boton colorBtn='btn_azul' onClick={onSubmit}>Enviar</Boton>
+        </div>
+        </div>
+        </div>
         </div>
     )
 }

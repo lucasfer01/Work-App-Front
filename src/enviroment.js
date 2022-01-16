@@ -1,8 +1,10 @@
 //Cloudinary url
 export const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/henrypf/upload";
 
+
 // url base
 export const BASE_URL = "https://workapp-back-end.herokuapp.com";
+//http://localhost:3001
 
 // Url de oficios
 export const JOB_URL = `${BASE_URL}/job`;
