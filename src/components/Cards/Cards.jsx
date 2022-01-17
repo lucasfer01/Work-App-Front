@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getJobs, getPosts } from "../../controllers";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../../actions/formEmpleador";
+import { getJobs } from "../../controllers";
 import JobCard from "../JobCard/JobCard";
 import PostCard from "../PostCard/PostCard";
 import styles from "./Cards.module.css";
@@ -29,22 +30,30 @@ export default function Cards(profiledata) {
     // console.log(jobs);
     // console.log(posts);
     // console.log("data", data)
+    
+    const storePosts = useSelector(state => state.posts.filterPost); 
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const jobsData = await getJobs();
-                const postsData = await getPosts();
-                // console.log("jobs:", jobsData)
-                // console.log("posts:", postsData)
-                setJobs(jobsData);
-                setPosts(postsData);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getData();
-    }, []);
+    useEffect(()=>{
+        setPosts(storePosts)
+    },[storePosts]); 
+       
+
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const jobsData = await getJobs();
+    //             const postsData = await getPosts();
+    //             // console.log("jobs:", jobsData)
+    //             // console.log("posts:", postsData)
+    //             setJobs(jobsData);
+    //             setPosts(postsData);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+    //     getData();
+    // }, []);
+
 
     if (type === "jobs") {
         return (
@@ -74,7 +83,7 @@ export default function Cards(profiledata) {
                                 id={post.post_id}
                                 title={post.post_title}
                                 description={post.post_description}
-                                photo={post.post_photo}
+                                photo={post.post_photo[0]}
                                 fee={post.post_fee}
                                 priority={post.post_priority}
                             />

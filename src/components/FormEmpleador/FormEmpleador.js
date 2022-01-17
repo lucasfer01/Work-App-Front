@@ -4,8 +4,13 @@ import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
+import { sendNotification } from "../../controllers";
+import { startUploading } from "../../helpers/imageUpload";
+import { useSelector } from "react-redux";
 
 export default function FormEmpleador() {
+  let { uid }= useSelector((state) => state.auth)
+
     const navigate = useNavigate();
     const [post, setPost] = React.useState({
         post_description: "",
@@ -13,8 +18,12 @@ export default function FormEmpleador() {
         post_photo: [],
         post_title: '',
         post_type: "contratar",
+        post_priority: "Urgente",
+        usr_id: uid
     });
     const [file, setFile] = React.useState("");
+
+    console.log("postForm", post)
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -33,15 +42,18 @@ export default function FormEmpleador() {
     }
 
     const handleChangePhoto = (e) => {
-        const { value } = e.target;
-        setFile(value);
+        const file = e.target.files[0];
+        setFile(file);
     }
 
-    const handleAddPhoto = (e) => {
+    const handleAddPhoto = async (e) => {
         e.preventDefault();
+
+        const urlFoto = await startUploading(file); 
+
         setPost({
             ...post,
-            post_photo: [...post.post_photo, file]
+            post_photo: [...post.post_photo, urlFoto]
         })
         setFile("");
     }
@@ -94,9 +106,17 @@ export default function FormEmpleador() {
                         <p>Añade una descripción detallada: </p>
                         <textarea cols='50' value={post.post_description} onChange={(event) => setPost({ ...post, post_description: event.target.value })}></textarea>
                     </div>
+                    <div className='formEmpleado_prioridad'>
+                        <p>Selecciones la prioridad</p>
+                        <select onChange={(event)=>setPost({...post, post_priority: event.target.value})}>
+                            <option value='Urgente'>Urgente</option>
+                            <option value='Poco Urgente'>Poco Urgente</option>
+                            <option value='Sin Urgencia'>Sin Urgencia</option>
+                        </select>
+                    </div>
                     <div className='formEmpleado_foto'>
                         <p>Sube una o más fotos: </p>
-                        <input type='text' value={file} onChange={handleChangePhoto} />
+                        <input type='file' onChange={handleChangePhoto} />
                         <button onClick={handleAddPhoto}>Añadir</button>
                         <div className="formEmpleado_fotos">|
                             {

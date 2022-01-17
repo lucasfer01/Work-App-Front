@@ -7,9 +7,8 @@ import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
-import {store} from '../store/store'
-import { startLogout } from "../actions/auth"; 
-import { CardProfileUser } from "../components/cardProfileUser/CardProfileUser";
+import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
+import { FormJobs } from "../components/formJobs/FormJobs"
 
 export const LoginRouter = () => {
   return (
@@ -24,8 +23,10 @@ export const LoginRouter = () => {
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
 
-
           <Route path="prueba" element={<Checkout />} />
+          <Route path="test" element={<UploadImageTest />} />
+          <Route path="addjob" element={<FormJobs/>} />
+
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
       </div>
