@@ -1,16 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home/Home';
+import React from "react";
+import { Provider } from "react-redux";
 
-function App() {
+import { store } from "./store/store";
+import { AppRouter } from "./routers/AppRouter";
+
+export const App = () => {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </div>
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   );
-}
-
-export default App;
+};

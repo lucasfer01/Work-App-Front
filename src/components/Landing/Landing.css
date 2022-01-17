@@ -1,0 +1,54 @@
+.main_landing_container {
+  background-color: #f0f2f5;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: [x0] 20% [x1] 40% [x2] 10% [x3] 30% [x4];
+  grid-template-rows: [y0] 1fr [y1] 1fr [y2];
+  align-items: center;
+  justify-content: center;
+}
+.about_landing {
+  grid-column: x1 / x2;
+  grid-row: y0 / y2;
+}
+
+.about_landing h1 {
+  font-size: 50px;
+  font-weight: 800;
+  color: #d42232;
+}
+
+.login_landing {
+  grid-column: x3 / x4;
+  grid-row: y0 / y2;
+  background-color: white;
+  width: 95%;
+  border-radius: 10px;
+  padding: 0.5rem;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+@media (max-width: 650px) {
+  .main_landing_container {
+    grid-template-columns: [x0] 20% [x1] 60% [x2] 20% [x3];
+    grid-template-rows: [y0] 35% [y1] 60% [y2] 5% [y3];
+  }
+  .about_landing {
+    grid-column: x1/ x2;
+    grid-row: y0 / y1;
+  }
+  .about_landing h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #d42232;
+    text-align: center;
+  }
+  .login_landing {
+    grid-column: x1 / x2;
+    grid-row: y1 / y2;
+    background-color: white;
+    width: 250px;
+    border-radius: 20px;
+  }
+}

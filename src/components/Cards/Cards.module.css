@@ -1,0 +1,37 @@
+.jobsContainer {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    gap: 2vw;
+}
+
+.postsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2vw;
+}
+
+
+@media (min-width: 680px){
+    .jobsContainer {
+        display: inline-grid;
+        grid-template-columns: auto auto auto;
+        gap: 2vw;
+    }
+}
+
+@media (min-width: 780px){
+    .postsContainer {
+        display: inline-grid;
+        /* grid-template-columns: auto auto; */
+        gap: 2vw;
+    }
+}
+
+@media (min-width: 920px){
+    .jobsContainer {
+        display: inline-grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 2vw;
+    }
+}

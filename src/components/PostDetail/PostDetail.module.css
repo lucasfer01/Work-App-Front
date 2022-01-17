@@ -1,0 +1,35 @@
+.container {
+    width: 100vw;
+}
+
+.subContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+   display: grid; 
+   grid-template-columns: 5fr 1fr;
+}
+
+.header h1 {
+    text-align: center; 
+}
+
+.header h4{
+  display: grid;
+  align-items: center;
+}
+
+.imagenes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.imagen{
+    height: 200px;
+    margin: 20px
+}
+
+

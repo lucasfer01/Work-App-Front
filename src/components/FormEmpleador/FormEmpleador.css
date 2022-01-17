@@ -1,0 +1,48 @@
+.formEmpleado_main{
+    border: solid #014B7C;
+    border-width: 5px;
+    border-radius: 10px;
+    width: 550px;
+    background-color: #F0F2F5;
+}
+
+p{
+    margin: 0px; 
+    font-weight: 700;
+}
+
+.formEmpleado_title{
+    background-color: #014B7C;
+    font-size: 20px;
+}
+
+.formEmpleado_boton{
+    display: grid;
+    grid-template-columns: [x0] 1fr [x1] 1fr [x2] 1fr [x3] 1fr [x4] 1fr [x5];
+}
+
+.formEmpleado_boton div{
+    grid-column: x2/x3;
+}
+
+.formEmpleado_fotos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.boxfoto {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    border: solid black;
+}
+
+.boxfoto > input {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.boxfoto > button {
+    width: 30px;
+    height: 30px;
+}

@@ -1,0 +1,57 @@
+.btn{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 27px;
+    display: inline-block;
+    margin: 5px;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    cursor: pointer
+}
+
+.btn:hover{
+    box-shadow: 0 0 8px rgb(0 0 0 / 26%);
+}
+
+.btn_azul{
+    background-color: #014B7C;
+    color: white;
+    border: solid #014B7C; 
+}
+.btn_azul:hover{
+    background-color: white;
+    color: #014B7C;
+    border: solid #014B7C;
+}
+.btn_rojo{
+    background-color: #D42232;
+    color: white;
+    border: solid #D42232; 
+}
+.btn_rojo:hover{
+    background-color: white;
+    color: #D42232;
+    border: solid #D42232;
+}
+
+.btn_azulLine{
+    background-color: white;
+    color: #014B7C;
+    border: solid #014B7C;
+}
+
+.btn_azulLine:hover{
+    background-color: #014B7C;
+    color: white;
+}
+
+.btn_rojoLine{
+    background-color: white;
+    color: #D42232;
+    border: solid #D42232;
+}
+
+.btn_rojoLine:hover{
+    background-color: #D42232;
+    color: white;
+}

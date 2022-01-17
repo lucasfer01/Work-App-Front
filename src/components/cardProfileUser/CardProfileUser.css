@@ -1,0 +1,46 @@
+.card {
+  width: 18rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-text {
+  font-weight: normal;
+}
+
+.starsRatingContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  font-size: 1rem;
+}
+
+.starsRatingList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.starsRatingList li {
+  margin: 0 0.2rem;
+}
+
+.starsRatingContainer span {
+  margin-left: 0.6rem;
+}
+
+.fa-star,
+.fa-star-half-alt {
+  color: #ffe234;
+}
+
+.card__user-profile {
+  width: auto;
+}
+
+.card__user-profile img {
+  max-height: 225px;
+  min-height: 225px;
+}

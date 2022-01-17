@@ -1,0 +1,40 @@
+.google-btn {
+  cursor: pointer;
+  margin-top: 5px;
+  background-color: #4285f4;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.3s ease;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.google-btn .google-icon-wrapper {
+  background-color: white;
+  height: 42px;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-btn .google-icon {
+  width: 22px;
+}
+
+.google-btn .btn-text {
+  padding: 0 14px;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  margin: 0px;
+}
+
+.google-btn:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+
+.google-btn:active {
+  background: #1669f2;
+}

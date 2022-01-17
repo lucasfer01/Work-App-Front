@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { getJobs } from "../../controllers";
-const image = "https://cursosvirtualesgratis.com/wp-content/uploads/2020/09/donde-aprender-carpinteria-cursos-de-carpinteria.jpg"
+import React from "react";
+import {Link} from "react-router-dom";
+import styles from "./JobCard.module.css";
 
 export default function JobCard(props) {
     return (
-        <div class="card bg-dark text-white">
-            <img src={image} class="card-img" alt="Img not found"/>
-                <div class="card-img-overlay">
-                    <h5 class="card-title">{props.name}</h5>
-                    <p class="card-text">{props.description}</p>
+        <div className={styles.container}>
+            <Link to={`/job/${props.id}`}>
+                <div className={styles.divCard}>
+                <div className={styles.title}>
+                    <h5>{props.name}</h5>
                 </div>
+                </div>
+            </Link>
         </div>
     );
 };
