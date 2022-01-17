@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 import styles from "./PostDetail.module.css";
 import { getPostDetail } from "../../controllers";
 import { style } from "@mui/system";
+import Chat from "../chat/chat";
 
 export default function PostDetail() {
     const [post, setPost] = useState([]);
+    const [viewChat, setViewChat] = useState(false);
     const { id } = useParams();
     useEffect(() => {
         const getPostData = async () => {
@@ -41,6 +43,8 @@ export default function PostDetail() {
                         }): <span>No hay fotos en esta publicación</span>}
                     </div>
                 </div>
+                <button onClick={() => setViewChat(true)}>Abrir chat</button>
+                {viewChat && <Chat userid={post.usr_id}/>}
             </div>: <h1>No se encontraron datos de este usuario</h1>}
         </>
     );
