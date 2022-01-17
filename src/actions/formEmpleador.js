@@ -9,6 +9,9 @@ import {types} from '../types/types'
 export const postPost = async (dataPost) =>  {
     // post data
     const { data } = await axios.post(POST_URL, {...dataPost});
+    
+    // Conectar post ocn empleo
+    // await axios.post(`${POST_URL}/${data.post_id}/`)
         
     return data;
 }
