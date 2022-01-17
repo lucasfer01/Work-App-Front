@@ -20,7 +20,7 @@ export const AppRouter = () => {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName));
+        dispatch(login(user.uid, user.displayName, user.email));
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -50,7 +50,7 @@ export const AppRouter = () => {
             element={
               <PrivateRoute isAuthenticated={isLoggedIn}>
                 <LoginRouter />
-              </PrivateRoute> 
+              </PrivateRoute>
             }
           />
           {/* No poner más rutas aquí, pornerlas en LoginRouter.js */}

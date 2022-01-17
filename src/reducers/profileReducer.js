@@ -1,3 +1,5 @@
+import axios from "axios";
+import { POST_USER } from "../enviroment";
 import { types } from "../types/types";
 
 const initialState = {
@@ -21,9 +23,11 @@ export const profileReducer = (state = initialState, action) => {
             posts: action.payload
         }
         case types.editProfile:
+            const {userId, data} = action.payload
+            axios.put(`${POST_USER}/${userId}`, data)
+            // window.location.href = `/profile/${userId}`
             return{
                 ...state
-                
             }
         default: 
         return state

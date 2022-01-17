@@ -1,28 +1,35 @@
 .container {
-    width: 45vw;
-    background-color: aquamarine;
-    margin-top: 5em;
-    margin-left: 5em;
-    height: 55vh;
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+    width: 100vw;
+}
+
+.subContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+   display: grid; 
+   grid-template-columns: 5fr 1fr;
+}
+
+.header h1 {
+    text-align: center; 
+}
+
+.header h4{
+  display: grid;
+  align-items: center;
+}
+
+.imagenes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.imagen{
+    height: 200px;
+    margin: 20px
 }
 
 
-.divimg > img {
-    width: 25em;
-}
-
-.body {
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-    margin-left: 3em;
-}
-
-.footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}

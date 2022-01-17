@@ -13,5 +13,8 @@ export const types = {
   profilePosts: "[P] Posts",
   editProfile: "[P] Edit",
 
-  formAddJobs: "[AddJob] Add Job"
+  formAddJobs: "[AddJob] Add Job",
+
+  getPosts: "[Post] GET POSTS",
+  setFilters: '[Post] SET FILTERS'
 };
