@@ -6,26 +6,29 @@ import axios from "axios";
 import socket from "../socket";
 
 
-export default function Chat({ userProfile}) {
+export default function Chat({ userProfile, userid}) {
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
 
     const [chat, setChat] = useState({
-        userName: "",
+        transmitter: user.uid,
+        receiver: userid,
         message: "",
-        room: user.uid + "-" + userProfile?.usr_id,
     });
 
     console.log("user", user);
     console.log("messages", messages);
 
     useEffect(() => {
-        socket.emit("join", chat.room);
+        socket.emit("register", user.uid);
         socket.on("message", (data) => {
             console.log("data: ", data);
-            socket.emit("join", chat.room);
             setMessages(messages => [...messages, data]);
+            setChat({
+                ...chat,
+                receiver: data.transmitter,
+            })
         });
         return () => {
             socket.off("message");
@@ -41,7 +44,6 @@ export default function Chat({ userProfile}) {
     const handleChange = (e) => {
         setChat({
             ...chat,
-            userName: user.name,
             message: e.target.value,
         });
     }
@@ -51,7 +53,7 @@ export default function Chat({ userProfile}) {
         setMessages(messages => [...messages, chat]);
         socket.emit("message", {
             ...chat,
-            response: true,
+            isResponse: true,
         });
     }
 
@@ -62,7 +64,7 @@ export default function Chat({ userProfile}) {
                     {
                         messages.map((m, i) => {
                             return (
-                                <div key={i} className={m.response ? "chat-message-response" : "chat-message"}>
+                                <div key={i} className={m.isResponse ? "chat-message-response" : "chat-message"}>
                                     <p className="user-name-message">{m.userName}</p>
                                     <p className="message-body">{m.message}</p>
                                 </div>
