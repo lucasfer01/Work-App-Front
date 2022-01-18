@@ -120,18 +120,19 @@ export const ProfileDetails = () => {
             <p className='texto'>{user?.usr_description}</p>
           </div>
           <div className='perfil-usuario-footer'>
-            <ul className='lista-datos'>
-              {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
-              <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li>
-              <li><ImUsers className="icono" /> Sexo:</li>
-              {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
-              {/* <li><ImUserTie className="icono" />Cargo:</li> */}
-            </ul>
-            <ul className='lista-datos'>
-              {/* <li><BsGeoAlt className='icono' /> Ubicacion:</li> */}
-              <li><BsTelephone className='icono' /> Telefono:</li>
-              <li><FaRegGrinBeam className="icono" /> sociales:</li>
-            </ul>
+
+              <ul className='lista-datos'>
+                  {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
+                  {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
+                  <li><ImUsers className="icono" /> Sexo:</li>
+                  {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
+                  <li><ImUserTie className="icono" />Cargo:</li>
+              </ul>
+              <ul className='lista-datos'>
+                  <li><BsGeoAlt className='icono' /> Nacionalidad:</li>
+                  <li><BsTelephone  className='icono'/> Telefono:</li>
+                  {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
+              </ul>
           </div>
           <div>
             <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
