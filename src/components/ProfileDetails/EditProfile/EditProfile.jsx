@@ -21,7 +21,13 @@ export function EditProfile() {
     usr_username: user.usr_username,
     usr_photo: user.usr_photo,
     usr_description: user.usr_description,
-    // usr_location: user.usr_location
+    // usr_charge: user.usr_charge,
+    // usr_gender: user.usr_gender,
+    // usr_country: user.usr_country,
+    // usr_linkedin: user.usr_social.linkedin,
+    // usr_facebook: user.usr_social.facebook,
+    // usr_instagram: user.usr_social.instagram,
+    // usr_github: user.usr_social.github
   });
   console.log(updatedUser)
 
@@ -81,7 +87,7 @@ function onSubmit(e){
         </div>
         <div>
           <label>Username</label>
-          <input name="usr_username" type="text" value={updatedUser.usr_username} onChange={onInputChange} />
+          <input name="usr_username" type="text" value={updatedUser.usr_username ? updatedUser.usr_username : ""} onChange={onInputChange} />
         </div>
         <div className='formEmpleado_foto'>
                         <label>Foto de perfil</label>
@@ -102,9 +108,37 @@ function onSubmit(e){
                     </div>
         <div>
           <label>Descripción</label>
-          <input name="usr_description" type="text" value={updatedUser.usr_description} onChange={onInputChange} />
+          <input name="usr_description" type="text" value={updatedUser.usr_description ? updatedUser.usr_description : ""} onChange={onInputChange} />
         </div>
-
+        <div>
+          <label>Cargo</label>
+          <input name="usr_charge" type="text" value={updatedUser.usr_charge ? updatedUser.usr_charge : ""} onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>Género</label>
+          <input name="usr_gender" type="" value={updatedUser.usr_gender ? updatedUser.usr_gender : ""} onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>Pais</label>
+          <input name="usr_country" type="" value={updatedUser.usr_country ? updatedUser.usr_country : ""} onChange={onInputChange}/>
+        </div>
+        <label>Redes Sociales</label>
+        <div>
+          <label>Facebook</label>
+          <input name="usr_facebook" type="text" value={updatedUser.usr_social?.facebook ? updatedUser.usr_social.facebook : "" } onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>Instagram</label>
+          <input name="usr_instagram" type="text" value={updatedUser.usr_social?.instagram ? updatedUser.usr_social.instagram : ""} onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>LinkedIn</label>
+          <input name="usr_linkedin" type="text" value={updatedUser.usr_social?.linkedin ? updatedUser.usr_social.linkedin : ""} onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>Github</label>
+          <input name="usr_github" type="text" value={updatedUser.usr_social?.github ? updatedUser.usr_social.github : ""} onChange={onInputChange}/>
+        </div>
         {/* <div>
           <label>Ubicación</label>
           <input name="usr_location" type="text" onChange={onInputChange} />

@@ -23,8 +23,8 @@ export default function PostCard(props) {
                 <img className='imagen' src={props.photo} alt="post..." />
             </div>
             <div className='info'>
-                <Link to={`/profile/${author.usr_id}`}>
-                    <h2>{author.usr_username}</h2>
+                <Link to={`/profile/${author?.usr_id}`}>
+                    <h2>{author?.usr_username}</h2>
                 </Link>
                 <Link to={`/post/${props.id}`}>
                     <h2>{props.title}</h2>
