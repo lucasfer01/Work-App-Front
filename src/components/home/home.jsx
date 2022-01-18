@@ -9,6 +9,8 @@ import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
 import Chat from "../chat/chat";
 import Filtros from "../Filtros/Filtros";
+import { Link } from 'react-router-dom';
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,6 +23,9 @@ export default function Home() {
       <div>
         <Chat />
         <Filtros/>
+        <Link to="/email">
+        <button> Crear Alerta de Empleo</button>
+        </Link>
         <div className={styles.newPostButton}>
         <Boton
           data-toggle="modal"

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { profileUser } from "../../actions/profileActions";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
-import { FaRegGrinBeam } from "react-icons/fa";
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaCity } from "react-icons/fa";
 import { BsGeoAlt } from "react-icons/bs";
-import { BsHouseDoor } from "react-icons/bs";
 import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
@@ -83,6 +79,7 @@ export const ProfileDetails = () => {
       <button className="btn-prof" onClick={contactUser}>
         <span className="text" >CONTACTAR</span>
       </button>
+      
     )
   }
 
