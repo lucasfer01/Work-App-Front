@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/home/Home";
+import Home from "../components/home/home.jsx";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
