@@ -1,24 +1,40 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { getPosts, setFilters } from '../../actions/formEmpleador';
+import { profileUser } from '../../actions/profileActions';
+import OrdenadorDistancia from '../../helpers/distanciaPuntos';
 import './Filtros.css'
 
 export default function Filtros({}){
 
     const dispatch = useDispatch();
+    const { userId } = useParams()
 
     const [filtro, setFiltro] = React.useState({
         Prioridad: '',
+        Orden: 'Ascendente',
     })
- 
+    
+    const usuario = useSelector(state => state.profile.user); 
     const storePosts = useSelector(state => state.posts.allPosts); 
 
+    React.useEffect(() => {
+        dispatch(profileUser(userId));
+      }, [userId]);
+    
+
+    console.log("usuario filtros",usuario)
     React.useEffect(()=>{
         dispatch(getPosts()); 
     },[1])
 
     React.useEffect(async()=>{
-        dispatch(setFilters(Filtrado(storePosts, filtro)))
+        if (usuario.usr_location){
+            console.log("ordenado", OrdenadorDistancia(Filtrado(storePosts, filtro), filtro.Orden))
+            dispatch(setFilters(OrdenadorDistancia(Filtrado(storePosts, filtro), filtro.Orden).post))
+        }
+        else {dispatch(setFilters(Filtrado(storePosts, filtro)))}
     },[filtro, storePosts])
 
     return(
@@ -34,7 +50,10 @@ export default function Filtros({}){
             </div>
             <div>
                 Distancia: 
-                <input type='range'/>
+                <select>
+                    <option value = 'Ascendente'>Ascendente</option>
+                    <option value = 'Descendente'>Descendente</option>
+                </select>
             </div>
         </div>
     )
