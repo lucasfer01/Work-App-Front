@@ -15,11 +15,12 @@ import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
-import "./profileDetails.css"
+import "./profileDetails.css";
 import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
+
 import { FormJobs } from "../formJobs/FormJobs"
 import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 
@@ -44,15 +45,15 @@ export const ProfileDetails = () => {
     console.log("dispatch profile");
   }, [dispatch, userId]);
 
-  console.log("user", user)
-  console.log("email", email)
 
+  console.log("user", user);
+  console.log("email", email);
 
   const contactUser = () => {
     //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
-    console.log("Ver chat")
+    console.log("Ver chat");
     setViewChat(!viewChat);
-  }
+  };
 
   function button() {
     if (user?.usr_email === email) {
@@ -66,6 +67,7 @@ export const ProfileDetails = () => {
           <Boton
             data-toggle="modal"
             data-target="#editUbicacion"
+
             colorBtn='btn_azul'
           >
             Editar Ubicación
@@ -95,12 +97,15 @@ export const ProfileDetails = () => {
         <div className='perfil-usuario-header'>
           <div className='perfil-usuario-portada'>
             <div className='perfil-usuario-avatar'>
+
               <img src={user?.usr_photo} alt="img-avatar" width="50px" />
               <button type="button" className="boton-avatar">
                 <FaImage />
               </button>
             </div>
             {button()}
+
+
 
 
 
@@ -142,6 +147,7 @@ export const ProfileDetails = () => {
         </div>
       </section>
       
+
     </div>
   );
 };
