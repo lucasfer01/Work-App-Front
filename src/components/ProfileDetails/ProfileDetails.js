@@ -17,20 +17,17 @@ import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
 
-
-import { FormJobs } from "../formJobs/FormJobs"
-import { LoadingScreen } from '../loadingScreen/LoadingScreen';
+import { FormJobs } from "../formJobs/FormJobs";
+import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import { getProfile } from "../../controllers";
-
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
-  const { userId } = useParams()
-  const loader = useSelector(state => state.ui.loading);
+  const { userId } = useParams();
+  const loader = useSelector((state) => state.ui.loading);
 
-  let user = useSelector((state) => state.profile.user)
-  let { email } = useSelector((state) => state.auth)
-  
+  let user = useSelector((state) => state.profile.user);
+  let { email } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -75,14 +72,6 @@ export const ProfileDetails = () => {
 
           <EditUbicacion profile={user} id={userId} />
         </div>
-
-      )
-    } else return (
-      <button className="btn-prof" onClick={contactUser}>
-        <span className="text" >CONTACTAR</span>
-      </button>
-      
-    )
       );
     } else
       return (
@@ -116,21 +105,28 @@ export const ProfileDetails = () => {
             <p className="texto">{user?.usr_description}</p>
           </div>
 
-          <div className='perfil-usuario-footer'>
-
-              <ul className='lista-datos'>
-                  {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
-                  {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
-                  <li><ImUsers className="icono" /> Sexo:</li>
-                  {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
-                  <li><ImUserTie className="icono" />Cargo:</li>
-              </ul>
-              <ul className='lista-datos'>
-                  <li><BsGeoAlt className='icono' /> Nacionalidad:</li>
-                  <li><BsTelephone  className='icono'/> Telefono:</li>
-                  {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
-              </ul>
-
+          <div className="perfil-usuario-footer">
+            <ul className="lista-datos">
+              {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
+              {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
+              <li>
+                <ImUsers className="icono" /> Sexo:
+              </li>
+              {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
+              <li>
+                <ImUserTie className="icono" />
+                Cargo:
+              </li>
+            </ul>
+            <ul className="lista-datos">
+              <li>
+                <BsGeoAlt className="icono" /> Nacionalidad:
+              </li>
+              <li>
+                <BsTelephone className="icono" /> Telefono:
+              </li>
+              {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
+            </ul>
           </div>
           <div>
             <Cards
