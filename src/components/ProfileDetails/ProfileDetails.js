@@ -23,6 +23,7 @@ import Chat from "../chat/chat";
 
 import { FormJobs } from "../formJobs/FormJobs"
 import { LoadingScreen } from '../loadingScreen/LoadingScreen';
+import { getProfile } from "../../controllers";
 
 
 export const ProfileDetails = () => {
@@ -32,13 +33,7 @@ export const ProfileDetails = () => {
 
   let user = useSelector((state) => state.profile.user)
   let { email } = useSelector((state) => state.auth)
-
-
-
-
-
-
-
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
