@@ -9,6 +9,7 @@ import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
 import { FormJobs } from "../components/formJobs/FormJobs"
+import Messenger from "../components/Messenger/Messenger";
 
 export const LoginRouter = () => {
   return (
@@ -26,6 +27,7 @@ export const LoginRouter = () => {
           <Route path="prueba" element={<Checkout />} />
           <Route path="test" element={<UploadImageTest />} />
           <Route path="addjob" element={<FormJobs/>} />
+          <Route path="messenger" element={<Messenger/>} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
