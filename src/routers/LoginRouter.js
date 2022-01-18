@@ -10,6 +10,7 @@ import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfil
 import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
 
 import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUser";
+import { About } from "../components/About/About";
 
 export const LoginRouter = () => {
   return (
@@ -18,6 +19,7 @@ export const LoginRouter = () => {
         <Sidebar />
         <Routes>
           <Route path="home" element={<Home />} />
+          <Route path="about" element={<About />} />
           <Route path="jobs" element={<Home />} />
           <Route path="profile/:userId" element={<ProfileDetails />} />
           <Route path="editprofile/:userId" element={<EditProfile />} />
