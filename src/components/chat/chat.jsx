@@ -7,11 +7,13 @@ import socket from "../socket";
 import { getProfile } from "../../controllers";
 
 
+
 export default function Chat({receiverUser}) {
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
     const [chat, setChat] = useState({
+
         transmitter: user.name,
         receiver: receiverUser?.usr_username,
         message: "",
@@ -21,6 +23,7 @@ export default function Chat({receiverUser}) {
 
 
     useEffect(() => {
+
         socket.emit("register", user.name);
         socket.on("message", (data) => {
             console.log("data: ", data);
@@ -66,6 +69,7 @@ export default function Chat({receiverUser}) {
                             return (
                                 <div key={i} className={m.isResponse ? "chat-message-response" : "chat-message"}>
                                     <p className="user-name-message">{m.transmitter}</p>
+
                                     <p className="message-body">{m.message}</p>
                                 </div>
                             )

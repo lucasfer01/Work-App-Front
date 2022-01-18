@@ -9,6 +9,7 @@ export default function PostDetail() {
     const [post, setPost] = useState([]);
     const [authorId, setAuthorId] = useState([]);
     const [author, setAuthor] = useState({});
+
     const [viewChat, setViewChat] = useState(false);
     const { id } = useParams();
     useEffect(() => {
