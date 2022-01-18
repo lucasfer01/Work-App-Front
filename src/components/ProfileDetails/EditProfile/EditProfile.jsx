@@ -28,6 +28,7 @@ export function EditProfile() {
     // usr_facebook: user.usr_social.facebook,
     // usr_instagram: user.usr_social.instagram,
     // usr_github: user.usr_social.github
+    // usr_phone: user.usr_phone
   });
   console.log(updatedUser)
 
@@ -121,6 +122,10 @@ function onSubmit(e){
         <div>
           <label>Pais</label>
           <input name="usr_country" type="" value={updatedUser.usr_country ? updatedUser.usr_country : ""} onChange={onInputChange}/>
+        </div>
+        <div>
+          <label>Telefono</label>
+          <input name="usr_phone" type="" value={updatedUser.usr_phone ? updatedUser.usr_phone : ""} onChange={onInputChange}/>
         </div>
         <label>Redes Sociales</label>
         <div>
