@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { types } from '../types/types'
 import { POST_USER } from '../enviroment'
+import { finishLoading, startLoading } from './ui';
 
 export function profileUser(userId) {
     return async function (dispatch) {
@@ -14,12 +15,14 @@ export function profileUser(userId) {
             .catch((error) => {
                 console.log(error)
             }) */
+            dispatch(startLoading());
             try {
                 const {data} = await axios.get(`${POST_USER}/${userId}`)
                 dispatch({
                     type: types.profileUser,
                     payload: data
-                })
+                });
+                dispatch(finishLoading())
             } catch (error) {
                 console.log(error);
             }
