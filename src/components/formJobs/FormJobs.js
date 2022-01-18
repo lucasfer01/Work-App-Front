@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobs, saveJob } from "../../actions/formJobs";
+import { saveJob } from "../../actions/formJobs";
 import { removeError, setError } from "../../actions/ui";
 import "./FormJobs.css";
 
@@ -14,25 +14,29 @@ export const FormJobs = () => {
     id: null,
   });
   const [hideList, setHideList] = useState(false);
+  const [jobMsg, setJobMsg] = useState("light");
 
   const { job, id } = formValues;
-
-  useEffect(() => {
-    dispatch(getJobs());
-  }, [dispatch]);
 
   const saveNewJob = (e) => {
     e.preventDefault();
     if (!id) {
+      setJobMsg("danger");
       dispatch(setError("Please select one job that are in the list"));
       return false;
     }
-    console.log(uid, id);
-    saveJob(uid, id);
-    setFormValues({
-      job: "",
-      id: null,
-    });
+    try {
+      saveJob(uid, id);
+      setFormValues({
+        job: "",
+        id: null,
+      });
+      setJobMsg("success");
+      dispatch(setError("Job added successfully"));
+    } catch (error) {
+      setJobMsg("danger");
+      dispatch(setError("Error en el servidor, porfavor intentelo mas tarde!"));
+    }
   };
 
   const handleInputChange = ({ target }) => {
@@ -51,14 +55,14 @@ export const FormJobs = () => {
 
   return (
     <div>
-      <button
+      {/*       <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addJobModal"
       >
         Add a job
-      </button>
+      </button> */}
 
       <div
         className="modal fade"
@@ -85,7 +89,7 @@ export const FormJobs = () => {
               <div className="mb-3 addJob">
                 {msgError && (
                   <div
-                    className="alert alert-danger alert-dismissible fade show"
+                    className={`alert alert-${jobMsg} alert-dismissible fade show`}
                     role="alert"
                   >
                     {msgError}

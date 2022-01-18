@@ -79,6 +79,7 @@ export default function Cards(profiledata) {
                                 photo={post.post_photo ? post.post_photo[0] : ""}
                                 fee={post.post_fee}
                                 priority={post.post_priority}
+                                authorId={post.usr_id}
                             />
                         );
                     })

@@ -1,7 +1,7 @@
 // Importamos axios
 import axios from 'axios';
 // Urls
-import { POST_URL, JOB_URL } from '../enviroment';
+import { POST_URL, JOB_URL, POST_USER } from '../enviroment';
 
 // Obtener todos los oficios
 export const getJobs = async () => {
@@ -87,4 +87,13 @@ export const getPostDetail = async (id) => {
     //     updatedAt: "2020-05-05T00:00:00.000Z",
     // }
 
+}
+
+export const getProfile = async (userId) => {
+    try {
+        const {data} = await axios.get(`${POST_USER}/${userId}`)
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
