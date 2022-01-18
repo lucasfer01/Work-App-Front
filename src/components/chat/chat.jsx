@@ -4,24 +4,24 @@ import { profileUser } from "../../actions/profileActions";
 import "./chat.css";
 import axios from "axios";
 import socket from "../socket";
+import { getProfile } from "../../controllers";
 
 
-export default function Chat({ userProfile, userid}) {
+export default function Chat({receiverUser}) {
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
-
     const [chat, setChat] = useState({
-        transmitter: user.uid,
-        receiver: userid,
+        transmitter: user.name,
+        receiver: receiverUser?.usr_username,
         message: "",
     });
 
-    console.log("user", user);
-    console.log("messages", messages);
+    console.log("chat", chat);
+
 
     useEffect(() => {
-        socket.emit("register", user.uid);
+        socket.emit("register", user.name);
         socket.on("message", (data) => {
             console.log("data: ", data);
             setMessages(messages => [...messages, data]);
@@ -65,7 +65,7 @@ export default function Chat({ userProfile, userid}) {
                         messages.map((m, i) => {
                             return (
                                 <div key={i} className={m.isResponse ? "chat-message-response" : "chat-message"}>
-                                    <p className="user-name-message">{m.userName}</p>
+                                    <p className="user-name-message">{m.transmitter}</p>
                                     <p className="message-body">{m.message}</p>
                                 </div>
                             )

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./PostDetail.module.css";
-import { getPostDetail } from "../../controllers";
+import { getPostDetail, getProfile } from "../../controllers";
 import { style } from "@mui/system";
 import Chat from "../chat/chat";
 
 export default function PostDetail() {
     const [post, setPost] = useState([]);
+    const [authorId, setAuthorId] = useState([]);
+    const [author, setAuthor] = useState({});
     const [viewChat, setViewChat] = useState(false);
     const { id } = useParams();
     useEffect(() => {
@@ -15,18 +17,30 @@ export default function PostDetail() {
                 const postData = await getPostDetail(id);
                 console.log("post:", postData)
                 setPost(postData);
+                setAuthorId(postData.usr_id);
             } catch (error) {
                 console.log(error);
             }
         };
         getPostData();
-    }, [id]);    
+        const getAuthorData = async () => {
+            try {
+                const authorData = await getProfile(authorId);
+                console.log("author:", authorData)
+                setAuthor(authorData);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAuthorData();
+    }, [id, authorId]);    
 
     return (
         <>
            {post.post_id? <div className={styles.container}>
                 <div className={styles.fecha}>fecha de publicación: {post.createdAt.slice(0, 10)}</div>
                 <div className={styles.subContainer}>
+                    <h3>Autor: {author?.usr_username}</h3>
                     <div className={styles.header}>
                         <h1>{post.post_title}</h1>
                         <h4 style={{color: "red"}}>{post.post_priority? post.post_priority: <span>Poco urgente</span>}</h4>
@@ -43,8 +57,8 @@ export default function PostDetail() {
                         }): <span>No hay fotos en esta publicación</span>}
                     </div>
                 </div>
-                <button onClick={() => setViewChat(true)}>Abrir chat</button>
-                {viewChat && <Chat userid={post.usr_id}/>}
+                <button onClick={() => setViewChat(!viewChat)}>Abrir chat</button>
+                {viewChat && <Chat receiverUser={author}/>}
             </div>: <h1>No se encontraron datos de este usuario</h1>}
         </>
     );
