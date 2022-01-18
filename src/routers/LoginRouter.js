@@ -9,6 +9,7 @@ import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
 import { FormJobs } from "../components/formJobs/FormJobs"
+
 import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUser";
 
 export const LoginRouter = () => {
