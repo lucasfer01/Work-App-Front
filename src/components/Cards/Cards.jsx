@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/formEmpleador";
-import { getJobs } from "../../controllers";
+import { getJobs } from "../../actions/formJobs";
 import JobCard from "../JobCard/JobCard";
 import PostCard from "../PostCard/PostCard";
 import styles from "./Cards.module.css";
 
 export default function Cards(profiledata) {
     const dispatch = useDispatch();
-    const [jobs, setJobs] = useState([]);
     const [posts, setPosts] = useState([]);
+    const jobs = useSelector(state => state.jobs.allJobs);
+
     let location = window.location.pathname;
     let type;
     if (location === "/home") {
@@ -31,28 +32,20 @@ export default function Cards(profiledata) {
     // console.log(posts);
     // console.log("data", data)
     
-    const storePosts = useSelector(state => state.posts.filterPost); 
+    const storePosts = useSelector(state => state.posts.filterPost);
+
+    //preuba
+    const pruebaJob = useSelector(state => state);
+    console.log('state',pruebaJob);
 
     useEffect(()=>{
-        setPosts(storePosts)
-    },[storePosts]); 
-       
+        const effect = async () => {
+            setPosts(storePosts);
+            await dispatch(getJobs());
+        }
 
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         try {
-    //             const jobsData = await getJobs();
-    //             const postsData = await getPosts();
-    //             // console.log("jobs:", jobsData)
-    //             // console.log("posts:", postsData)
-    //             setJobs(jobsData);
-    //             setPosts(postsData);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    //     getData();
-    // }, []);
+        effect();
+    },[dispatch, storePosts]); 
 
 
     if (type === "jobs") {
@@ -83,9 +76,10 @@ export default function Cards(profiledata) {
                                 id={post.post_id}
                                 title={post.post_title}
                                 description={post.post_description}
-                                photo={post.post_photo[0]}
+                                photo={post.post_photo ? post.post_photo[0] : ""}
                                 fee={post.post_fee}
                                 priority={post.post_priority}
+                                authorId={post.usr_id}
                             />
                         );
                     })
