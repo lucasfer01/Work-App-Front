@@ -6,7 +6,9 @@
 .card-text {
   font-weight: normal;
 }
-
+.img-fluid{
+  object-fit: cover;
+}
 .starsRatingContainer {
   display: flex;
   justify-content: space-between;
