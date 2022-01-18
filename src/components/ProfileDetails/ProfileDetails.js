@@ -21,6 +21,7 @@ import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
 
+
 import { FormJobs } from "../formJobs/FormJobs"
 import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 import { getProfile } from "../../controllers";
@@ -34,12 +35,12 @@ export const ProfileDetails = () => {
   let user = useSelector((state) => state.profile.user)
   let { email } = useSelector((state) => state.auth)
   
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId))
+    dispatch(profileUser(userId));
     console.log("dispatch profile");
   }, [dispatch, userId]);
-
 
   console.log("user", user);
   console.log("email", email);
@@ -62,37 +63,39 @@ export const ProfileDetails = () => {
           <Boton
             data-toggle="modal"
             data-target="#editUbicacion"
-
-            colorBtn='btn_azul'
+            colorBtn="btn_azul"
           >
             Editar Ubicación
           </Boton>
-          <Link to='/addjob'>
-            <Boton
-              data-toggle="modal"
-              colorBtn='btn_azul'
-            >
-              Agregar trabajo
-            </Boton>
-          </Link>
+
+          <Boton
+            data-toggle="modal"
+            data-target="#addJobModal"
+            colorBtn="btn_azul"
+          >
+            Agregar trabajo
+          </Boton>
+          <FormJobs />
+
           <EditUbicacion profile={user} id={userId} />
         </div>
-
-      )
-    } else return (
-      <button className="btn-prof" onClick={contactUser}>
-        <span className="text" >CONTACTAR</span>
-      </button>
-    )
+      );
+    } else
+      return (
+        <button className="btn-prof" onClick={contactUser}>
+          <span className="text">CONTACTAR</span>
+        </button>
+      );
   }
 
-  return (loader ? <LoadingScreen/> : 
+  return loader ? (
+    <LoadingScreen />
+  ) : (
     <div>
-      <section className='seccion-perfil-usuario'>
-        <div className='perfil-usuario-header'>
-          <div className='perfil-usuario-portada'>
-            <div className='perfil-usuario-avatar'>
-
+      <section className="seccion-perfil-usuario">
+        <div className="perfil-usuario-header">
+          <div className="perfil-usuario-portada">
+            <div className="perfil-usuario-avatar">
               <img src={user?.usr_photo} alt="img-avatar" width="50px" />
               <button type="button" className="boton-avatar">
                 <FaImage />
@@ -100,20 +103,15 @@ export const ProfileDetails = () => {
             </div>
             {button()}
 
-
-
-
-
             {viewChat && <Chat userPRofile={user} />}
-
           </div>
         </div>
-        <div className='perfil-usuario-body'>
-          <div className='perfil-usuario-bio'>
-
-            <h3 className='titulo'>{user?.usr_username}</h3>
-            <p className='texto'>{user?.usr_description}</p>
+        <div className="perfil-usuario-body">
+          <div className="perfil-usuario-bio">
+            <h3 className="titulo">{user?.usr_username}</h3>
+            <p className="texto">{user?.usr_description}</p>
           </div>
+
           <div className='perfil-usuario-footer'>
 
               <ul className='lista-datos'>
@@ -128,22 +126,47 @@ export const ProfileDetails = () => {
                   <li><BsTelephone  className='icono'/> Telefono:</li>
                   {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
               </ul>
+
           </div>
           <div>
-            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
+            <Cards
+              key="job"
+              profiledata={user?.jobs}
+              profileType={"jobs"}
+            ></Cards>
           </div>
           <div>
-            <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
+            <Cards
+              key="post"
+              profiledata={user?.posts}
+              profileType={"posts"}
+            ></Cards>
           </div>
-          <div className='redes-sociales'>
-            <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons' /></a>
-            <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
-            <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
+          <div className="redes-sociales">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              className="boton-redes facebook"
+            >
+              <FaFacebook className="icons" />
+            </a>
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              className="boton-redes linkeding"
+            >
+              <FaLinkedin className="icons" />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              className="boton-redes instagram"
+            >
+              <FaInstagram className="icons" />
+            </a>
           </div>
         </div>
       </section>
-      
-
     </div>
   );
 };
