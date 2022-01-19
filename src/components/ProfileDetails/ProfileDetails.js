@@ -20,9 +20,9 @@ import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
-import { FormJobs } from "../formJobs/FormJobs"
-
-
+import { FormJobs } from "../formJobs/FormJobs";
+import { LoadingScreen } from "../loadingScreen/LoadingScreen";
+import { getProfile } from "../../controllers";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -30,12 +30,8 @@ export const ProfileDetails = () => {
   
   let user= useSelector((state) => state.profile.user)
   let { email }= useSelector((state) => state.auth)
+  const loader = useSelector((state) => state.ui.loading);
 
-
-
-
-
-  
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -79,15 +75,14 @@ export const ProfileDetails = () => {
               </Link> 
         <EditUbicacion profile = {user} id = {userId}/>
         </div>
-
-      )
-    } else return (
-      <button className="btn-prof" onClick={contactUser}>
-            <span className="text" >CONTACTAR</span>
-            </button>
-    )
+      );
+    } else
+      return (
+        <button className="btn-prof" onClick={contactUser}>
+          <span className="text">CONTACTAR</span>
+        </button>
+      );
   }
-
   return (
    <div>
      <section className='seccion-perfil-usuario'>
@@ -113,19 +108,28 @@ export const ProfileDetails = () => {
               <h3 className='titulo'>{user?.usr_username}</h3>
               <p className='texto'>{user?.usr_description}</p>
           </div>
-          <div className='perfil-usuario-footer'>
-              <ul className='lista-datos'>
-                  <li><BsHouseDoor className='icono' />Direccion de usuario:</li>
-                  <li><BsTelephone  className='icono'/> Telefono:</li>
-                  <li><FaCity className='icono' /> Trabaja en:</li>
-                  <li><ImUserTie className="icono" />Cargo:</li>
-              </ul>
-              <ul className='lista-datos'>
-                  <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li>
-                  <li><BsGeoAlt className='icono' /> Ubicacion:</li>
-                  <li><ImUsers className="icono" /> Sexo:</li>
-                  <li><FaRegGrinBeam className="icono" /> sociales:</li>
-              </ul>
+          <div className="perfil-usuario-footer">
+            <ul className="lista-datos">
+              {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
+              {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
+              <li>
+                <ImUsers className="icono" /> Sexo:
+              </li>
+              {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
+              <li>
+                <ImUserTie className="icono" />
+                Cargo:
+              </li>
+            </ul>
+            <ul className="lista-datos">
+              <li>
+                <BsGeoAlt className="icono" /> Nacionalidad:
+              </li>
+              <li>
+                <BsTelephone className="icono" /> Telefono:
+              </li>
+              {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
+            </ul>
           </div>
           <div>
            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
