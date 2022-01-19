@@ -9,7 +9,12 @@ import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
 import Chat from "../chat/chat";
 import Filtros from "../Filtros/Filtros";
+
 import socket from "../socket";
+
+import { Link } from 'react-router-dom';
+
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -30,6 +35,10 @@ export default function Home() {
         >
           Nuevo post
         </Boton>
+        <Link to="/email">
+        <Boton colorBtn='btn_azul'
+         > Crear Alerta de Empleo </Boton>
+        </Link>
         </div>
       </div>
       <div className={styles.divJobs}>

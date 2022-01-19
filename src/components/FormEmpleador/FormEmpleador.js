@@ -4,7 +4,7 @@ import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
-import { sendNotification } from "../../controllers";
+import { sendNotification, sendEmail } from "../../controllers";
 import { startUploading } from "../../helpers/imageUpload";
 import { useSelector } from "react-redux";
 
@@ -32,6 +32,7 @@ export default function FormEmpleador() {
             const createPost = await postPost({
                 ...post
             });
+            const email = await sendEmail(post);
            window.location.reload(true)
 
             return createPost;

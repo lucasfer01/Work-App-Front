@@ -20,7 +20,10 @@ export const UploadImageTest = () => {
   //Poner async await para que regrese el url en lugar de una promesa
   const postChanges = async () => {
     //se le pasa por parametro el archivo que viene de e.target.files[0];
-    const urlFile = await startUploading(file);
+
+    /* const urlFile = */ await startUploading(file);
+    
+    
     //Todo tu codigo aqui...
   };
 

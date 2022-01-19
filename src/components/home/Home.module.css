@@ -1,0 +1,10 @@
+.divJobs {
+    text-align: center;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: -96px;
+    margin-left: 50px;
+}

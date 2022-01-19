@@ -6,10 +6,12 @@
 .card-text {
   font-weight: normal;
 }
-
+.img-fluid{
+  object-fit: cover;
+}
 .starsRatingContainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-end;
   font-size: 1rem;
 }

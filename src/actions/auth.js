@@ -22,6 +22,7 @@ export const startLoginEmailPassword = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
+        registerUserDB(user);
         dispatch(login(user.uid, user.displayName, user.email));
         dispatch(finishLoading());
       })
