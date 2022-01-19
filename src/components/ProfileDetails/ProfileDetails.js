@@ -26,10 +26,10 @@ import { getProfile } from "../../controllers";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
-  const {userId} = useParams()
-  
-  let user= useSelector((state) => state.profile.user)
-  let { email }= useSelector((state) => state.auth)
+  const { userId } = useParams()
+
+  let user = useSelector((state) => state.profile.user)
+  let { email } = useSelector((state) => state.auth)
   const loader = useSelector((state) => state.ui.loading);
 
 
@@ -43,37 +43,41 @@ export const ProfileDetails = () => {
   console.log("email", email)
 
 
-  const contactUser = () =>{
+  const contactUser = () => {
     //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
     console.log("Ver chat")
     setViewChat(!viewChat);
   }
 
-  function button(){
-    if(user?.usr_email === email){
-      return(
+  function button() {
+    if (user?.usr_email === email) {
+      return (
         <div>
-        <Link to={`/editprofile/${user.usr_id}`}>
+          <Link to={`/editprofile/${user.usr_id}`}>
             <button type="button" className="boton-portada">
-                    <BsFillGearFill /> Editar Perfil
-                </button>
-            </Link>
+              <BsFillGearFill /> Editar Perfil
+            </button>
+          </Link>
+          <Boton
+            data-toggle="modal"
+            data-target="#editUbicacion"
+            colorBtn='btn_azul'
+          >
+            Editar Ubicación
+          </Boton>
+          <Link to='/addjob'>
             <Boton
-                data-toggle="modal"
-                data-target="#editUbicacion"
-                colorBtn='btn_azul'
-              >
-                Editar Ubicación
-              </Boton>
-              <Link to='/addjob'> 
-              <Boton
               data-toggle="modal"
               colorBtn='btn_azul'
-              >
-                Agregar trabajo
-              </Boton>
-              </Link> 
-        <EditUbicacion profile = {user} id = {userId}/>
+            >
+              Agregar trabajo
+            </Boton>
+          </Link>
+          <Link to="/email">
+            <Boton colorBtn='btn_azul'
+            > Crear Alerta de Empleo </Boton>
+          </Link>
+          <EditUbicacion profile={user} id={userId} />
         </div>
       );
     } else
@@ -84,29 +88,29 @@ export const ProfileDetails = () => {
       );
   }
   return (
-   <div>
-     <section className='seccion-perfil-usuario'>
-         <div className='perfil-usuario-header'>
-             <div className='perfil-usuario-portada'>
-             <div className='perfil-usuario-avatar'>
-                 <img src={user?.usr_photo} alt="img-avatar" width="50px"/>
-                 <button type="button" className="boton-avatar">
-                      <FaImage />
-                 </button>
-              </div>
-              {button()}
-
-              
-
-              {viewChat && <Chat userPRofile={user} />}
-
+    <div>
+      <section className='seccion-perfil-usuario'>
+        <div className='perfil-usuario-header'>
+          <div className='perfil-usuario-portada'>
+            <div className='perfil-usuario-avatar'>
+              <img src={user?.usr_photo} alt="img-avatar" width="50px" />
+              <button type="button" className="boton-avatar">
+                <FaImage />
+              </button>
             </div>
+            {button()}
+
+
+
+            {viewChat && <Chat userPRofile={user} />}
+
+          </div>
         </div>
-      <div className='perfil-usuario-body'>
+        <div className='perfil-usuario-body'>
           <div className='perfil-usuario-bio'>
-                
-              <h3 className='titulo'>{user?.usr_username}</h3>
-              <p className='texto'>{user?.usr_description}</p>
+
+            <h3 className='titulo'>{user?.usr_username}</h3>
+            <p className='texto'>{user?.usr_description}</p>
           </div>
           <div className="perfil-usuario-footer">
             <ul className="lista-datos">
@@ -132,18 +136,18 @@ export const ProfileDetails = () => {
             </ul>
           </div>
           <div>
-           <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
-           </div>
-           <div>
-          <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
+            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
+          </div>
+          <div>
+            <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
           </div>
           <div className='redes-sociales'>
-              <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons'/></a>
-              <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
-              <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
+            <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons' /></a>
+            <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
+            <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
           </div>
-      </div>
-    </section>
-</div>
+        </div>
+      </section>
+    </div>
   );
 };
