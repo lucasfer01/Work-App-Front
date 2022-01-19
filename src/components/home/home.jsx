@@ -23,9 +23,6 @@ export default function Home() {
       <div>
         <Chat />
         <Filtros/>
-        <Link to="/email">
-        <button> Crear Alerta de Empleo</button>
-        </Link>
         <div className={styles.newPostButton}>
         <Boton
           data-toggle="modal"
@@ -34,6 +31,10 @@ export default function Home() {
         >
           Nuevo post
         </Boton>
+        <Link to="/email">
+        <Boton colorBtn='btn_azul'
+         > Crear Alerta de Empleo </Boton>
+        </Link>
         </div>
       </div>
       <div className={styles.divJobs}>

@@ -1,33 +1,40 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-router-dom';
 
 const AlertaEmpleo = () => {
 
-    const [job, setJob] = useState({
-        email: "",
-        empleo: "",
+    const [alerts, setAlerts] = useState({
+        usr_alerts: [],
     });
+    const { uid } = useSelector((state) => state.auth);
 
-    const getAlert = async (input) => {
-        const res = await axios.post("localhost:3000/email", input);
+    const getAlerts = async (alerts) => {
+        const res = await axios.put(`localhost:3000/user/${uid}`, alerts);
         console.log(res)
         return res;
     };
     
-    const handleSubmit = (input) => {
-        getAlert(input);
-        setJob({});
-        // alert("Se ha creado su alerta de empleo");
-        console.log("Input enviado", input);
+    const handleChange = (e) => {
+        setAlerts({
+            ...alerts,
+            usr_alerts: [...usr_alerts, e.target.value]
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getAlerts(alerts);
+        setAlerts({});
+        console.log("Input enviado ", alerts);
     };
 
     return (
         <div>
             <div>
                 <form>
-                    <input placeholder="E-mail" value="email" />
-                    <input placeholder="Empleo a alertar..." value="empleo" />
-                    <button onClick={handleSubmit()} >Enviar </button>
+                    <input placeholder="Empleo a alertar..." onChange={handleChange} />
+                    <button onClick={handleSubmit} > Enviar </button>
                 </form>
             </div>
         </div>
