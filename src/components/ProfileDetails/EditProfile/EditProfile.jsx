@@ -21,16 +21,15 @@ export function EditProfile() {
     usr_username: user.usr_username,
     usr_photo: user.usr_photo,
     usr_description: user.usr_description,
-    // usr_charge: user.usr_charge,
-    // usr_gender: user.usr_gender,
-    // usr_country: user.usr_country,
-    // usr_linkedin: user.usr_social.linkedin,
-    // usr_facebook: user.usr_social.facebook,
-    // usr_instagram: user.usr_social.instagram,
-    // usr_github: user.usr_social.github
-    // usr_phone: user.usr_phone
+    usr_charge: user.usr_charge,
+    usr_gender: user.usr_gender,
+    usr_country: user.usr_country,
+    usr_social: user.usr_social,
+    usr_phone: user.usr_phone
   });
   console.log(updatedUser)
+
+
 
 function onInputChange(e) {
     e.preventDefault()
@@ -38,7 +37,18 @@ function onInputChange(e) {
         ...updatedUser,
         [e.target.name]: e.target.value
     })
+}
 
+
+function onSocialChange(e){
+  e.preventDefault()
+  setUpdatedUser({
+    ...updatedUser,
+    usr_social: {
+      ...updatedUser.usr_social,
+      [e.target.name]: e.target.value
+    } 
+  })
 }
 
 const [file, setFile] = React.useState("");
@@ -130,19 +140,19 @@ function onSubmit(e){
         <label>Redes Sociales</label>
         <div>
           <label>Facebook</label>
-          <input name="usr_facebook" type="text" value={updatedUser.usr_social?.facebook ? updatedUser.usr_social.facebook : "" } onChange={onInputChange}/>
+          <input name="facebook" type="text" value={updatedUser.usr_social?.facebook ? updatedUser.usr_social.facebook : "" } onChange={onSocialChange}/>
         </div>
         <div>
           <label>Instagram</label>
-          <input name="usr_instagram" type="text" value={updatedUser.usr_social?.instagram ? updatedUser.usr_social.instagram : ""} onChange={onInputChange}/>
+          <input name="instagram" type="text" value={updatedUser.usr_social?.instagram ? updatedUser.usr_social.instagram : ""} onChange={onSocialChange}/>
         </div>
         <div>
           <label>LinkedIn</label>
-          <input name="usr_linkedin" type="text" value={updatedUser.usr_social?.linkedin ? updatedUser.usr_social.linkedin : ""} onChange={onInputChange}/>
+          <input name="linkedin" type="text" value={updatedUser.usr_social?.linkedin ? updatedUser.usr_social.linkedin : ""} onChange={onSocialChange}/>
         </div>
         <div>
           <label>Github</label>
-          <input name="usr_github" type="text" value={updatedUser.usr_social?.github ? updatedUser.usr_social.github : ""} onChange={onInputChange}/>
+          <input name="github" type="text" value={updatedUser.usr_social?.github ? updatedUser.usr_social.github : ""} onChange={onSocialChange}/>
         </div>
         {/* <div>
           <label>Ubicación</label>

@@ -9,12 +9,12 @@ import { getProfile } from "../../controllers";
 
 
 export default function Chat({receiverUser}) {
+    const [allChats, setAllChats] = useState({});
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
     const [chat, setChat] = useState({
-
-        transmitter: user.name,
+        sender: user.name,
         receiver: receiverUser?.usr_username,
         message: "",
     });
@@ -23,19 +23,15 @@ export default function Chat({receiverUser}) {
 
 
     useEffect(() => {
-
         socket.emit("register", user.name);
         socket.on("message", (data) => {
             console.log("data: ", data);
             setMessages(messages => [...messages, data]);
             setChat({
                 ...chat,
-                receiver: data.transmitter,
+                receiver: data.sender,
             })
         });
-        return () => {
-            socket.off("message");
-        }
     }, []);
 
     const divRef = useRef(null)
@@ -54,10 +50,7 @@ export default function Chat({receiverUser}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessages(messages => [...messages, chat]);
-        socket.emit("message", {
-            ...chat,
-            isResponse: true,
-        });
+        socket.emit("message", chat);
     }
 
     return (
@@ -67,8 +60,8 @@ export default function Chat({receiverUser}) {
                     {
                         messages.map((m, i) => {
                             return (
-                                <div key={i} className={m.isResponse ? "chat-message-response" : "chat-message"}>
-                                    <p className="user-name-message">{m.transmitter}</p>
+                                <div key={i} className={m.sender === user.name ? "chat-message" : "chat-message-response"}>
+                                    <p className="user-name-message">{m.sender}</p>
 
                                     <p className="message-body">{m.message}</p>
                                 </div>

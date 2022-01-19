@@ -4,12 +4,13 @@ import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 // form Empleados action
 import { postPost } from '../../actions/formEmpleador';
-import { sendNotification } from "../../controllers";
+import { sendNotification, sendEmail } from "../../controllers";
 import { startUploading } from "../../helpers/imageUpload";
 import { useSelector } from "react-redux";
 
 export default function FormEmpleador() {
   let { uid }= useSelector((state) => state.auth)
+  const jobs = useSelector((state) => state.jobs.allJobs)
 
     const navigate = useNavigate();
     const [post, setPost] = React.useState({
@@ -22,16 +23,22 @@ export default function FormEmpleador() {
         usr_id: uid
     });
     const [file, setFile] = React.useState("");
+    const [newJob, setNewJob] = React.useState("");
+    const [postJobs, setPostJobs] = React.useState([]);
+    const [jobList, setJobList] = React.useState([]);
 
-    console.log("postForm", post)
+
 
     async function handleOnSubmit(e) {
         e.preventDefault();
 
         try {
             const createPost = await postPost({
-                ...post
+                post: post,
+                jobs: postJobs,
             });
+            const email = await sendEmail(postJobs);
+            console.log("createPost", createPost)
            window.location.reload(true)
 
             return createPost;
@@ -68,6 +75,27 @@ export default function FormEmpleador() {
         })
     }
 
+    const handleJobChange = (e) => {
+        const { value } = e.target;;
+        setNewJob(value);
+        const filteredJobs = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
+        setJobList(filteredJobs);
+    }
+
+    const handleAddJob = (e) => {
+        e.preventDefault();
+        const { value } = e.target;
+        setPostJobs([...postJobs, value]);
+        setNewJob("");
+        setJobList([]);
+    }
+
+    const handleDeleteJob = (e) => {
+        e.preventDefault();
+        const { value } = e.target;
+        setPostJobs(postJobs.filter(p => p !== value));
+    }
+
 
     return (
         <div
@@ -93,7 +121,25 @@ export default function FormEmpleador() {
                         <p>Postea el trabajo que necesitas</p>
                     </div>
                     <div className='formEmpleado_type'>
+                        <input type="text" value={newJob} onChange={handleJobChange} placeholder="Rubro" />
                     </div>
+                    {
+                        jobList.map(job => (
+                            <div key={job.job_id}>
+                                <input type="button" value={job.job_name} onClick={handleAddJob}/>
+                            </div>
+                        ))
+                    }
+                    {
+                        postJobs.map((job, index) => {
+                            return (
+                                <div className='formEmpleado_job' key={index}>
+                                    <p>{job}</p>
+                                    <button type="button" onClick={handleDeleteJob} value={job}>Eliminar</button>
+                                </div>
+                            )
+                        })
+                    }
                     <div className='formEmpleado_foto'>
                         <p>Título del post: </p>
                         <input type='text' onChange={event => setPost({ ...post, post_title: event.target.value })} />
