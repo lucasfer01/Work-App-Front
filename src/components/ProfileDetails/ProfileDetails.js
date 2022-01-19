@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { profileUser } from "../../actions/profileActions";
-import { FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
@@ -110,20 +110,20 @@ export const ProfileDetails = () => {
               {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
               {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
               <li>
-                <ImUsers className="icono" /> Sexo:
+                <ImUsers className="icono" /> Sexo: {user?.usr_gender}
               </li>
               {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
               <li>
                 <ImUserTie className="icono" />
-                Cargo:
+                Cargo: {user?.usr_charge}
               </li>
             </ul>
             <ul className="lista-datos">
               <li>
-                <BsGeoAlt className="icono" /> Nacionalidad:
+                <BsGeoAlt className="icono" /> Nacionalidad: {user?.usr_country}
               </li>
               <li>
-                <BsTelephone className="icono" /> Telefono:
+                <BsTelephone className="icono" /> Telefono: {user?.usr_phone}
               </li>
               {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
             </ul>
@@ -144,25 +144,32 @@ export const ProfileDetails = () => {
           </div>
           <div className="redes-sociales">
             <a
-              href="https://www.facebook.com"
-              target="_blank"
-              className="boton-redes facebook"
-            >
-              <FaFacebook className="icons" />
-            </a>
-            <a
-              href="https://www.linkedin.com"
+              href={user?.usr_social?.linkedin? user?.usr_social.linkedin : null}
               target="_blank"
               className="boton-redes linkeding"
             >
               <FaLinkedin className="icons" />
             </a>
             <a
-              href="https://www.instagram.com"
+              href={user?.usr_social?.github? user?.usr_social.github : null}
+              target="_blank"
+              className="boton-redes github"
+            >
+              <FaGithub className="icons" />
+            </a>
+            <a
+              href={user?.usr_social?.instagram? user?.usr_social.instagram : null}
               target="_blank"
               className="boton-redes instagram"
             >
               <FaInstagram className="icons" />
+            </a>
+            <a
+              href={user?.usr_social?.facebook? user?.usr_social.facebook : null}
+              target="_blank"
+              className="boton-redes facebook"
+            >
+              <FaFacebook className="icons" />
             </a>
           </div>
         </div>
