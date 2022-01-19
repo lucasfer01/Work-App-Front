@@ -9,6 +9,7 @@ import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
 import Chat from "../chat/chat";
 import Filtros from "../Filtros/Filtros";
+import socket from "../socket";
 
 export default function Home() {
   const dispatch = useDispatch();
