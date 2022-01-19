@@ -1,7 +1,7 @@
 // impprtamos axios
 import axios from "axios";
 // url post
-import { POST_URL } from "../enviroment";
+import { POST_JOB, POST_URL, POST_USER_JOB } from "../enviroment";
 import { types } from "../types/types";
 
 // Post
@@ -32,4 +32,16 @@ export const setFilters = (data) => {
   return (dispatch) => {
     dispatch({ type: types.setFilters, payload: data });
   };
+};
+
+//Relacionar el post con el job
+export const setPostJob = async (post_id, job_id) => {
+  console.log(post_id, job_id);
+  await axios
+    .post(`${POST_JOB}/${post_id}/${job_id}`)
+    .then((res) => console.log(res))
+    .catch((e) => {
+      console.log("falla en setPostJob");
+      alert(e);
+    });
 };
