@@ -97,3 +97,12 @@ export const getProfile = async (userId) => {
         console.log(error);
     }
 }
+
+export const sendEmail = async (postData) => {
+    try {
+        const {data} = await axios.post(`http://localhost:3000/email`, postData)
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
