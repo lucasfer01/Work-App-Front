@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
@@ -10,6 +10,7 @@ import Boton from '../Boton/Boton'
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../actions/auth";
 // import { FaPowerOff } from "react-icons/fa";
+import socket from "../socket";
 
 
 const Buton = styled(Boton)`
@@ -82,13 +83,28 @@ const SidebarLabel = styled.span`
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
+  const [newNotification, setNewNotification] = useState(false)
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [notifications, setNotifications] = useState([]);
 
   const showSidebar = () => setSidebar(!sidebar);
+  const showNotif = () => {
+    setShowNotifications(!showNotifications);
+    setNewNotification(false);
+  };
 
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(startLogout());
   };
+
+  useEffect(() => {
+    socket.on("notification", (data) => {
+      setNewNotification(true);
+      setNotifications(notifications => [...notifications, data]);
+      console.log("notifications", notifications);
+    });
+  } , [])
 
   return (
     <>
@@ -102,6 +118,21 @@ const Sidebar = () => {
               <Logo>WORKINLING.</Logo>
             </Link>
           </Center>
+          <button onClick={showNotif}>Notifications
+          {
+            newNotification && <span>!!</span>
+          }
+          </button>
+          {
+            showNotifications && notifications.map((notification, i) => {
+              return (
+                <div key={i}>
+                  <p>{notification.type}</p>
+                  <p>{notification.body.message}</p>
+                </div>
+              )
+            })
+          }
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>

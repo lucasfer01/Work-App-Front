@@ -9,7 +9,11 @@ import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
 import Chat from "../chat/chat";
 import Filtros from "../Filtros/Filtros";
+
+import socket from "../socket";
+
 import { Link } from 'react-router-dom';
+
 
 
 export default function Home() {
