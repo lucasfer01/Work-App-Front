@@ -35,10 +35,6 @@ export default function Home() {
         >
           Nuevo post
         </Boton>
-        <Link to="/email">
-        <Boton colorBtn='btn_azul'
-         > Crear Alerta de Empleo </Boton>
-        </Link>
         </div>
       </div>
       <div className={styles.divJobs}>
