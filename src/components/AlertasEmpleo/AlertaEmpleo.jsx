@@ -1,33 +1,43 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const AlertaEmpleo = () => {
 
-    const [job, setJob] = useState({
-        email: "",
-        empleo: "",
-    });
+    const [newAlert, setNewAlert] = useState("");
 
-    const getAlert = async (input) => {
-        const res = await axios.post("localhost:3000/email", input);
-        console.log(res)
+    const [alerts, setAlerts] = useState({
+        usr_alerts: [],
+    });
+    const { uid } = useSelector((state) => state.auth);
+    console.log(uid);
+
+    const getAlerts = async (alerts) => {
+        const res = await axios.put(`http://localhost:3000/user/${uid}`, alerts);
+        console.log(res.data)
         return res;
     };
     
-    const handleSubmit = (input) => {
-        getAlert(input);
-        setJob({});
-        // alert("Se ha creado su alerta de empleo");
-        console.log("Input enviado", input);
+    const handleChange = (e) => {
+        setNewAlert(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setAlerts(alerts => ({
+            usr_alerts: [...alerts.usr_alerts, newAlert]
+        }));
+        console.log("alertas", alerts);
+        getAlerts(alerts);
+        console.log("Input enviado ", alerts);
     };
 
     return (
         <div>
             <div>
                 <form>
-                    <input placeholder="E-mail" value="email" />
-                    <input placeholder="Empleo a alertar..." value="empleo" />
-                    <button onClick={handleSubmit()} >Enviar </button>
+                    <input placeholder="Empleo a alertar..." onChange={handleChange} value={newAlert}/>
+                    <button onClick={handleSubmit} > Enviar </button>
                 </form>
             </div>
         </div>
