@@ -126,12 +126,10 @@ const Sidebar = () => {
           {
             showNotifications && notifications.map((notification, i) => {
               return (
-                <br key={i}>
-                <div>
+                <div key={i}>
                   <p>{notification.type}</p>
                   <p>{notification.body.message}</p>
                 </div>
-                </br>
               )
             })
           }
