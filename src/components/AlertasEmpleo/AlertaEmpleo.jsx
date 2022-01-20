@@ -12,6 +12,10 @@ const AlertaEmpleo = () => {
     const { uid } = useSelector((state) => state.auth);
     console.log(uid);
 
+    const [jobList, setJobList] = useState([]);
+
+    const jobs = useSelector((state) => state.jobs.allJobs);
+
     const getAlerts = async (alerts) => {
         const res = await axios.put(`http://localhost:3000/user/${uid}`, alerts);
         console.log(res.data)
@@ -19,7 +23,10 @@ const AlertaEmpleo = () => {
     };
     
     const handleChange = (e) => {
-        setNewAlert(e.target.value);
+        const { value } = e.target;
+        const job = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
+        setJobList(job);
+        setNewAlert(value);
     };
 
     const handleSubmit = (e) => {
@@ -27,9 +34,7 @@ const AlertaEmpleo = () => {
         setAlerts(alerts => ({
             usr_alerts: [...alerts.usr_alerts, newAlert]
         }));
-        console.log("alertas", alerts);
         getAlerts(alerts);
-        console.log("Input enviado ", alerts);
     };
 
     return (
@@ -37,6 +42,13 @@ const AlertaEmpleo = () => {
             <div>
                 <form>
                     <input placeholder="Empleo a alertar..." onChange={handleChange} value={newAlert}/>
+                    {
+                        jobList.map(job => (
+                            <div key={job.job_id}>
+                                <input type="button" value={job.job_name} />
+                            </div>
+                        ))
+                    }
                     <button onClick={handleSubmit} > Enviar </button>
                 </form>
             </div>
