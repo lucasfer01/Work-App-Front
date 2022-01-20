@@ -9,7 +9,7 @@ import { getProfile } from "../../controllers";
 
 
 export default function Chat({receiverUser}) {
-    const [allChats, setAllChats] = useState({});
+    const [allChats, setAllChats] = useState([]);
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
@@ -19,12 +19,13 @@ export default function Chat({receiverUser}) {
         message: "",
     });
 
-    console.log("chat", chat);
-
-
     useEffect(() => {
         socket.emit("register", user.name);
-        socket.on("message", (data) => {
+        socket.on("chatHistory", (data) => {
+            console.log("allChats", data);
+            setAllChats(data);
+        });
+        socket.on("response", (data) => {
             console.log("data: ", data);
             setMessages(messages => [...messages, data]);
             setChat({
