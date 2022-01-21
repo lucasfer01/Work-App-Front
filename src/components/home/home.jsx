@@ -27,9 +27,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 export default function Home() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [type, setType] = useState("");
+
+let location = window.location.pathname;
+
+useEffect(() => {
+  if (location === "/home") {
+    setType("posts");
+  } else if (location === "/jobs") {
+    setType("jobs");
+  }
+}, [location]);
 
   return (
     <div>
@@ -39,33 +52,27 @@ export default function Home() {
           <Leftbar />
         </Grid>
         <Grid item sm={7} xs={10}>
-          <Feed />
+          {
+            type === "posts" && (
+            <div>
+              <Filtros />
+              <Feed />
+            </div>
+            )
+          }
+          {
+            type === "jobs" && (
+              <div className={styles.divJobs}>
+                <Cards />
+              </div>
+            )
+          }
         </Grid>
         <Grid item sm={3} className={classes.right}>
           <Rightbar />
         </Grid>
       </Grid>
       <Add />
-      <div className={styles.search}>
-      <SearchBar  />
-      </div>
-      <div>
-        {/* <Chat />  */}
-        <Filtros/>
-        <div className={styles.newPostButton}>
-        <Boton
-          data-toggle="modal"
-          data-target="#FormEmpleador"
-          colorBtn='btn_azul'
-        >
-          Nuevo post
-        </Boton>
-        </div>
-      </div>
-      <div className={styles.divJobs}>
-        <Cards />
-      </div>
-      <FormEmpleador/>
     </div>
   );
 };

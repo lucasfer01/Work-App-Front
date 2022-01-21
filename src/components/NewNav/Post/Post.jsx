@@ -8,6 +8,9 @@ import {
     makeStyles,
     Typography,
   } from "@material-ui/core";
+  import { useState, useEffect } from "react";
+  import { getProfile } from "../../../controllers";
+  import { useNavigate} from 'react-router-dom';
   
   const useStyles = makeStyles((theme) => ({
     card: {
@@ -21,21 +24,45 @@ import {
     },
   }));
   
-  const Post = () => {
+  const Post = (props) => {
     const classes = useStyles();
+    const navigate = useNavigate();
+    const authorId = props.authorId;
+    const [author, setAuthor] = useState({});
+    console.log("authorId", authorId);
+    useEffect(() => {
+        getProfile(authorId).then(res => {
+            setAuthor(res);
+        }).catch(err => {
+            console.log(err);
+        });
+    }, [authorId]);
+
+    console.log("author", author);
+
+    const handleDetails = () => {
+        navigate(`/post/${props.id}`);
+    }
+
+
     return (
       <Card className={classes.card}>
         <CardActionArea>
-          <CardMedia className={classes.media} image="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3" title="My Post" />
-          <CardContent>
+          <CardMedia className={classes.media} image={props.photo} title="My Post" />
             <Typography gutterBottom variant="h5">
-              Busco Full Stack Developer
+              {author?.usr_username}
             </Typography>
+            <Typography gutterBottom variant="h5">
+              {props.title}
+            </Typography>
+          <CardContent>
             <Typography variant="body2">
-            ¿Te apasionan los desafíos y tu objetivo es dar la milla extra siempre? ¡Tsoft es tu lugar!
-            Nos encontramos en la búsqueda de un/a Dev Full Stack (Java+React)
-            Ssr/Sr para sumarse a nuestra Gerencia de Desarrollo y DevOps para 
-            participar en un desafiante proyecto.
+              {props.shorDescription}
+            </Typography>
+          </CardContent>
+          <CardContent>
+            <Typography variant="body2">
+              {props.priority}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -43,8 +70,8 @@ import {
           <Button size="small" color="primary">
             Contactar
           </Button>
-          <Button size="small" color="primary">
-            Ir al peril
+          <Button size="small" color="primary" onClick={handleDetails}>
+            Detalles
           </Button>
         </CardActions>
       </Card>
