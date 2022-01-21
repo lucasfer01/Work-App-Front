@@ -63,96 +63,105 @@ function Alert(props) {
 
 const Add = () => {
   const classes = useStyles();
-  let { uid }= useSelector((state) => state.auth)
+  let { uid } = useSelector((state) => state.auth)
   const jobs = useSelector((state) => state.jobs.allJobs)
 
-    const navigate = useNavigate();
-    const [post, setPost] = React.useState({
-        post_description: "",
-        post_shortDescription: "",
-        post_photo: [],
-        post_title: '',
-        post_type: "contratar",
-        post_priority: "Urgente",
-        usr_id: uid
-    });
-    const [open, setOpen] = useState(false);
-    const [openAlert, setOpenAlert] = useState(false);
-    const [file, setFile] = React.useState("");
-    const [newJob, setNewJob] = React.useState("");
-    const [postJobs, setPostJobs] = React.useState([]);
-    const [jobList, setJobList] = React.useState([]);
+  const navigate = useNavigate();
+  const [post, setPost] = React.useState({
+    post_description: "",
+    post_shortDescription: "",
+    post_photo: [],
+    post_title: '',
+    post_type: "contratar",
+    post_priority: "",
+    usr_id: uid
+  });
+  const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [file, setFile] = React.useState("");
+  const [newJob, setNewJob] = React.useState("");
+  const [postJobs, setPostJobs] = React.useState([]);
+  const [jobList, setJobList] = React.useState([]);
 
 
 
-    async function handleOnSubmit(e) {
-        e.preventDefault();
+  async function handleOnSubmit(e) {
+    e.preventDefault();
 
-        try {
-            const createPost = await postPost({
-                post: post,
-                jobs: postJobs,
-            });
-            const email = await sendEmail(postJobs);
-            console.log("createPost", createPost)
-           window.location.reload(true)
+    try {
+      const createPost = await postPost({
+        post: post,
+        jobs: postJobs,
+      });
+      //const email = await sendEmail(postJobs);
+      console.log("createPost", createPost);
 
-            return createPost;
+      setOpen(false)
+      //window.location.reload(true)
 
-        } catch (e) {
-            alert(e);
-        }
+      return createPost;
+
+    } catch (e) {
+      alert(e);
     }
+  }
 
-    const handleChangePhoto = (e) => {
-        const file = e.target.files[0];
-        setFile(file);
-    }
+  const handleChangePhoto = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  }
 
-    const handleAddPhoto = async (e) => {
-        e.preventDefault();
+  const handleAddPhoto = async (e) => {
+    e.preventDefault();
 
-        const urlFoto = await startUploading(file); 
+    const urlFoto = await startUploading(file);
 
-        setPost({
-            ...post,
-            post_photo: [...post.post_photo, urlFoto]
-        })
-        setFile("");
-    }
+    setPost({
+      ...post,
+      post_photo: [...post.post_photo, urlFoto]
+    })
+    setFile("");
+  }
 
-    const handleDeletePhoto = (e) => {
-        e.preventDefault();
-        const { value } = e.target;
-        console.log("photo:", value);
-        setPost({
-            ...post,
-            post_photo: post.post_photo.filter(p => p !== value)
-        })
-    }
+  const handleDeletePhoto = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    console.log("photo:", value);
+    setPost({
+      ...post,
+      post_photo: post.post_photo.filter(p => p !== value)
+    })
+  }
 
-    const handleJobChange = (e) => {
-        const { value } = e.target;;
-        setNewJob(value);
-        const filteredJobs = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
-        setJobList(filteredJobs);
-    }
+  const handleJobChange = (e) => {
+    const { value } = e.target;;
+    setNewJob(value);
+    const filteredJobs = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
+    setJobList(filteredJobs);
+  }
 
-    const handleAddJob = (e) => {
-        e.preventDefault();
-        const { value } = e.target;
-        setPostJobs([...postJobs, value]);
-        setNewJob("");
-        setJobList([]);
-    }
+  const handleAddJob = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    setPostJobs([...postJobs, value]);
+    setNewJob("");
+    setJobList([]);
+  }
 
-    const handleDeleteJob = (e) => {
-        e.preventDefault();
-        const { value } = e.target;
-        setPostJobs(postJobs.filter(p => p !== value));
-    }
+  const handleDeleteJob = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    setPostJobs(postJobs.filter(p => p !== value));
+  }
 
-  
+  const handlePriority = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+    setPost({
+      ...post,
+      post_priority: value
+    })
+  }
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -177,25 +186,45 @@ const Add = () => {
                 label="Rubro del trabajo "
                 size="small"
                 style={{ width: "100%" }}
-                value={newJob} 
+                value={newJob}
                 onChange={handleJobChange}
               />
             </div>
+            {
+              jobList.map(job => (
+                <div key={job.job_id}>
+                  <input type="button" value={job.job_name} onClick={handleAddJob} />
+                </div>
+              ))
+            }
+            {
+              postJobs.map((job, index) => {
+                return (
+                  <div className='formEmpleado_job' key={index}>
+                    <p>{job}</p>
+                    <button type="button" onClick={handleDeleteJob} value={job}>Eliminar</button>
+                  </div>
+                )
+              })
+            }
             <div className={classes.item}>
-
               <TextField
                 id="standard-basic"
                 label="Tituto del trabajo"
                 size="small"
                 style={{ width: "100%" }}
                 onChange={event => setPost({ ...post, post_title: event.target.value })}
-              //   {
-              //     jobList.map(job => (
-              //         <div key={job.job_id}>
-              //             <input type="button" value={job.job_name} onClick={handleAddJob}/>
-              //         </div>
-              //     ))
-              // }
+              />
+            </div>
+            <div className={classes.item}>
+              <TextField
+                id="standard-basic"
+                placeholder="Una breve descripción del trabajo..."
+                variant="outlined"
+                label="Resumen del trabajo"
+                size="small"
+                style={{ width: "100%" }}
+                value={post.post_shortDescription} onChange={(event) => setPost({ ...post, post_shortDescription: event.target.value })}
               />
             </div>
             <div className={classes.item}>
@@ -212,9 +241,9 @@ const Add = () => {
               />
             </div>
             <div className={classes.item}>
-              <FormLabel component="legend"  onChange={(event)=>setPost({...post, post_priority: event.target.value})}>
+              <FormLabel component="legend" onChange={(event) => setPost({ ...post, post_priority: event.target.value })}>
                 En que estado quiere su post?</FormLabel>
-              <RadioGroup>
+              <RadioGroup onClick={handlePriority}>
                 <FormControlLabel
                   value="Urgente"
                   control={<Radio size="small" />}
@@ -233,41 +262,28 @@ const Add = () => {
               </RadioGroup>
             </div>
             <div className={classes.root}>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                multiple
-                type="file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Upload
-                </Button>
-              </label>
-              <input accept="image/*" className={classes.input} id="icon-button-file" type="file"
-              onChange={handleChangePhoto} />
               <label htmlFor="icon-button-file">
-                <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleAddPhoto}>
-                {
-                                post.post_photo.length > 0 && post.post_photo.map((photo, i) => {
-                                    return (
-                                        <div key={i} className="boxfoto">
-                                            <input type="image" src={photo} alt="img not found" />
-                                            <button value={photo} onClick={handleDeletePhoto}>X</button>
-                                        </div>
-                                    )
-                                })
-                            }
-                </IconButton>
+                <input accept="image/*" id="icon-button-file" type="file"
+                  onChange={handleChangePhoto} />
+                <button onClick={handleAddPhoto}>Añadir</button>
               </label>
+              {
+                post.post_photo.length > 0 && post.post_photo.map((photo, i) => {
+                  return (
+                    <div key={i} className="boxfoto">
+                      <input type="image" src={photo} alt="img not found" />
+                      <button value={photo} onClick={handleDeletePhoto}>X</button>
+                    </div>
+                  )
+                })
+              }
             </div>
             <div className={classes.item}>
               <Button
                 variant="outlined"
                 color="primary"
                 style={{ marginRight: 20 }}
-                onClick={() => setOpenAlert(true)}
+                onClick={handleOnSubmit}
               >
                 Create
               </Button>
@@ -275,7 +291,6 @@ const Add = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={() => setOpen(false)}
-                onClick={handleOnSubmit}
               >
                 Cancel
               </Button>
