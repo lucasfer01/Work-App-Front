@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 500,
-    height: 550,
+    height: 700,
     backgroundColor: "white",
     position: "absolute",
     top: 0,
@@ -95,12 +95,12 @@ const Add = () => {
       });
       //const email = await sendEmail(postJobs);
       console.log("createPost", createPost);
-
+     
       setOpen(false)
       //window.location.reload(true)
-
+      alert("Post created succesufully")
       return createPost;
-
+       
     } catch (e) {
       alert(e);
     }
