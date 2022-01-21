@@ -57,7 +57,7 @@ import {
             </Typography>
           <CardContent>
             <Typography variant="body2">
-              {props.shorDescription}
+              {props.shortdescription}
             </Typography>
           </CardContent>
           <CardContent>

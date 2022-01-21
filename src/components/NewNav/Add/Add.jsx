@@ -69,7 +69,7 @@ const Add = () => {
   const navigate = useNavigate();
   const [post, setPost] = React.useState({
     post_description: "",
-    post_shortDescription: "",
+    post_shortdescription: "",
     post_photo: [],
     post_title: '',
     post_type: "contratar",
@@ -224,7 +224,7 @@ const Add = () => {
                 label="Resumen del trabajo"
                 size="small"
                 style={{ width: "100%" }}
-                value={post.post_shortDescription} onChange={(event) => setPost({ ...post, post_shortDescription: event.target.value })}
+                value={post.post_shortdescription} onChange={(event) => setPost({ ...post, post_shortdescription: event.target.value })}
               />
             </div>
             <div className={classes.item}>
