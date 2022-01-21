@@ -59,7 +59,7 @@ export default function PostDetail() {
                     </div>
                 </div>
                 <button onClick={() => setViewChat(!viewChat)}>Abrir chat</button>
-                {viewChat && <Chat receiverUser={author}/>}
+                {viewChat && <Chat receiverId={author.usr_id}/>}
             </div>: <h1>No se encontraron datos de este usuario</h1>}
         </>
     );
