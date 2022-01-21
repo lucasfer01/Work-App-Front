@@ -7,12 +7,16 @@ import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
 // import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
-import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
-import AlertaEmpleo from '../components/AlertasEmpleo/AlertaEmpleo.jsx';
+
+import AlertaEmpleo from "../components/AlertasEmpleo/AlertaEmpleo.jsx";
 import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUser";
 import { About } from "../components/About/About";
+
 import Messenger from "../components/Messenger/Messenger";
 import NewNav from "../components/NewNav/NewNav"
+
+import { FormReview } from "../components/formReview/FormReview";
+
 
 export const LoginRouter = () => {
   return (
@@ -31,9 +35,8 @@ export const LoginRouter = () => {
           <Route path="job/:jobId" element={<CardsProfileUser />} />
           <Route path="messenger" element={<Messenger />} />
 
-
           <Route path="prueba" element={<Checkout />} />
-          <Route path="test" element={<UploadImageTest />} />
+          <Route path="test" element={<FormReview />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
