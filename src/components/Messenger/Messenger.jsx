@@ -5,6 +5,7 @@ import Mensajes from './Mensajes/Mensajes';
 import "./messenger.css";
 
 const Messenger = () => {
+
     return (
         <div className='messenger'>
             <div className='chatMenu'>
@@ -33,7 +34,9 @@ const Messenger = () => {
                     </div>
                     <div className='chatBoxBottom'>
                         <textarea className='chatMessageInput' placeholder='Write something...'></textarea>
-                        <button className='chatSubmitButton'>Send</button>
+                        <button className='chatSubmitButton'>
+                            Send
+                            </button>
                     </div>
                 </div>
             </div>

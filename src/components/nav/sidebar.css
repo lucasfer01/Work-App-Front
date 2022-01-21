@@ -1,0 +1,12 @@
+.img-user-nav{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 5%;
+}
+
+.campana{
+    font-size: 35px;
+    margin-left: -70px;
+    color: white;
+}
