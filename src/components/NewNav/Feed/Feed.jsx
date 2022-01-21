@@ -22,7 +22,7 @@ const Feed = () => {
             id={post.post_id}
             title={post.post_title}
             description={post.post_description}
-            shortDescription={post.post_shortDescription}
+            shortdescription={post.post_shortdescription}
             photo={post.post_photo}
             authorId={post.usr_id}
             priority={post.post_priority}
