@@ -9,7 +9,7 @@ import './Filtros.css'
 export default function Filtros({}){
 
     const dispatch = useDispatch();
-    const { userId } = useParams()
+
 
     const [filtro, setFiltro] = React.useState({
         Prioridad: '',
@@ -18,10 +18,6 @@ export default function Filtros({}){
     
     const usuario = useSelector(state => state.profile.user); 
     const storePosts = useSelector(state => state.posts.allPosts); 
-
-    React.useEffect(() => {
-        dispatch(profileUser(userId));
-      }, [userId]);
     
 
     console.log("usuario filtros",usuario)
