@@ -1,22 +1,24 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/Home/Home";
+import Home from "../components/home/home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
-import Sidebar from "../components/nav/Sidebar";
+// import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 import { UploadImageTest } from "../components/uploadImageTest/UploadImageTest";
 import AlertaEmpleo from '../components/AlertasEmpleo/AlertaEmpleo.jsx';
 import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUser";
 import { About } from "../components/About/About";
+import Messenger from "../components/Messenger/Messenger";
+import NewNav from "../components/NewNav/NewNav"
 
 export const LoginRouter = () => {
   return (
     <div>
       <div>
-        <Sidebar />
+        <NewNav />
         <Routes>
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
@@ -27,6 +29,7 @@ export const LoginRouter = () => {
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
           <Route path="job/:jobId" element={<CardsProfileUser />} />
+          <Route path="messenger" element={<Messenger />} />
 
 
           <Route path="prueba" element={<Checkout />} />

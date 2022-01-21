@@ -9,7 +9,8 @@ import { IconContext } from "react-icons/lib";
 import Boton from '../Boton/Boton'
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../actions/auth";
-// import { FaPowerOff } from "react-icons/fa";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import "./sidebar.css";
 import socket from "../socket";
 
 
@@ -81,6 +82,14 @@ const SidebarLabel = styled.span`
   margin-left: 16px;
 `;
 
+const userImg = styled.img`
+width: 32px;
+height: 32px;
+border-radius: 50%;
+object-fit: cover;
+cursor: pointer;
+`
+
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
   const [newNotification, setNewNotification] = useState(false)
@@ -118,7 +127,12 @@ const Sidebar = () => {
               <Logo>WORKINLING.</Logo>
             </Link>
           </Center>
-          <button onClick={showNotif}>Notifications
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
+            className="img-user-nav"
+            alt=""
+          />
+          <button onClick={showNotif}><IoMdNotificationsOutline className="campana" />
           {
             newNotification && <span>!!</span>
           }
