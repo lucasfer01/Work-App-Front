@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/auth";
 import Cards from "../Cards/Cards";
 import styles from "./Home.module.css";
-import { getJobs, getPosts } from "../../controllers";
+import { getJobs } from "../../actions/formJobs";
+import { getUserChats } from "../../actions/chatActions";
+import { profileUser } from "../../actions/profileActions";
+import { getPosts } from "../../controllers";
 import { SearchBar } from "../SearchBar/SearchBar";
 import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
@@ -34,15 +37,26 @@ export default function Home() {
   const classes = useStyles();
   const [type, setType] = useState("");
 
-let location = window.location.pathname;
+  const { user } = useSelector((state) => state.auth);
 
-useEffect(() => {
-  if (location === "/home") {
-    setType("posts");
-  } else if (location === "/jobs") {
-    setType("jobs");
-  }
-}, [location]);
+  let location = window.location.pathname;
+
+  useEffect(() => {
+    if (location === "/home") {
+      setType("posts");
+    } else if (location === "/jobs") {
+      setType("jobs");
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const effect = async () => {
+      await dispatch(profileUser(user.uid, "own"));
+      await dispatch(getJobs());
+      await dispatch(getUserChats());
+    }
+    effect();
+  }, [dispatch]);
 
   return (
     <div>
@@ -54,10 +68,10 @@ useEffect(() => {
         <Grid item sm={7} xs={10}>
           {
             type === "posts" && (
-            <div>
-              <Filtros />
-              <Feed />
-            </div>
+              <div>
+                <Filtros />
+                <Feed />
+              </div>
             )
           }
           {

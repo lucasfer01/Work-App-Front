@@ -11,6 +11,7 @@ import {
   import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
   import { useState } from "react";
   import { Link } from "react-router-dom";
+  import Messenger from "../Messenger/Messenger";
   
   const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -70,12 +71,18 @@ import {
   }));
   
   const NewNav = () => {
-    
     const [open, setOpen] = useState(false);
     const classes = useStyles({ open });
+    const [displayInBox, setDisplayInBox] = useState(false);
+
+    const handleDisplayInBox = (e) => {
+      e.preventDefault();
+      setDisplayInBox(!displayInBox);
+    };
 
     return (
-      <AppBar position="fixed">
+      <div >
+      <AppBar style={{position: "sticky", top: 0}}>
         <Toolbar className={classes.toolbar}>
           <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
@@ -96,7 +103,9 @@ import {
               onClick={() => setOpen(true)}
             />
             <Badge badgeContent={4} color="secondary" className={classes.badge}>
+              <button onClick={handleDisplayInBox}>
               <Mail />
+              </button>
             </Badge>
             <Badge badgeContent={2} color="secondary" className={classes.badge}>
               <Notifications />
@@ -108,6 +117,14 @@ import {
           </div>
         </Toolbar>
       </AppBar>
+      {
+        displayInBox && (
+          <div>
+            <Messenger />
+          </div>
+        )
+      }
+      </div>
     );
   };
   

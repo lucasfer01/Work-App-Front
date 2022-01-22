@@ -1,0 +1,19 @@
+import { types } from "../types/types";
+
+const initialState = {
+  userChats: [],
+};
+
+const chatsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.getUserChats:
+      return {
+        ...state,
+        userChats: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default chatsReducer;

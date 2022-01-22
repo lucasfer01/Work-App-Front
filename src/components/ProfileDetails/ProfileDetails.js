@@ -35,9 +35,11 @@ export const ProfileDetails = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId))
-    console.log("dispatch profile")
-  }, []);
+    const getUser = async () => {
+    await dispatch(profileUser(userId))
+    }
+    getUser()
+  }, [userId, dispatch]);
 
   console.log("user", user)
   console.log("email", email)
@@ -102,7 +104,7 @@ export const ProfileDetails = () => {
 
 
 
-            {viewChat && <Chat userPRofile={user} />}
+            {viewChat && <Chat receiverId={user?.usr_id} />}
 
           </div>
         </div>
@@ -136,7 +138,7 @@ export const ProfileDetails = () => {
             </ul>
           </div>
           <div>
-            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
+            <Cards key="job" profileJobs={user?.jobs}></Cards>
           </div>
           <div>
             <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>

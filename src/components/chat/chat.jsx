@@ -18,12 +18,24 @@ export default function Chat({receiverId}) {
         receiver: receiverId,
         message: "",
     });
+    const [userReceiver, setUserReceiver] = useState({});
+    const [displayChat, setDisplayChat] = useState(false);
+
+    useEffect(() => {
+        const getUserReceiver = async () => {
+            const data = await getProfile(receiverId);
+            console.log("userReceiver", data);
+            setUserReceiver(data);
+        }
+        getUserReceiver();
+    }, [receiverId]);
 
     useEffect(() => {
         socket.emit("register", senderUserId);
         socket.emit("chat-history", { userId1: senderUserId, userId2: receiverId });
         socket.on("chat-history", async (data) => {
             const chatHistory = await data;
+            console.log("chatHistory", chatHistory);
             setMessages(chatHistory);
         });
         socket.on("response", (data) => {
@@ -55,16 +67,26 @@ export default function Chat({receiverId}) {
         socket.emit("message", chat);
     }
 
+    const handleSaveChat = (e) => {
+        e.preventDefault();
+        socket.emit("save-chat", "save");
+        console.log("save chat", chat);
+    }
+
     return (
         <div className="chat-container">
             <div className="chat-window">
+                <div className="chat-header">
+                    <p>{userReceiver.usr_username}</p>
+                </div>
+                <div>
+                    <input type="button" value="x" onClick={handleSaveChat}/>
+                </div>
                 <div className="chat-output">
                     {
-                        messages.map((m, i) => {
+                        messages?.map((m, i) => {
                             return (
                                 <div key={i} className={m.sender === user.uid ? "chat-message" : "chat-message-response"}>
-                                    <p className="user-name-message">{m.sender}</p>
-
                                     <p className="message-body">{m.message}</p>
                                 </div>
                             )

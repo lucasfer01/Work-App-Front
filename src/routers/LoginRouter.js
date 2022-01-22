@@ -37,6 +37,7 @@ export const LoginRouter = () => {
 
           <Route path="prueba" element={<Checkout />} />
           <Route path="test" element={<FormReview />} />
+          <Route path="messenger" element={<Messenger />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>

@@ -1,49 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import "./chatonline.css";
+import Mensajes from '../Mensajes/Mensajes';
+import { getProfile } from "../../../controllers";
+import Chat from '../Chat/Chat';
+
 
 const Chatonline = () => {
+    const myId = useSelector(state => state.auth.uid);
+    const [openChat, setOpenChat] = useState(false);
+    const [users, setUsers] = useState([{ usr_username: "Mauricio" }]);
+    const [receiverId, setReceiverId] = useState("");
+    const [messages, setMessages] = useState([]);
+    const chats = useSelector(state => state.chats?.userChats);
+    console.log("userChats", chats);
+    useEffect(() => {
+        if (chats) {
+            setUsers(chats?.map(chat => chat.users.find(u => u.user_id !== myId)));
+        }
+    }, [chats]);
+
+    const handleOpenChat = (e) => {
+        e.preventDefault();
+        setOpenChat(true);
+        setReceiverId(e.target.value);
+    }
+
+
     return (
         <div className='chatOnline'>
-            <div className='chatOnlineFriend'>
-                <div className='chatOnlineImgContainer'>
-                <img className='chatOnlineImg'
-                src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-                alt=""
-                />
-                <div className='chatOnlineBadge'></div>
-                </div>
-                <span className='chatOnlineName'>Nahuel Cernadas</span>
+            <div>
+                {
+                    openChat && (
+                        <div className='chatBox'>
+                            <button onClick={() => setOpenChat(false)}>X</button>
+                            <div className='chatBoxWrapper'>
+                                <div className='chatBoxTop'>
+                                    <Mensajes />
+                                    <Mensajes own={true} />
+                                    <Mensajes />
+                                </div>
+                                <div className='chatBoxBottom'>
+                                    <textarea className='chatMessageInput' placeholder='Write something...'></textarea>
+                                    <button className='chatSubmitButton'>
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
-            <div className='chatOnlineFriend'>
-                <div className='chatOnlineImgContainer'>
-                <img className='chatOnlineImg'
-                src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-                alt=""
-                />
-                <div className='chatOnlineBadge'></div>
-                </div>
-                <span className='chatOnlineName'>Mauricio</span>
-            </div>
-            <div className='chatOnlineFriend'>
-                <div className='chatOnlineImgContainer'>
-                <img className='chatOnlineImg'
-                src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-                alt=""
-                />
-                <div className='chatOnlineBadge'></div>
-                </div>
-                <span className='chatOnlineName'>Lucas</span>
-            </div>
-            <div className='chatOnlineFriend'>
-                <div className='chatOnlineImgContainer'>
-                <img className='chatOnlineImg'
-                src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-                alt=""
-                />
-                <div className='chatOnlineBadge'></div>
-                </div>
-                <span className='chatOnlineName'>Martin</span>
-            </div>
+            {
+                users?.map(u => (
+                    <button key={u.usr_id} value={u.usr_id} onClick={handleOpenChat}>
+                        <div className='chatOnlineFriend'>
+                            <div className='chatOnlineImgContainer'>
+                                <img className='chatOnlineImg'
+                                    src={u.usr_photo}
+                                    alt=""
+                                />
+                                <div className='chatOnlineBadge'></div>
+                            </div>
+                            <span className='chatOnlineName'>{u.usr_username}</span>
+                        </div>
+                    </button>
+                ))
+            }
         </div>
     )
 }

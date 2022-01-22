@@ -7,7 +7,7 @@ import {
   Person,
   Face,
 } from "@material-ui/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../../actions/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
   parr: {
     fontWeight: 500,
-     marginLeft: "29px",
-     marginTop: "-23px",
-     [theme.breakpoints.down("sm")]: {
-        display: "none",
-      },
+    marginLeft: "29px",
+    marginTop: "-23px",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   text: {
     fontWeight: 500,
@@ -57,40 +57,41 @@ const useStyles = makeStyles((theme) => ({
 
 const Leftbar = () => {
   const classes = useStyles();
+  const user = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
   const handleLogout = () => {
-  dispatch(startLogout());
-};
-  
+    dispatch(startLogout());
+  };
+
   return (
     <Container className={classes.container}>
       <div className={classes.item}>
-          <Link to="/home">
-        <Home className={classes.icon} />
-        <Typography className={classes.text}><p className={classes.parr}>Home</p>
-        </Typography>
+        <Link to="/home">
+          <Home className={classes.icon} />
+          <Typography className={classes.text}><p className={classes.parr}>Home</p>
+          </Typography>
         </Link>
       </div>
       <div className={classes.item}>
-          <Link to="/jobs">
-        <Work className={classes.icon} />
-        <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
-        </Typography>
+        <Link to="/jobs">
+          <Work className={classes.icon} />
+          <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
+          </Typography>
         </Link>
       </div>
       <div className={classes.item}>
-      <Link to="/profile/' + uid">
-        <Person className={classes.icon} />
-        <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
-        </Typography>
+        <Link to={`/profile/${user.uid}`}>
+          <Person className={classes.icon} />
+          <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
+          </Typography>
         </Link>
       </div>
       <div className={classes.item}>
-      <Link to="/about">
-        <Face className={classes.icon} />
-        <Typography className={classes.text}><p className={classes.parr}>Nosotros</p>
-        </Typography>
+        <Link to="/about">
+          <Face className={classes.icon} />
+          <Typography className={classes.text}><p className={classes.parr}>Nosotros</p>
+          </Typography>
         </Link>
       </div>
       <div className={classes.item}>

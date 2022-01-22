@@ -3,8 +3,11 @@ import Chat from './Chat/Chat';
 import Chatonline from './Chatonline/Chatonline';
 import Mensajes from './Mensajes/Mensajes';
 import "./messenger.css";
+import { useSelector} from 'react-redux';
+import { useState } from 'react';
 
 const Messenger = () => {
+    const [messages, setMessages] = useState([]);
 
     return (
         <div className='messenger'>
@@ -21,16 +24,9 @@ const Messenger = () => {
             <div className='chatBox'>
                 <div className='chatBoxWrapper'>
                     <div className='chatBoxTop'>
-                      <Mensajes />
-                      <Mensajes own={true}/>
-                      <Mensajes />
-                      <Mensajes />
-                      <Mensajes />
-                      <Mensajes own={true}/>
-                      <Mensajes />
-                      <Mensajes />
-                      <Mensajes />
-                      <Mensajes />
+                        <Mensajes />
+                        <Mensajes own={true} />
+                        <Mensajes />
                     </div>
                     <div className='chatBoxBottom'>
                         <textarea className='chatMessageInput' placeholder='Write something...'></textarea>

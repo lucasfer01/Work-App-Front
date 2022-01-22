@@ -9,6 +9,7 @@ export const types = {
   uiFinishLoading: "[UI] Finish loading",
 
   profileUser: "[P] User",
+  ownProfile: "[P] Own Profile",
   profileJobs: "[P] Jobs",
   profilePosts: "[P] Posts",
   editProfile: "[P] Edit",
@@ -16,5 +17,7 @@ export const types = {
   formAddJobs: "[AddJob] Add Job",
 
   getPosts: "[Post] GET POSTS",
-  setFilters: '[Post] SET FILTERS'
+  setFilters: '[Post] SET FILTERS',
+
+  getUserChats: "[Chat] Get Chats",
 };
