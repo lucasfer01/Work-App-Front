@@ -6,7 +6,6 @@ import { uiReducer } from "../reducers/uiReducer";
 import { profileReducer } from "../reducers/profileReducer";
 import { jobsReducer } from "../reducers/jobsReducer";
 import {  postsReducer } from '../reducers/postsReducer';
-import chatsReducer from "../reducers/chatsReducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -19,7 +18,6 @@ const reducers = combineReducers({
   jobs: jobsReducer,
   posts: postsReducer, 
   profile: profileReducer,
-  chats: chatsReducer,
 });
 
 export const store = createStore(

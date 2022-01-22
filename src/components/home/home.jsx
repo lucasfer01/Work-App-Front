@@ -37,8 +37,7 @@ export default function Home() {
   const classes = useStyles();
   const [type, setType] = useState("");
 
-  const { user } = useSelector((state) => state.auth);
-
+  const user = useSelector((state) => state.auth);
   let location = window.location.pathname;
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function Home() {
     const effect = async () => {
       await dispatch(profileUser(user.uid, "own"));
       await dispatch(getJobs());
-      await dispatch(getUserChats());
+      return "Datos cargados";
     }
     effect();
   }, [dispatch]);

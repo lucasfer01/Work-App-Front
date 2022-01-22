@@ -11,6 +11,9 @@ export default function Cards({profileJobs}) {
     const jobs = useSelector(state => state.jobs.allJobs)
     let location = window.location.pathname;
     let data = profileJobs ? profileJobs : jobs;
+    console.log("jobcards", jobs);
+    console.log("profileJobs", profileJobs);
+    console.log("data", data);
     return (
         <div className={styles.jobsContainer}>
             {

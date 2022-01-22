@@ -9,16 +9,17 @@ import Chat from '../Chat/Chat';
 const Chatonline = () => {
     const myId = useSelector(state => state.auth.uid);
     const [openChat, setOpenChat] = useState(false);
-    const [users, setUsers] = useState([{ usr_username: "Mauricio" }]);
+    const [users, setUsers] = useState([]);
     const [receiverId, setReceiverId] = useState("");
     const [messages, setMessages] = useState([]);
-    const chats = useSelector(state => state.chats?.userChats);
+    const {chats} = useSelector(state => state.profile.ownProfile);
     console.log("userChats", chats);
     useEffect(() => {
         if (chats) {
             setUsers(chats?.map(chat => chat.users.find(u => u.user_id !== myId)));
         }
     }, [chats]);
+
 
     const handleOpenChat = (e) => {
         e.preventDefault();
