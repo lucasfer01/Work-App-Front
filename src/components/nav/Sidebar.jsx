@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
@@ -12,6 +13,7 @@ import { startLogout } from "../../actions/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import "./sidebar.css";
 import socket from "../socket";
+import Chat from '../chat/chat';
 
 
 const Buton = styled(Boton)`
@@ -95,6 +97,8 @@ const Sidebar = () => {
   const [newNotification, setNewNotification] = useState(false)
   const [showNotifications, setShowNotifications] = useState(false)
   const [notifications, setNotifications] = useState([]);
+  const [openChat, setOpenChat] = useState(false);
+  const myprofile = useSelector((state) => state.auth);
 
   const showSidebar = () => setSidebar(!sidebar);
   const showNotif = () => {
@@ -110,7 +114,10 @@ const Sidebar = () => {
   useEffect(() => {
     socket.on("notification", (data) => {
       setNewNotification(true);
-      setNotifications(notifications => [...notifications, data]);
+      setNotifications(notifications => {
+        let clearExistingSender = notifications.filter(n => n.body.sender !== data.body.sender);
+        return [...clearExistingSender, data];
+      });
       console.log("notifications", notifications);
     });
   } , [])
@@ -140,9 +147,17 @@ const Sidebar = () => {
           {
             showNotifications && notifications.map((notification, i) => {
               return (
+                <div>
                 <div key={i}>
                   <p>{notification.type}</p>
                   <p>{notification.body.message}</p>
+                  <input type="button" value="Open chat" onClick={() => setOpenChat(!openChat)} />
+                </div>
+                <div>
+                  {
+                    openChat && <Chat />
+                  }
+                </div>
                 </div>
               )
             })

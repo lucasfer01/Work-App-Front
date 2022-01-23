@@ -8,32 +8,33 @@ import { getProfile } from "../../controllers";
 
 
 
-export default function Chat({receiverUser}) {
-    const [allChats, setAllChats] = useState([]);
+export default function Chat({receiverId}) {
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
+    const senderUserId = user.uid;
     const [chat, setChat] = useState({
-        sender: user.name,
-        receiver: receiverUser?.usr_username,
+        sender: user.uid,
+        receiver: receiverId,
         message: "",
     });
 
     useEffect(() => {
-        socket.emit("register", user.name);
-        socket.on("chatHistory", (data) => {
-            console.log("allChats", data);
-            setAllChats(data);
+        socket.emit("register", senderUserId);
+        socket.emit("chat-history", { userId1: senderUserId, userId2: receiverId });
+        socket.on("chat-history", async (data) => {
+            const chatHistory = await data;
+            setMessages(chatHistory);
         });
         socket.on("response", (data) => {
-            console.log("data: ", data);
+            console.log("response: ", data);
             setMessages(messages => [...messages, data]);
             setChat({
                 ...chat,
                 receiver: data.sender,
             })
         });
-    }, []);
+    }, [receiverId]);
 
     const divRef = useRef(null)
 
@@ -61,7 +62,7 @@ export default function Chat({receiverUser}) {
                     {
                         messages.map((m, i) => {
                             return (
-                                <div key={i} className={m.sender === user.name ? "chat-message" : "chat-message-response"}>
+                                <div key={i} className={m.sender === user.uid ? "chat-message" : "chat-message-response"}>
                                     <p className="user-name-message">{m.sender}</p>
 
                                     <p className="message-body">{m.message}</p>
