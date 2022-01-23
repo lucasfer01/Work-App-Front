@@ -17,7 +17,7 @@ Instalar dependenciasa
 ```
 
 Correr la aplicación
-
+a
 ```bash
   En la misma consola escribir "npm start"
 ```
