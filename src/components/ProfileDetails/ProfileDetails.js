@@ -22,7 +22,7 @@ import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
 import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
-import { getProfile } from "../../controllers";
+import Feed from "../NewNav/Feed/Feed";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -138,10 +138,10 @@ export const ProfileDetails = () => {
             </ul>
           </div>
           <div>
-            <Cards key="job" profileJobs={user?.jobs}></Cards>
+            <Cards key="job" profileJobs={user?.jobs} />
           </div>
           <div>
-            <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
+            <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
             <a

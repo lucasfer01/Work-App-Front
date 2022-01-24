@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Feed = () => {
+const Feed = ({profilePosts}) => {
   const classes = useStyles();
-  const posts = useSelector((state) => state.posts.filterPost);
+  const allPosts = useSelector((state) => state.posts.filterPost);
+  let posts = profilePosts ? profilePosts : allPosts;
   console.log("feedposts", posts);
   return (
     <Container className={classes.container}>

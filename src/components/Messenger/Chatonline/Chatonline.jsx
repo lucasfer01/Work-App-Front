@@ -4,66 +4,69 @@ import "./chatonline.css";
 import Mensajes from '../Mensajes/Mensajes';
 import { getProfile } from "../../../controllers";
 import Chat from '../Chat/Chat';
+import ChatWindow from '../ChatWindow/ChatWindow';
 
 
-const Chatonline = () => {
+const Chatonline = ({ data }) => {
     const myId = useSelector(state => state.auth.uid);
+    console.log("datachat", data)
     const [openChat, setOpenChat] = useState(false);
     const [users, setUsers] = useState([]);
-    const [receiverId, setReceiverId] = useState("");
+    const [receiverUser, setReceiverUser] = useState({});
+    const [chatId, setChatId] = useState("");
+    const chats = data;
     const [messages, setMessages] = useState([]);
-    const {chats} = useSelector(state => state.profile.ownProfile);
-    console.log("userChats", chats);
+    console.log("userChats", users);
     useEffect(() => {
-        if (chats) {
-            setUsers(chats?.map(chat => chat.users.find(u => u.user_id !== myId)));
-        }
-    }, [chats]);
+        setUsers(data?.map(chat => {
+            return {
+                chatId: chat.chat_id,
+                user: chat.users.find(u => u.usr_id !== myId)
+            }
+        }));
+        console.log("result", users)
+    }, [data]);
 
 
-    const handleOpenChat = (e) => {
+    const handleOpenChat = (e, chatId, user) => {
         e.preventDefault();
-        setOpenChat(true);
-        setReceiverId(e.target.value);
+        console.log("ids", chatId, user);
+        setChatId(chatId);
+        setReceiverUser(user);
+        setOpenChat(!openChat);
     }
 
 
     return (
         <div className='chatOnline'>
-            <div>
-                {
-                    openChat && (
-                        <div className='chatBox'>
-                            <button onClick={() => setOpenChat(false)}>X</button>
-                            <div className='chatBoxWrapper'>
-                                <div className='chatBoxTop'>
-                                    <Mensajes />
-                                    <Mensajes own={true} />
-                                    <Mensajes />
-                                </div>
-                                <div className='chatBoxBottom'>
-                                    <textarea className='chatMessageInput' placeholder='Write something...'></textarea>
-                                    <button className='chatSubmitButton'>
-                                        Send
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
-            </div>
+            {
+                openChat && <div>
+                    <div>
+                        <button onClick={() => setOpenChat(false)}>X</button>
+                    </div>
+                    <div>
+                        <ChatWindow
+                            chatId={chatId}
+                            myId={myId}
+                            receiverId={receiverUser.usr_id}
+                            receiverName={receiverUser.usr_username}
+                            receiverPhoto={receiverUser.usr_photo}
+                        />
+                    </div>
+                </div>
+            }
             {
                 users?.map(u => (
-                    <button key={u.usr_id} value={u.usr_id} onClick={handleOpenChat}>
+                    <button key={u.user.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)}>
                         <div className='chatOnlineFriend'>
                             <div className='chatOnlineImgContainer'>
                                 <img className='chatOnlineImg'
-                                    src={u.usr_photo}
+                                    src={u.user?.usr_photo}
                                     alt=""
                                 />
                                 <div className='chatOnlineBadge'></div>
                             </div>
-                            <span className='chatOnlineName'>{u.usr_username}</span>
+                            <span className='chatOnlineName'>{u.user?.usr_username}</span>
                         </div>
                     </button>
                 ))

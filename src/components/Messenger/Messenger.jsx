@@ -6,9 +6,7 @@ import "./messenger.css";
 import { useSelector} from 'react-redux';
 import { useState } from 'react';
 
-const Messenger = () => {
-    const [messages, setMessages] = useState([]);
-
+const Messenger = ({data}) => {
     return (
         <div className='messenger'>
             <div className='chatMenu'>
@@ -38,7 +36,7 @@ const Messenger = () => {
             </div>
             <div className='chatOnline'>
                 <div className='chatOnlineWrapper'>
-                    <Chatonline />
+                    <Chatonline data={data} />
                 </div>
             </div>
         </div>
