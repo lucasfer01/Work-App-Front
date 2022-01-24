@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/home/Home";
+import Home from "../components/Home/home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
@@ -15,6 +15,7 @@ import Messenger from "../components/Messenger/Messenger";
 import NewNav from "../components/NewNav/NewNav"
 
 import { FormReview } from "../components/formReview/FormReview";
+import { RedirectPostpago } from "../components/mercadopago/RedirectPostpago";
 
 
 export const LoginRouter = () => {
@@ -35,6 +36,7 @@ export const LoginRouter = () => {
           <Route path="messenger" element={<Messenger />} />
 
           <Route path="prueba" element={<Checkout />} />
+          <Route path="prueba2/*" element={<RedirectPostpago />} />
           <Route path="test" element={<FormReview />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
