@@ -15,15 +15,14 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
-import { useState } from "react";
+import React, { useState } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import { postPost } from '../../../actions/formEmpleador';
+import { getPosts, postPost } from '../../../actions/formEmpleador';
 import { sendEmail } from "../../../controllers";
 import { startUploading } from "../../../helpers/imageUpload";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
-import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -63,11 +62,12 @@ function Alert(props) {
 
 const Add = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   let { uid } = useSelector((state) => state.auth)
   const jobs = useSelector((state) => state.jobs.allJobs)
 
   const navigate = useNavigate();
-  const [post, setPost] = React.useState({
+  const [post, setPost] = useState({
     post_description: "",
     post_shortdescription: "",
     post_photo: [],
@@ -78,10 +78,10 @@ const Add = () => {
   });
   const [open, setOpen] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
-  const [file, setFile] = React.useState("");
-  const [newJob, setNewJob] = React.useState("");
-  const [postJobs, setPostJobs] = React.useState([]);
-  const [jobList, setJobList] = React.useState([]);
+  const [file, setFile] = useState("");
+  const [newJob, setNewJob] = useState("");
+  const [postJobs, setPostJobs] = useState([]);
+  const [jobList, setJobList] = useState([]);
 
 
 
@@ -93,11 +93,12 @@ const Add = () => {
         post: post,
         jobs: postJobs,
       });
-      //const email = await sendEmail(postJobs);
+      const email = await sendEmail(postJobs);
       console.log("createPost", createPost);
 
       setOpen(false)
       //window.location.reload(true)
+      await dispatch(getPosts())
 
       return createPost;
 
