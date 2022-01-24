@@ -1,6 +1,7 @@
 import { Container, makeStyles } from "@material-ui/core";
 import Post from "../Post/Post";
 import { useDispatch, useSelector } from "react-redux";
+import Filtros from "../../Filtros/Filtros";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +16,7 @@ const Feed = () => {
   console.log("feedposts", posts);
   return (
     <Container className={classes.container}>
+      <Filtros />
       {
         posts?.map((post) => (
           <Post

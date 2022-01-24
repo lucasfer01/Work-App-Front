@@ -8,8 +8,6 @@ import { getJobs, getPosts } from "../../controllers";
 import { SearchBar } from "../SearchBar/SearchBar";
 import Boton from '../Boton/Boton'
 import FormEmpleador from "../FormEmpleador/FormEmpleador";
-// import Chat from "../chat/chat";
-import Filtros from "../Filtros/Filtros";
 import Leftbar from "../NewNav/Leftbar/Leftbar";
 import Feed from "../NewNav/Feed/Feed";
 import Rightbar from "../NewNav/Rightbar/Rightbar";
@@ -54,10 +52,7 @@ useEffect(() => {
         <Grid item sm={7} xs={10}>
           {
             type === "posts" && (
-            <div>
-              <Filtros />
               <Feed />
-            </div>
             )
           }
           {
