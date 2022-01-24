@@ -10,14 +10,14 @@ Clonar el repositorio
   git clone https://github.com/lucasfer01/Work-App-Front.git
 ```
 
-Instalar dependencias
+Instalar dependenciasa
 
 ```bash
   Dentro del repositorio abrimos consola y escribimos "npm install"
 ```
 
 Correr la aplicación
-
+a
 ```bash
   En la misma consola escribir "npm start"
 ```

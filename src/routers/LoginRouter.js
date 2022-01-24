@@ -4,7 +4,6 @@ import Home from "../components/Home/home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
-// import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 

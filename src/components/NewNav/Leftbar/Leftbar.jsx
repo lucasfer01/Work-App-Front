@@ -7,7 +7,7 @@ import {
   Person,
   Face,
 } from "@material-ui/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../../actions/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Leftbar = () => {
+  const { uid }= useSelector((state) => state.auth)
+
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -80,7 +82,7 @@ const Leftbar = () => {
         </Link>
       </div>
       <div className={classes.item}>
-      <Link to="/profile/' + uid">
+      <Link to={`/profile/${uid}`}>
         <Person className={classes.icon} />
         <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
         </Typography>

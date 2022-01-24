@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 500,
-    height: 550,
+    height: 700,
     backgroundColor: "white",
     position: "absolute",
     top: 0,
@@ -54,6 +54,11 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     marginBottom: theme.spacing(3),
+  },
+  trabajos: {
+    width: "100%",
+    background: "transparent",
+    color: "gray",
   },
 }));
 
@@ -89,18 +94,19 @@ const Add = () => {
     e.preventDefault();
 
     try {
+      console.log('postEnc', post)
       const createPost = await postPost({
         post: post,
         jobs: postJobs,
       });
       //const email = await sendEmail(postJobs);
       console.log("createPost", createPost);
-
+     
       setOpen(false)
       //window.location.reload(true)
-
+      alert("Post created succesufully")
       return createPost;
-
+       
     } catch (e) {
       alert(e);
     }
@@ -193,7 +199,7 @@ const Add = () => {
             {
               jobList.map(job => (
                 <div key={job.job_id}>
-                  <input type="button" value={job.job_name} onClick={handleAddJob} />
+                  <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                 </div>
               ))
             }
