@@ -79,7 +79,7 @@ import {
         <Toolbar className={classes.toolbar}>
           <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
-            Working App
+            WorkApp
           </Typography>
           </Link>
           <Typography variant="h6" className={classes.logoSm}>
