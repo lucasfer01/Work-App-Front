@@ -55,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
   item: {
     marginBottom: theme.spacing(3),
   },
+  trabajos: {
+    width: "100%",
+    background: "transparent",
+    color: "gray",
+  },
 }));
 
 function Alert(props) {
@@ -89,6 +94,7 @@ const Add = () => {
     e.preventDefault();
 
     try {
+      console.log('postEnc', post)
       const createPost = await postPost({
         post: post,
         jobs: postJobs,
@@ -193,7 +199,7 @@ const Add = () => {
             {
               jobList.map(job => (
                 <div key={job.job_id}>
-                  <input type="button" value={job.job_name} onClick={handleAddJob} />
+                  <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                 </div>
               ))
             }
