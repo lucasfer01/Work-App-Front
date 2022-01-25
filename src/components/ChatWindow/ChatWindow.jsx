@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Intento = () => {
+const ChatWindow = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
@@ -87,4 +87,4 @@ const Intento = () => {
     )
 }
 
-export default Intento;
+export default ChatWindow;

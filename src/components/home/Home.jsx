@@ -13,7 +13,7 @@ import Feed from "../NewNav/Feed/Feed";
 import Rightbar from "../NewNav/Rightbar/Rightbar";
 import Add from "../NewNav/Add/Add";
 import NewNav from "../NewNav/NewNav";
-import Intento from "../Intento/Intento";
+import ChatWindow from "../ChatWindow/ChatWindow";
 // import socket from "../socket";
 
 // import { Link } from 'react-router-dom';
@@ -68,7 +68,7 @@ useEffect(() => {
         </Grid>
       </Grid>
       <Add />
-      <Intento />
+      <ChatWindow />
     </div>
   );
 };
