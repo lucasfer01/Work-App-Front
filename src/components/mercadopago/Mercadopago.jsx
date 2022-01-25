@@ -9,10 +9,14 @@ import { useSelector } from 'react-redux';
 // Estilos
 import canBuyStyle from './style/mercadopago_canBuy.module.css'; // Puede comprar
 import cantBuyStyle from './style/mercadopago_cantBuy.module.css'; // No puede comprar
+import formStyle from './style/mercadopago.module.css';
+// Img
+import spinner from './assets/loading-buffering.gif';
 
 export default function Checkout() {
     // Estados
     const [canBuy, setCanBuy] = useState(false);
+    const [loader, setLoader] = useState(false);
     
     // Seleccionamos el id del estado global
     const userId = useSelector(state => state.auth.uid);
@@ -46,6 +50,12 @@ export default function Checkout() {
         usr_id: userId
     }
 
+    // button handler
+    function handlerOnClick() {
+        // Seteamos el loader en true
+        setLoader(true);
+    }
+
     // Controlador para enviar formulario
     function handleOnSubmit(e) {
         // Prevenir accion por defecto
@@ -59,8 +69,12 @@ export default function Checkout() {
 
 
     return (
-        <form onSubmit={handleOnSubmit}>
-            <button disabled={!canBuy} className={canBuy ? canBuyStyle.pagoButtonCanBuy : cantBuyStyle.pagoButtonCantBuy} type='submit'>COMPRAR</button>
+        <form className={formStyle.container} onSubmit={handleOnSubmit}>
+            <button disabled={!canBuy} onClick={handlerOnClick} className={canBuy ? canBuyStyle.pagoButtonCanBuy : cantBuyStyle.pagoButtonCantBuy} type='submit'>COMPRAR</button>
+
+            {loader && <img className={formStyle.spinner} src={spinner} alt='spinner'/>}
+
+            {!canBuy && <h3>Ya tenes WorkApp Premium 👍</h3>}
         </form>
     )
 }
