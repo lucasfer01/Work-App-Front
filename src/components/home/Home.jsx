@@ -45,7 +45,6 @@ useEffect(() => {
 
   return (
     <div>
-      <NewNav />
       <Grid container>
         <Grid item sm={2} xs={2}>
           <Leftbar />
