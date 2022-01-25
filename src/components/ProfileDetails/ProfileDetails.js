@@ -119,28 +119,28 @@ export const ProfileDetails = () => {
             <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
-            {user.usr_social.linkedin && <a
-              href={user.usr_social.linkedin ? user.usr_social.linkedin : null}
+            {user.usr_social?.linkedin && <a
+              href={user.usr_social?.linkedin ? user.usr_social.linkedin : null}
               target="_blank"
               className="boton-redes linkeding" rel="noreferrer"
             >
               {user.usr_social.linkedin && <FaLinkedin className="icons" />}
             </a>}
-            {user.usr_social.github && <a
+            {user.usr_social?.github && <a
               href={user?.usr_social?.github ? user?.usr_social.github : null}
               target="_blank"
               className="boton-redes github" rel="noreferrer"
             >
               <BsGithub fill="#000" className="icons" />
             </a>}
-            {user.usr_social.instagram && <a
-              href={user.usr_social.instagram ? user.usr_social.instagram : null}
+            {user.usr_social?.instagram && <a
+              href={user.usr_social?.instagram ? user.usr_social.instagram : null}
               target="_blank"
               className="boton-redes instagram" rel="noreferrer"
             >
               <FaInstagram className="icons" />
             </a>}
-            {user.usr_social.facebook && <a
+            {user.usr_social?.facebook && <a
               href={user?.usr_social?.facebook ? user?.usr_social.facebook : null}
               target="_blank"
               className="boton-redes facebook" rel="noreferrer"
