@@ -13,8 +13,9 @@ export default function Filtros({}){
 
     const [filtro, setFiltro] = React.useState({
         Prioridad: '',
-        Orden: 'Ascendente',
+        maximo: 10,
     })
+
     
     const usuario = useSelector(state => state.profile.user); 
     const storePosts = useSelector(state => state.posts.allPosts); 
@@ -27,8 +28,8 @@ export default function Filtros({}){
 
     React.useEffect(async()=>{
         if (usuario.usr_location){
-            console.log("ordenado", OrdenadorDistancia(Filtrado(storePosts, filtro), filtro.Orden))
-            dispatch(setFilters(OrdenadorDistancia(Filtrado(storePosts, filtro), filtro.Orden).post))
+            console.log("ordenado", OrdenadorDistancia(Filtrado(storePosts, filtro),usuario, filtro.maximo))
+            dispatch(setFilters(OrdenadorDistancia(Filtrado(storePosts, filtro), usuario, filtro.maximo).post))
         }
         else {dispatch(setFilters(Filtrado(storePosts, filtro)))}
     },[filtro, storePosts])
@@ -46,10 +47,8 @@ export default function Filtros({}){
             </div>
             <div>
                 Distancia: 
-                <select>
-                    <option value = 'Ascendente'>Ascendente</option>
-                    <option value = 'Descendente'>Descendente</option>
-                </select>
+                <input type='range' min='2' max='60' value = {filtro.maximo} onChange={event=>setFiltro({...filtro, maximo: event.target.value})}/>
+                <span>{filtro.maximo} km</span>
             </div>
         </div>
     )

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/auth";
+import {profileUser} from '../../actions/profileActions.js'
 import Cards from "../Cards/Cards";
 import styles from "./Home.module.css";
 import { getJobs, getPosts } from "../../controllers";
@@ -32,6 +33,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [type, setType] = useState("");
+  const myId = useSelector(state => state.auth.uid);
 
 let location = window.location.pathname;
 
@@ -42,6 +44,14 @@ useEffect(() => {
     setType("jobs");
   }
 }, [location]);
+
+useEffect(()=>{
+
+  const getProfile =  async () => {
+     await dispatch(profileUser(myId))
+  }
+  getProfile(); 
+},[myId])
 
   return (
     <div>

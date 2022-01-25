@@ -11,25 +11,7 @@ function haversine_distance(mk1, mk2) {
     return d;
   }
 
-function Ascendente (a, b){
-  var A = a.distancia; 
-  var B = b.distancia; 
-  if (A<B) return -1; 
-  if (A>B) return 1; 
-  return 0; 
-}
-
-function Descendente (a, b){
-  var A = a.distancia; 
-  var B = b.distancia; 
-  if (A>B) return -1; 
-  if (A<B) return 1; 
-  return 0; 
-}
-
-
-
-export default function OrdenadorDistancia(arreglo, usuario, orden){
+export default function OrdenadorDistancia(arreglo, usuario, maximo){
   var miUbicacion = usuario.usr_location; 
 
   var postUbicacion = arreglo.map(post => {
@@ -43,9 +25,10 @@ export default function OrdenadorDistancia(arreglo, usuario, orden){
   postUbicacion.forEach(element => {
     var suUbicacion = element.perfil.usr_location; 
     if (suUbicacion){ element.distancia = haversine_distance(miUbicacion, suUbicacion)}
-    else {element.distancia = 1000}
+    else {element.distancia = 60}
   });
 
-  if(orden === 'Ascendente')return postUbicacion.sort(Ascendente);
-  else {return postUbicacion.sort(Descendente)} 
+  console.log("Ubicacion",postUbicacion[0], parseInt(maximo))
+
+ return postUbicacion.filter(post => post.distancia <= parseInt(maximo))
 }
