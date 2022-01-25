@@ -13,6 +13,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
+import { useSelector } from 'react-redux'
+import { IMG } from '../../enviroment'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -75,6 +77,8 @@ const NewNav = () => {
   const [open, setOpen] = useState(false);
   const classes = useStyles({ open });
 
+  const profile = useSelector((state) => state.profile.ownProfile)
+
   return (
     <AppBar style={{position:"sticky"}}>
       <Toolbar className={classes.toolbar}>
@@ -102,10 +106,12 @@ const NewNav = () => {
           <Badge badgeContent={2} color="secondary" className={classes.badge}>
             <Notifications />
           </Badge>
-          <Avatar
+          <Link to={`/profile/${profile.usr_id}`}>
+            <Avatar
             alt="Full stack"
-            src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-          />
+            src={profile?.usr_photo? profile.usr_photo : IMG }
+            />
+          </Link>
         </div>
       </Toolbar>
     </AppBar>
