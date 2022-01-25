@@ -20,6 +20,7 @@ import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import Feed from "../NewNav/Feed/Feed";
 import Jobs from "../Jobs/Jobs";
 import { DEF_BANNER, IMG } from "../../enviroment";
+import { FormJobs } from "../formJobs/FormJobs";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -31,8 +32,8 @@ export const ProfileDetails = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId))
-    console.log("dispatch profile")
+    dispatch(profileUser(userId));
+    console.log("dispatch profile");
   }, [userId, dispatch]);
 
   const contactUser = () => {
@@ -55,15 +56,22 @@ export const ProfileDetails = () => {
           >
             Editar Ubicación
           </Boton>
-          <Link to="/addjob">
-            <Boton data-toggle="modal" colorBtn="btn_azul">
-              Agregar trabajo
-            </Boton>
-          </Link>
+          {/* <Link to="/addjob"> */}
+          <Boton
+            data-toggle="modal"
+            colorBtn="btn_azul"
+            data-toggle="modal"
+            data-target="#addJobModal"
+          >
+            Agregar trabajo
+          </Boton>
+          {/*  </Link> */}
           <Link to={`/profile/${userId}/alert`}>
             <Boton colorBtn="btn_azul"> Crear Alerta de Empleo </Boton>
           </Link>
           <EditUbicacion profile={user} id={userId} />
+
+          <FormJobs />
         </div>
       );
     } else
@@ -73,19 +81,24 @@ export const ProfileDetails = () => {
         </button>
       );
   }
-  return (loader ? <LoadingScreen /> :
+  return loader ? (
+    <LoadingScreen />
+  ) : (
     <div>
       <section className="seccion-perfil-usuario">
         <div className="perfil-usuario-header">
           <div className="perfil-usuario-portada">
-          <img
+            <img
               className="imagen-portada"
-              src={user?.usr_banner? user.usr_banner : DEF_BANNER}
+              src={user?.usr_banner ? user.usr_banner : DEF_BANNER}
               alt="portada"
             ></img>
             <div className="perfil-usuario-avatar">
-            <img src={user?.usr_photo ? user.usr_photo : IMG} alt="img-avatar" width="50px" />
-              
+              <img
+                src={user?.usr_photo ? user.usr_photo : IMG}
+                alt="img-avatar"
+                width="50px"
+              />
             </div>
             {button()}
 
@@ -100,18 +113,22 @@ export const ProfileDetails = () => {
           <div className="perfil-usuario-footer">
             <ul className="lista-datos">
               <li>
-                <ImUsers className="icono" />Sexo: {user?.usr_gender}
+                <ImUsers className="icono" />
+                Sexo: {user?.usr_gender}
               </li>
               <li>
-                <ImUserTie className="icono" />Cargo: {user?.usr_charge}
+                <ImUserTie className="icono" />
+                Cargo: {user?.usr_charge}
               </li>
             </ul>
             <ul className="lista-datos">
               <li>
-                <BsGeoAlt className="icono" />País: {user?.usr_country}
+                <BsGeoAlt className="icono" />
+                País: {user?.usr_country}
               </li>
               <li>
-                <BsTelephone className="icono" />Telefono: {user?.usr_phone}
+                <BsTelephone className="icono" />
+                Telefono: {user?.usr_phone}
               </li>
             </ul>
           </div>
@@ -120,34 +137,52 @@ export const ProfileDetails = () => {
             <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
-            {user.usr_social?.linkedin && <a
-              href={user.usr_social?.linkedin ? user.usr_social.linkedin : null}
-              target="_blank"
-              className="boton-redes linkeding" rel="noreferrer"
-            >
-              {user.usr_social.linkedin && <FaLinkedin className="icons" />}
-            </a>}
-            {user.usr_social?.github && <a
-              href={user?.usr_social?.github ? user?.usr_social.github : null}
-              target="_blank"
-              className="boton-redes github" rel="noreferrer"
-            >
-              <BsGithub fill="#000" className="icons" />
-            </a>}
-            {user.usr_social?.instagram && <a
-              href={user.usr_social?.instagram ? user.usr_social.instagram : null}
-              target="_blank"
-              className="boton-redes instagram" rel="noreferrer"
-            >
-              <FaInstagram className="icons" />
-            </a>}
-            {user.usr_social?.facebook && <a
-              href={user?.usr_social?.facebook ? user?.usr_social.facebook : null}
-              target="_blank"
-              className="boton-redes facebook" rel="noreferrer"
-            >
-              <FaFacebook className="icons" />
-            </a>}
+            {user.usr_social?.linkedin && (
+              <a
+                href={
+                  user.usr_social?.linkedin ? user.usr_social.linkedin : null
+                }
+                target="_blank"
+                className="boton-redes linkeding"
+                rel="noreferrer"
+              >
+                {user.usr_social.linkedin && <FaLinkedin className="icons" />}
+              </a>
+            )}
+            {user.usr_social?.github && (
+              <a
+                href={user?.usr_social?.github ? user?.usr_social.github : null}
+                target="_blank"
+                className="boton-redes github"
+                rel="noreferrer"
+              >
+                <BsGithub fill="#000" className="icons" />
+              </a>
+            )}
+            {user.usr_social?.instagram && (
+              <a
+                href={
+                  user.usr_social?.instagram ? user.usr_social.instagram : null
+                }
+                target="_blank"
+                className="boton-redes instagram"
+                rel="noreferrer"
+              >
+                <FaInstagram className="icons" />
+              </a>
+            )}
+            {user.usr_social?.facebook && (
+              <a
+                href={
+                  user?.usr_social?.facebook ? user?.usr_social.facebook : null
+                }
+                target="_blank"
+                className="boton-redes facebook"
+                rel="noreferrer"
+              >
+                <FaFacebook className="icons" />
+              </a>
+            )}
           </div>
         </div>
       </section>
