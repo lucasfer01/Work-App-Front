@@ -27,12 +27,11 @@ import Feed from "../NewNav/Feed/Feed";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
-  const { userId } = useParams()
+  const { userId } = useParams();
 
   let user = useSelector((state) => state.profile.user)
-  let { email } = useSelector((state) => state.auth)
-  const loader = useSelector((state) => state.ui.loading);
-
+  let { email } = useSelector((state) => state.auth);
+  const loader = useSelector(state => state.ui.loading);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,7 +51,7 @@ export const ProfileDetails = () => {
 
   function button() {
     if (user?.usr_email === email) {
-      return (
+      return ( 
         <div>
           <Link to={`/editprofile/${user.usr_id}`}>
             <button type="button" className="boton-portada">
@@ -88,7 +87,7 @@ export const ProfileDetails = () => {
         </button>
       );
   }
-  return (
+  return ( loader ? <LoadingScreen/> :
     <div>
       <section className='seccion-perfil-usuario'>
         <div className='perfil-usuario-header'>
