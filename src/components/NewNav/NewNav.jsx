@@ -72,15 +72,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewNav = () => {
-
   const [open, setOpen] = useState(false);
   const classes = useStyles({ open });
 
   return (
-    <AppBar position="fixed">
-      <Toolbar className={classes.toolbar}>
-        <Link style={{ textDecoration: 'none' }} to="/">
-          <Typography variant="h6" className={newNavStyles.logo}>
+    return (
+      <AppBar style={{position:"sticky", top:0}}>
+        <Toolbar className={classes.toolbar}>
+          <Link to="/">
+          <Typography variant="h6" className={classes.logoLg}>
             WorkApp
           </Typography>
         </Link>

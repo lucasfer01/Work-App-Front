@@ -29,7 +29,7 @@ export const LoginRouter = () => {
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="jobs" element={<Home />} />
-          <Route path="email" element={<AlertaEmpleo />} />
+          <Route path="profile/:userId/alert" element={<AlertaEmpleo />} />
           <Route path="profile/:userId" element={<ProfileDetails />} />
           <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="post/:id" element={<PostDetail />} />
