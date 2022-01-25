@@ -50,13 +50,6 @@ useEffect(() => {
   }
 }, [location]);
 
-useEffect(() => {
-  const getData = async () => {
-    await dispatch(getJobs());
-    await dispatch(profileUser(myId, "own"));
-  };
-  getData();
-}, [myId, dispatch]);
 
   return (
     <div>

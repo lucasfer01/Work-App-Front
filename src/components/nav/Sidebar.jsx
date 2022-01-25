@@ -7,14 +7,13 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./data";
 import SubMenu from "./Submenu";
 import { IconContext } from "react-icons/lib";
-import Boton from '../Boton/Boton'
-import { useDispatch } from "react-redux";
+import Boton from "../Boton/Boton";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/auth";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import "./sidebar.css";
 import socket from "../socket";
 import Chat from '../chat/chat';
-
 
 const Buton = styled(Boton)`
   display: flex;
@@ -85,17 +84,17 @@ const SidebarLabel = styled.span`
 `;
 
 const userImg = styled.img`
-width: 32px;
-height: 32px;
-border-radius: 50%;
-object-fit: cover;
-cursor: pointer;
-`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+`;
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
-  const [newNotification, setNewNotification] = useState(false)
-  const [showNotifications, setShowNotifications] = useState(false)
+  const [newNotification, setNewNotification] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [openChat, setOpenChat] = useState(false);
   const myprofile = useSelector((state) => state.auth);
@@ -107,6 +106,7 @@ const Sidebar = () => {
   };
 
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     dispatch(startLogout());
   };
@@ -120,7 +120,7 @@ const Sidebar = () => {
       });
       console.log("notifications", notifications);
     });
-  } , [])
+  }, []);
 
   return (
     <>
@@ -131,21 +131,16 @@ const Sidebar = () => {
           </NavIcon>
           <Center>
             <Link to="/">
-              <Logo>WORKINLING.</Logo>
+              <Logo>WORKINLING.</Logo> 
             </Link>
           </Center>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-            className="img-user-nav"
-            alt=""
-          />
-          <button onClick={showNotif}><IoMdNotificationsOutline className="campana" />
-          {
-            newNotification && <span>!!</span>
-          }
+          <img src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3" className="img-user-nav" alt="" />
+          <button onClick={showNotif}>
+            <IoMdNotificationsOutline className="campana" />
+            {newNotification && <span>!!</span>}
           </button>
-          {
-            showNotifications && notifications.map((notification, i) => {
+          {showNotifications &&
+            notifications.map((notification, i) => {
               return (
                 <div>
                 <div key={i}>
@@ -159,9 +154,8 @@ const Sidebar = () => {
                   }
                 </div>
                 </div>
-              )
-            })
-          }
+              );
+            })}
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
@@ -169,12 +163,16 @@ const Sidebar = () => {
               <AiIcons.AiOutlineClose onClick={showSidebar} />
             </NavIcon>
             {SidebarData().map((item, index) => {
-              if(item.path){return (
-                <SubMenu item={item} key={index}/>
-              )}
-              else {return (
-                <Buton key = {item} onClick={handleLogout}>{item.icon}<SidebarLabel>{item.title}</SidebarLabel></Buton>
-              )}
+              if (item.path) {
+                return <SubMenu item={item} key={index} />;
+              } else {
+                return (
+                  <Buton key={item} onClick={handleLogout}>
+                    {item.icon}
+                    <SidebarLabel>{item.title}</SidebarLabel>
+                  </Buton>
+                );
+              }
             })}
           </SidebarWrap>
         </SidebarNav>
