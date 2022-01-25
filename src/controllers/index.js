@@ -91,16 +91,25 @@ export const getPostDetail = async (id) => {
 
 export const getProfile = async (userId) => {
     try {
-        const {data} = await axios.get(`${POST_USER}/${userId}`)
+        const { data } = await axios.get(`${POST_USER}/${userId}`)
         return data;
     } catch (error) {
         console.log(error);
     }
 }
 
+export const addAlerts = async (uid, alerts) => {
+    try {
+        const {data} = await axios.put(`http://localhost:3000/user/${uid}`, alerts);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const sendEmail = async (postData) => {
     try {
-        const {data} = await axios.post(`http://localhost:3000/email`, postData)
+        const { data } = await axios.post(`http://localhost:3000/email`, postData)
         return data;
     } catch (error) {
         console.log(error);

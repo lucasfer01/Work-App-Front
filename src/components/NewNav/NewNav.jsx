@@ -75,7 +75,7 @@ import {
     const classes = useStyles({ open });
 
     return (
-      <AppBar position="fixed">
+      <AppBar style={{position:"sticky", top:0}}>
         <Toolbar className={classes.toolbar}>
           <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
