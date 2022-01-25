@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IMG } from "../../enviroment";
 
 import "./CardProfileUser.css";
 
@@ -9,8 +10,7 @@ export const CardProfileUser = (userData) => {
   if (!rating) rating = 0;
   if (!desc) desc = "";
   if (!img_url) {
-    img_url =
-      "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png";
+    img_url = IMG
   }
 
   const maxStars = 5;
