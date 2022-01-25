@@ -23,6 +23,7 @@ import Chat from "../chat/chat";
 import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import { getProfile } from "../../controllers";
+import Feed from "../NewNav/Feed/Feed";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -139,32 +140,32 @@ export const ProfileDetails = () => {
             <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
           </div>
           <div>
-            <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
+            <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
             <a
-              href={user?.usr_social?.linkedin? user?.usr_social.linkedin : null}
+              href={user?.usr_social?.linkedin ? user?.usr_social.linkedin : null}
               target="_blank"
               className="boton-redes linkeding"
             >
               <FaLinkedin className="icons" />
             </a>
             <a
-              href={user?.usr_social?.github? user?.usr_social.github : null}
+              href={user?.usr_social?.github ? user?.usr_social.github : null}
               target="_blank"
               className="boton-redes github"
             >
               <FaGithub className="icons" />
             </a>
             <a
-              href={user?.usr_social?.instagram? user?.usr_social.instagram : null}
+              href={user?.usr_social?.instagram ? user?.usr_social.instagram : null}
               target="_blank"
               className="boton-redes instagram"
             >
               <FaInstagram className="icons" />
             </a>
             <a
-              href={user?.usr_social?.facebook? user?.usr_social.facebook : null}
+              href={user?.usr_social?.facebook ? user?.usr_social.facebook : null}
               target="_blank"
               className="boton-redes facebook"
             >
