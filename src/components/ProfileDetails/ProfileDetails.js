@@ -34,7 +34,6 @@ export const ProfileDetails = () => {
     dispatch(profileUser(userId))
     console.log("dispatch profile")
   }, [userId, dispatch]);
-  }, []);
 
   const contactUser = () => {
     setViewChat(!viewChat);

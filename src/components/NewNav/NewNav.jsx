@@ -16,7 +16,6 @@ import { profileUser } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
-import { useSelector } from 'react-redux'
 import { IMG } from '../../enviroment'
 
 const useStyles = makeStyles((theme) => ({
