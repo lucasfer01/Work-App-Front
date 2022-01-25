@@ -91,7 +91,8 @@ export default function PostDetail() {
                {post.post_photo.length > 0? post.post_photo.map(foto => {
                             return(
                <CardMedia className={classes.media} image={foto} title="My Post" />
-               )}): <span>No hay fotos en esta publicación</span>}
+               )}): <CardMedia className={classes.media} image="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FWorkingapp.jpg?alt=media&token=09c05864-0fca-4fed-8c69-e44c328b2d0e"
+               alt="img default..." />}
                             <Typography className={classes.font} gutterBottom variant="h5">
                             {author?.usr_username}
                           </Typography>

@@ -23,6 +23,9 @@ import Chat from "../chat/chat";
 import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import { getProfile } from "../../controllers";
+import {
+  Button,
+} from "@material-ui/core";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -58,26 +61,30 @@ export const ProfileDetails = () => {
               <BsFillGearFill /> Editar Perfil
             </button>
           </Link>
-          <Boton
-            data-toggle="modal"
-            data-target="#editUbicacion"
-            colorBtn='btn_azul'
-          >
+          <Button
+          variant="outlined"
+          color="primary"
+          style={{ marginRight: 20 }}
+        >
             Editar Ubicación
-          </Boton>
+          </Button>
           
-            <Boton
-              data-toggle="modal"
-              data-target="#addJobModal"
-              colorBtn='btn_azul'
-            >
+          <Button
+          variant="outlined"
+          color="primary"
+          style={{ marginRight: 20 }}
+        >
               Agregar trabajo
-            </Boton>
+            </Button>
             <FormJobs />
           
           <Link to="/email">
-            <Boton colorBtn='btn_azul'
-            > Crear Alerta de Empleo </Boton>
+            <Button
+          variant="outlined"
+          color="primary"
+          style={{ marginRight: 20 }}
+        >
+          Crear Alerta de Empleo </Button>
           </Link>
           <EditUbicacion profile={user} id={userId} />
         </div>

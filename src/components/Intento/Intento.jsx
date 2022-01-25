@@ -9,6 +9,7 @@ import {
 import MessageIcon from '@material-ui/icons/Message';
 import React, { useState } from "react";
 import Mensajes from '../Messenger/Mensajes/Mensajes';
+import Chat from '../Messenger/Chat/Chat';
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -49,6 +50,13 @@ const Intento = () => {
             </Tooltip>
             <Modal open={open}>
                 <Container className={classes.container}>
+                <div className='chatMenu'>
+                <div className='chatMenuWrapper'>
+                    <input placeholder='Search for Contacts' className='chatMenuInput' />
+                    <Chat />
+                    <Chat />
+                </div>
+            </div>
                 <div className='conversation'>
             <img className='conversationImg' 
             src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
