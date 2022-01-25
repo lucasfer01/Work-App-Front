@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 1fr;
     height: 55px;
     margin-left: -26px;
-    margin-top: -16px;
+    margin-top: -80px;
 }
 
 .div-fil{
@@ -18,7 +18,7 @@
     margin-right: 15px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .distan{
@@ -26,7 +26,7 @@
     margin-right: 15px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .options{
@@ -35,7 +35,7 @@
 
 @media (max-width: 750px) {
     .filtros_main {
-        width: 113%;
-        margin-top: -24px;
+        width: 115%;
+        margin-top: -80px;
     }
 }

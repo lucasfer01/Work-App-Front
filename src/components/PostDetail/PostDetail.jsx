@@ -99,56 +99,6 @@ export default function PostDetail() {
     getAuthorData();
   }, [id, authorId]);
 
-<<<<<<< HEAD
-    return (
-        <>
-           {post.post_id? 
-           <Card className={classes.card}>
-               <CardActionArea>
-               {post.post_photo.length > 0? post.post_photo.map(foto => {
-                            return(
-               <CardMedia className={classes.media} image={foto} title="My Post" />
-               )}): <CardMedia className={classes.media} image="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FWorkingapp.jpg?alt=media&token=09c05864-0fca-4fed-8c69-e44c328b2d0e"
-               alt="img default..." />}
-                            <Typography className={classes.font} gutterBottom variant="h5">
-                            {author?.usr_username}
-                          </Typography>
-                           <Typography className={classes.fontTitle} gutterBottom variant="h5">
-                           {post.post_title}
-                         </Typography>
-                       <CardContent>
-                         <Typography className={classes.fontDesc} variant="body2">
-                           {post.post_description}
-                         </Typography>
-                       </CardContent>
-                        <CardContent>
-                        <Typography className={classes.fontStatus} variant="body2">
-                          {post.post_priority? post.post_priority: <span>Poco urgente</span>}
-                        </Typography>
-                      </CardContent>
-                       <CardContent>
-                       <Typography className={classes.fontDesc} variant="body2">
-                       Fecha de publicación:
-                       {post.createdAt.slice(0, 10)}
-                       </Typography>
-                     </CardContent>
-                      <CardContent>
-                      <Typography className={classes.fontDesc} variant="body2">
-                      Pago:
-                      {post.post_fee? post.post_fee: <span> Por acordar</span>}
-                      </Typography>
-                    </CardContent>
-                    </CardActionArea>
-                </Card>: <h1>No se encontraron datos de este usuario</h1>}
-                <button className="btn-detalle" onClick={() => setViewChat(!viewChat)}>
-              <div class="svg-wrapper-1">
-               <div class="svg-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                 <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-               </svg>
-            </div>
-=======
   return ( loader ? <LoadingScreen/> :
     <>
       {post.post_id ?
@@ -196,7 +146,6 @@ export default function PostDetail() {
               <path fill="none" d="M0 0h24v24H0z"></path>
               <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
             </svg>
->>>>>>> 02422b5636da3bc6e85e5572b41fb21de467d82b
           </div>
         </div>
         <span>Abrir Chat</span>

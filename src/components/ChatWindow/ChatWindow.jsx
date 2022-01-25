@@ -10,6 +10,7 @@ import MessageIcon from '@material-ui/icons/Message';
 import React, { useState } from "react";
 import Mensajes from '../Messenger/Mensajes/Mensajes';
 import Chat from "../Messenger/Chat/Chat";
+import "./chatWindow.css";
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -18,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
         right: "7%",
     },
     container: {
-        width: 500,
-        height: 760,
+        width: 1000,
+        height: 800,
         backgroundColor: "white",
         position: "absolute",
         top: 0,

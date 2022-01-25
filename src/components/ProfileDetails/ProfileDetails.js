@@ -17,16 +17,9 @@ import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
-<<<<<<< HEAD
-import { getProfile } from "../../controllers";
-import {
-  Button,
-} from "@material-ui/core";
-=======
 import Feed from "../NewNav/Feed/Feed";
 import Jobs from "../Jobs/Jobs";
 import { DEF_BANNER, IMG } from "../../enviroment";
->>>>>>> 02422b5636da3bc6e85e5572b41fb21de467d82b
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -54,32 +47,6 @@ export const ProfileDetails = () => {
               <BsFillGearFill /> Editar Perfil
             </Boton>
           </Link>
-<<<<<<< HEAD
-          <Button
-          variant="outlined"
-          color="primary"
-          style={{ marginRight: 20 }}
-        >
-            Editar Ubicación
-          </Button>
-          
-          <Button
-          variant="outlined"
-          color="primary"
-          style={{ marginRight: 20 }}
-        >
-              Agregar trabajo
-            </Button>
-            <FormJobs />
-          
-          <Link to="/email">
-            <Button
-          variant="outlined"
-          color="primary"
-          style={{ marginRight: 20 }}
-        >
-          Crear Alerta de Empleo </Button>
-=======
           <Boton
             data-toggle="modal"
             data-target="#editUbicacion"
@@ -94,7 +61,6 @@ export const ProfileDetails = () => {
           </Link>
           <Link to={`/profile/${userId}/alert`}>
             <Boton colorBtn="btn_azul"> Crear Alerta de Empleo </Boton>
->>>>>>> 02422b5636da3bc6e85e5572b41fb21de467d82b
           </Link>
           <EditUbicacion profile={user} id={userId} />
         </div>

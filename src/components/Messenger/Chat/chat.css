@@ -1,12 +1,12 @@
-.conversation{
+.conversation2{
     display: flex;
     align-items: center;
     padding: 10px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: -50px;
 }
 
-.conversation:hover{
+.conversation2:hover{
     background-color: rgb(245, 243, 243);
 }
 
