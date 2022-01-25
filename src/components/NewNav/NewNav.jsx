@@ -9,10 +9,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getJobs } from "../../actions/formJobs";
+import { profileUser } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
+import { IMG } from '../../enviroment'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -74,6 +78,22 @@ const useStyles = makeStyles((theme) => ({
 const NewNav = () => {
   const [open, setOpen] = useState(false);
   const classes = useStyles({ open });
+  const dispatch = useDispatch();
+  const myId = useSelector((state) => state.auth.uid);
+
+  useEffect(() => {
+    const getData = async () => {
+      await dispatch(getJobs());
+      await dispatch(profileUser(myId, "own"));
+    };
+    getData();
+  }, [myId, dispatch]);
+
+  const profile = useSelector((state) => state.profile.ownProfile)
+
+  const profileAvatar = () =>{
+    window.location.href= `/profile/${profile?.usr_id}` ? `/profile/${profile.usr_id}` : null 
+  }
 
   return (
     <AppBar style={{position:"sticky"}}>
@@ -102,10 +122,12 @@ const NewNav = () => {
           <Badge badgeContent={2} color="secondary" className={classes.badge}>
             <Notifications />
           </Badge>
-          <Avatar
+          <button onClick={profileAvatar}>
+            <Avatar
             alt="Full stack"
-            src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-          />
+            src={profile?.usr_photo? profile.usr_photo : IMG }
+            />
+            </button>
         </div>
       </Toolbar>
     </AppBar>

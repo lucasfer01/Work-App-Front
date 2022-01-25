@@ -41,21 +41,21 @@ export default function Filtros({}){
 
     return(
         <div className='filtros_main'>
-            <div>
-                Prioridad: 
-                <select onChange={(event)=>setFiltro({...filtro, Prioridad: event.target.value})}>
-                    <option value=''>Todos</option>
-                    <option value='Urgente'>Urgente</option>
-                    <option value='Poco Urgente'>Poco Urgente</option>
-                    <option value='Sin Urgencia'>Sin Urgencia</option>
-                </select>
-            </div>
-            <div>
-                Distancia: 
-                <input type='range' min='2' max='60' value = {filtro.maximo} onChange={event=>setFiltro({...filtro, maximo: event.target.value})}/>
-                <span>{filtro.maximo} km</span>
-            </div>
+        <div className='div-fil'>
+           <span className='priority'>Prioridad: </span>
+            <select className='select-fil' onChange={(event)=>setFiltro({...filtro, Prioridad: event.target.value})}>
+                <option className='options' value=''>Todos</option>
+                <option className='options' value='Urgente'>Urgente</option>
+                <option className='options' value='Poco Urgente'>Poco Urgente</option>
+                <option className='options' value='Sin Urgencia'>Sin Urgencia</option>
+            </select>
+
         </div>
+        <div className='div-dist'>
+            <span className='distan'>Distancia: {filtro.maximo} km</span> 
+            <input type='range' min='2' max='60' value = {filtro.maximo} onChange={event=>setFiltro({...filtro, maximo: event.target.value})}/>
+        </div>
+    </div>
     )
 }
 
