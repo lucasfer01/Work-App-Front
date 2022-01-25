@@ -1,21 +1,23 @@
+import axios from "axios";
 import { CardProfileUser } from "../cardProfileUser/CardProfileUser";
+import { useDispatch, useSelector } from 'react-redux'
+import { BASE_URL } from '../../enviroment'
+import { useEffect } from "react";
+import { getUsers } from "../../actions/getUsers";
 
 export const About = () => {
-
-    const users = [
-        {
-            usr_id: "",
-            usr_username: "",
-            usr_description: "",
-            usr_photo: ""
-        }
-    ]
-
+  const dispatch = useDispatch();
+  const Allusers = useSelector(state => state.users.allUsers);
+  useEffect(() => {
+    dispatch(getUsers())
+  }, []);
+  
+const admins = Allusers.filter((u) => u.usr_role === "admin")
 
     return (
         <div className="container-fluid">
           <div className="row">
-            {users.map((userData) => (
+            {admins?.map((userData) => (
               <CardProfileUser
                 key={userData.usr_id}
                 id={userData.usr_id}
