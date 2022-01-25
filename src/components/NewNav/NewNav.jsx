@@ -79,6 +79,10 @@ const NewNav = () => {
 
   const profile = useSelector((state) => state.profile.ownProfile)
 
+  const profileAvatar = () =>{
+    window.location.href= `/profile/${profile?.usr_id}` ? `/profile/${profile.usr_id}` : null 
+  }
+
   return (
     <AppBar style={{position:"sticky"}}>
       <Toolbar className={classes.toolbar}>
@@ -106,12 +110,12 @@ const NewNav = () => {
           <Badge badgeContent={2} color="secondary" className={classes.badge}>
             <Notifications />
           </Badge>
-          <Link to={`/profile/${profile.usr_id}`}>
+          <button onClick={profileAvatar}>
             <Avatar
             alt="Full stack"
             src={profile?.usr_photo? profile.usr_photo : IMG }
             />
-          </Link>
+            </button>
         </div>
       </Toolbar>
     </AppBar>
