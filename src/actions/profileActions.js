@@ -3,7 +3,7 @@ import { types } from '../types/types'
 import { POST_USER } from '../enviroment'
 import { finishLoading, startLoading } from './ui';
 
-export function profileUser(userId) {
+export function profileUser(userId, own) {
     return async function (dispatch) {
         /* axios.get(`${POST_USER}/${userId}`)
             .then((user) => {
@@ -19,7 +19,7 @@ export function profileUser(userId) {
             try {
                 const {data} = await axios.get(`${POST_USER}/${userId}`)
                 dispatch({
-                    type: types.profileUser,
+                    type: own ? types.ownProfile : types.profileUser,
                     payload: data
                 });
                 dispatch(finishLoading())

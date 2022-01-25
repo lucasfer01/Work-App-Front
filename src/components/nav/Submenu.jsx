@@ -63,12 +63,12 @@ const SubMenu = ({ item}) => {
         </div>
       </SidebarLink>
       {subnav &&
-        item.subNav.map((item, index) => {
+        item.subNav.map((item, index) => (
           <SidebarLink to={item.path} key={index}>
             {item.icon}
             <SidebarLabel>{item.title}</SidebarLabel>
           </SidebarLink>
-        })}
+        ))}
     </>
   );
 };

@@ -17,10 +17,10 @@ import {
 import { Add as AddIcon } from "@material-ui/icons";
 import { useState } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import { postPost } from '../../../actions/formEmpleador';
+import { postPost, getPosts } from '../../../actions/formEmpleador';
 import { sendEmail } from "../../../controllers";
 import { startUploading } from "../../../helpers/imageUpload";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 import React from "react";
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 500,
-    height: 550,
+    height: 700,
     backgroundColor: "white",
     position: "absolute",
     top: 0,
@@ -55,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
   item: {
     marginBottom: theme.spacing(3),
   },
+  trabajos: {
+    width: "100%",
+    background: "transparent",
+    color: "gray",
+  },
 }));
 
 function Alert(props) {
@@ -65,6 +70,7 @@ const Add = () => {
   const classes = useStyles();
   let { uid } = useSelector((state) => state.auth)
   const jobs = useSelector((state) => state.jobs.allJobs)
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
   const [post, setPost] = React.useState({
@@ -90,17 +96,18 @@ const Add = () => {
 
     try {
       const createPost = await postPost({
-        post: post,
+        post: {...post, post_photo: post.post_photo.length ? post.post_photo : ['https://www.trecebits.com/wp-content/uploads/2017/07/empleo-trabajo.jpg']},
         jobs: postJobs,
       });
-      //const email = await sendEmail(postJobs);
-      console.log("createPost", createPost);
 
-      setOpen(false)
-      //window.location.reload(true)
+      const email = await sendEmail(createPost);
+     
+      setOpen(false);
 
-      return createPost;
+      alert("Post created succesufully")
 
+      await dispatch(getPosts())
+       
     } catch (e) {
       alert(e);
     }
@@ -193,7 +200,7 @@ const Add = () => {
             {
               jobList.map(job => (
                 <div key={job.job_id}>
-                  <input type="button" value={job.job_name} onClick={handleAddJob} />
+                  <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                 </div>
               ))
             }

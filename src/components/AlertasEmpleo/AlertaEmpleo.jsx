@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { addAlerts } from '../../controllers';
 
 const AlertaEmpleo = () => {
 
@@ -15,12 +16,6 @@ const AlertaEmpleo = () => {
     const [jobList, setJobList] = useState([]);
 
     const jobs = useSelector((state) => state.jobs.allJobs);
-
-    const getAlerts = async (alerts) => {
-        const res = await axios.put(`http://localhost:3000/user/${uid}`, alerts);
-        console.log(res.data)
-        return res;
-    };
     
     const handleChange = (e) => {
         const { value } = e.target;
@@ -34,16 +29,22 @@ const AlertaEmpleo = () => {
         setAlerts(alerts => ({
             usr_alerts: [...alerts.usr_alerts, newAlert]
         }));
-        getAlerts(alerts);
+        const add = async () => {
+            await addAlerts(uid, alerts);
+        }
+        add();
+        alert("Alertas agregadas");
+        setNewAlert("");
     };
 
     return (
         <div>
+            <h2>Agregar alertas</h2>
             <div>
                 <form>
                     <input placeholder="Empleo a alertar..." onChange={handleChange} value={newAlert}/>
                     {
-                        jobList.map(job => (
+                        jobList?.map(job => (
                             <div key={job.job_id}>
                                 <input type="button" value={job.job_name} />
                             </div>

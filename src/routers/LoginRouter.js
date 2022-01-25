@@ -1,10 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/home/home";
+import Home from "../components/home/Home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
-// import Sidebar from "../components/nav/Sidebar";
 import Checkout from "../components/mercadopago/Mercadopago";
 import { EditProfile } from "../components/ProfileDetails/EditProfile/EditProfile";
 
@@ -18,6 +17,10 @@ import NewNav from "../components/NewNav/NewNav";
 import { FormReview } from "../components/formReview/FormReview";
 import { FormJobs } from "../components/formJobs/FormJobs";
 import { FormNewJob } from "../components/formNewJob/FormNewJob";
+import { RedirectPostpago } from "../components/mercadopago/RedirectPostpago";
+
+import { Plan } from "../components/Plan/Plan";
+
 
 export const LoginRouter = () => {
   return (
@@ -28,15 +31,16 @@ export const LoginRouter = () => {
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="jobs" element={<Home />} />
-          <Route path="email" element={<AlertaEmpleo />} />
+          <Route path="profile/:userId/alert" element={<AlertaEmpleo />} />
           <Route path="profile/:userId" element={<ProfileDetails />} />
           <Route path="editprofile/:userId" element={<EditProfile />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="createpost" element={<FormEmpleador />} />
           <Route path="job/:jobId" element={<CardsProfileUser />} />
           <Route path="messenger" element={<Messenger />} />
+          <Route path="upgradePlan" element={<Plan />} />
+          <Route path="upgradePlan/checkPayment/*" element={<RedirectPostpago />} />
 
-          <Route path="prueba" element={<Checkout />} />
           <Route path="test" element={<FormReview />} />
           <Route path="test1" element={<FormJobs />} />
           <Route path="test2" element={<FormNewJob />} />

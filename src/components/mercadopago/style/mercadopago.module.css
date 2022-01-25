@@ -1,0 +1,14 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spinner {
+    position: absolute;
+    left: 9.6rem;
+    bottom: 0.313rem;
+    width: 2.8rem;
+}
