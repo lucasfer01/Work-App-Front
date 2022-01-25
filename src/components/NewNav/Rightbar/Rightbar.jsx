@@ -5,6 +5,8 @@ import {
     Typography,
     Divider,
   } from "@material-ui/core";
+  // Url
+  import { FRONT_URL } from "../../../enviroment";
   
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -31,26 +33,21 @@ import {
         <Typography className={classes.title} gutterBottom>
           Categorias que puedan servirle
         </Typography>
-        <Typography className={classes.title} gutterBottom>
-          Plomeria
-        </Typography>
-        <Link href="#" className={classes.link} variant="body2">
+        
+        <Link href={`${FRONT_URL}/job/19`} className={classes.link} variant="body2">
           Carpintero
         </Link>
-        <Link href="#" className={classes.link} variant="body2">
+        <Link href={`${FRONT_URL}/job/29`} className={classes.link} variant="body2">
           Electricista
         </Link>
-        <Link href="#" className={classes.link} variant="body2">
+        <Link href={`${FRONT_URL}/job/63`} className={classes.link} variant="body2">
           Programador
         </Link>
         <Divider flexItem style={{marginBottom:5}}/>
-        <Link href="#" className={classes.link} variant="body2">
+        <Link href={`${FRONT_URL}/job/4`} className={classes.link} variant="body2">
           Albañil
         </Link>
-        <Link href="#" className={classes.link} variant="body2">
-          Particular
-        </Link>
-        <Link href="#" className={classes.link} variant="body2">
+        <Link href={`${FRONT_URL}/job/44`} className={classes.link} variant="body2">
           Mecanico
         </Link>
       </Container>
