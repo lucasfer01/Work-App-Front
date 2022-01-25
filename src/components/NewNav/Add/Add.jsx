@@ -100,7 +100,7 @@ const Add = () => {
         jobs: postJobs,
       });
 
-      const email = await sendEmail(postJobs);
+      const email = await sendEmail(createPost);
      
       setOpen(false);
 
