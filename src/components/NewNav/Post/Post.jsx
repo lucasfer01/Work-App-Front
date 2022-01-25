@@ -15,6 +15,7 @@ import {
   const useStyles = makeStyles((theme) => ({
     card: {
       marginBottom: theme.spacing(5),
+      marginTop: "5%",
     },
     media: {
       height: 250,
@@ -48,7 +49,11 @@ import {
     return (
       <Card className={classes.card}>
         <CardActionArea>
+          {props.photo.length > 0? 
           <CardMedia className={classes.media} image={props.photo} title="My Post" />
+            :  <CardMedia className={classes.media} image="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FWorkingapp.jpg?alt=media&token=09c05864-0fca-4fed-8c69-e44c328b2d0e"
+           alt="img default..." />
+          }
             <Typography gutterBottom variant="h5">
               {author?.usr_username}
             </Typography>
