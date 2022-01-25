@@ -52,9 +52,9 @@ export const ProfileDetails = () => {
   function button() {
     if (user?.usr_email === email) {
       return (
-        <div>
+        <div className="boton-portada">
           <Link to={`/editprofile/${user.usr_id}`}>
-            <button type="button" className="boton-portada">
+            <button type="button">
               <BsFillGearFill /> Editar Perfil
             </button>
           </Link>
@@ -65,14 +65,16 @@ export const ProfileDetails = () => {
           >
             Editar Ubicación
           </Boton>
-          <Link to='/addjob'>
+          
             <Boton
               data-toggle="modal"
+              data-target="#addJobModal"
               colorBtn='btn_azul'
             >
               Agregar trabajo
             </Boton>
-          </Link>
+            <FormJobs />
+          
           <Link to="/email">
             <Boton colorBtn='btn_azul'
             > Crear Alerta de Empleo </Boton>
@@ -92,6 +94,7 @@ export const ProfileDetails = () => {
       <section className='seccion-perfil-usuario'>
         <div className='perfil-usuario-header'>
           <div className='perfil-usuario-portada'>
+            <img className= 'imagen-portada' src={user?.usr_banner} alt="portada"></img>
             <div className='perfil-usuario-avatar'>
               <img src={user?.usr_photo} alt="img-avatar" width="50px" />
               <button type="button" className="boton-avatar">
@@ -117,20 +120,19 @@ export const ProfileDetails = () => {
               {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
               {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
               <li>
-                <ImUsers className="icono" /> Sexo: {user?.usr_gender}
+                <ImUsers className="icono" />Sexo: {user?.usr_gender}
               </li>
               {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
               <li>
-                <ImUserTie className="icono" />
-                Cargo: {user?.usr_charge}
+                <ImUserTie className="icono" />Cargo: {user?.usr_charge}
               </li>
             </ul>
             <ul className="lista-datos">
               <li>
-                <BsGeoAlt className="icono" /> Nacionalidad: {user?.usr_country}
+                <BsGeoAlt className="icono" />País: {user?.usr_country}
               </li>
               <li>
-                <BsTelephone className="icono" /> Telefono: {user?.usr_phone}
+                <BsTelephone className="icono" />Telefono: {user?.usr_phone}
               </li>
               {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
             </ul>
