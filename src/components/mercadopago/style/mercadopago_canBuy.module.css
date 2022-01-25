@@ -1,0 +1,16 @@
+.pagoButtonCanBuy {
+    background-color: #3f51b5;
+    width: 8rem;
+    height: 3.3rem;
+    /* margin: 5rem 0 0 5rem; */
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 300;
+    transition: all .3s;
+    margin-bottom: 2rem;
+}
+
+.pagoButtonCanBuy:hover {
+    background-color: #3f51b5b0;
+    transform: scale(0.95);
+}
