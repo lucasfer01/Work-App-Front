@@ -33,6 +33,7 @@ export const FormJobs = () => {
       });
       setJobMsg("success");
       dispatch(setError("Job added successfully"));
+      window.location.reload();
     } catch (error) {
       setJobMsg("danger");
       dispatch(setError("Error en el servidor, porfavor intentelo mas tarde!"));
@@ -61,7 +62,7 @@ export const FormJobs = () => {
 
   return (
     <div>
-      <button
+      {/*       <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
@@ -69,7 +70,7 @@ export const FormJobs = () => {
         style={{ zIndex: 99999 }}
       >
         Add a job
-      </button>
+      </button> */}
 
       <div
         className="modal fade"
@@ -112,7 +113,9 @@ export const FormJobs = () => {
                   </div>
                 )}
                 {/* ---- */}
-                <label>Write and select one job</label>
+                <label style={{ color: "#000" }}>
+                  Write and select one job
+                </label>
                 <input
                   type="text"
                   name="job"
