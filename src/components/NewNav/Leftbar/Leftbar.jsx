@@ -10,6 +10,8 @@ import {
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../../actions/auth";
+// Estilos
+import navStyles from '../Styles/newNav.module.css';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,43 +69,43 @@ const Leftbar = () => {
   };
 
   return (
-    <Container className={classes.container}>
-      <div className={classes.item}>
-        <Link to="/home">
+    <Container style={{padding:'0', paddingTop: '4.0rem', backgroundColor:'#fff'}} className={classes.container}>
+      <div className={navStyles.item}>
+        <Link style={{textDecoration:'none'}} to="/home">
           <Home className={classes.icon} />
           <Typography className={classes.text}><p className={classes.parr}>Home</p>
           </Typography>
         </Link>
       </div>
-      <div className={classes.item}>
-        <Link to="/jobs">
+      <div className={navStyles.item}>
+        <Link style={{textDecoration:'none'}} to="/jobs">
           <Work className={classes.icon} />
           <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
           </Typography>
         </Link>
       </div>
-      <div className={classes.item}>
-        <Link to={`/profile/${uid}`}>
+      <div className={navStyles.item}>
+        <Link style={{textDecoration:'none'}} to={`/profile/${uid}`}>
           <Person className={classes.icon} />
           <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
           </Typography>
         </Link>
       </div>
-      <div className={classes.item}>
-        <Link to="/about">
+      <div className={navStyles.item}>
+        <Link style={{textDecoration:'none'}} to="/about">
           <Face className={classes.icon} />
           <Typography className={classes.text}><p className={classes.parr}>Nosotros</p>
           </Typography>
         </Link>
       </div>
-      <div className={classes.item}>
-        <Link to={`/upgradePlan`}>
+      <div className={navStyles.item}>
+        <Link style={{textDecoration:'none'}} to={`/upgradePlan`}>
           <ArrowUpward className={classes.icon} />
           <Typography className={classes.text}><p className={classes.parr}>Mejorar Plan</p>
           </Typography>
         </Link>
       </div>
-      <div className={classes.item}>
+      <div className={navStyles.item}>
         <ExitToApp className={classes.icon} />
         <Typography className={classes.text} onClick={handleLogout}>Logout</Typography>
       </div>
