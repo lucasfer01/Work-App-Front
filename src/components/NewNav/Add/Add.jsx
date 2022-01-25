@@ -17,10 +17,10 @@ import {
 import { Add as AddIcon } from "@material-ui/icons";
 import { useState } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
-import { postPost } from '../../../actions/formEmpleador';
+import { postPost, getPosts } from '../../../actions/formEmpleador';
 import { sendEmail } from "../../../controllers";
 import { startUploading } from "../../../helpers/imageUpload";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 import React from "react";
@@ -70,6 +70,7 @@ const Add = () => {
   const classes = useStyles();
   let { uid } = useSelector((state) => state.auth)
   const jobs = useSelector((state) => state.jobs.allJobs)
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
   const [post, setPost] = React.useState({
@@ -94,18 +95,18 @@ const Add = () => {
     e.preventDefault();
 
     try {
-      console.log('postEnc', post)
       const createPost = await postPost({
         post: post,
         jobs: postJobs,
       });
-      //const email = await sendEmail(postJobs);
-      console.log("createPost", createPost);
+
+      const email = await sendEmail(postJobs);
      
-      setOpen(false)
-      //window.location.reload(true)
+      setOpen(false);
+
       alert("Post created succesufully")
-      return createPost;
+
+      await dispatch(getPosts())
        
     } catch (e) {
       alert(e);

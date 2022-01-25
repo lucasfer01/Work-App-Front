@@ -15,7 +15,7 @@ import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
-import "./profileDetails.css";
+import "./profileDetails.css"
 import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
@@ -23,59 +23,60 @@ import Chat from "../chat/chat";
 import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import { getProfile } from "../../controllers";
-import { IMG } from "../../enviroment";
+import Feed from "../NewNav/Feed/Feed";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
-  const { userId } = useParams();
+  const { userId } = useParams()
 
-  let user = useSelector((state) => state.profile.user);
-  let { email } = useSelector((state) => state.auth);
+  let user = useSelector((state) => state.profile.user)
+  let { email } = useSelector((state) => state.auth)
   const loader = useSelector((state) => state.ui.loading);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId));
-    console.log("dispatch profile");
+    dispatch(profileUser(userId))
+    console.log("dispatch profile")
   }, []);
 
-  console.log("user", user);
-  console.log("email", email);
+  console.log("user", user)
+  console.log("email", email)
+
 
   const contactUser = () => {
     //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
-    console.log("Ver chat");
+    console.log("Ver chat")
     setViewChat(!viewChat);
-  };
+  }
 
   function button() {
     if (user?.usr_email === email) {
       return (
-        <div className="boton-portada">
+        <div>
           <Link to={`/editprofile/${user.usr_id}`}>
-            <Boton colorBtn="btn_azul" type="button">
+            <button type="button" className="boton-portada">
               <BsFillGearFill /> Editar Perfil
-            </Boton>
+            </button>
           </Link>
           <Boton
             data-toggle="modal"
             data-target="#editUbicacion"
-            colorBtn="btn_azul"
+            colorBtn='btn_azul'
           >
             Editar Ubicación
           </Boton>
-
-          <Boton
-            data-toggle="modal"
-            data-target="#addJobModal"
-            colorBtn="btn_azul"
-          >
-            Agregar trabajo
-          </Boton>
-          <FormJobs />
-
+          <Link to='/addjob'>
+            <Boton
+              data-toggle="modal"
+              colorBtn='btn_azul'
+            >
+              Agregar trabajo
+            </Boton>
+          </Link>
           <Link to="/email">
-            <Boton colorBtn="btn_azul"> Crear Alerta de Empleo </Boton>
+            <Boton colorBtn='btn_azul'
+            > Crear Alerta de Empleo </Boton>
           </Link>
           <EditUbicacion profile={user} id={userId} />
         </div>
@@ -89,34 +90,35 @@ export const ProfileDetails = () => {
   }
   return (
     <div>
-      <section className="seccion-perfil-usuario">
-        <div className="perfil-usuario-header">
-          <div className="perfil-usuario-portada">
-            <img
-              className="imagen-portada"
-              src={user?.usr_banner}
-              alt="portada"
-            ></img>
-            <div className="perfil-usuario-avatar">
-              <img src={user?.usr_photo ? user.usr_photo : IMG} alt="img-avatar" width="50px" />
+      <section className='seccion-perfil-usuario'>
+        <div className='perfil-usuario-header'>
+          <div className='perfil-usuario-portada'>
+            <div className='perfil-usuario-avatar'>
+              <img src={user?.usr_photo} alt="img-avatar" width="50px" />
+              <button type="button" className="boton-avatar">
+                <FaImage />
+              </button>
             </div>
             {button()}
 
+
+
             {viewChat && <Chat userPRofile={user} />}
+
           </div>
         </div>
-        <div className="perfil-usuario-body">
-          <div className="perfil-usuario-bio">
-            <h3 className="titulo">{user?.usr_username}</h3>
-            <p className="texto">{user?.usr_description}</p>
+        <div className='perfil-usuario-body'>
+          <div className='perfil-usuario-bio'>
+
+            <h3 className='titulo'>{user?.usr_username}</h3>
+            <p className='texto'>{user?.usr_description}</p>
           </div>
           <div className="perfil-usuario-footer">
             <ul className="lista-datos">
               {/* <li><BsHouseDoor className='icono' />Direccion de usuario:</li> */}
               {/* <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li> */}
               <li>
-                <ImUsers className="icono" />
-                Sexo: {user?.usr_gender}
+                <ImUsers className="icono" /> Sexo: {user?.usr_gender}
               </li>
               {/* <li><FaCity className='icono' /> Trabaja en:</li> */}
               <li>
@@ -126,35 +128,23 @@ export const ProfileDetails = () => {
             </ul>
             <ul className="lista-datos">
               <li>
-                <BsGeoAlt className="icono" />
-                País: {user?.usr_country}
+                <BsGeoAlt className="icono" /> Nacionalidad: {user?.usr_country}
               </li>
               <li>
-                <BsTelephone className="icono" />
-                Telefono: {user?.usr_phone}
+                <BsTelephone className="icono" /> Telefono: {user?.usr_phone}
               </li>
               {/* <li><FaRegGrinBeam className="icono" /> sociales:</li> */}
             </ul>
           </div>
           <div>
-            <Cards
-              key="job"
-              profiledata={user?.jobs}
-              profileType={"jobs"}
-            ></Cards>
+            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
           </div>
           <div>
-            <Cards
-              key="post"
-              profiledata={user?.posts}
-              profileType={"posts"}
-            ></Cards>
+            <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
             <a
-              href={
-                user?.usr_social?.linkedin ? user?.usr_social.linkedin : null
-              }
+              href={user?.usr_social?.linkedin ? user?.usr_social.linkedin : null}
               target="_blank"
               className="boton-redes linkeding"
             >
@@ -168,18 +158,14 @@ export const ProfileDetails = () => {
               <FaGithub className="icons" />
             </a>
             <a
-              href={
-                user?.usr_social?.instagram ? user?.usr_social.instagram : null
-              }
+              href={user?.usr_social?.instagram ? user?.usr_social.instagram : null}
               target="_blank"
               className="boton-redes instagram"
             >
               <FaInstagram className="icons" />
             </a>
             <a
-              href={
-                user?.usr_social?.facebook ? user?.usr_social.facebook : null
-              }
+              href={user?.usr_social?.facebook ? user?.usr_social.facebook : null}
               target="_blank"
               className="boton-redes facebook"
             >

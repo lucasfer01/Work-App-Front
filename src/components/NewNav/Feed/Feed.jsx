@@ -1,7 +1,9 @@
 import { Container, makeStyles } from "@material-ui/core";
 import Post from "../Post/Post";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Filtros from "../../Filtros/Filtros";
+import { getPosts } from "../../../actions/formEmpleador";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -10,10 +12,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Feed = () => {
+const Feed = ({profilePosts}) => {
   const classes = useStyles();
-  const posts = useSelector((state) => state.posts.filterPost);
-  console.log("feedposts", posts);
+  const dispatch = useDispatch();
+  const allPosts = useSelector((state) => state.posts.filterPost);
+  const posts = profilePosts ? profilePosts : allPosts;
+
+  useEffect(() => {
+    const getAllposts = async () => {
+      await dispatch(getPosts());
+    };
+    getAllposts();
+  }, [dispatch]);
+  
   return (
     <Container className={classes.container}>
       <Filtros />
