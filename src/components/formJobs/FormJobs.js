@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveJob } from "../../actions/formJobs";
+import { getJobs, saveJob } from "../../actions/formJobs";
 import { removeError, setError } from "../../actions/ui";
 import "./FormJobs.css";
 
@@ -53,16 +53,23 @@ export const FormJobs = () => {
     dispatch(removeError());
   };
 
+  useEffect(() => {
+    if (allJobs.length <= 0) {
+      dispatch(getJobs());
+    }
+  }, [dispatch, allJobs]);
+
   return (
     <div>
-      {/*       <button
+      <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addJobModal"
+        style={{ zIndex: 99999 }}
       >
         Add a job
-      </button> */}
+      </button>
 
       <div
         className="modal fade"

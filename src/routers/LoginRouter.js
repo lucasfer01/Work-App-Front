@@ -12,9 +12,11 @@ import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUse
 import { About } from "../components/About/About";
 
 import Messenger from "../components/Messenger/Messenger";
-import NewNav from "../components/NewNav/NewNav"
+import NewNav from "../components/NewNav/NewNav";
 
 import { FormReview } from "../components/formReview/FormReview";
+import { FormJobs } from "../components/formJobs/FormJobs";
+import { FormNewJob } from "../components/formNewJob/FormNewJob";
 import { RedirectPostpago } from "../components/mercadopago/RedirectPostpago";
 
 import { Plan } from "../components/Plan/Plan";
@@ -40,6 +42,8 @@ export const LoginRouter = () => {
           <Route path="upgradePlan/checkPayment/*" element={<RedirectPostpago />} />
 
           <Route path="test" element={<FormReview />} />
+          <Route path="test1" element={<FormJobs />} />
+          <Route path="test2" element={<FormNewJob />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>
