@@ -7,10 +7,13 @@ import {
     Tooltip,
 } from "@material-ui/core";
 import MessageIcon from '@material-ui/icons/Message';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Mensajes from '../Messenger/Mensajes/Mensajes';
 import Chat from "../Messenger/Chat/Chat";
 import "./chatWindow.css";
+import socket from "../socket";
+import ChatMessages from "./ChatMessages";
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -38,16 +41,55 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChatWindow = (props) => {
+const ChatWindow = () => {
+    const myId = useSelector(state => state.auth.uid);
     const classes = useStyles();
     const [open, setOpen] = useState(false);
-    const {chatId, myId, receiverId, receiverName, receiverPhoto} = props
+    const [openChat, setOpenChat] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [receiverUser, setReceiverUser] = useState({});
+    const [chatId, setChatId] = useState("");
     const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState({
-        sender: myId,
-        receiver: receiverId,
-        message: "",
-    });
+    console.log("userChats", users);
+    const [displayInBox, setDisplayInBox] = useState(false);
+    const [data, setData] = useState([]);
+    console.log("data chat", data);
+
+    useEffect(() => {
+        socket.emit("data", myId);
+        socket.on("data", async (data) => {
+            const newData = await data;
+            setData(newData);
+        })
+        socket.on("message", (data) => {
+            socket.emit("data", myId);
+        });
+    }, [myId]);
+
+    useEffect(() => {
+        setUsers(data?.map(chat => {
+            return {
+                chatId: chat.chat_id,
+                user: chat.users.find(u => u.usr_id !== myId)
+            }
+        }));
+        console.log("result", users)
+    }, [data]);
+
+
+    const handleOpenChat = (e, chatId, user) => {
+        e.preventDefault();
+        console.log("ids", chatId, user);
+        setChatId(chatId);
+        setReceiverUser(user);
+        setOpenChat(!openChat);
+    }
+
+    const handleDisplayInBox = (e) => {
+        e.preventDefault();
+        setOpenChat(!openChat);
+    };
+
 
     return (
         <>
@@ -57,49 +99,49 @@ const ChatWindow = (props) => {
                 </Fab>
             </Tooltip>
             <Modal open={open}>
-                
+
                 <div>
-                <Container className={classes.container}>
-                <div className='chatMenu'>
-                <div className='chatMenuWrapper'>
-                    <input placeholder='Search for Contacts' className='chatMenuInput' />
-                    <Chat />
-                    <Chat />
-                </div>
-            </div>
-                <div className='conversation'>
-            <img className='conversationImg' 
-            src="https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FDragonBall.jpg?alt=media&token=8b489b89-0177-4a73-bd52-8b1afb4ba6b3"
-            alt=""
-            />
-            <span className='conversationName'>Nahuel Cernadas</span>
-        </div>
-                    <div className='chatBox'>
-                        <div className='chatBoxWrapper'>
-                            <div className='chatBoxTop'>
-                                <Mensajes />
-                                <Mensajes />
-                                <Mensajes />
-                                <Mensajes />
-                            </div>
-                            <div className='chatBoxBottom'>
-                                <textarea className='chatMessageInput' placeholder='Write something...'></textarea>
-                                <button className='chatSubmitButton'>
-                                    Send
-                                </button>
+                    <Container className={classes.container}>
+                        <div className='chatMenu'>
+                            <div className='chatMenuWrapper'>
+                                <input placeholder='Search for Contacts' className='chatMenuInput' />
+                                {
+                                    users?.map(u => (
+                                        <button key={u.user.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                            <Chat
+                                                receiverName={u.user?.usr_username}
+                                                receiverPhoto={u.user?.usr_photo}
+                                            />
+                                        </button>
+                                    ))
+                                }
                             </div>
                         </div>
-                    </div>
-                    <div className={classes.item}>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            onClick={() => setOpen(false)}
-                        >
-                            Salir
-                        </Button>
-                    </div>
-                </Container>
+                        {
+                            openChat && (
+                                <div>
+                                    <button onClick={handleDisplayInBox}>X</button>
+                                    <ChatMessages
+                                    chatId={chatId}
+                                    myId={myId}
+                                    receiverId={receiverUser.usr_id}
+                                    receiverName={receiverUser.usr_username}
+                                    receiverPhoto={receiverUser.usr_photo}
+                                />
+
+                                </div>
+                            )
+                        }
+                        <div className={classes.item}>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={() => setOpen(false)}
+                            >
+                                Salir
+                            </Button>
+                        </div>
+                    </Container>
                 </div>
             </Modal>
         </>
