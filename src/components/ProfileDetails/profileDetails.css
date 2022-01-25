@@ -32,8 +32,8 @@
 
 .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
     position: absolute;
-    top: 100px;
-    right: 1rem;
+    top: 0px;
+    right: 8.40rem;
     border: 0;
     border-radius: 8px;
     padding: 12px 25px;

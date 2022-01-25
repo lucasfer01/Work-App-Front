@@ -3,8 +3,7 @@ export const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/henrypf/upload";
 
 
 // url base
-
-// export const BASE_URL = "https://work-app-henry.herokuapp.com/";
+//export const BASE_URL = "https://work-app-henry.herokuapp.com";
 export const BASE_URL = "http://localhost:3000";
 
 // Url de oficios
@@ -24,3 +23,9 @@ export const CHECKOUT_URL = `${BASE_URL}/checkout`;
 
 // Url postpago
 export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
+
+//img de perfil por defecto
+export const IMG = "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
+
+//default banner
+export const DEF_BANNER = "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
