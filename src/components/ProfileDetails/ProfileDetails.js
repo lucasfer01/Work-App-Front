@@ -38,7 +38,7 @@ export const ProfileDetails = () => {
   useEffect(() => {
     dispatch(profileUser(userId))
     console.log("dispatch profile")
-  }, []);
+  }, [userId, dispatch]);
 
   console.log("user", user)
   console.log("email", email)

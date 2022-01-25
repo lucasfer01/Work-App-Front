@@ -9,7 +9,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Cancel, Mail, Notifications, Search } from "@material-ui/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getJobs } from "../../actions/formJobs";
+import { profileUser } from "../../actions/profileActions";
 import { Link } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
@@ -74,6 +77,16 @@ const useStyles = makeStyles((theme) => ({
 const NewNav = () => {
   const [open, setOpen] = useState(false);
   const classes = useStyles({ open });
+  const dispatch = useDispatch();
+  const myId = useSelector((state) => state.auth.uid);
+
+  useEffect(() => {
+    const getData = async () => {
+      await dispatch(getJobs());
+      await dispatch(profileUser(myId, "own"));
+    };
+    getData();
+  }, [myId, dispatch]);
 
   return (
     <AppBar style={{position:"sticky"}}>

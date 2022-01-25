@@ -11,9 +11,7 @@ const AlertaEmpleo = () => {
 
     const [newAlert, setNewAlert] = useState("");
 
-    const [alerts, setAlerts] = useState({
-        usr_alerts: [],
-    });
+    const [alerts, setAlerts] = useState([]);
     const { uid } = useSelector((state) => state.auth);
     console.log(uid);
 
@@ -22,30 +20,25 @@ const AlertaEmpleo = () => {
     const jobs = useSelector((state) => state.jobs.allJobs);
     const jobNames = jobs.map((job) => job.job_name);
 
-    console.log("all job alerts", jobs);
-    
+    console.log("all job alerts", jobNames);
 
     useEffect(() => {
-        setAlerts({
-            usr_alerts: myAlerts,
-        });
+        setAlerts(myAlerts);
     }, [myAlerts]);
+    
+
     
     const handleChange = (e) => {
         const { value } = e.target;
-        const filteredJobs = jobNames.filter((j) => j.includes(value));
         setNewAlert(value);
+        const filteredJobs = newAlert !== "" ? jobNames.filter((j) => j.toLowerCase().includes(newAlert.toLowerCase())) : [];
         setJobList(filteredJobs);
-        console.log("filtered jobs", filteredJobs);
     };
 
     const handleAddJob = (e) => {
         e.preventDefault();
         const { value } = e.target;
-        setAlerts({
-            ...alerts,
-            usr_alerts: [...alerts.usr_alerts, value]
-        });
+        if (!alerts.includes(value)) setAlerts([...alerts, value]);
         setNewAlert("");
         setJobList([]);
     };
@@ -53,23 +46,16 @@ const AlertaEmpleo = () => {
     const handleQuitJob = (e) => {
         e.preventDefault();
         const { value } = e.target;
-        setAlerts({
-            ...alerts,
-            usr_alerts: alerts.usr_alerts.filter(p => p !== value)
-        });
+        setAlerts(alerts.filter((a) => a.toLowerCase() !== value.toLowerCase()));
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setAlerts(alerts => ({
-            usr_alerts: [...alerts.usr_alerts, newAlert]
-        }));
         const add = async () => {
-            await addAlerts(uid, alerts);
+            await addAlerts(uid, {usr_alerts: alerts});
         }
         add();
-        alert("Alertas agregadas");
         setNewAlert("");
+        
     };
 
     return (
@@ -80,17 +66,19 @@ const AlertaEmpleo = () => {
                     <input placeholder="Empleo a alertar..." onChange={handleChange} value={newAlert}/>
                     {
                         jobList?.map(job => (
-                            <div key={job.job_id}>
-                                <input type="button" value={job.job_name} onSubmit={handleAddJob} />
+                            <div key={job}>
+                                <input type="button" value={job} onClick={handleAddJob} />
                             </div>
                         ))
                     }
                     {
-                        alerts.usr_alerts?.map(alert => (
-                            <p>{alert} <button onClick={handleQuitJob}>X</button></p>
+                        alerts?.map(alert => (
+                            <p>{alert} <button value={alert} onClick={handleQuitJob}>X</button></p>
                         ))
                     }
+                    <p>
                     <button onClick={handleSubmit} > Enviar </button>
+                    </p>
                 </form>
             </div>
         </div>
