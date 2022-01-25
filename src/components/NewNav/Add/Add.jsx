@@ -96,7 +96,7 @@ const Add = () => {
 
     try {
       const createPost = await postPost({
-        post: post,
+        post: {...post, post_photo: post.post_photo.length ? post.post_photo : ['https://www.trecebits.com/wp-content/uploads/2017/07/empleo-trabajo.jpg']},
         jobs: postJobs,
       });
 
