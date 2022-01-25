@@ -12,6 +12,8 @@
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.2s;
+    margin-left: 10%;
+    margin-top: -32px;
    }
    
    .btn-detalle span {
@@ -35,7 +37,7 @@
    }
    
    .btn-detalle:hover span {
-    transform: translateX(5em);
+    transform: translateX(8em);
    }
    
    .btn-detalle:active {
