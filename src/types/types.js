@@ -12,6 +12,7 @@ export const types = {
   profileJobs: "[P] Jobs",
   profilePosts: "[P] Posts",
   editProfile: "[P] Edit",
+  ownProfile: "[P] Own",
 
   getUsers: "[U] Get Users",
   formAddJobs: "[AddJob] Add Job",

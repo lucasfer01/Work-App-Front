@@ -24,6 +24,7 @@ import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import { getProfile } from "../../controllers";
 import Feed from "../NewNav/Feed/Feed";
+import Jobs from "../Jobs/Jobs";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -74,7 +75,7 @@ export const ProfileDetails = () => {
               Agregar trabajo
             </Boton>
           </Link>
-          <Link to="/email">
+          <Link to={`/profile/${userId}/alert`}>
             <Boton colorBtn='btn_azul'
             > Crear Alerta de Empleo </Boton>
           </Link>
@@ -137,7 +138,7 @@ export const ProfileDetails = () => {
             </ul>
           </div>
           <div>
-            <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
+            {/* Aquí van los workerposts */}
           </div>
           <div>
             <Feed key="feed" profilePosts={user?.posts} />

@@ -9,6 +9,7 @@ import {
 import MessageIcon from '@material-ui/icons/Message';
 import React, { useState } from "react";
 import Mensajes from '../Messenger/Mensajes/Mensajes';
+import Chat from "../Messenger/Chat/Chat";
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -36,9 +37,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChatWindow = () => {
+const ChatWindow = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const {chatId, myId, receiverId, receiverName, receiverPhoto} = props
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState({
+        sender: myId,
+        receiver: receiverId,
+        message: "",
+    });
 
     return (
         <>
@@ -48,6 +56,8 @@ const ChatWindow = () => {
                 </Fab>
             </Tooltip>
             <Modal open={open}>
+                
+                <div>
                 <Container className={classes.container}>
                 <div className='conversation'>
             <img className='conversationImg' 
@@ -82,6 +92,7 @@ const ChatWindow = () => {
                         </Button>
                     </div>
                 </Container>
+                </div>
             </Modal>
         </>
     )

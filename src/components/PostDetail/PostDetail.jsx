@@ -133,7 +133,10 @@ export default function PostDetail() {
           </div>
        <span>Abrir Chat</span>
             </button>
-            {viewChat && <Chat receiverId={author.usr_id}/>}
+            {viewChat && <div style={{position: "sticky"}}>
+              <Chat receiverId={author.usr_id}/>
+            </div>
+}
         </>
     );
 };
