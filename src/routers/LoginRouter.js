@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/Home/Home";
+import Home from "../components/home/home";
 import { ProfileDetails } from "../components/ProfileDetails/ProfileDetails";
 import PostDetail from "../components/PostDetail/PostDetail";
 import FormEmpleador from "../components/FormEmpleador/FormEmpleador";
@@ -13,10 +13,11 @@ import { CardsProfileUser } from "../components/cardsProfileUser/CardsProfileUse
 import { About } from "../components/About/About";
 
 import Messenger from "../components/Messenger/Messenger";
-import NewNav from "../components/NewNav/NewNav"
+import NewNav from "../components/NewNav/NewNav";
 
 import { FormReview } from "../components/formReview/FormReview";
-
+import { FormJobs } from "../components/formJobs/FormJobs";
+import { FormNewJob } from "../components/formNewJob/FormNewJob";
 
 export const LoginRouter = () => {
   return (
@@ -37,6 +38,8 @@ export const LoginRouter = () => {
 
           <Route path="prueba" element={<Checkout />} />
           <Route path="test" element={<FormReview />} />
+          <Route path="test1" element={<FormJobs />} />
+          <Route path="test2" element={<FormNewJob />} />
 
           {/* {Todas las rutas privadas deben ir aquí} */}
         </Routes>

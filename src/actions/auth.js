@@ -23,7 +23,7 @@ export const startLoginEmailPassword = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         registerUserDB(user);
-        dispatch(login(user.uid, user.displayName, user.email));
+        dispatch(login(user.uid, user.displayName, user.email, user.photoURL));
         dispatch(finishLoading());
       })
       .catch((err) => {
@@ -41,7 +41,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
         console.log(user);
         await updateProfile(user, { displayName: name });
         registerUserDB(user);
-        dispatch(login(user.uid, user.displayName, user.email));
+        dispatch(login(user.uid, user.displayName, user.email, user.photoURL));
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +55,7 @@ export const startGoogleLogin = () => {
     const auth = getAuth();
     signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
       registerUserDB(user);
-      dispatch(login(user.uid, user.displayName, user.email));
+      dispatch(login(user.uid, user.displayName, user.email, user.photoURL));
     });
   };
 };
@@ -88,12 +88,13 @@ export const startResetPassword = (email) => {
   };
 };
 
-export const login = (uid, displayName, email) => ({
+export const login = (uid, displayName, email, photoURL) => ({
   type: types.login,
   payload: {
     uid,
     displayName,
     email,
+    photoURL,
   },
 });
 
