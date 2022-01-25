@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { profileUser } from "../../actions/profileActions";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
-import { FaRegGrinBeam } from "react-icons/fa";
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaCity } from "react-icons/fa";
-import { BsGeoAlt } from "react-icons/bs";
-import { BsHouseDoor } from "react-icons/bs";
+import { BsGeoAlt, BsGithub } from "react-icons/bs";
 import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
@@ -20,9 +16,7 @@ import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
-import { FormJobs } from "../formJobs/FormJobs";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
-import { getProfile } from "../../controllers";
 import Feed from "../NewNav/Feed/Feed";
 import Jobs from "../Jobs/Jobs";
 import { DEF_BANNER, IMG } from "../../enviroment";
@@ -37,16 +31,10 @@ export const ProfileDetails = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId));
-    console.log("dispatch profile");
+    dispatch(profileUser(userId))
   }, []);
 
-  console.log("user", user);
-  console.log("email", email);
-
   const contactUser = () => {
-    //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
-    console.log("Ver chat");
     setViewChat(!viewChat);
   };
 
@@ -84,9 +72,7 @@ export const ProfileDetails = () => {
         </button>
       );
   }
-  return loader ? (
-    <LoadingScreen />
-  ) : (
+  return (loader ? <LoadingScreen /> :
     <div>
       <section className="seccion-perfil-usuario">
         <div className="perfil-usuario-header">
@@ -133,40 +119,34 @@ export const ProfileDetails = () => {
             <Feed key="feed" profilePosts={user?.posts} />
           </div>
           <div className="redes-sociales">
-            <a
-              href={
-                user?.usr_social?.linkedin ? user?.usr_social.linkedin : null
-              }
+            {user.usr_social.linkedin && <a
+              href={user.usr_social.linkedin ? user.usr_social.linkedin : null}
               target="_blank"
-              className="boton-redes linkeding"
+              className="boton-redes linkeding" rel="noreferrer"
             >
-              <FaLinkedin className="icons" />
-            </a>
-            <a
+              {user.usr_social.linkedin && <FaLinkedin className="icons" />}
+            </a>}
+            {user.usr_social.github && <a
               href={user?.usr_social?.github ? user?.usr_social.github : null}
               target="_blank"
-              className="boton-redes github"
+              className="boton-redes github" rel="noreferrer"
             >
-              <FaGithub className="icons" />
-            </a>
-            <a
-              href={
-                user?.usr_social?.instagram ? user?.usr_social.instagram : null
-              }
+              <BsGithub fill="#000" className="icons" />
+            </a>}
+            {user.usr_social.instagram && <a
+              href={user.usr_social.instagram ? user.usr_social.instagram : null}
               target="_blank"
-              className="boton-redes instagram"
+              className="boton-redes instagram" rel="noreferrer"
             >
               <FaInstagram className="icons" />
-            </a>
-            <a
-              href={
-                user?.usr_social?.facebook ? user?.usr_social.facebook : null
-              }
+            </a>}
+            {user.usr_social.facebook && <a
+              href={user?.usr_social?.facebook ? user?.usr_social.facebook : null}
               target="_blank"
-              className="boton-redes facebook"
+              className="boton-redes facebook" rel="noreferrer"
             >
               <FaFacebook className="icons" />
-            </a>
+            </a>}
           </div>
         </div>
       </section>
