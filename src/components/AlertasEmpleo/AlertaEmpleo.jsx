@@ -2,8 +2,12 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { addAlerts } from '../../controllers';
+import { useEffect } from 'react';
 
 const AlertaEmpleo = () => {
+    const myAlerts = useSelector((state) => state.profile.ownProfile?.usr_alerts);
+
+    console.log("my alerts", myAlerts);
 
     const [newAlert, setNewAlert] = useState("");
 
@@ -16,12 +20,43 @@ const AlertaEmpleo = () => {
     const [jobList, setJobList] = useState([]);
 
     const jobs = useSelector((state) => state.jobs.allJobs);
+    const jobNames = jobs.map((job) => job.job_name);
+
+    console.log("all job alerts", jobs);
+    
+
+    useEffect(() => {
+        setAlerts({
+            usr_alerts: myAlerts,
+        });
+    }, [myAlerts]);
     
     const handleChange = (e) => {
         const { value } = e.target;
-        const job = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
-        setJobList(job);
+        const filteredJobs = jobNames.filter((j) => j.includes(value));
         setNewAlert(value);
+        setJobList(filteredJobs);
+        console.log("filtered jobs", filteredJobs);
+    };
+
+    const handleAddJob = (e) => {
+        e.preventDefault();
+        const { value } = e.target;
+        setAlerts({
+            ...alerts,
+            usr_alerts: [...alerts.usr_alerts, value]
+        });
+        setNewAlert("");
+        setJobList([]);
+    };
+
+    const handleQuitJob = (e) => {
+        e.preventDefault();
+        const { value } = e.target;
+        setAlerts({
+            ...alerts,
+            usr_alerts: alerts.usr_alerts.filter(p => p !== value)
+        });
     };
 
     const handleSubmit = (e) => {
@@ -46,8 +81,13 @@ const AlertaEmpleo = () => {
                     {
                         jobList?.map(job => (
                             <div key={job.job_id}>
-                                <input type="button" value={job.job_name} />
+                                <input type="button" value={job.job_name} onSubmit={handleAddJob} />
                             </div>
+                        ))
+                    }
+                    {
+                        alerts.usr_alerts?.map(alert => (
+                            <p>{alert} <button onClick={handleQuitJob}>X</button></p>
                         ))
                     }
                     <button onClick={handleSubmit} > Enviar </button>
