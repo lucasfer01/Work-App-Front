@@ -32,6 +32,8 @@ export const ProfileDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId))
+    console.log("dispatch profile")
+  }, [userId, dispatch]);
   }, []);
 
   const contactUser = () => {

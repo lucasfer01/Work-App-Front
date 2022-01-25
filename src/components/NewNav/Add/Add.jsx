@@ -95,12 +95,13 @@ const Add = () => {
     e.preventDefault();
 
     try {
-      const createPost = await postPost({
+      const newPost = {
         post: {...post, post_photo: post.post_photo.length ? post.post_photo : ['https://www.trecebits.com/wp-content/uploads/2017/07/empleo-trabajo.jpg']},
         jobs: postJobs,
-      });
+      }
+      const createPost = await postPost(newPost);
 
-      const email = await sendEmail(createPost);
+      const email = await sendEmail(newPost);
      
       setOpen(false);
 
