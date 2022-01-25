@@ -18,6 +18,10 @@ export const getPosts = async () => {
     // Retornamos el resultado
     return data;
 
+
+    // axios.get(POST_URL)
+    // .then(resultado => {return resultado.data})
+
     // return [
     //     {
     //         post_id: 1,
@@ -91,8 +95,8 @@ export const getPostDetail = async (id) => {
 
 export const getProfile = async (userId) => {
     try {
-        const { data } = await axios.get(`${POST_USER}/${userId}`)
-        return data;
+        const data = await axios.get(`${POST_USER}/${userId}`);
+        return data;   
     } catch (error) {
         console.log(error);
     }

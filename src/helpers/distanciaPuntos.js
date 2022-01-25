@@ -11,41 +11,31 @@ function haversine_distance(mk1, mk2) {
     return d;
   }
 
-function Ascendente (a, b){
-  var A = a.distancia; 
-  var B = b.distancia; 
-  if (A<B) return -1; 
-  if (A>B) return 1; 
-  return 0; 
-}
-
-function Descendente (a, b){
-  var A = a.distancia; 
-  var B = b.distancia; 
-  if (A>B) return -1; 
-  if (A<B) return 1; 
-  return 0; 
-}
-
-
-
-export default function OrdenadorDistancia(arreglo, usuario, orden){
+export default function OrdenadorDistancia(arreglo, usuario, maximo){
   var miUbicacion = usuario.usr_location; 
 
-  var postUbicacion = arreglo.map(post => {
+  var postUbicacion =  arreglo.map( post => {
     return {
-      perfil: getProfile(post.usr_id),
+      perfil: {},
       post: post, 
       distancia: 0,
     }
   })
+  
+  async function llamarPerfil (){
+    for(let ii = 0; ii < postUbicacion.length; ii++){
+      const profile = await getProfile(postUbicacion[ii].post.usr_id)
+      postUbicacion[ii].perfil = profile.data; 
+    }
+    postUbicacion.forEach(element => {
+      var suUbicacion =  element.perfil.usr_location; 
+      if (suUbicacion){ element.distancia = haversine_distance(miUbicacion, suUbicacion)}
+      else {element.distancia = 60}
+    }); 
+    return postUbicacion.filter(elemento => {return elemento.distancia <= parseInt(maximo)}); 
+  }
 
-  postUbicacion.forEach(element => {
-    var suUbicacion = element.perfil.usr_location; 
-    if (suUbicacion){ element.distancia = haversine_distance(miUbicacion, suUbicacion)}
-    else {element.distancia = 1000}
-  });
-
-  if(orden === 'Ascendente')return postUbicacion.sort(Ascendente);
-  else {return postUbicacion.sort(Descendente)} 
+  return llamarPerfil(); 
 }
+
+// postUbicacion.filter(post=>post.distancia <= maximo)
