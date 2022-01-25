@@ -76,7 +76,7 @@ const NewNav = () => {
   const classes = useStyles({ open });
 
   return (
-    <AppBar style={{ position: "sticky", top: 0 }}>
+    <AppBar style={{ position: "sticky"}}>
       <Toolbar className={classes.toolbar}>
         <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
