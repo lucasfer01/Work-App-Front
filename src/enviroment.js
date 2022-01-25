@@ -26,3 +26,6 @@ export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
 
 //img de perfil por defecto
 export const IMG = "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
+
+//default banner
+export const DEF_BANNER = "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
