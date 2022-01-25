@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 // Actions
 import { finishLoading, startLoading } from '../../actions/ui'; // ui.loading
+import ChatMessages from "../ChatWindow/ChatMessages";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostDetail() {
   const classes = useStyles();
+  const myId = useSelector(state => state.auth.uid);
   const [post, setPost] = useState([]);
   const [authorId, setAuthorId] = useState([]);
   const [author, setAuthor] = useState({});
@@ -150,7 +152,16 @@ export default function PostDetail() {
         </div>
         <span>Abrir Chat</span>
       </button>
-      {viewChat && <Chat receiverId={author.usr_id} />}
+      {
+      viewChat && (
+        <ChatMessages
+        myId={myId}
+        receiverId={authorId}
+        receiverName={author.usr_username}
+        receiverPhoto={author.usr_photo}
+        />
+      )
+      }
     </>
   );
 };
