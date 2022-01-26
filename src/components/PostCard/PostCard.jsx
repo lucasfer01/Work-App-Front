@@ -6,7 +6,7 @@ import { getProfile } from "../../controllers";
 export default function PostCard(props) {
     const authorId = props.authorId;
     const [author, setAuthor] = useState({});
-    console.log("authorId", authorId);
+
     useEffect(() => {
         getProfile(authorId).then(res => {
             setAuthor(res);

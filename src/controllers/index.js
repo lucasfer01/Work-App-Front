@@ -95,7 +95,7 @@ export const getPostDetail = async (id) => {
 
 export const getProfile = async (userId) => {
     try {
-        const data = await axios.get(`${POST_USER}/${userId}`);
+        const {data} = await axios.get(`${POST_USER}/${userId}`);
         return data;   
     } catch (error) {
         console.log(error);

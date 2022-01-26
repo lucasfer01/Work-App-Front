@@ -64,6 +64,8 @@ const Post = (props) => {
     });
   }, [authorId]);
 
+  console.log("author", author)
+
   const handleDetails = () => {
     navigate(`/post/${props.id}`);
   }

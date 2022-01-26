@@ -2,7 +2,6 @@ import React from 'react';
 import "./chat.css";
 import {IMG} from "../../../enviroment"
 
-
 const Chat = ({receiverName, receiverPhoto}) => {
     let photo = receiverPhoto ? receiverPhoto : IMG;
 
