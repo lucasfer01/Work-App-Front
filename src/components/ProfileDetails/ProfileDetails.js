@@ -144,10 +144,13 @@ export const ProfileDetails = () => {
               </li>
             </ul>
           </div>
+          {/* <div> */}
+          {/* <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards> */}
+          {/* </div> */}
           <div>{/* Aquí van los workerposts */}</div>
               <div>
-                <button onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</button>
-                <button onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</button>
+                <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Boton>
+                <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Boton>
               </div>
           <div>
             {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}
@@ -203,9 +206,9 @@ export const ProfileDetails = () => {
         </div>
       </section>
       
-      <div>
+      <Boton colorBtn="btn_azul">
         <Link to='/create-workerpost'>Crear Workerpost</Link>
-      </div>
+      </Boton>
     </div>
   );
 };
