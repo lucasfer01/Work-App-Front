@@ -89,6 +89,8 @@ const NewNav = () => {
     getData();
   }, [myId, dispatch]);
 
+  
+
   const profile = useSelector((state) => state.profile.ownProfile)
 
   const profileAvatar = () =>{

@@ -21,10 +21,12 @@ import Feed from "../NewNav/Feed/Feed";
 import Jobs from "../Jobs/Jobs";
 import { DEF_BANNER, IMG } from "../../enviroment";
 import { FormJobs } from "../formJobs/FormJobs";
+import ChatMessages from "../ChatWindow/ChatMessages";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
   const { userId } = useParams();
+  const myId = useSelector((state) => state.auth.uid);
 
   let user = useSelector((state) => state.profile.user);
   let { email } = useSelector((state) => state.auth);
@@ -101,8 +103,16 @@ export const ProfileDetails = () => {
               />
             </div>
             {button()}
-
-            {viewChat && <Chat userPRofile={user} />}
+            {
+            viewChat && (
+              <ChatMessages
+                myId={myId}
+                receiverId={user.usr_id}
+                receiverName={user.usr_name}
+                receiverPhoto={user.usr_photo}
+                />
+            )
+            }
           </div>
         </div>
         <div className="perfil-usuario-body">
