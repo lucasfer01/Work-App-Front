@@ -12,6 +12,7 @@ import Mensajes from '../Messenger/Mensajes/Mensajes';
 import Chat from "../Messenger/Chat/Chat";
 import "./chatWindow.css";
 import socket from "../socket";
+import {IMG} from "../../enviroment"
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -48,6 +49,7 @@ const ChatMessages = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const { chatId, myId, receiverId, receiverName, receiverPhoto } = props
+    let photo = receiverPhoto ? receiverPhoto : IMG;
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState({
         sender: myId,
@@ -93,7 +95,7 @@ const ChatMessages = (props) => {
         <div className="chat-messages">
             <div className='conversation'>
                 <img className='conversationImg'
-                    src={receiverPhoto}
+                    src={photo}
                     alt=""
                 />
                 <span className='conversationName'>{receiverName}</span>

@@ -1,5 +1,8 @@
-.conversation{
-    margin-top: -125px;
+
+.conversation {
+    position: relative;
+    left: 160px;
+    width: calc(100% - 160px);
 }
 
 .chat-header {
@@ -21,6 +24,36 @@
 }
 
 .chatWindow {
-    background-color: red;
+    background-color: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30em;
 }
+
+.caja {
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+.closechat {
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: #dc2f02;
+    color: whitesmoke;
+    width: 60px;
+    height: 40px;
+    border-radius: 30%;
+
+    transition: 0.7s;
+}
+
+.closechat:hover {
+    background-color: #6a040f;
+}
+
+
+
+
 
