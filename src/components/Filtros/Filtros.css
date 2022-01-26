@@ -3,7 +3,7 @@
     background-color: #3f51b5;
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     height: 55px;
     margin-left: -26px;
     margin-top: -80px;
@@ -38,4 +38,12 @@
         width: 115%;
         margin-top: -80px;
     }
+}
+
+.div-oficio{
+    margin-right: 20%;
+}
+
+.div-oficio input {
+    height: 20px;
 }
