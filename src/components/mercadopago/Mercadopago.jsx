@@ -30,9 +30,9 @@ export default function Checkout() {
             const { usr_plan } = user.data;
 
             // Verifiacmos el plan del usuario
-            if(usr_plan === 'free') { // Si el plan del usuario es free...
+            if(usr_plan === 'premium') { // Si el plan del usuario es free...
                 // Seteamos el estado de setCanBuy a true
-                setCanBuy(true);
+                setCanBuy(false);
             }
         })
     },[])
