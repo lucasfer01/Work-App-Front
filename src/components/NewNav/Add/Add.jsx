@@ -181,7 +181,6 @@ const Add = () => {
   const handleDeletePhoto = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    console.log("photo:", value);
     setPost({
       ...post,
       post_photo: post.post_photo.filter(p => p !== value)

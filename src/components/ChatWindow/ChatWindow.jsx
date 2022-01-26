@@ -16,17 +16,12 @@ import socket from "../socket";
 import ChatMessages from "./ChatMessages";
 
 const useStyles = makeStyles((theme) => ({
-    fab: {
-        position: "fixed",
-        bottom: "840px",
-        right: "12%",
-        color: "#fff",
-        backgroundColor: "#3f51b5",
-    },
     container: {
+        display: "flex",
+        flexDirection: "row-reverse",
         width: 1000,
         height: 800,
-        backgroundColor: "white",
+        backgroundColor: "none",
         position: "absolute",
         top: 0,
         bottom: 0,
@@ -96,55 +91,49 @@ const ChatWindow = () => {
     return (
         <>
             <Tooltip title="messenger" aria-label="chat" onClick={() => setOpen(true)}>
-                <Fab color="primary" className={classes.fab}>
-                    <MessageIcon />
-                </Fab>
+                <MessageIcon />
             </Tooltip>
             <Modal open={open}>
-
-                <div>
                     <Container className={classes.container}>
                         <div className='chatMenu'>
                             <div className='chatMenuWrapper'>
-                                <input placeholder='Search for Contacts' className='chatMenuInput' />
-                                {
-                                    users?.map(u => (
-                                        <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
-                                            <Chat
-                                                receiverName={u.user?.usr_username}
-                                                receiverPhoto={u.user?.usr_photo}
-                                            />
-                                        </button>
-                                    ))
-                                }
+                                <div className="chat-header">
+                                    <input placeholder='Search for Contacts' className='chatMenuInput' />
+                                    <button onClick={() => setOpen(false)}>
+                                        X
+                                    </button>
+                                </div>
+                                <div className='chatMenuList'>
+                                    {
+                                        users?.map(u => (
+                                            <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                                <Chat
+                                                    receiverName={u.user?.usr_username}
+                                                    receiverPhoto={u.user?.usr_photo}
+                                                />
+                                            </button>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
-                        {
-                            openChat && (
-                                <div>
-                                    <button onClick={handleDisplayInBox}>X</button>
-                                    <ChatMessages
-                                    chatId={chatId}
-                                    myId={myId}
-                                    receiverId={receiverUser.usr_id}
-                                    receiverName={receiverUser.usr_username}
-                                    receiverPhoto={receiverUser.usr_photo}
-                                />
-
-                                </div>
-                            )
-                        }
-                        <div className={classes.item}>
-                            <Button
-                                variant="outlined"
-                                color="secondary"
-                                onClick={() => setOpen(false)}
-                            >
-                                Salir
-                            </Button>
+                        <div className='chatWindow'>
+                            {
+                                openChat && (
+                                    <div className="caja">
+                                        <button onClick={handleDisplayInBox}>X</button>
+                                        <ChatMessages
+                                            chatId={chatId}
+                                            myId={myId}
+                                            receiverId={receiverUser.usr_id}
+                                            receiverName={receiverUser.usr_username}
+                                            receiverPhoto={receiverUser.usr_photo}
+                                        />
+                                    </div>
+                                )
+                            }
                         </div>
                     </Container>
-                </div>
             </Modal>
         </>
     )

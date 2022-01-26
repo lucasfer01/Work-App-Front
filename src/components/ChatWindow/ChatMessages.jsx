@@ -7,7 +7,7 @@ import {
     Tooltip,
 } from "@material-ui/core";
 import MessageIcon from '@material-ui/icons/Message';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Mensajes from '../Messenger/Mensajes/Mensajes';
 import Chat from "../Messenger/Chat/Chat";
 import "./chatWindow.css";
@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     item: {
         marginBottom: theme.spacing(3),
     },
+    messagesWindow: {
+        height: "63vh",
+        overflowY: "scroll",
+    }
 }));
 
 
@@ -50,6 +54,7 @@ const ChatMessages = (props) => {
         receiver: receiverId,
         message: "",
     });
+    const divRef = useRef(null)
 
     useEffect(() => {
         socket.emit("register", myId);
@@ -64,6 +69,10 @@ const ChatMessages = (props) => {
             setMessages(messages => [...messages, data]);
         });
     }, [chatId]);
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const handleChange = (e) => {
         setNewMessage({
@@ -91,7 +100,7 @@ const ChatMessages = (props) => {
             </div>
             <div className='chatBox'>
                 <div className='chatBoxWrapper'>
-                    <div className='chatBoxTop'>
+                    <div className={classes.messagesWindow}>
                         {
                             messages?.map(message => (
                                 <Mensajes
@@ -101,6 +110,7 @@ const ChatMessages = (props) => {
                                 />
                             ))
                         }
+                        <div ref={divRef}></div>
                     </div>
                     <div className='chatBoxBottom'>
                         <textarea onChange={handleChange} className='chatMessageInput' placeholder='Write something...'></textarea>

@@ -1,3 +1,26 @@
 .conversation{
     margin-top: -125px;
 }
+
+.chat-header {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.chat-header > button {
+    background-color: #6a040f;
+    color: whitesmoke;
+    width: 60px;
+    border-radius: 10px;
+    transition: 0.7s;
+}
+
+.chat-header > button:hover {
+    background-color: #dc2f02;
+}
+
+.chatWindow {
+    background-color: red;
+}
+

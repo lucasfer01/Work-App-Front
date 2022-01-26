@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NewNav = () => {
   const [open, setOpen] = useState(false);
+  const [displayNotifications, setDisplayNotifications] = useState(false);
   const classes = useStyles({ open });
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.auth.uid);
@@ -116,13 +117,19 @@ const NewNav = () => {
 
   const profile = useSelector((state) => state.profile.ownProfile)
 
-  const profileAvatar = () =>{
+  const profileAvatar = () => {
     //window.location.href= `/profile/${profile?.usr_id}` ? `/profile/${profile.usr_id}` : null 
     naviagte(`/profile/${profile?.usr_id}`)
   }
 
+  const handleDisplayNotifications = (e) => {
+    e.preventDefault();
+    setDisplayNotifications(!displayNotifications);
+  }
+
   return (
-    <AppBar style={{position:"sticky"}}>
+    <div>
+      <AppBar style={{ position: "sticky" }}>
       <Toolbar className={classes.toolbar}>
         <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
@@ -142,22 +149,31 @@ const NewNav = () => {
             className={classes.searchButton}
             onClick={() => setOpen(true)}
           />
-           <ChatWindow />
           <Badge badgeContent={4} color="secondary" className={classes.badge}>
-            {/* <Mail /> */}
+            <ChatWindow />
           </Badge>
-          <Badge badgeContent={2} color="secondary" className={classes.badge}>
-            <Notifications />
-          </Badge>
+          <button onClick={handleDisplayNotifications}>
+            <Badge badgeContent="!" color="secondary" className={classes.badge}>
+              <Notifications />
+            </Badge>
+          </button>
           <button onClick={profileAvatar}>
             <Avatar
-            alt="Full stack"
-            src={profile?.usr_photo? profile.usr_photo : IMG }
+              alt="Full stack"
+              src={profile?.usr_photo ? profile.usr_photo : IMG}
             />
-            </button>
+          </button>
         </div>
       </Toolbar>
     </AppBar>
+      {
+          displayNotifications && (
+            <div style={{position: "fixed", right: "30px", zIndex: "100"}}>
+              <Notification />
+            </div>
+          )
+        }
+    </div>
   );
 };
 
