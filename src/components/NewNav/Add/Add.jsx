@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: 500,
-    height: 700,
+    height: 800,
     backgroundColor: "white",
     position: "absolute",
     top: 0,
