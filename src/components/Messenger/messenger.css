@@ -6,7 +6,10 @@
 .chatMenu {
     display: flex;
     flex-direction: row-reverse;
+    background-color: whitesmoke;
+    height: 100%;
 }
+
 
 .chatMenuInput{
     width: 90%;
@@ -17,15 +20,13 @@
 
 .chatBox{
     display: flex;
-    margin-top: 35px;
 }
 
 .chatBoxWrapper{
     padding: 10px;
     height: 100%;
-    width: 45%;
-    margin-top: -11px;
-    width: 50%;
+    width: 100%;
+    background-color: whitesmoke;
 }
 
 .chatBoxTop{
@@ -61,12 +62,13 @@
     flex: 3;
 }
 
+
+
 .chatMenuWrapper,
-.chatBoxWrapper,
 .chatOnlineWrapper {
   padding: 10px;
   height: 100%;
-  width: 50%;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {

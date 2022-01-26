@@ -7,11 +7,11 @@ const Notification = ({post, jobs}) => {
         <div className={'message'}>
             <div className='messageTop'>
                 <img className='messageImg'
-                src={post.post_photo[0]}
+                src={post?.post_photo[0]}
                 alt=""
                 />
-                <p className='messageText'>Alguien necesita {jobs[0]}</p>
-                <p className='messageText'>{post.post_title}</p>
+                <p className='messageText'>Alguien necesita </p>
+                <p className='messageText'>{post?.post_title}</p>
             </div>
             <div className='messageBottom'>post.createdAt</div>
         </div>
