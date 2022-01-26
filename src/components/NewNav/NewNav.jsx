@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getJobs } from "../../actions/formJobs";
 import { profileUser } from "../../actions/profileActions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
 import { IMG } from '../../enviroment'
@@ -83,14 +83,15 @@ const NewNav = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState([]);
   const [unreadNotifications, setUnreadNotifications] = useState([]);
+  const naviagte = useNavigate();
 
   console.log("unreadmess", unreadMessages);
   console.log("unreadnot", unreadNotifications);
 
   useEffect(() => {
     const getData = async () => {
-      await dispatch(getJobs());
       await dispatch(profileUser(myId, "own"));
+      await dispatch(getJobs());
     };
     getData();
   }, [myId, dispatch]);
@@ -99,17 +100,14 @@ const NewNav = () => {
     socket.emit("register", myId);
     socket.on("unread-messages", (data) => {
       setUnreadMessages(data);
-      console.log("unreadmess1", unreadMessages);
     })
     socket.on("unread-notifications", (data) => {
       setUnreadNotifications(data);
-      console.log("unreadnot1", unreadNotifications);
     })
     socket.on("new-post", async (data) => {
       const res = await data;
       setNotifications([...notifications, res]);
     });
-
     return () => {
       socket.emit("unregister", myId);
     };
@@ -119,7 +117,8 @@ const NewNav = () => {
   const profile = useSelector((state) => state.profile.ownProfile)
 
   const profileAvatar = () =>{
-    window.location.href= `/profile/${profile?.usr_id}` ? `/profile/${profile.usr_id}` : null 
+    //window.location.href= `/profile/${profile?.usr_id}` ? `/profile/${profile.usr_id}` : null 
+    naviagte(`/profile/${profile?.usr_id}`)
   }
 
   return (

@@ -17,7 +17,7 @@ import NewNav from "../NewNav/NewNav";
 import ChatWindow from "../ChatWindow/ChatWindow";
 import Jobs from "../Jobs/Jobs";
 // Components
-import {LoadingScreen} from '../loadingScreen/LoadingScreen';
+import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 // import socket from "../socket";
 
 // import { Link } from 'react-router-dom';
@@ -40,21 +40,18 @@ export default function Home() {
   const loader = useSelector(state => state.ui.loading);
   const ownProfile = useSelector((state) => state.profile.ownProfile);
   const jobs = useSelector((state) => state.jobs.allJobs);
+  let location = window.location.pathname;
 
-  console.log("all jobs",jobs);
-  console.log("my profile", ownProfile);
-let location = window.location.pathname;
-
-useEffect(() => {
-  if (location === "/home") {
-    setType("posts");
-  } else if (location === "/jobs") {
-    setType("jobs");
-  }
-}, [location]);
+  useEffect(() => {
+    if (location === "/home") {
+      setType("posts");
+    } else if (location === "/jobs") {
+      setType("jobs");
+    }
+  }, [location]);
 
 
-  return (loader ? <LoadingScreen/> :
+  return (loader ? <LoadingScreen /> :
     <div>
       <Grid container>
         <Grid item sm={2} xs={2}>
