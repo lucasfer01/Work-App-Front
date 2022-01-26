@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BASE_URL } from '../../enviroment'
 import { useEffect } from "react";
 import { getUsers } from "../../actions/getUsers";
+import Leftbar from "../NewNav/Leftbar/Leftbar";
 
 export const About = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,9 @@ export const About = () => {
 const admins = Allusers.filter((u) => u.usr_role === "admin")
 
     return (
-        <div className="container-fluid">
-          <div className="row">
+        <div className="container-fluid2">
+          <div className="row2">
+          <Leftbar/>
             {admins?.map((userData) => (
               <CardProfileUser
                 key={userData.usr_id}

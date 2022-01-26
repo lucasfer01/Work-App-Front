@@ -18,8 +18,10 @@ import ChatMessages from "./ChatMessages";
 const useStyles = makeStyles((theme) => ({
     fab: {
         position: "fixed",
-        bottom: "22px",
-        right: "7%",
+        bottom: "840px",
+        right: "12%",
+        color: "#fff",
+        backgroundColor: "#3f51b5",
     },
     container: {
         width: 1000,
@@ -94,7 +96,7 @@ const ChatWindow = () => {
     return (
         <>
             <Tooltip title="messenger" aria-label="chat" onClick={() => setOpen(true)}>
-                <Fab color="secondary" className={classes.fab}>
+                <Fab color="primary" className={classes.fab}>
                     <MessageIcon />
                 </Fab>
             </Tooltip>
