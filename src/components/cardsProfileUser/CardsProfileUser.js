@@ -14,13 +14,13 @@ export const CardsProfileUser = () => {
     axios
       .get(`${JOB_URL}/${jobId}`)
       .then((res) => {
-        setUsers(res.data.users);
+        setUsers(res.data.users.sort((a,b) => a.usr_relevanceScore - b.usr_relevanceScore).reverse());
         setJob(res.data);
       })
       .catch((error) => console.log(error));
   }, [jobId]);
 
-  console.log("users", users, "job", job);
+  console.log('user', users)
 
   return (
     <div className="container-fluid">
