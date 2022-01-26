@@ -19,6 +19,8 @@ import newNavStyles from './Styles/newNav.module.css';
 import { IMG } from '../../enviroment'
 import { SearchBar } from "../SearchBar/SearchBar";
 import ChatWindow from "../ChatWindow/ChatWindow";
+import socket from "../socket";
+import Notification from "../Messenger/Notification/Notification";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -78,6 +80,7 @@ const NewNav = () => {
   const classes = useStyles({ open });
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.auth.uid);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -85,7 +88,13 @@ const NewNav = () => {
       await dispatch(profileUser(myId, "own"));
     };
     getData();
+    socket.emit("register", myId);
+    socket.on("new-post", async (data) => {
+      const res = await data;
+      setNotifications([...notifications, res]);
+    });
   }, [myId, dispatch]);
+
 
   
 
