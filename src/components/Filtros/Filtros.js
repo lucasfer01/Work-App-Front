@@ -40,7 +40,7 @@ export default function Filtros({}){
         else {dispatch(setFilters(Filtrado(storePosts, filtro)))}
         }
         setear();
-        console.log("filtro aplicado", filtro); 
+        // console.log("filtro aplicado", filtro); 
     },[filtro, storePosts])
 
 
@@ -61,7 +61,7 @@ export default function Filtros({}){
       };
     const selectJob = (value) => {
         setFormValues({ ...formValues, job: value.job_name, id: value.job_id });
-        console.log("oficio", value.job_id)
+        // console.log("oficio", value.job_id)
         setFiltro({...filtro, oficio: value.job_id})
         setHideList(true);
     };
