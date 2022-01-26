@@ -17,6 +17,8 @@ import { Link } from "react-router-dom";
 // Estilos
 import newNavStyles from './Styles/newNav.module.css';
 import { IMG } from '../../enviroment'
+import { SearchBar } from "../SearchBar/SearchBar";
+import ChatWindow from "../ChatWindow/ChatWindow";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -39,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
     borderRadius: theme.shape.borderRadius,
     width: "50%",
     [theme.breakpoints.down("sm")]: {
@@ -109,8 +107,8 @@ const NewNav = () => {
           WORKING
         </Typography>
         <div className={classes.search}>
-          <Search />
-          <InputBase placeholder="Search..." className={classes.input} />
+          <SearchBar />
+          {/* <InputBase placeholder="Search..." className={classes.input} /> */}
           <Cancel className={classes.cancel} onClick={() => setOpen(false)} />
         </div>
         <div className={classes.icons}>
@@ -118,8 +116,9 @@ const NewNav = () => {
             className={classes.searchButton}
             onClick={() => setOpen(true)}
           />
+           <ChatWindow />
           <Badge badgeContent={4} color="secondary" className={classes.badge}>
-            <Mail />
+            {/* <Mail /> */}
           </Badge>
           <Badge badgeContent={2} color="secondary" className={classes.badge}>
             <Notifications />
