@@ -26,6 +26,9 @@ export const CHECKOUT_URL = `${BASE_URL}/checkout`;
 // Url postpago
 export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
 
+// Url Workerpost
+export const WORKERPOST_URL = `${BASE_URL}/workerpost`;
+
 //img de perfil por defecto
 export const IMG = "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
 

@@ -20,6 +20,7 @@ import { RedirectPostpago } from "../components/mercadopago/RedirectPostpago";
 
 import { Plan } from "../components/Plan/Plan";
 import { EditarPost } from "../components/EditarPost&Workerpost/EditarPost";
+import { FormWorkerpost } from "../components/FormWorkerpost/FormWorkerpost";
 
 
 export const LoginRouter = () => {
@@ -41,6 +42,7 @@ export const LoginRouter = () => {
           <Route path="upgradePlan" element={<Plan />} />
           <Route path="upgradePlan/checkPayment/*" element={<RedirectPostpago />} />
           <Route path="editPost/:postId" element={<EditarPost />} />
+          <Route path="create-workerpost" element={<FormWorkerpost />} />
 
           <Route path="test" element={<FormReview />} />
           <Route path="test2" element={<FormNewJob />} />
