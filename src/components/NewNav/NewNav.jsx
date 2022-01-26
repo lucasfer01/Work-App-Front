@@ -83,6 +83,11 @@ const NewNav = () => {
   const dispatch = useDispatch();
   const myId = useSelector((state) => state.auth.uid);
   const [notifications, setNotifications] = useState([]);
+  const [unreadMessages, setUnreadMessages] = useState([]);
+  const [unreadNotifications, setUnreadNotifications] = useState([]);
+
+  console.log("unreadmess", unreadMessages);
+  console.log("unreadnot", unreadNotifications);
 
   useEffect(() => {
     const getData = async () => {
@@ -90,15 +95,28 @@ const NewNav = () => {
       await dispatch(profileUser(myId, "own"));
     };
     getData();
+  }, [myId, dispatch]);
+
+  useEffect(() => {
     socket.emit("register", myId);
+    socket.on("unread-messages", (data) => {
+      setUnreadMessages(data);
+      console.log("unreadmess1", unreadMessages);
+    })
+    socket.on("unread-notifications", (data) => {
+      setUnreadNotifications(data);
+      console.log("unreadnot1", unreadNotifications);
+    })
     socket.on("new-post", async (data) => {
       const res = await data;
       setNotifications([...notifications, res]);
     });
-  }, [myId, dispatch]);
 
+    return () => {
+      socket.emit("unregister", myId);
+    };
+  }, [myId, notifications]);
 
-  
 
   const profile = useSelector((state) => state.profile.ownProfile)
 
