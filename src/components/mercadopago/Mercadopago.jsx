@@ -15,7 +15,7 @@ import spinner from './assets/loading-buffering.gif';
 
 export default function Checkout() {
     // Estados
-    const [canBuy, setCanBuy] = useState(false);
+    const [canBuy, setCanBuy] = useState(true);
     const [loader, setLoader] = useState(false);
     
     // Seleccionamos el id del estado global
