@@ -202,7 +202,10 @@ export const ProfileDetails = () => {
           </div>
         </div>
       </section>
-
+      
+      <div>
+        <Link to='/create-workerpost'>Crear Workerpost</Link>
+      </div>
     </div>
   );
 };
