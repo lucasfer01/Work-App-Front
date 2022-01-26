@@ -107,7 +107,7 @@ const ChatWindow = () => {
                                 <input placeholder='Search for Contacts' className='chatMenuInput' />
                                 {
                                     users?.map(u => (
-                                        <button key={u.user.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                        <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
                                             <Chat
                                                 receiverName={u.user?.usr_username}
                                                 receiverPhoto={u.user?.usr_photo}

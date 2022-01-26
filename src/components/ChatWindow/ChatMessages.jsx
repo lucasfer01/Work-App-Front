@@ -75,6 +75,7 @@ const ChatMessages = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessages(messages => [...messages, newMessage]);
+        console.log("newMessage", newMessage);
         socket.emit("message", newMessage);
     }
 
