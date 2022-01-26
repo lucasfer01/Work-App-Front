@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 import React from "react";
+import socket from "../../socket";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -101,7 +102,16 @@ const Add = () => {
       }
       const createPost = await postPost(newPost);
 
-      const email = await sendEmail(newPost);
+      const toSend = {
+        post: createPost,
+        jobs: postJobs,
+      }
+
+      console.log("toSend", toSend)
+
+      const email = await sendEmail(toSend);
+
+      socket.emit("new-post", toSend);
      
       setOpen(false);
 
