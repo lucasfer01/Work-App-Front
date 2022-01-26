@@ -29,7 +29,7 @@ export default function JobCard(props) {
     return (
         <Card className={classes.card}>
               <CardActionArea>
-              <CardMedia className={classes.media} image="https://cursosvirtualesgratis.com/wp-content/uploads/2020/09/donde-aprender-carpinteria-cursos-de-carpinteria.jpg" 
+              <CardMedia className={classes.media} image={props.photo} 
               title="My Post" />
               <Link to={`/job/${props.id}`}>
               <Typography gutterBottom variant="h5">
