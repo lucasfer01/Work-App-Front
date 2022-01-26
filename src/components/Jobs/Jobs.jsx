@@ -31,6 +31,7 @@ export default function Jobs() {
                             id={job.job_id}
                             name={job.job_name}
                             description={job.job_description}
+                            photo={job.job_photo}
                         />
                     );
                 })
