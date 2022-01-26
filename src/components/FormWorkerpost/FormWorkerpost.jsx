@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // Loader gif
 import spinner from './assets/loading-buffering.gif';
+import Boton from '../Boton/Boton';
 
 export function FormWorkerpost() {
     // workerpost
@@ -99,7 +100,7 @@ export function FormWorkerpost() {
         </div>) : ''}
 
         <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', flexDirection:'column'}}>
-            <button onClick={() => setLoader(true)} type='submit'>Crear Workerpost</button>
+            <Boton colorBtn="btn_azul" onClick={() => setLoader(true)} type='submit'>Crear Workerpost</Boton>
             {loader && <img src={spinner} width='16px' alt='loader'/>}
         </div>
     </form>;
