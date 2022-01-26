@@ -5,6 +5,8 @@ import { editProfile, profileUser } from "../../../actions/profileActions";
 import { startUploading } from "../../../helpers/imageUpload";
 import Boton from "../../Boton/Boton";
 import { countries } from "./countries";
+import "./editProfile.css";
+
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -129,13 +131,14 @@ export function EditProfile() {
 
   return (
     <div>
-      <form>
+      <form className="form-register">
         <div>
           <h2>Editar Perfil</h2>
         </div>
         <div>
           <label>Username</label>
           <input
+            className="controls"
             name="usr_username"
             type="text"
             value={updatedUser.usr_username ? updatedUser.usr_username : ""}
@@ -144,17 +147,16 @@ export function EditProfile() {
         </div>
         <div className="formEmpleado_foto">
           <label>Foto de perfil</label>
-          <input type="file" onChange={handleChangePhoto} />
+          <input className="controls" type="file" onChange={handleChangePhoto} />
           <Boton colorBtn="btn_azul" onClick={handleAddPhoto}>
             Añadir
           </Boton>
           <div className="formEmpleado_fotos">
-            |
             {updatedUser.usr_photo?.length > 0 &&
               updatedUser.usr_photo.map((photo, i) => {
                 return (
                   <div key={i} className="boxfoto">
-                    <input type="image" src={photo} alt="img not found" />
+                    <input className="controls" type="image" src={photo} alt="img not found" />
                     <button value={photo} onClick={handleDeletePhoto}>
                       X
                     </button>
@@ -165,17 +167,16 @@ export function EditProfile() {
         </div>
         <div className="formEmpleado_foto">
           <label>Portada</label>
-          <input type="file" onChange={handleChangeBanner} />
+          <input className="controls" type="file" onChange={handleChangeBanner} />
           <Boton colorBtn="btn_azul" onClick={handleAddBanner}>
             Añadir
           </Boton>
           <div className="formEmpleado_fotos">
-            |
             {updatedUser.usr_banner?.length > 0 &&
               updatedUser.usr_banner?.map((banner, i) => {
                 return (
                   <div key={i} className="boxfoto">
-                    <input type="image" src={banner} alt="img not found" />
+                    <input className="controls" type="image" src={banner} alt="img not found" />
                     <button value={banner} onClick={handleDeleteBanner}>
                       X
                     </button>
@@ -187,6 +188,7 @@ export function EditProfile() {
         <div>
           <label>Descripción</label>
           <input
+            className="controls"
             name="usr_description"
             type="text"
             value={
@@ -198,24 +200,25 @@ export function EditProfile() {
         <div>
           <label>Cargo</label>
           <input
+            className="controls"
             name="usr_charge"
             type="text"
             value={updatedUser.usr_charge ? updatedUser.usr_charge : ""}
             onChange={onInputChange}
           />
         </div>
-        <div>
+        <div className="divs">
           <label>Sexo</label>
-          <select name="usr_gender" id="usr_gender" onChange={onInputChange}>
+          <select className="selecx" name="usr_gender" id="usr_gender" onChange={onInputChange}>
             <option value=" --- " selected></option>
             <option value="Hombre">Hombre</option>
             <option value="Mujer">Mujer</option>
             <option value="Otro">Otro</option>
           </select>
         </div>
-        <div>
+        <div className="divs">
           <label>Pais</label>
-          <select name="usr_country" id="usr_country" onChange={onInputChange}>
+          <select className="selecx" name="usr_country" id="usr_country" onChange={onInputChange}>
             <option value=" --- " selected></option>
             {countries.map((c) => {
               return (
@@ -229,7 +232,7 @@ export function EditProfile() {
         <div>
           <label>Telefono</label>
           <input
-
+            className="controls"
             name="usr_phone"
             type="tel"
             id="phone"
@@ -237,12 +240,13 @@ export function EditProfile() {
             value={updatedUser.usr_phone ? updatedUser.usr_phone : ""}
             onChange={onInputChange}
           />
-          <label>Ej: +54 287 4565487</label>
+          <label className="labels">Ej: +54 287 4565487</label>
         </div>
-        <label>Redes Sociales</label>
+        <label className="labels">Redes Sociales</label>
         <div>
           <label>Facebook</label>
           <input
+            className="controls"
             name="facebook"
             type="text"
             value={
@@ -256,6 +260,7 @@ export function EditProfile() {
         <div>
           <label>Instagram</label>
           <input
+            className="controls"
             name="instagram"
             type="text"
             value={
@@ -269,6 +274,7 @@ export function EditProfile() {
         <div>
           <label>LinkedIn</label>
           <input
+          className="controls"
             name="linkedin"
             type="text"
             value={
@@ -282,6 +288,7 @@ export function EditProfile() {
         <div>
           <label>Github</label>
           <input
+          className="controls"
             name="github"
             type="text"
             value={
@@ -296,14 +303,14 @@ export function EditProfile() {
           <label>Ubicación</label>
           <input name="usr_location" type="text" onChange={onInputChange} />
         </div> */}
-        <Boton colorBtn="btn_azul" onClick={onSubmit}>
+        <button onClick={onSubmit}>
           Guardar
-        </Boton>
+        </button>
         <p>{savedMsg()}</p>
-      </form>
-      <Link to={`/profile/${userId}`}>
-        <Boton colorBtn="btn_azul">Volver al perfil</Boton>
+        <Link to={`/profile/${userId}`}>
+        <button>Volver al perfil</button>
       </Link>
+      </form>
     </div>
   );
 }

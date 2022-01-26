@@ -1,0 +1,52 @@
+.form-register{
+    width: 700px;
+    background: #24303c;
+    padding: 30px;
+    margin: auto;
+    margin-top: 35px;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.form-register h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-left: 25%;
+    color: white;
+}
+
+.controls {
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #1f53c5;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: white;
+}
+
+.form-register button {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+.divs {
+    margin-bottom: 25px;
+}
+
+.selecx {
+   margin-left: 10px;
+}
+
+.labels{
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
