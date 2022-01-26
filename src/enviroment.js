@@ -33,6 +33,9 @@ export const FRONT_URL = 'http://localhost:3001';
 // Front job
 export const JOB_FRONT_URL = `${FRONT_URL}/jobs`
 
+// Post front url
+export const POST_FRONT_URL = `${FRONT_URL}/post`;
+
 //default banner
 export const DEF_BANNER = "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
 

@@ -1,0 +1,39 @@
+.buttonEdit {
+    width: 2rem;
+    height: 2rem;
+    background-color: #3f51b5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    display: none;
+}
+
+.buttonDelete {
+    width: 2rem;
+    height: 2rem;
+    background-color: #b81919;
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    display: none;
+}
+
+.container {
+    position: relative;
+}
+
+.container:hover .buttonEdit {
+    display: flex;
+}
+
+.container:hover .buttonDelete {
+    display: flex;
+}

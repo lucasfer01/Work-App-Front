@@ -16,6 +16,8 @@ import Add from "../NewNav/Add/Add";
 import NewNav from "../NewNav/NewNav";
 import ChatWindow from "../ChatWindow/ChatWindow";
 import Jobs from "../Jobs/Jobs";
+// Components
+import {LoadingScreen} from '../loadingScreen/LoadingScreen';
 // import socket from "../socket";
 
 // import { Link } from 'react-router-dom';
@@ -35,6 +37,7 @@ export default function Home() {
   const classes = useStyles();
   const [type, setType] = useState("");
   const myId = useSelector((state) => state.auth.uid);
+  const loader = useSelector(state => state.ui.loading);
   const ownProfile = useSelector((state) => state.profile.ownProfile);
   const jobs = useSelector((state) => state.jobs.allJobs);
 
@@ -51,7 +54,7 @@ useEffect(() => {
 }, [location]);
 
 
-  return (
+  return (loader ? <LoadingScreen/> :
     <div>
       <Grid container>
         <Grid item sm={2} xs={2}>

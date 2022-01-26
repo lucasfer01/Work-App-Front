@@ -19,6 +19,7 @@ import { FormNewJob } from "../components/formNewJob/FormNewJob";
 import { RedirectPostpago } from "../components/mercadopago/RedirectPostpago";
 
 import { Plan } from "../components/Plan/Plan";
+import { EditarPost } from "../components/EditarPost&Workerpost/EditarPost";
 
 
 export const LoginRouter = () => {
@@ -39,6 +40,7 @@ export const LoginRouter = () => {
           <Route path="messenger" element={<Messenger />} />
           <Route path="upgradePlan" element={<Plan />} />
           <Route path="upgradePlan/checkPayment/*" element={<RedirectPostpago />} />
+          <Route path="editPost/:postId" element={<EditarPost />} />
 
           <Route path="test" element={<FormReview />} />
           <Route path="test2" element={<FormNewJob />} />
