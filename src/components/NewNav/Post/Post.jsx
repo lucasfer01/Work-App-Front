@@ -22,7 +22,7 @@ import { startLoading, finishLoading } from '../../../actions/ui';
 // Axios
 import axios from 'axios';
 // Url
-import { POST_URL } from "../../../enviroment";
+import { FRONT_URL, POST_URL } from "../../../enviroment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -52,7 +52,7 @@ const Post = (props) => {
   // useEffect
   useEffect(() => {
     // Verificar la ruta
-    if(window.location.pathname.slice(1,8) === 'profile' || authorId === sessionUserId) { // Si empieza con profile puede editar o eliminar
+    if (window.location.pathname.slice(9) === sessionUserId || authorId === sessionUserId) { // Si el post pertenec al usuario lo puede editar
       // Seteamos el estado en true
       setCanEditOrDelete(true);
     }
@@ -78,7 +78,16 @@ const Post = (props) => {
 
     // Hacemos llamada para borrar el post
     axios.delete(`${POST_URL}/${props.id}`)
-      .then(response => dispatch(finishLoading()))
+      .then(response => {
+        
+        // Verifiacamos si estamos en home
+        if (window.location.pathname.slice(1, 8) === 'profile') {
+          window.location.href = `${FRONT_URL}/profile/${sessionUserId}`
+        }
+        
+        // Seteamos el loader en false
+        dispatch(finishLoading());
+      })
       .catch(error => console.log(error));
   }
 
