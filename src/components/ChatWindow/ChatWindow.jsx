@@ -44,13 +44,13 @@ const ChatWindow = () => {
     const [open, setOpen] = useState(false);
     const [openChat, setOpenChat] = useState(false);
     const [users, setUsers] = useState([]);
+    const [usersCopy, setUsersCopy] = useState([]);
     const [receiverUser, setReceiverUser] = useState({});
     const [chatId, setChatId] = useState("");
     const [messages, setMessages] = useState([]);
     console.log("userChats", users);
     const [displayInBox, setDisplayInBox] = useState(false);
     const [data, setData] = useState([]);
-    console.log("data chat", data);
 
     useEffect(() => {
         socket.emit("data", myId);
@@ -64,19 +64,19 @@ const ChatWindow = () => {
     }, [myId]);
 
     useEffect(() => {
-        setUsers(data?.map(chat => {
+        const newData = data?.map(chat => {
             return {
                 chatId: chat.chat_id,
                 user: chat.users.find(u => u.usr_id !== myId)
             }
-        }));
-        console.log("result", users)
+        })
+        setUsers(newData);
+        setUsersCopy(newData);
     }, [data]);
 
 
     const handleOpenChat = (e, chatId, user) => {
         e.preventDefault();
-        console.log("ids", chatId, user);
         setChatId(chatId);
         setReceiverUser(user);
         setOpenChat(!openChat);
@@ -87,6 +87,17 @@ const ChatWindow = () => {
         setOpenChat(!openChat);
     };
 
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        console.log("value", value);
+        console.log("users", users);
+        console.log("usersCopy", usersCopy);
+        const newUsers = usersCopy.filter(user => {
+            return user.user.usr_username.toLowerCase().includes(value.toLowerCase());
+        });
+        setUsers(newUsers);
+    }
+
 
     return (
         <>
@@ -94,46 +105,46 @@ const ChatWindow = () => {
                 <MessageIcon />
             </Tooltip>
             <Modal open={open}>
-                    <Container className={classes.container}>
-                        <div className='chatMenu'>
-                            <div className='chatMenuWrapper'>
-                                <div className="chat-header">
-                                    <input placeholder='Search for Contacts' className='chatMenuInput' />
-                                    <button onClick={() => setOpen(false)}>
-                                        X
-                                    </button>
-                                </div>
-                                <div className='chatMenuList'>
-                                    {
-                                        users?.map(u => (
-                                            <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
-                                                <Chat
-                                                    receiverName={u.user?.usr_username}
-                                                    receiverPhoto={u.user?.usr_photo}
-                                                />
-                                            </button>
-                                        ))
-                                    }
-                                </div>
+                <Container className={classes.container}>
+                    <div className='chatMenu'>
+                        <div className='chatMenuWrapper'>
+                            <div className="chat-header">
+                                <input onChange={handleSearch} placeholder='Search for Contacts' className='chatMenuInput' />
+                                <button onClick={() => setOpen(false)}>
+                                    X
+                                </button>
+                            </div>
+                            <div className='chatMenuList'>
+                                {
+                                    users?.map(u => (
+                                        <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                            <Chat
+                                                receiverName={u.user?.usr_username}
+                                                receiverPhoto={u.user?.usr_photo}
+                                            />
+                                        </button>
+                                    ))
+                                }
                             </div>
                         </div>
-                        <div className='chatWindow'>
-                            {
-                                openChat && (
-                                    <div className="caja">
-                                        <button onClick={handleDisplayInBox}>X</button>
-                                        <ChatMessages
-                                            chatId={chatId}
-                                            myId={myId}
-                                            receiverId={receiverUser.usr_id}
-                                            receiverName={receiverUser.usr_username}
-                                            receiverPhoto={receiverUser.usr_photo}
-                                        />
-                                    </div>
-                                )
-                            }
-                        </div>
-                    </Container>
+                    </div>
+                    <div className='chatWindow'>
+                        {
+                            openChat && (
+                                <div className="caja">
+                                    <button className="closechat" onClick={handleDisplayInBox}>X</button>
+                                    <ChatMessages
+                                        chatId={chatId}
+                                        myId={myId}
+                                        receiverId={receiverUser.usr_id}
+                                        receiverName={receiverUser.usr_username}
+                                        receiverPhoto={receiverUser.usr_photo}
+                                    />
+                                </div>
+                            )
+                        }
+                    </div>
+                </Container>
             </Modal>
         </>
     )
