@@ -1,6 +1,6 @@
 import { Container, makeStyles } from "@material-ui/core";
 import Post from "../Post/Post";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Filtros from "../../Filtros/Filtros";
 import { getPosts } from "../../../actions/formEmpleador";
@@ -18,7 +18,16 @@ const Feed = ({profilePosts}) => {
   const allPosts = useSelector((state) => state.posts.filterPost);
   const posts = profilePosts ? profilePosts : allPosts;
 
+  // Mostrar filtro
+  const [showFilter, setShowFilter] = useState(true);
+
   useEffect(() => {
+    // Comprobamos si pathname empieza con profile
+    if(window.location.pathname.slice(1,8) === 'profile') {
+      // Seteamos el estado en false
+      setShowFilter(false);
+    }
+
     const getAllposts = async () => {
       await dispatch(getPosts());
     };
@@ -27,7 +36,7 @@ const Feed = ({profilePosts}) => {
   
   return (
     <Container className={classes.container}>
-      <Filtros />
+      {showFilter && <Filtros />}
       {
         posts?.map((post) => (
           <Post
