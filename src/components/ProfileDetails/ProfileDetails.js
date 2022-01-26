@@ -22,9 +22,11 @@ import Jobs from "../Jobs/Jobs";
 import { DEF_BANNER, IMG } from "../../enviroment";
 import { FormJobs } from "../formJobs/FormJobs";
 import ChatMessages from "../ChatWindow/ChatMessages";
+import { Workerpost } from "../Workerpost/Workerpost";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
+  const [postOrWorkerpost, setPostOrWorkerpost] = useState({ show: 'post' });
   const { userId } = useParams();
   const myId = useSelector((state) => state.auth.uid);
 
@@ -35,7 +37,7 @@ export const ProfileDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId));
-    console.log("dispatch profile");
+    console.log(user.workerPosts);
   }, [userId, dispatch]);
 
   const contactUser = () => {
@@ -104,14 +106,14 @@ export const ProfileDetails = () => {
             </div>
             {button()}
             {
-            viewChat && (
-              <ChatMessages
-                myId={myId}
-                receiverId={user.usr_id}
-                receiverName={user.usr_name}
-                receiverPhoto={user.usr_photo}
+              viewChat && (
+                <ChatMessages
+                  myId={myId}
+                  receiverId={user.usr_id}
+                  receiverName={user.usr_name}
+                  receiverPhoto={user.usr_photo}
                 />
-            )
+              )
             }
           </div>
         </div>
@@ -143,8 +145,12 @@ export const ProfileDetails = () => {
             </ul>
           </div>
           <div>{/* Aquí van los workerposts */}</div>
+              <div>
+                <button onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</button>
+                <button onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</button>
+              </div>
           <div>
-            <Feed key="feed" profilePosts={user?.posts} />
+            {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}
           </div>
           <div className="redes-sociales">
             {user.usr_social?.linkedin && (
@@ -161,41 +167,42 @@ export const ProfileDetails = () => {
             )}
             {user.usr_social?.github && (
               <a
-                href={user?.usr_social?.github ? user?.usr_social.github : null}
-                target="_blank"
-                className="boton-redes github"
-                rel="noreferrer"
+              href={user?.usr_social?.github ? user?.usr_social.github : null}
+              target="_blank"
+              className="boton-redes github"
+              rel="noreferrer"
               >
                 <BsGithub fill="#000" className="icons" />
               </a>
             )}
             {user.usr_social?.instagram && (
               <a
-                href={
+              href={
                   user.usr_social?.instagram ? user.usr_social.instagram : null
                 }
                 target="_blank"
                 className="boton-redes instagram"
                 rel="noreferrer"
-              >
+                >
                 <FaInstagram className="icons" />
               </a>
             )}
             {user.usr_social?.facebook && (
               <a
-                href={
+              href={
                   user?.usr_social?.facebook ? user?.usr_social.facebook : null
                 }
                 target="_blank"
                 className="boton-redes facebook"
                 rel="noreferrer"
-              >
+                >
                 <FaFacebook className="icons" />
               </a>
             )}
           </div>
         </div>
       </section>
+
     </div>
   );
 };
