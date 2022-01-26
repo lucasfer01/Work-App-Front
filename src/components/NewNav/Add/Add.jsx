@@ -61,6 +61,42 @@ const useStyles = makeStyles((theme) => ({
     background: "transparent",
     color: "gray",
   },
+  jobsBox: {
+    maxHeight: "10em",
+    overflow: "scroll",
+  },
+  addedBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  added: {
+    display: "flex",
+    gap: "10px",
+  },
+  radios: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  photocontainer: {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto auto",
+    marginTop: "10px",
+    marginBottom: "15px",
+  },
+  photobox: {
+    display: "flex",
+    flexDirection: "row",
+    width: "4em",
+    height: "4em",
+    border: "1px solid #ccc",
+    borderRadius: "3px",
+  },
+  photo: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
 }));
 
 function Alert(props) {
@@ -97,7 +133,7 @@ const Add = () => {
 
     try {
       const newPost = {
-        post: {...post, post_photo: post.post_photo.length ? post.post_photo : ['https://www.trecebits.com/wp-content/uploads/2017/07/empleo-trabajo.jpg']},
+        post: { ...post, post_photo: post.post_photo.length ? post.post_photo : ['https://www.trecebits.com/wp-content/uploads/2017/07/empleo-trabajo.jpg'] },
         jobs: postJobs,
       }
       const createPost = await postPost(newPost);
@@ -112,13 +148,13 @@ const Add = () => {
       const email = await sendEmail(toSend);
 
       socket.emit("new-post", toSend);
-     
+
       setOpen(false);
 
       alert("Post created succesufully")
 
       await dispatch(getPosts())
-       
+
     } catch (e) {
       alert(e);
     }
@@ -132,12 +168,13 @@ const Add = () => {
   const handleAddPhoto = async (e) => {
     e.preventDefault();
 
-    const urlFoto = await startUploading(file);
-
-    setPost({
-      ...post,
-      post_photo: [...post.post_photo, urlFoto]
-    })
+    if (post.post_photo.length < 4) {
+      const urlFoto = await startUploading(file);
+      setPost({
+        ...post,
+        post_photo: [...post.post_photo, urlFoto]
+      })
+    }
     setFile("");
   }
 
@@ -154,14 +191,19 @@ const Add = () => {
   const handleJobChange = (e) => {
     const { value } = e.target;;
     setNewJob(value);
-    const filteredJobs = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
+    let filteredJobs = [];
+    if (value !== "") {
+      filteredJobs = jobs.filter(job => job.job_name.toLowerCase().includes(value.toLowerCase()));
+    }
     setJobList(filteredJobs);
   }
 
   const handleAddJob = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    setPostJobs([...postJobs, value]);
+    if (!postJobs.includes(value) && postJobs.length < 3) {
+      setPostJobs([...postJobs, value]);
+    }
     setNewJob("");
     setJobList([]);
   }
@@ -208,23 +250,27 @@ const Add = () => {
                 onChange={handleJobChange}
               />
             </div>
-            {
-              jobList.map(job => (
-                <div key={job.job_id}>
-                  <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
-                </div>
-              ))
-            }
-            {
-              postJobs.map((job, index) => {
-                return (
-                  <div className='formEmpleado_job' key={index}>
-                    <p>{job}</p>
-                    <button type="button" onClick={handleDeleteJob} value={job}>Eliminar</button>
+            <div className={classes.jobsBox}>
+              {
+                jobList.map(job => (
+                  <div key={job.job_id}>
+                    <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                   </div>
-                )
-              })
-            }
+                ))
+              }
+            </div>
+            <div className={classes.addedBox}>
+              {
+                postJobs.map((job, index) => {
+                  return (
+                    <div className={classes.added} key={index}>
+                      <span>{job}</span>
+                      <button type="button" onClick={handleDeleteJob} value={job}>X</button>
+                    </div>
+                  )
+                })
+              }
+            </div>
             <div className={classes.item}>
               <TextField
                 id="standard-basic"
@@ -237,8 +283,6 @@ const Add = () => {
             <div className={classes.item}>
               <TextField
                 id="standard-basic"
-                placeholder="Una breve descripción del trabajo..."
-                variant="outlined"
                 label="Resumen del trabajo"
                 size="small"
                 style={{ width: "100%" }}
@@ -250,8 +294,6 @@ const Add = () => {
                 id="outlined-multiline-static"
                 multiline
                 rows={4}
-                placeholder="Que estoy necesitando..."
-                variant="outlined"
                 label="Description"
                 size="small"
                 style={{ width: "100%" }}
@@ -260,8 +302,8 @@ const Add = () => {
             </div>
             <div className={classes.item}>
               <FormLabel component="legend" onChange={(event) => setPost({ ...post, post_priority: event.target.value })}>
-                En que estado quiere su post?</FormLabel>
-              <RadioGroup onClick={handlePriority}>
+                ¿Con qué urgencia necesita del servicio?</FormLabel>
+              <RadioGroup className={classes.radios} onClick={handlePriority}>
                 <FormControlLabel
                   value="Urgente"
                   control={<Radio size="small" />}
@@ -285,16 +327,18 @@ const Add = () => {
                   onChange={handleChangePhoto} />
                 <button onClick={handleAddPhoto}>Añadir</button>
               </label>
-              {
-                post.post_photo.length > 0 && post.post_photo.map((photo, i) => {
-                  return (
-                    <div key={i} className="boxfoto">
-                      <input type="image" src={photo} alt="img not found" />
-                      <button value={photo} onClick={handleDeletePhoto}>X</button>
-                    </div>
-                  )
-                })
-              }
+              <div className={classes.photocontainer}>
+                {
+                  post.post_photo.length > 0 && post.post_photo.map((photo, i) => {
+                    return (
+                      <div key={i} className={classes.photobox}>
+                        <img className={classes.photo} src={photo} alt="img not found" />
+                        <button value={photo} onClick={handleDeletePhoto}>X</button>
+                      </div>
+                    )
+                  })
+                }
+              </div>
             </div>
             <div className={classes.item}>
               <Button
