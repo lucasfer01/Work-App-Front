@@ -23,6 +23,9 @@ export const POST_USER_JOB = `${BASE_URL}/user-job`;
 // Url Checkout mercadopago
 export const CHECKOUT_URL = `${BASE_URL}/checkout`;
 
+// Url Workerpost
+export const WORKERPOST_URL = `${BASE_URL}/workerpost`;
+
 // Url postpago
 export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
 
