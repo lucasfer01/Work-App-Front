@@ -10,17 +10,19 @@ const Notification = ({post, jobs}) => {
     const navigate = useNavigate();
     return (
         <div className={'message'}>
-            <div className='messageTop'>
+            <div className='body'>
                 <img className='messageImg'
                 src={photo}
                 alt=""
                 />
-                <p className='messageText'>Alguien necesita {job} </p>
+                <div className='messageInfo'>
+                <p className='message'>Alguien necesita {job} </p>
                 <button onClick={() => navigate(`/post/${post.post_id}`)} >
-                <p className='messageText'>{post?.post_title}</p>
+                <p className='post'>{post?.post_title}</p>
                 </button>
+                </div>
             </div>
-            <div className='messageBottom'>{post?.createdAt}</div>
+            <div className='messageBottom'>{post?.createdAt.slice(0, 10)}</div>
         </div>
     )
 }
