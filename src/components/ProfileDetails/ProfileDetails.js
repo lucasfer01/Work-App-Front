@@ -23,6 +23,7 @@ import { DEF_BANNER, IMG } from "../../enviroment";
 import { FormJobs } from "../formJobs/FormJobs";
 import ChatMessages from "../ChatWindow/ChatMessages";
 import { Workerpost } from "../Workerpost/Workerpost";
+import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
 
 export const ProfileDetails = () => {
   const [viewChat, setViewChat] = useState(false);
@@ -80,9 +81,7 @@ export const ProfileDetails = () => {
       );
     } else
       return (
-        <button className="btn-prof" onClick={contactUser}>
-          <span className="text">CONTACTAR</span>
-        </button>
+        <ChatWindowv2 receiverData={user} />
       );
   }
   return loader ? (
@@ -151,6 +150,13 @@ export const ProfileDetails = () => {
               <div>
                 <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Boton>
                 <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Boton>
+              </div>
+              <div>
+                {
+                  user?.usr_email !== email && (
+                    <ChatWindowv2 receiverData={user} />
+                  )
+                }
               </div>
           <div>
             {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}

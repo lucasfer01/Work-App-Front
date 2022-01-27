@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChatWindow = () => {
+const ChatWindowv2 = ({ receiverData }) => {
     const myId = useSelector(state => state.auth.uid);
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -72,7 +72,11 @@ const ChatWindow = () => {
         })
         setUsers(newData);
         setUsersCopy(newData);
-    }, [data]);
+        if (receiverData) {
+            setReceiverUser(receiverData);
+            setOpenChat(true);
+        }
+    }, [data, receiverData]);
 
 
     const handleOpenChat = (e, chatId, user) => {
@@ -89,9 +93,6 @@ const ChatWindow = () => {
 
     const handleSearch = (e) => {
         const { value } = e.target;
-        console.log("value", value);
-        console.log("users", users);
-        console.log("usersCopy", usersCopy);
         const newUsers = usersCopy.filter(user => {
             return user.user.usr_username.toLowerCase().includes(value.toLowerCase());
         });
@@ -101,9 +102,27 @@ const ChatWindow = () => {
 
     return (
         <>
-            <Tooltip title="messenger" aria-label="chat" onClick={() => setOpen(true)}>
-                <MessageIcon />
-            </Tooltip>
+            {
+                receiverData ? (
+                    <Tooltip title="messenger" aria-label="chat" onClick={() => setOpen(true)}>
+                        <button className="btn-detalle" >
+                            <div class="svg-wrapper-1">
+                                <div class="svg-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Abrir Chat</span>
+                        </button>
+                    </Tooltip>
+                ) : (
+                    <Tooltip title="messenger" aria-label="chat" onClick={() => setOpen(true)}>
+                        <MessageIcon />
+                    </Tooltip>
+                )
+            }
             <Modal open={open}>
                 <Container className={classes.container}>
                     <div className='chatMenu'>
@@ -115,6 +134,11 @@ const ChatWindow = () => {
                                 </button>
                             </div>
                             <div className='chatMenuList'>
+                                {
+                                    users?.length === 0 && (
+                                        <h3>No tienes chats</h3>
+                                    )
+                                }
                                 {
                                     users?.map(u => (
                                         <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
@@ -150,4 +174,4 @@ const ChatWindow = () => {
     )
 }
 
-export default ChatWindow;
+export default ChatWindowv2;

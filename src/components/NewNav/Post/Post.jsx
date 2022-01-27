@@ -23,6 +23,7 @@ import { startLoading, finishLoading } from '../../../actions/ui';
 import axios from 'axios';
 // Url
 import { POST_URL } from "../../../enviroment";
+import { IMG} from "../../../enviroment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -48,11 +49,12 @@ const Post = (props) => {
   const dispatch = useDispatch();
   // useSelector
   const sessionUserId = useSelector(state => state.auth.uid);
+  let photo = author?.usr_photo ? author.usr_photo : IMG;
 
   // useEffect
   useEffect(() => {
     // Verificar la ruta
-    if(window.location.pathname.slice(1,8) === 'profile' || authorId === sessionUserId) { // Si empieza con profile puede editar o eliminar
+    if (window.location.pathname.slice(1, 8) === 'profile' || authorId === sessionUserId) { // Si empieza con profile puede editar o eliminar
       // Seteamos el estado en true
       setCanEditOrDelete(true);
     }
@@ -94,6 +96,10 @@ const Post = (props) => {
             alt="img default..." />
         }
         <Typography gutterBottom variant="h5">
+          <img className='conversationImg'
+            src={photo}
+            alt=""
+          />
           {author?.usr_username}
         </Typography>
         <Typography gutterBottom variant="h5">

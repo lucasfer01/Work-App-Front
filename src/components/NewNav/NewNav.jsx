@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import newNavStyles from './Styles/newNav.module.css';
 import { IMG } from '../../enviroment'
 import { SearchBar } from "../SearchBar/SearchBar";
-import ChatWindow from "../ChatWindow/ChatWindow";
+import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
 import socket from "../socket";
 import Notification from "../Messenger/Notification/Notification";
 
@@ -129,7 +129,7 @@ const NewNav = () => {
 
   return (
     <div>
-      <AppBar style={{ position: "sticky" }}>
+      <AppBar style={{position: "sticky"}}>
       <Toolbar className={classes.toolbar}>
         <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
@@ -150,7 +150,7 @@ const NewNav = () => {
             onClick={() => setOpen(true)}
           />
           <Badge badgeContent={4} color="secondary" className={classes.badge}>
-            <ChatWindow />
+            <ChatWindowv2 />
           </Badge>
           <button onClick={handleDisplayNotifications}>
             <Badge badgeContent="!" color="secondary" className={classes.badge}>

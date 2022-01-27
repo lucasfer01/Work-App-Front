@@ -2,6 +2,7 @@
 import axios from 'axios';
 // Urls
 import { POST_URL, JOB_URL, POST_USER } from '../enviroment';
+import { BASE_URL } from '../enviroment';
 
 // Obtener todos los oficios
 export const getJobs = async () => {
@@ -104,7 +105,7 @@ export const getProfile = async (userId) => {
 
 export const addAlerts = async (uid, alerts) => {
     try {
-        const {data} = await axios.put(`http://localhost:3000/user/${uid}`, alerts);
+        const {data} = await axios.put(`${BASE_URL}/user/${uid}`, alerts);
         return data;
     } catch (error) {
         console.log(error);
@@ -113,7 +114,7 @@ export const addAlerts = async (uid, alerts) => {
 
 export const sendEmail = async (postData) => {
     try {
-        const { data } = await axios.post(`http://localhost:3000/email`, postData)
+        const { data } = await axios.post(`${BASE_URL}/email`, postData)
         return data;
     } catch (error) {
         console.log(error);

@@ -86,8 +86,11 @@ const ChatMessages = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessages(messages => [...messages, newMessage]);
-        console.log("newMessage", newMessage);
         socket.emit("message", newMessage);
+        setNewMessage({
+            ...newMessage,
+            message: "",
+        });
     }
 
 
@@ -115,8 +118,18 @@ const ChatMessages = (props) => {
                         <div ref={divRef}></div>
                     </div>
                     <div className='chatBoxBottom'>
-                        <textarea onChange={handleChange} className='chatMessageInput' placeholder='Write something...'></textarea>
-                        <button onClick={handleSubmit} className='chatSubmitButton'>
+                        <textarea 
+                        onKeyPress={(e) => {
+                             if (e.key === "Enter") {
+                                handleSubmit(e)
+                            }
+                        }} 
+                        onChange={handleChange}
+                        value={newMessage.message} 
+                        className='chatMessageInput' 
+                        placeholder='Write something...'>
+                        </textarea>
+                        <button onClick={handleSubmit} className='chatSubmitButton' >
                             Send
                         </button>
                     </div>
