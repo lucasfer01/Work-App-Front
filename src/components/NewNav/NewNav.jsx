@@ -97,8 +97,6 @@ const NewNav = () => {
     badgeColor: notifications.length ? "secondary" : "transparent",
   });
 
-  console.log("unreadmess", unreadMessages);
-  console.log("unreadnot", unreadNotifications);
 
   useEffect(() => {
     const getData = async () => {
@@ -130,8 +128,8 @@ const NewNav = () => {
       const res = await data;
       setNotifications([...notifications, res]);
       setNot({
-        badgeContent: notifications.length ? "!" : "",
-        badgeColor: notifications.length ? "secondary" : "transparent",
+        badgeContent: "!",
+        badgeColor: "secondary",
       });
     });
     socket.on("response", (data) => {
@@ -139,11 +137,15 @@ const NewNav = () => {
         ...unreadMessages,
         data.sender
       ])
+      setMess({
+        badgeContent: "!",
+        badgeColor: "secondary",
+      });
     })
     return () => {
       socket.emit("unregister", myId);
     };
-  }, [myId, unreadMessages, mess]);
+  }, [myId]);
 
 
   const profile = useSelector((state) => state.profile.ownProfile)
@@ -161,19 +163,20 @@ const NewNav = () => {
       badgeContent: "",
       badgeColor: "transparent",
     });
-    socket.emit("read-notifications", {myId, postId: e.target.value});
+    socket.emit("read-notifications", { myId, postId: e.target.value });
     socket.emit("unregister", myId);
     socket.emit("register", myId);
   }
 
   const handleUnreadMessages = (e) => {
     e.preventDefault();
-    setUnreadMessages([]);
+    console.log("unreadmessages", unreadMessages);
     setMess({
       badgeContent: "",
       badgeColor: "transparent",
     });
   }
+
 
   const handleReadNotifications = (e) => {
     e.preventDefault();
@@ -182,7 +185,7 @@ const NewNav = () => {
       badgeContent: "",
       badgeColor: "transparent",
     });
-    socket.emit("read-notifications", {myId, postId: e.target.value});
+    socket.emit("read-notifications", { myId, postId: e.target.value });
     socket.emit("unregister", myId);
     socket.emit("register", myId);
   }
@@ -190,60 +193,60 @@ const NewNav = () => {
   return (
     <div>
       <AppBar style={{ position: "sticky" }}>
-      <Toolbar className={classes.toolbar}>
-        <Link to="/">
-          <Typography variant="h6" className={classes.logoLg}>
-            WorkApp
+        <Toolbar className={classes.toolbar}>
+          <Link to="/">
+            <Typography variant="h6" className={classes.logoLg}>
+              WorkApp
+            </Typography>
+          </Link>
+          <Typography variant="h6" className={classes.logoSm}>
+            WORKING
           </Typography>
-        </Link>
-        <Typography variant="h6" className={classes.logoSm}>
-          WORKING
-        </Typography>
-        <div className={classes.search}>
-          <SearchBar />
-          {/* <InputBase placeholder="Search..." className={classes.input} /> */}
-          <Cancel className={classes.cancel} onClick={() => setOpen(false)} />
-        </div>
-        <div className={classes.icons}>
-          <Search
-            className={classes.searchButton}
-            onClick={() => setOpen(true)}
-          />
-          <Badge badgeContent={mess.badgeContent} color={mess.badgeColor} className={classes.badge}>
-            <button onclick={handleUnreadMessages}>
-            <ChatWindowv2 unreadMessages={unreadMessages} />
-            </button>
-          </Badge>
-          <button onClick={handleDisplayNotifications}>
-            <Badge badgeContent={not.badgeContent} color={not.badgeColor} className={classes.badge}>
-              <Notifications className={classes.campana}/>
-            </Badge>
-          </button>
-          <button onClick={profileAvatar}>
-            <Avatar
-              alt="Full stack"
-              src={profile?.usr_photo ? profile.usr_photo : IMG}
+          <div className={classes.search}>
+            <SearchBar />
+            {/* <InputBase placeholder="Search..." className={classes.input} /> */}
+            <Cancel className={classes.cancel} onClick={() => setOpen(false)} />
+          </div>
+          <div className={classes.icons}>
+            <Search
+              className={classes.searchButton}
+              onClick={() => setOpen(true)}
             />
-          </button>
-        </div>
-      </Toolbar>
-    </AppBar>
+            <button onClick={handleUnreadMessages}>
+              <Badge badgeContent={mess.badgeContent} color={mess.badgeColor} className={classes.badge}>
+                <ChatWindowv2 unreadMessages={unreadMessages} />
+              </Badge>
+            </button>
+            <button onClick={handleDisplayNotifications}>
+              <Badge badgeContent={not.badgeContent} color={not.badgeColor} className={classes.badge}>
+                <Notifications className={classes.campana} />
+              </Badge>
+            </button>
+            <button onClick={profileAvatar}>
+              <Avatar
+                alt="Full stack"
+                src={profile?.usr_photo ? profile.usr_photo : IMG}
+              />
+            </button>
+          </div>
+        </Toolbar>
+      </AppBar>
       {
-          displayNotifications && (
-            notifications?.map(notif => {
-              return (
-                <div>
+        displayNotifications && (
+          notifications?.map(notif => {
+            return (
+              <div>
                 <Notification
                   key={notif?.id}
                   post={notif?.post}
                   jobs={notif?.jobs}
                 />
                 <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
-                </div>
-              )
-            })
-          )
-        }
+              </div>
+            )
+          })
+        )
+      }
     </div>
   );
 };

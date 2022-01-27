@@ -48,7 +48,6 @@ const ChatWindowv2 = ({ receiverData, unreadMessages }) => {
     const [receiverUser, setReceiverUser] = useState({});
     const [chatId, setChatId] = useState("");
     const [messages, setMessages] = useState([]);
-    console.log("userChats", users);
     const [displayInBox, setDisplayInBox] = useState(false);
     const [data, setData] = useState([]);
     let numBerUsers = users.length;
@@ -156,7 +155,7 @@ const ChatWindowv2 = ({ receiverData, unreadMessages }) => {
                                 }
                                 {
                                     users?.map(u => (
-                                        <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                        <button className="btnUnread" key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
                                             <Chat
                                                 receiverName={u.user?.usr_username}
                                                 receiverPhoto={u.user?.usr_photo}
