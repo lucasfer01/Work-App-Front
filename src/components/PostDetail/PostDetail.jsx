@@ -21,12 +21,13 @@ import { finishLoading, startLoading } from '../../actions/ui'; // ui.loading
 import ChatMessages from "../ChatWindow/ChatMessages";
 import { IMG} from "../../enviroment";
 import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
+import Leftbar from "../NewNav/Leftbar/Leftbar"
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    width: "80%",
-    marginLeft: "10%",
-    marginTop: "10%",
+    width: "60%",
+    marginLeft: "29%",
+    marginTop: "-62%",
     marginBottom: theme.spacing(5),
     boxShadow: "0 1rem 1rem rgba(0, 0, 0, 0.2)",
   },
@@ -107,6 +108,9 @@ export default function PostDetail() {
 
   return (loader ? <LoadingScreen /> :
     <>
+    <div className="divleftDetail">
+    <Leftbar />
+    </div>
       {post.post_id ?
         <Card className={classes.card}>
           <CardActionArea>

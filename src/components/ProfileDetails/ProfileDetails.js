@@ -148,10 +148,7 @@ export const ProfileDetails = () => {
         </Modal>
         </>
       );
-    } else
-      return (
-        <ChatWindowv2 receiverData={user} />
-      );
+    }
   }
   return loader ? (
     <LoadingScreen />
@@ -216,18 +213,20 @@ export const ProfileDetails = () => {
           {/* <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards> */}
           {/* </div> */}
           <div>{/* Aquí van los workerposts */}</div>
-              <div>
-                <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Boton>
-                <Boton colorBtn="btn_azul" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Boton>
+              <div className="vtn1">
+                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Button>
+                </div>
+                <div className="vtn2">
+                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Button>
               </div>
-              <div>
+              <div className="divChat2">
                 {
                   user?.usr_email !== email && (
                     <ChatWindowv2 receiverData={user} />
                   )
                 }
               </div>
-          <div>
+          <div className="div-posted">
             {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}
           </div>
           <div className="redes-sociales">
