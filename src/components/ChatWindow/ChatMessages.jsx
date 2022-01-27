@@ -63,11 +63,9 @@ const ChatMessages = (props) => {
         socket.emit("chat-history", ({ chatId, senderId: myId, receiverId }));
         socket.on("chat-history", async (data) => {
             const chatHistory = await data;
-            console.log("chatHistory", chatHistory);
             setMessages(chatHistory);
         });
         socket.on("response", (data) => {
-            console.log("response: ", data);
             setMessages(messages => [...messages, data]);
         });
     }, [chatId]);

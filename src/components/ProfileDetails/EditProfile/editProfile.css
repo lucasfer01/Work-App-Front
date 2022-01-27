@@ -1,9 +1,13 @@
+.divEdit-leftb{
+    width: 17%;
+}
+
 .form-register{
     width: 700px;
     background: #24303c;
     padding: 30px;
     margin: auto;
-    margin-top: 35px;
+    margin-top: -40%;
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
     color: white;

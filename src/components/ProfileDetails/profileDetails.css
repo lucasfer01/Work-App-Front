@@ -1,3 +1,7 @@
+.left-prof{
+    width: 17%;
+}
+
 .seccion-perfil-usuario .perfil-usuario-body,
 .seccion-perfil-usuario{
     display: flex;
@@ -14,17 +18,19 @@
 }
 
 .seccion-perfil-usuario .perfil-usuario-header{
-    width: 100%;
+    width: 66%;
     display: flex;
     justify-content: center;
     background: linear-gradient(#317FFF, transparent);
     margin-bottom: 1.25rem;
+    margin-left: 16%;
+    margin-top: -45%;
 }
 
 .seccion-perfil-usuario .perfil-usuario-portada{
     display: block;
     position: relative;
-    width: 90%;
+    width: 93%;
     height: 17rem;
     background: linear-gradient(45deg, #BC3CFF, #317FFF);
     border-radius: 0 0 20px 20px;
@@ -83,6 +89,7 @@
     width: 70%;
     position: relative;
     max-width: 750px;
+    margin-left: 18%;
 }
 
 .seccion-perfil-usuario .perfil-usuario-body .titulo{
@@ -100,6 +107,7 @@
 .seccion-perfil-usuario .perfil-usuario-footer,
 .seccion-perfil-usuario .perfil-usuario-bio{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
@@ -237,10 +245,7 @@
        margin-left: 30%;
    }
 
-   .divChat2{
-       margin-left: 55%;
-       margin-top: -23px;
-   }
+   
 
    .div-posted{
        width: 100%;
@@ -254,6 +259,11 @@
    .vtn2{
     margin-left: 18%;
     margin-top: -35px;
+    }
+
+.divChat2{
+    margin-left: 55%;
+    margin-top: -23px;
 }
 
 @media (max-width: 750px) {

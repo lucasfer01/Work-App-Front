@@ -6,13 +6,11 @@ import axios from "axios";
 
 export default function Jobs() {
     const [jobs, setJobs] = useState([]);
-    console.log(jobs);
 
     useEffect(() => {
         const getJobsData = async () => {
             try {
                 const jobsData = await getJobs();
-                console.log("jobs:", jobsData)
                 setJobs(jobsData);
             } catch (error) {
                 console.log(error);

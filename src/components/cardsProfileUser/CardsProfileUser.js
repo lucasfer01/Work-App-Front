@@ -20,7 +20,6 @@ export const CardsProfileUser = () => {
       .catch((error) => console.log(error));
   }, [jobId]);
 
-  console.log('user', users)
 
   return (
     <div className="container-fluid">

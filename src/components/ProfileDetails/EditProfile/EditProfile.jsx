@@ -7,13 +7,14 @@ import { startUploading } from "../../../helpers/imageUpload";
 import Boton from "../../Boton/Boton";
 import { countries } from "./countries";
 import "./editProfile.css";
+import Leftbar from "../../NewNav/Leftbar/Leftbar"
 
 
 export function EditProfile() {
   const navigate = useNavigate();
   const { userId } = useParams();
   let user = useSelector((state) => state.profile.user);
-  console.log(user);
+  
   const [saved, setSaved] = useState(false);
 
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export function EditProfile() {
     usr_phone: user.usr_phone,
     usr_banner: user.usr_banner
   });
-  console.log(updatedUser);
+
 
   function onInputChange(e) {
     e.preventDefault();
@@ -132,6 +133,9 @@ export function EditProfile() {
 
   return (
     <div>
+      <div className="divEdit-leftb">
+       <Leftbar />
+      </div>
       <form className="form-register">
         <div>
           <h2>Editar Perfil</h2>

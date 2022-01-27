@@ -64,6 +64,25 @@
     flex: 3;
 }
 
+.btn-detalle {
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  margin-left: 29%;
+  width: 8em;
+  height: 50px;
+  margin-bottom: 20px;
+ }
+
 
 
 .chatMenuWrapper,

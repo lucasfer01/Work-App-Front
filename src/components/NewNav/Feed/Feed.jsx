@@ -18,6 +18,7 @@ const Feed = ({profilePosts}) => {
   const allPosts = useSelector((state) => state.posts.filterPost);
   const posts = profilePosts ? profilePosts : allPosts;
 
+
   // Mostrar filtro
   const [showFilter, setShowFilter] = useState(true);
 

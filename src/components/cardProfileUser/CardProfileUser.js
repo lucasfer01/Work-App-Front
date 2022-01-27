@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IMG } from "../../enviroment";
+import { IMG, POST_USER } from "../../enviroment";
+import axios from 'axios';
 
 import "./CardProfileUser.css";
 
@@ -12,6 +13,15 @@ export const CardProfileUser = (userData) => {
   if (!img_url) {
     img_url = IMG
   }
+
+  const [score, setScore] = useState(1);
+
+  useEffect(() => {
+    axios.get(`${POST_USER}/${id}`)
+      .then(user => setScore(user.data.usr_score))
+      .catch(error => console.log(error));
+  },[]);
+
 
   const maxStars = 5;
   const starsArr = [];
@@ -44,9 +54,9 @@ export const CardProfileUser = (userData) => {
           </div>
           <p className="card-text">{desc}</p>
           <div className="starsRatingContainer">
-            <ul className="starsRatingList">{userStars(rating)}</ul>
-            {rating ? (
-              <span className="mr-4">{Math.round(rating * 10) / 10} / 5</span>
+            
+            {score ? (
+              <span className="mr-4">{score}⭐</span>
             ) : (
               <small>Aun no tiene calificaciones</small>
             )}

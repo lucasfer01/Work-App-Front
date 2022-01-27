@@ -53,6 +53,33 @@
     background-color: #6a040f;
 }
 
+.chatMenuList {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+.btnUnread {
+    display: flex;
+    flex-direction: row;
+    transition: 0.7s;
+    width: 30em;
+}
+
+.btnUnread :hover {
+    background-color: #ade8f4;
+    border-radius: 15px;
+}
+
+.unread {
+    background-color: #ffd000;
+    border: 1px solid #c36f09;
+    border-radius: 3px;
+    width: 20px;
+    height: 30px;
+}
+
 
 
 

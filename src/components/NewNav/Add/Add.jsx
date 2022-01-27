@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   jobsBox: {
     maxHeight: "10em",
-    overflow: "scroll",
+    overflowY: "scroll",
   },
   addedBox: {
     display: "flex",
@@ -230,7 +230,7 @@ const Add = () => {
     setOpenAlert(false);
   };
   return (
-    <>
+    <div>
       <Tooltip title="Add" aria-label="add" onClick={() => setOpen(true)}>
         <Fab color="primary" className={classes.fab}>
           <AddIcon />
@@ -238,7 +238,7 @@ const Add = () => {
       </Tooltip>
       <Modal open={open}>
         <Container className={classes.container}>
-          <form className={classes.form} autoComplete="off">
+          <form style={{marginTop:'3rem'}} className={classes.form} autoComplete="off">
             <div className={classes.item}>
               <TextField
                 id="standard-basic"
@@ -370,7 +370,7 @@ const Add = () => {
           This is a success message!
         </Alert>
       </Snackbar>
-    </>
+    </div>
   );
 };
 

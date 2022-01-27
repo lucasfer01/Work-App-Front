@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "row-reverse",
         width: 1000,
-        height: 800,
+        height: 700,
         backgroundColor: "none",
         position: "absolute",
         top: 0,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChatWindowv2 = ({ receiverData }) => {
+const ChatWindowv2 = ({ receiverData, unreadMessages }) => {
     const myId = useSelector(state => state.auth.uid);
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -48,17 +48,20 @@ const ChatWindowv2 = ({ receiverData }) => {
     const [receiverUser, setReceiverUser] = useState({});
     const [chatId, setChatId] = useState("");
     const [messages, setMessages] = useState([]);
-    console.log("userChats", users);
     const [displayInBox, setDisplayInBox] = useState(false);
     const [data, setData] = useState([]);
+    let numBerUsers = users.length;
+    const [unread, setUnread] = useState([]);
+
 
     useEffect(() => {
+        socket.emit("register", myId);
         socket.emit("data", myId);
         socket.on("data", async (data) => {
             const newData = await data;
             setData(newData);
         })
-        socket.on("message", (data) => {
+        socket.on("response", (data) => {
             socket.emit("data", myId);
         });
     }, [myId]);
@@ -76,7 +79,10 @@ const ChatWindowv2 = ({ receiverData }) => {
             setReceiverUser(receiverData);
             setOpenChat(true);
         }
-    }, [data, receiverData]);
+        if (unreadMessages?.length) {
+            setUnread(unreadMessages);
+        }
+    }, [data, receiverData, unreadMessages]);
 
 
     const handleOpenChat = (e, chatId, user) => {
@@ -84,6 +90,10 @@ const ChatWindowv2 = ({ receiverData }) => {
         setChatId(chatId);
         setReceiverUser(user);
         setOpenChat(!openChat);
+        socket.emit("read-messages", {myId, senderId: user?.usr_id});
+        socket.emit("unregister", myId);
+        socket.emit("register", myId);
+        setUnread(unread.filter(unr => unr !== user?.usr_id));
     }
 
     const handleDisplayInBox = (e) => {
@@ -97,6 +107,10 @@ const ChatWindowv2 = ({ receiverData }) => {
             return user.user.usr_username.toLowerCase().includes(value.toLowerCase());
         });
         setUsers(newUsers);
+    }
+
+    const handleReadMessage = (e, userId) => {
+        e.preventDefault();
     }
 
 
@@ -141,11 +155,18 @@ const ChatWindowv2 = ({ receiverData }) => {
                                 }
                                 {
                                     users?.map(u => (
-                                        <button key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
+                                        <button className="btnUnread" key={u.user?.usr_id} onClick={(e) => handleOpenChat(e, u.chatId, u.user)} >
                                             <Chat
                                                 receiverName={u.user?.usr_username}
                                                 receiverPhoto={u.user?.usr_photo}
                                             />
+                                            {
+                                                unread?.includes(u.user?.usr_id) && (
+                                                    <div className='unread'>
+                                                        <span>{"!"}</span>
+                                                    </div>
+                                                )
+                                            }
                                         </button>
                                     ))
                                 }

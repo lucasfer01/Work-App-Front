@@ -22,9 +22,8 @@ import { startLoading, finishLoading } from '../../../actions/ui';
 // Axios
 import axios from 'axios';
 // Url
-// import { POST_URL } from "../../../enviroment";
 import { IMG} from "../../../enviroment";
-import { FRONT_URL} from "../../../enviroment";
+import { FRONT_URL, POST_URL} from "../../../enviroment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -67,7 +66,6 @@ const Post = (props) => {
     });
   }, [authorId]);
 
-  console.log("author", author)
 
   const handleDetails = () => {
     navigate(`/post/${props.id}`);
@@ -127,9 +125,6 @@ const Post = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Contactar
-        </Button>
         <Button size="small" color="primary" onClick={handleDetails}>
           Detalles
         </Button>
