@@ -126,9 +126,6 @@ const Post = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Contactar
-        </Button>
         <Button size="small" color="primary" onClick={handleDetails}>
           Detalles
         </Button>
