@@ -17,17 +17,22 @@ const admins = Allusers.filter((u) => u.usr_role === "admin")
 
     return (
         <div className="container-fluid2">
-          <div className="row2">
-          <Leftbar/>
-            {admins?.map((userData) => (
-              <CardProfileUser
-                key={userData.usr_id}
-                id={userData.usr_id}
-                name={userData.usr_username}
-                desc={userData.usr_description}
-                img_url={userData.usr_photo && userData.usr_photo}
-              />
-            ))}
+          <div className="row2" style={{display: "grid", gridTemplateColumns: "17fr 80fr"}}>
+            <div style={{width: '100%'}}>
+              <Leftbar/>
+            </div>
+            <div style={{display: "grid",gridTemplateColumns: "repeat(4, 1fr)"}}>
+              {admins?.map((userData) => (
+                <CardProfileUser
+                  key={userData.usr_id}
+                  id={userData.usr_id}
+                  name={userData.usr_username}
+                  desc={userData.usr_description}
+                  img_url={userData.usr_photo && userData.usr_photo}
+                  style = {{width: '90%', margin: '10px'}}
+                />
+                ))}
+            </div>
           </div>
         </div>
       );
