@@ -22,6 +22,8 @@ import { startLoading, finishLoading } from '../../../actions/ui';
 // Axios
 import axios from 'axios';
 // Url
+import { POST_URL } from "../../../enviroment";
+import { IMG} from "../../../enviroment";
 import { FRONT_URL, POST_URL } from "../../../enviroment";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +50,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
   // useSelector
   const sessionUserId = useSelector(state => state.auth.uid);
+  let photo = author?.usr_photo ? author.usr_photo : IMG;
 
   // useEffect
   useEffect(() => {
@@ -103,6 +106,10 @@ const Post = (props) => {
             alt="img default..." />
         }
         <Typography gutterBottom variant="h5">
+          <img className='conversationImg'
+            src={photo}
+            alt=""
+          />
           {author?.usr_username}
         </Typography>
         <Typography gutterBottom variant="h5">

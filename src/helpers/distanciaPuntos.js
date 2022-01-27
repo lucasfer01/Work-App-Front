@@ -25,7 +25,7 @@ export default function OrdenadorDistancia(arreglo, usuario, maximo){
   async function llamarPerfil (){
     for(let ii = 0; ii < postUbicacion.length; ii++){
       const profile = await getProfile(postUbicacion[ii].post.usr_id)
-      postUbicacion[ii].perfil = profile.data; 
+      postUbicacion[ii].perfil = profile; 
     }
     postUbicacion.forEach(element => {
       var suUbicacion =  element.perfil.usr_location; 
