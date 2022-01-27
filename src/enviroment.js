@@ -34,7 +34,7 @@ export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
 export const IMG = "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
 
 // Front url
-export const FRONT_URL = 'http://localhost:3001';
+export const FRONT_URL = 'http://localhost:3000';
 
 // Front job
 export const JOB_FRONT_URL = `${FRONT_URL}/jobs`

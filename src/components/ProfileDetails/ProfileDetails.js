@@ -288,7 +288,7 @@ export const ProfileDetails = () => {
           </div>
         </div>
       </section>
-      {userId === myId ? '' : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', position: 'absolute', top: '500px', left: '100px' }}>
+      {userId === myId ? '' : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', position: 'absolute', top: '500px', left: '250px' }}>
         <label>Puntuar al usuario</label>
         <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)} />
         <label>{inputRange}⭐</label>
