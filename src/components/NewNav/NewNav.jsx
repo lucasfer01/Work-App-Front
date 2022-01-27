@@ -70,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     display: (props) => (props.open ? "none" : "flex"),
   },
+  campana: {
+    color: "white",
+  },
   badge: {
     marginRight: theme.spacing(4),
   },
@@ -156,7 +159,7 @@ const NewNav = () => {
           </Badge>
           <button onClick={handleDisplayNotifications}>
             <Badge badgeContent="!" color="secondary" className={classes.badge}>
-              <Notifications />
+              <Notifications className={classes.campana}/>
             </Badge>
           </button>
           <button onClick={profileAvatar}>

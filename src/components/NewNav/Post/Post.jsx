@@ -22,8 +22,9 @@ import { startLoading, finishLoading } from '../../../actions/ui';
 // Axios
 import axios from 'axios';
 // Url
+// import { POST_URL } from "../../../enviroment";
 import { IMG} from "../../../enviroment";
-import { FRONT_URL, POST_URL } from "../../../enviroment";
+import { FRONT_URL} from "../../../enviroment";
 
 const useStyles = makeStyles((theme) => ({
   card: {
