@@ -1,4 +1,8 @@
 /* From css.btn-detalles.io by @adamgiebl */
+
+.divleftDetail{
+    width: 17%;
+}
 .btn-detalle {
     font-family: inherit;
     font-size: 20px;
@@ -12,8 +16,10 @@
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.2s;
-    margin-left: 10%;
+    margin-left: 29%;
     margin-top: -32px;
+    width: 13%;
+    height: 50px;
    }
    
    .btn-detalle span {
