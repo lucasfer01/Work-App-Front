@@ -22,7 +22,7 @@ export const FormJobs = () => {
     e.preventDefault();
     if (!id) {
       setJobMsg("danger");
-      dispatch(setError("Please select one job that are in the list"));
+      dispatch(setError("Porfavor seleccione un trabajo de la lista"));
       return false;
     }
     try {
@@ -32,7 +32,7 @@ export const FormJobs = () => {
         id: null,
       });
       setJobMsg("success");
-      dispatch(setError("Job added successfully"));
+      dispatch(setError("Trabajo agregado correctamente"));
       window.location.reload();
     } catch (error) {
       setJobMsg("danger");
@@ -114,13 +114,13 @@ export const FormJobs = () => {
                 )}
                 {/* ---- */}
                 <label style={{ color: "#000" }}>
-                  Write and select one job
+                  Escribe y selecciona un trabajo de la lista
                 </label>
                 <input
                   type="text"
                   name="job"
                   className="form-control"
-                  placeholder="Example: Plumber"
+                  placeholder="Ejemplo: Plomero"
                   autoComplete="off"
                   value={job}
                   onChange={handleInputChange}
