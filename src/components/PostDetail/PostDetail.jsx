@@ -25,10 +25,9 @@ import Leftbar from "../NewNav/Leftbar/Leftbar"
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    marginTop: "-41%",
     width: "60%",
     marginLeft: "29%",
-    marginTop: "-62%",
-    marginBottom: theme.spacing(5),
     boxShadow: "0 1rem 1rem rgba(0, 0, 0, 0.2)",
   },
   font: {

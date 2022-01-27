@@ -88,8 +88,14 @@ const NewNav = () => {
   const [unreadMessages, setUnreadMessages] = useState([]);
   const [unreadNotifications, setUnreadNotifications] = useState([]);
   const naviagte = useNavigate();
-
-  let numberUnreadMessages = 0;
+  const [mess, setMess] = useState({
+    badgeContent: "",
+    badgeColor: "transparent",
+  });
+  const [not, setNot] = useState({
+    badgeContent: "",
+    badgeColor: "transparent",
+  });
 
   console.log("unreadmess", unreadMessages);
   console.log("unreadnot", unreadNotifications);
@@ -105,7 +111,13 @@ const NewNav = () => {
   useEffect(() => {
     socket.emit("register", myId);
     socket.on("unread-messages", (data) => {
-      setUnreadMessages(data);
+      if (data?.length) {
+        setUnreadMessages(data);
+        setMess({
+          badgeContent: data.length,
+          badgeColor: "secondary",
+        });
+      }
     })
     socket.on("unread-notifications", (data) => {
       setUnreadNotifications(data);
@@ -154,11 +166,11 @@ const NewNav = () => {
             className={classes.searchButton}
             onClick={() => setOpen(true)}
           />
-          <Badge badgeContent={4} color="secondary" className={classes.badge}>
+          <Badge badgeContent={mess.badgeContent} color={mess.badgeColor} className={classes.badge}>
             <ChatWindowv2 />
           </Badge>
           <button onClick={handleDisplayNotifications}>
-            <Badge badgeContent="!" color="secondary" className={classes.badge}>
+            <Badge badgeContent={not.badgeContent} color={not.badgeColor} className={classes.badge}>
               <Notifications className={classes.campana}/>
             </Badge>
           </button>
