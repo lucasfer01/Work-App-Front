@@ -32,7 +32,7 @@ export const CardProfileUser = (userData) => {
   };
 
   return (
-    <div className="col-12 col-md-4 col-xl-3">
+    <div style={userData.style}>
       <div className="card card__user-profile mt-3 mb-1">
         <img src={img_url} className="img-fluid" alt="job" />
         <div className="card-body">

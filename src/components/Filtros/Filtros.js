@@ -32,7 +32,7 @@ export default function Filtros({}){
  
     React.useEffect(()=>{
         async function setear(){
-            if (usuario?.usr_location){
+            if (usuario.usr_location !== null){
             const ordenado = await OrdenadorDistancia(Filtrado(storePosts, filtro),usuario, filtro.maximo); 
             // console.log("ordenado", ordenado)
             dispatch(setFilters(ordenado.map(elemento => {return elemento.post})))
