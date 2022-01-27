@@ -22,7 +22,6 @@ export const CardProfileUser = (userData) => {
       .catch(error => console.log(error));
   },[]);
 
-  console.log(score, 'scoree')
 
   const maxStars = 5;
   const starsArr = [];
