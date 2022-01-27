@@ -14,7 +14,6 @@ import Feed from "../NewNav/Feed/Feed";
 import Rightbar from "../NewNav/Rightbar/Rightbar";
 import Add from "../NewNav/Add/Add";
 import NewNav from "../NewNav/NewNav";
-import ChatWindow from "../ChatWindow/ChatWindow";
 import Jobs from "../Jobs/Jobs";
 // Components
 import { LoadingScreen } from '../loadingScreen/LoadingScreen';
@@ -76,7 +75,6 @@ export default function Home() {
         </Grid>
       </Grid>
       <Add />
-      <ChatWindow />
     </div>
   );
 };

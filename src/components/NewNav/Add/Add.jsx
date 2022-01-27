@@ -151,9 +151,9 @@ const Add = () => {
 
       setOpen(false);
 
-      alert("Post created succesufully")
-
       await dispatch(getPosts())
+
+      alert("Post created succesufully")
 
     } catch (e) {
       alert(e);
@@ -345,6 +345,7 @@ const Add = () => {
                 color="primary"
                 style={{ marginRight: 20 }}
                 onClick={handleOnSubmit}
+                disabled={postJobs.length < 1 || post.post_title === "" || post.post_shortdescription === "" || post.post_description === "" || post.post_priority === ""}
               >
                 Create
               </Button>
