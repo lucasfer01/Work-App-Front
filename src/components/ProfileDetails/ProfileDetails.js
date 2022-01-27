@@ -19,7 +19,7 @@ import Chat from "../chat/chat";
 import { LoadingScreen } from "../loadingScreen/LoadingScreen";
 import Feed from "../NewNav/Feed/Feed";
 import Jobs from "../Jobs/Jobs";
-import { DEF_BANNER, IMG } from "../../enviroment";
+import { DEF_BANNER, IMG, POST_USER } from "../../enviroment";
 import { FormJobs } from "../formJobs/FormJobs";
 import ChatMessages from "../ChatWindow/ChatMessages";
 import { Workerpost } from "../Workerpost/Workerpost";
@@ -33,6 +33,7 @@ import {
   Button,
 } from "@material-ui/core";
 import BuildIcon from '@material-ui/icons/Build';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -64,10 +65,14 @@ export const ProfileDetails = () => {
   const [open, setOpen] = useState(false);
   const { userId } = useParams();
   const myId = useSelector((state) => state.auth.uid);
+  const [inputRange, setInputRange] = useState(3);
+  const [punteadoCorrectamente, setPunteadoCorrectamente] = useState(false);
 
   let user = useSelector((state) => state.profile.user);
   let { email } = useSelector((state) => state.auth);
   const loader = useSelector((state) => state.ui.loading);
+
+  console.log('user',inputRange)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -280,6 +285,19 @@ export const ProfileDetails = () => {
           </div>
         </div>
       </section>
+      {userId === myId ? '' : <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',position:'absolute',top:'500px',left:'100px'}}>
+        <label>Puntuar al usuario</label>
+        <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)}/>
+        <label>{inputRange}⭐</label>
+        <button onClick={() => {
+          const puntaje = (user.usr_score ? (parseInt(user.usr_score) + parseInt(inputRange)) / 2 : inputRange);
+          console.log('puntaje',puntaje)
+          axios.put(`${POST_USER}/${userId}`, {usr_score: puntaje})
+            .then(response => setPunteadoCorrectamente(true))
+            .catch(error => console.log(error));
+        }}>Puntuar</button>
+        {punteadoCorrectamente && <h4>Punteado correctamente ✔</h4>}
+      </div>}
     </div>
   );
 };
