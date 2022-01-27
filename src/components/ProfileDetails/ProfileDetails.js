@@ -24,10 +24,44 @@ import { FormJobs } from "../formJobs/FormJobs";
 import ChatMessages from "../ChatWindow/ChatMessages";
 import { Workerpost } from "../Workerpost/Workerpost";
 import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
+import {
+  makeStyles,
+  Container,
+  Fab,
+  Modal,
+  Tooltip,
+  Button,
+} from "@material-ui/core";
+import BuildIcon from '@material-ui/icons/Build';
+
+const useStyles = makeStyles((theme) => ({
+  fab: {
+    bottom: "-5px",
+    left: "125px",
+  },
+  container: {
+    width: 320,
+    height: 380,
+    backgroundColor: "white",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100vw",
+      height: "100vh",
+    },
+  },
+}));
+
 
 export const ProfileDetails = () => {
+  const classes = useStyles();
   const [viewChat, setViewChat] = useState(false);
   const [postOrWorkerpost, setPostOrWorkerpost] = useState({ show: 'post' });
+  const [open, setOpen] = useState(false);
   const { userId } = useParams();
   const myId = useSelector((state) => state.auth.uid);
 
@@ -48,36 +82,71 @@ export const ProfileDetails = () => {
   function button() {
     if (user?.usr_email === email) {
       return (
+        <>
+        <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
+        <Fab color="primary" className={classes.fab}>
+          <BuildIcon />
+        </Fab>
+      </Tooltip>
+      <Modal open={open}>
+        <Container className={classes.container}>
         <div className="boton-portada">
           <Link to={`/editprofile/${user.usr_id}`}>
-            <Boton type="button" colorBtn="btn_azul">
+            <div className="btn-pro">
+            <Button type="button" color="primary"  variant="outlined">
               <BsFillGearFill /> Editar Perfil
-            </Boton>
+            </Button>
+            </div>
           </Link>
-          <Boton
+          <div className="btn-pro">
+          <Button
+            variant="outlined"
             data-toggle="modal"
             data-target="#editUbicacion"
-            colorBtn="btn_azul"
+            color="primary"
           >
             Editar Ubicación
-          </Boton>
+          </Button>
+          </div>
           {/* <Link to="/addjob"> */}
-          <Boton
+          <div className="btn-pro">
+          <Button
+            variant="outlined"
             data-toggle="modal"
-            colorBtn="btn_azul"
+            color="primary"
             data-toggle="modal"
             data-target="#addJobModal"
           >
             Agregar trabajo
-          </Boton>
+          </Button>
+          </div>
           {/*  </Link> */}
+          <div className="btn-pro">
           <Link to={`/profile/${userId}/alert`}>
-            <Boton colorBtn="btn_azul"> Crear Alerta de Empleo </Boton>
+            <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
           </Link>
           <EditUbicacion profile={user} id={userId} />
 
           <FormJobs />
+          </div>
+          <div className="btn-pro">
+          <Button color="primary" variant="outlined">
+        <Link to='/create-workerpost'>Crear Workerpost</Link>
+      </Button>
+      </div>
+          <div className="btn-salir">
+          <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              </div>
         </div>
+        </Container>
+        </Modal>
+        </>
       );
     } else
       return (
@@ -211,10 +280,6 @@ export const ProfileDetails = () => {
           </div>
         </div>
       </section>
-      
-      <Boton colorBtn="btn_azul">
-        <Link to='/create-workerpost'>Crear Workerpost</Link>
-      </Boton>
     </div>
   );
 };
