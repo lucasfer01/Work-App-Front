@@ -71,7 +71,6 @@ export default function Home() {
           }
         </Grid>
         <Grid item sm={3} className={classes.right}>
-          <Rightbar />
         </Grid>
       </Grid>
       <Add />

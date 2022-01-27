@@ -57,7 +57,7 @@ export function Workerpost({ workerposts }) {
 
     return <div className={workerpostStyle.container}>
         {workerposts.length ?
-            workerposts.map(workerpost => <div key={workerpost.wp_id}>
+            workerposts.map(workerpost => <div style={{position:'relative', display:'flex', justifyContent:'center', alignItems:'center', border: '1px solid black', flexDirection:'column', marginBottom:'2rem'}} key={workerpost.wp_id}>
                 <img src={workerpost.wp_photo && workerpost.wp_photo[0]} width='500px' alt="foto workerpost" />
                 <h1>{workerpost.wp_title}</h1>
                 <h2>{workerpost.wp_description}</h2>
