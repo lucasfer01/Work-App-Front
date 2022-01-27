@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 // Loader gif
 import spinner from './assets/loading-buffering.gif';
 import Boton from '../Boton/Boton';
+import Leftbar from "../NewNav/Leftbar/Leftbar"
+import "./worker.css"
 
 export function FormWorkerpost() {
     // workerpost
@@ -71,15 +73,32 @@ export function FormWorkerpost() {
             .catch(error => console.log(error));
     }
 
-    return <form onSubmit={handleOnSubmit}>
-        <label>Titulo</label>
-        <input type="text" name='wp_title' value={workerpost.wp_title} onChange={handleOnChange} />
-
-        <label>Descripcion</label>
-        <textarea style={{ resize: 'none' }} name="wp_description" value={workerpost.wp_description} onChange={handleOnChange}></textarea>
-
-        <label>Fotos</label>
-        <input type="file" onChange={handleAddPhoto} />
+    return (
+        <div>
+            <div className='div-left'>
+        <Leftbar />
+        </div>
+    <form className='form-register2' onSubmit={handleOnSubmit}>
+        <div>
+        <h2>Workerpost</h2>
+        </div>
+        <div>
+        <label className='labels'>Titulo</label>
+        <input className='controls2' type="text" name='wp_title' value={workerpost.wp_title} onChange={handleOnChange} />
+        </div>
+        <div>
+        <label className='labels'>Descripcion</label>
+        <input
+            className="controls2"
+            name="wp_description"
+            type="text"
+            value={workerpost.wp_description}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div>
+        <label className='labels'>Fotos</label>
+        <input className='controls2' type="file" onChange={handleAddPhoto} />
         {uploading && <h3>Cargando Archivo...</h3>}
 
         {workerpost.wp_photo.length ? workerpost.wp_photo.map(foto => <div key={foto}>
@@ -98,10 +117,13 @@ export function FormWorkerpost() {
                 })
             }}>X</button>
         </div>) : ''}
+        </div>
 
         <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', flexDirection:'column'}}>
             <Boton colorBtn="btn_azul" onClick={() => setLoader(true)} type='submit'>Crear Workerpost</Boton>
             {loader && <img src={spinner} width='16px' alt='loader'/>}
         </div>
-    </form>;
+    </form>
+    </div>
+    )
 }
