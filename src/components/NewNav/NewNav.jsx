@@ -129,7 +129,7 @@ const NewNav = () => {
 
   return (
     <div>
-      <AppBar style={{position: "sticky"}}>
+      <AppBar style={{ position: "fixed" }}>
       <Toolbar className={classes.toolbar}>
         <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
