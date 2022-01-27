@@ -24,6 +24,7 @@ import { FormJobs } from "../formJobs/FormJobs";
 import ChatMessages from "../ChatWindow/ChatMessages";
 import { Workerpost } from "../Workerpost/Workerpost";
 import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
+import Leftbar from "../NewNav/Leftbar/Leftbar";
 import {
   makeStyles,
   Container,
@@ -38,7 +39,7 @@ import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   fab: {
     bottom: "-5px",
-    left: "125px",
+    left: "-50px",
   },
   container: {
     width: 320,
@@ -159,6 +160,9 @@ export const ProfileDetails = () => {
     <LoadingScreen />
   ) : (
     <div>
+      <div className="left-prof">
+        <Leftbar />
+      </div>
       <section className="seccion-perfil-usuario">
         <div className="perfil-usuario-header">
           <div className="perfil-usuario-portada">
