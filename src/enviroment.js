@@ -6,7 +6,6 @@ export const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/henrypf/upload";
 
 export const BASE_URL = "https://work-app-henry.herokuapp.com";
 
-
 // export const BASE_URL = "http://localhost:3000";
 
 // Url de oficios
@@ -34,7 +33,7 @@ export const POSTPAGO_URL = `${CHECKOUT_URL}/pagos`
 export const IMG = "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
 
 // Front url
-export const FRONT_URL = 'http://localhost:3001';
+export const FRONT_URL = 'https://work-app-front.vercel.app';
 
 // Front job
 export const JOB_FRONT_URL = `${FRONT_URL}/jobs`

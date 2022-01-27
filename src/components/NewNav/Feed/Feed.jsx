@@ -17,7 +17,7 @@ const Feed = ({profilePosts}) => {
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.posts.filterPost);
   const posts = profilePosts ? profilePosts : allPosts;
-  console.log("profilepost", posts)
+
 
   // Mostrar filtro
   const [showFilter, setShowFilter] = useState(true);

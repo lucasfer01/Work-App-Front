@@ -1,42 +1,31 @@
 .message{
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 
-.messageTop{
+.body {
     display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 30em;
 }
 
 .messageImg{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
     object-fit: cover;
     margin-right: 10px;
 }
 
-.messageText{
-    padding: 10px;
-    border-radius: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    background-color: #1877f2;
-    color: white;
-    max-width: 300px;
-}
 
 .messageBottom{
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
-    margin-top: 10px;
 }
 
-.message.own{
-    align-items: flex-end;
-}
 
-.message.own .messageText{
-    background-color: rgb(245, 241, 241);
-    color: black;
+.messageinfo {
+    display: flex;
+    flex-direction: column;
 }

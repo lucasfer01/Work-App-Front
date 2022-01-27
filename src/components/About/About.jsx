@@ -21,7 +21,7 @@ const admins = Allusers.filter((u) => u.usr_role === "admin")
             <div style={{width: '100%'}}>
               <Leftbar/>
             </div>
-            <div style={{display: "grid",gridTemplateColumns: "repeat(4, 1fr)"}}>
+            <div style={{display: "grid",gridTemplateColumns: "repeat(4, 1fr)", marginTop:'5rem'}}>
               {admins?.map((userData) => (
                 <CardProfileUser
                   key={userData.usr_id}

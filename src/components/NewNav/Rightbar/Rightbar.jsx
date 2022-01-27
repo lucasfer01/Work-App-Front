@@ -6,7 +6,9 @@ import {
     Divider,
   } from "@material-ui/core";
   // Url
-  import { FRONT_URL } from "../../../enviroment";
+  import { FRONT_URL, JOB_URL } from "../../../enviroment";
+  import axios from 'axios';
+import { useState, useEffect } from "react";
   
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -28,13 +30,29 @@ import {
   
   const Rightbar = () => {
     const classes = useStyles();
+
+    const [jobId, setJobId] = useState({Carpintero: '',Electricista: '',Programador: '', Albañil:'', Mecanico: ''});
+
+    const jobs = ['Carpintero', 'Electricista', 'Programador', 'Albañil', 'Mecanico']
+
+    useEffect(() => {
+      const promises = jobs.map(job => axios.get(`${JOB_URL}/job?jobName=${job}`));
+
+      Promise.all(promises)
+        .then(response => response.data.map(job => setJobId({...jobId,[job.job_name]:job.job_id})))
+        .catch(error => console.log(error));
+    },[]);
+
+    console.log(jobId);
+
+    
     return (
       <Container className={classes.container}>
         <Typography className={classes.title} gutterBottom>
           Categorias que puedan servirle
         </Typography>
         
-        <Link href={`${FRONT_URL}/job/19`} className={classes.link} variant="body2">
+        <Link href={`${FRONT_URL}/job/29`} className={classes.link} variant="body2">
           Carpintero
         </Link>
         <Link href={`${FRONT_URL}/job/29`} className={classes.link} variant="body2">

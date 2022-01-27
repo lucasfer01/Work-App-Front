@@ -56,6 +56,18 @@ const useStyles = makeStyles((theme) => ({
       height: "100vh",
     },
   },
+  puntuar: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  puntuarbox: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "5em",
+    marginBottom: "1em",
+  }
 }));
 
 
@@ -73,12 +85,10 @@ export const ProfileDetails = () => {
   let { email } = useSelector((state) => state.auth);
   const loader = useSelector((state) => state.ui.loading);
 
-  console.log('user', inputRange)
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId));
-    console.log(user.workerPosts);
   }, [userId, dispatch]);
 
   const contactUser = () => {
@@ -179,22 +189,34 @@ export const ProfileDetails = () => {
               />
             </div>
             {button()}
-            {
-              viewChat && (
-                <ChatMessages
-                  myId={myId}
-                  receiverId={user.usr_id}
-                  receiverName={user.usr_name}
-                  receiverPhoto={user.usr_photo}
-                />
-              )
-            }
           </div>
         </div>
         <div className="perfil-usuario-body">
           <div className="perfil-usuario-bio">
             <h3 className="titulo">{user?.usr_username}</h3>
             <p className="texto">{user?.usr_description}</p>
+          </div>
+          <div className={classes.puntuarbox}>
+            {userId === myId ? '' : <div className={classes.puntuar} >
+              <label>Puntuar al usuario</label>
+              <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)} />
+              <label>{inputRange}⭐</label>
+              <button onClick={() => {
+                const puntaje = (user.usr_score ? (parseInt(user.usr_score) + parseInt(inputRange)) / 2 : inputRange);
+                console.log('puntaje', puntaje)
+                axios.put(`${POST_USER}/${userId}`, { usr_score: puntaje })
+                  .then(response => setPunteadoCorrectamente(true))
+                  .catch(error => console.log(error));
+              }}>Puntuar</button>
+              {punteadoCorrectamente && <h4>Punteado correctamente ✔</h4>}
+            </div>}
+            {
+              user?.usr_email !== email && (
+                <div>
+                  <ChatWindowv2 receiverData={user} />
+                </div>
+              )
+            }
           </div>
           <div className="perfil-usuario-footer">
             <ul className="lista-datos">
@@ -278,29 +300,10 @@ export const ProfileDetails = () => {
                 <FaFacebook className="icons" />
               </a>
             )}
-            {
-              user?.usr_email !== email && (
-                <div>
-                  <ChatWindowv2 receiverData={user} />
-                </div>
-              )
-            }
           </div>
         </div>
       </section>
-      {userId === myId ? '' : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', position: 'absolute', top: '500px', left: '100px' }}>
-        <label>Puntuar al usuario</label>
-        <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)} />
-        <label>{inputRange}⭐</label>
-        <button onClick={() => {
-          const puntaje = (user.usr_score ? (parseInt(user.usr_score) + parseInt(inputRange)) / 2 : inputRange);
-          console.log('puntaje', puntaje)
-          axios.put(`${POST_USER}/${userId}`, { usr_score: puntaje })
-            .then(response => setPunteadoCorrectamente(true))
-            .catch(error => console.log(error));
-        }}>Puntuar</button>
-        {punteadoCorrectamente && <h4>Punteado correctamente ✔</h4>}
-      </div>}
+
     </div>
   );
 };

@@ -19,3 +19,12 @@
 .item:hover {
     background-color: #ccc;
 }
+
+.notbox {
+    position: absolute;
+    right: 1em;
+    background-color: #a2d2ff;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 100;
+}
