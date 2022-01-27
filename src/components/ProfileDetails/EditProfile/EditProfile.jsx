@@ -7,6 +7,7 @@ import { startUploading } from "../../../helpers/imageUpload";
 import Boton from "../../Boton/Boton";
 import { countries } from "./countries";
 import "./editProfile.css";
+import Leftbar from "../../NewNav/Leftbar/Leftbar"
 
 
 export function EditProfile() {
@@ -132,6 +133,9 @@ export function EditProfile() {
 
   return (
     <div>
+      <div className="divEdit-leftb">
+       <Leftbar />
+      </div>
       <form className="form-register">
         <div>
           <h2>Editar Perfil</h2>
