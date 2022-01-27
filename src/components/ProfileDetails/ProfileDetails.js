@@ -179,22 +179,19 @@ export const ProfileDetails = () => {
               />
             </div>
             {button()}
-            {
-              viewChat && (
-                <ChatMessages
-                  myId={myId}
-                  receiverId={user.usr_id}
-                  receiverName={user.usr_name}
-                  receiverPhoto={user.usr_photo}
-                />
-              )
-            }
           </div>
         </div>
         <div className="perfil-usuario-body">
           <div className="perfil-usuario-bio">
             <h3 className="titulo">{user?.usr_username}</h3>
             <p className="texto">{user?.usr_description}</p>
+            {
+              user?.usr_email !== email && (
+                <div style={{width: "50em", brackGroundColor: "red"}}>
+                  <ChatWindowv2 receiverData={user} />
+                </div>
+              )
+            }
           </div>
           <div className="perfil-usuario-footer">
             <ul className="lista-datos">
@@ -278,13 +275,6 @@ export const ProfileDetails = () => {
                 <FaFacebook className="icons" />
               </a>
             )}
-            {
-              user?.usr_email !== email && (
-                <div>
-                  <ChatWindowv2 receiverData={user} />
-                </div>
-              )
-            }
           </div>
         </div>
       </section>
