@@ -41,8 +41,6 @@ export const JOB_FRONT_URL = `${FRONT_URL}/jobs`
 // Post front url
 export const POST_FRONT_URL = `${FRONT_URL}/post`;
 
-// Workerpost front url
-export const WORKERPOST_URL = `${BASE_URL}/workerpost`;
 
 //default banner
 export const DEF_BANNER = "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"

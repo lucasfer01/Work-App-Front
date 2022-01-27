@@ -10,8 +10,8 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     card: {
-      marginBottom: "-8px",
-      marginTop: "5%",
+      marginBottom: "-11px",
+      marginTop: "13%",
       display: "inline-flex",
       width: "30%",
       marginLeft: "20px",
