@@ -4,9 +4,9 @@ export const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/henrypf/upload";
 
 // url base
 
-// export const BASE_URL = "https://work-app-henry.herokuapp.com";
+export const BASE_URL = "https://work-app-henry.herokuapp.com";
 
-export const BASE_URL = "http://localhost:3000";
+//export const BASE_URL = "http://localhost:3000";
 
 // Url de oficios
 export const JOB_URL = `${BASE_URL}/job`;
@@ -40,7 +40,6 @@ export const JOB_FRONT_URL = `${FRONT_URL}/jobs`
 
 // Post front url
 export const POST_FRONT_URL = `${FRONT_URL}/post`;
-
 
 //default banner
 export const DEF_BANNER = "https://leadcoat.com/wp-content/uploads/2019/02/Default-Banner.png"
