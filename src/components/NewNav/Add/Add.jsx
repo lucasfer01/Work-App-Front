@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   jobsBox: {
     maxHeight: "10em",
-    overflow: "scroll",
+    overflowY: "scroll",
   },
   addedBox: {
     display: "flex",
