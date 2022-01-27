@@ -89,12 +89,12 @@ const NewNav = () => {
   const [unreadNotifications, setUnreadNotifications] = useState([]);
   const naviagte = useNavigate();
   const [mess, setMess] = useState({
-    badgeContent: "",
+    badgeContent: unreadMessages.length ? "!" : "",
     badgeColor: "transparent",
   });
   const [not, setNot] = useState({
-    badgeContent: "",
-    badgeColor: "transparent",
+    badgeContent: notifications.length ? "!" : "",
+    badgeColor: notifications.length ? "secondary" : "transparent",
   });
 
   console.log("unreadmess", unreadMessages);
@@ -112,24 +112,38 @@ const NewNav = () => {
     socket.emit("register", myId);
     socket.on("unread-messages", (data) => {
       if (data?.length) {
-        setUnreadMessages(data);
+        setUnreadMessages([...unreadMessages, data]);
         setMess({
-          badgeContent: data.length,
+          badgeContent: "!",
           badgeColor: "secondary",
         });
       }
     })
     socket.on("unread-notifications", (data) => {
-      setUnreadNotifications(data);
+      setNotifications(data);
+      setNot({
+        badgeContent: data.length ? "!" : "",
+        badgeColor: data.length ? "secondary" : "transparent",
+      });
     })
     socket.on("new-post", async (data) => {
       const res = await data;
       setNotifications([...notifications, res]);
+      setNot({
+        badgeContent: notifications.length ? "!" : "",
+        badgeColor: notifications.length ? "secondary" : "transparent",
+      });
     });
+    socket.on("response", (data) => {
+      setUnreadMessages([
+        ...unreadMessages,
+        data.sender
+      ])
+    })
     return () => {
       socket.emit("unregister", myId);
     };
-  }, [myId, notifications]);
+  }, [myId, unreadMessages, mess]);
 
 
   const profile = useSelector((state) => state.profile.ownProfile)
@@ -142,11 +156,40 @@ const NewNav = () => {
   const handleDisplayNotifications = (e) => {
     e.preventDefault();
     setDisplayNotifications(!displayNotifications);
+    setUnreadNotifications([]);
+    setNot({
+      badgeContent: "",
+      badgeColor: "transparent",
+    });
+    socket.emit("read-notifications", {myId, postId: e.target.value});
+    socket.emit("unregister", myId);
+    socket.emit("register", myId);
+  }
+
+  const handleUnreadMessages = (e) => {
+    e.preventDefault();
+    setUnreadMessages([]);
+    setMess({
+      badgeContent: "",
+      badgeColor: "transparent",
+    });
+  }
+
+  const handleReadNotifications = (e) => {
+    e.preventDefault();
+    setUnreadNotifications([]);
+    setNot({
+      badgeContent: "",
+      badgeColor: "transparent",
+    });
+    socket.emit("read-notifications", {myId, postId: e.target.value});
+    socket.emit("unregister", myId);
+    socket.emit("register", myId);
   }
 
   return (
     <div>
-      <AppBar style={{ position: "fixed" }}>
+      <AppBar style={{ position: "sticky" }}>
       <Toolbar className={classes.toolbar}>
         <Link to="/">
           <Typography variant="h6" className={classes.logoLg}>
@@ -167,7 +210,9 @@ const NewNav = () => {
             onClick={() => setOpen(true)}
           />
           <Badge badgeContent={mess.badgeContent} color={mess.badgeColor} className={classes.badge}>
-            <ChatWindowv2 />
+            <button onclick={handleUnreadMessages}>
+            <ChatWindowv2 unreadMessages={unreadMessages} />
+            </button>
           </Badge>
           <button onClick={handleDisplayNotifications}>
             <Badge badgeContent={not.badgeContent} color={not.badgeColor} className={classes.badge}>
@@ -185,9 +230,18 @@ const NewNav = () => {
     </AppBar>
       {
           displayNotifications && (
-            <div style={{position: "fixed", top: "40px",right: "30px", zIndex: "100"}}>
-              <Notification />
-            </div>
+            notifications?.map(notif => {
+              return (
+                <div>
+                <Notification
+                  key={notif?.id}
+                  post={notif?.post}
+                  jobs={notif?.jobs}
+                />
+                <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
+                </div>
+              )
+            })
           )
         }
     </div>
