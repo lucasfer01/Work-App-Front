@@ -72,7 +72,7 @@ export const ProfileDetails = () => {
   let { email } = useSelector((state) => state.auth);
   const loader = useSelector((state) => state.ui.loading);
 
-  console.log('user',inputRange)
+  console.log('user', inputRange)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -88,69 +88,69 @@ export const ProfileDetails = () => {
     if (user?.usr_email === email) {
       return (
         <>
-        <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
-        <Fab color="primary" className={classes.fab}>
-          <BuildIcon />
-        </Fab>
-      </Tooltip>
-      <Modal open={open}>
-        <Container className={classes.container}>
-        <div className="boton-portada">
-          <Link to={`/editprofile/${user.usr_id}`}>
-            <div className="btn-pro">
-            <Button type="button" color="primary"  variant="outlined">
-              <BsFillGearFill /> Editar Perfil
-            </Button>
-            </div>
-          </Link>
-          <div className="btn-pro">
-          <Button
-            variant="outlined"
-            data-toggle="modal"
-            data-target="#editUbicacion"
-            color="primary"
-          >
-            Editar Ubicación
-          </Button>
-          </div>
-          {/* <Link to="/addjob"> */}
-          <div className="btn-pro">
-          <Button
-            variant="outlined"
-            data-toggle="modal"
-            color="primary"
-            data-toggle="modal"
-            data-target="#addJobModal"
-          >
-            Agregar trabajo
-          </Button>
-          </div>
-          {/*  </Link> */}
-          <div className="btn-pro">
-          <Link to={`/profile/${userId}/alert`}>
-            <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
-          </Link>
-          <EditUbicacion profile={user} id={userId} />
+          <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
+            <Fab color="primary" className={classes.fab}>
+              <BuildIcon />
+            </Fab>
+          </Tooltip>
+          <Modal open={open}>
+            <Container className={classes.container}>
+              <div className="boton-portada">
+                <Link to={`/editprofile/${user.usr_id}`}>
+                  <div className="btn-pro">
+                    <Button type="button" color="primary" variant="outlined">
+                      <BsFillGearFill /> Editar Perfil
+                    </Button>
+                  </div>
+                </Link>
+                <div className="btn-pro">
+                  <Button
+                    variant="outlined"
+                    data-toggle="modal"
+                    data-target="#editUbicacion"
+                    color="primary"
+                  >
+                    Editar Ubicación
+                  </Button>
+                </div>
+                {/* <Link to="/addjob"> */}
+                <div className="btn-pro">
+                  <Button
+                    variant="outlined"
+                    data-toggle="modal"
+                    color="primary"
+                    data-toggle="modal"
+                    data-target="#addJobModal"
+                  >
+                    Agregar trabajo
+                  </Button>
+                </div>
+                {/*  </Link> */}
+                <div className="btn-pro">
+                  <Link to={`/profile/${userId}/alert`}>
+                    <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
+                  </Link>
+                  <EditUbicacion profile={user} id={userId} />
 
-          <FormJobs />
-          </div>
-          <div className="btn-pro">
-          <Button color="primary" variant="outlined">
-        <Link to='/create-workerpost'>Crear Workerpost</Link>
-      </Button>
-      </div>
-          <div className="btn-salir">
-          <Button
-                variant="outlined"
-                color="secondary"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
+                  <FormJobs />
+                </div>
+                <div className="btn-pro">
+                  <Button color="primary" variant="outlined">
+                    <Link to='/create-workerpost'>Crear Workerpost</Link>
+                  </Button>
+                </div>
+                <div className="btn-salir">
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => setOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </div>
-        </div>
-        </Container>
-        </Modal>
+            </Container>
+          </Modal>
         </>
       );
     }
@@ -218,21 +218,14 @@ export const ProfileDetails = () => {
           {/* <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards> */}
           {/* </div> */}
           <div>{/* Aquí van los workerposts */}</div>
-              <div className="vtn1">
-                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Button>
-                </div>
-                <div className="vtn2">
-                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Button>
-              </div>
-              <div className="divChat2">
-                {
-                  user?.usr_email !== email && (
-                    <ChatWindowv2 receiverData={user} />
-                  )
-                }
-              </div>
+          <div className="vtn1">
+            <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({ show: 'post' })}>Posts</Button>
+          </div>
+          <div className="vtn2">
+            <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({ show: 'workerpost' })}>WorkerPost</Button>
+          </div>
           <div className="div-posted">
-            {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}
+            {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts} />}
           </div>
           <div className="redes-sociales">
             {user.usr_social?.linkedin && (
@@ -249,49 +242,56 @@ export const ProfileDetails = () => {
             )}
             {user.usr_social?.github && (
               <a
-              href={user?.usr_social?.github ? user?.usr_social.github : null}
-              target="_blank"
-              className="boton-redes github"
-              rel="noreferrer"
+                href={user?.usr_social?.github ? user?.usr_social.github : null}
+                target="_blank"
+                className="boton-redes github"
+                rel="noreferrer"
               >
                 <BsGithub fill="#000" className="icons" />
               </a>
             )}
             {user.usr_social?.instagram && (
               <a
-              href={
+                href={
                   user.usr_social?.instagram ? user.usr_social.instagram : null
                 }
                 target="_blank"
                 className="boton-redes instagram"
                 rel="noreferrer"
-                >
+              >
                 <FaInstagram className="icons" />
               </a>
             )}
             {user.usr_social?.facebook && (
               <a
-              href={
+                href={
                   user?.usr_social?.facebook ? user?.usr_social.facebook : null
                 }
                 target="_blank"
                 className="boton-redes facebook"
                 rel="noreferrer"
-                >
+              >
                 <FaFacebook className="icons" />
               </a>
             )}
+            {
+              user?.usr_email !== email && (
+                <div>
+                  <ChatWindowv2 receiverData={user} />
+                </div>
+              )
+            }
           </div>
         </div>
       </section>
-      {userId === myId ? '' : <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',position:'absolute',top:'500px',left:'100px'}}>
+      {userId === myId ? '' : <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', position: 'absolute', top: '500px', left: '100px' }}>
         <label>Puntuar al usuario</label>
-        <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)}/>
+        <input type='range' min='1' max='5' value={inputRange} onChange={(e) => setInputRange(e.target.value)} />
         <label>{inputRange}⭐</label>
         <button onClick={() => {
           const puntaje = (user.usr_score ? (parseInt(user.usr_score) + parseInt(inputRange)) / 2 : inputRange);
-          console.log('puntaje',puntaje)
-          axios.put(`${POST_USER}/${userId}`, {usr_score: puntaje})
+          console.log('puntaje', puntaje)
+          axios.put(`${POST_USER}/${userId}`, { usr_score: puntaje })
             .then(response => setPunteadoCorrectamente(true))
             .catch(error => console.log(error));
         }}>Puntuar</button>

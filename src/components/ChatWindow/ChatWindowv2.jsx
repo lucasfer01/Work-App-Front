@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "row-reverse",
         width: 1000,
-        height: 800,
+        height: 700,
         backgroundColor: "none",
         position: "absolute",
         top: 0,
@@ -53,15 +53,15 @@ const ChatWindowv2 = ({ receiverData }) => {
     const [data, setData] = useState([]);
     let numBerUsers = users.length;
 
-    console.log("receiverData", users);
 
     useEffect(() => {
+        socket.emit("register", myId);
         socket.emit("data", myId);
         socket.on("data", async (data) => {
             const newData = await data;
             setData(newData);
         })
-        socket.on("message", (data) => {
+        socket.on("response", (data) => {
             socket.emit("data", myId);
         });
     }, [myId]);
