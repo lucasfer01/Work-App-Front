@@ -11,27 +11,29 @@ export const CardsProfileUser = () => {
   const { jobId } = useParams();
 
   useEffect(() => {
-    axios.get(`${JOB_URL}/${jobId}`)
-      .then(res => {
-        setUsers(res.data.users);
+    axios
+      .get(`${JOB_URL}/${jobId}`)
+      .then((res) => {
+        setUsers(res.data.users.sort((a,b) => a.usr_relevanceScore - b.usr_relevanceScore).reverse());
         setJob(res.data);
       })
-      .catch(error => console.log(error));
-  }, [jobId])
+      .catch((error) => console.log(error));
+  }, [jobId]);
 
-  console.log('users', users, 'job', job);
+  console.log('user', users)
 
   return (
     <div className="container-fluid">
       <div className="row">
         {users.map((userData) => (
-          <CardProfileUser key={userData.usr_id}
-                           id={userData.usr_id}
-                           name={userData.usr_username}
-                           job={job.job_name}
-                           desc={userData.usr_description}
-                           img_url={userData.usr_photo && userData.usr_photo}
-                           />
+          <CardProfileUser
+            key={userData.usr_id}
+            id={userData.usr_id}
+            name={userData.usr_username}
+            job={job.job_name}
+            desc={userData.usr_description}
+            img_url={userData.usr_photo && userData.usr_photo}
+          />
         ))}
       </div>
     </div>

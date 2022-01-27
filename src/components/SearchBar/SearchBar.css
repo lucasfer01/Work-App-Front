@@ -1,24 +1,26 @@
 .searchInputs {
-    margin-top: 125px;
+    margin-top: 33px;
     display: flex;
   }
   
   .search input {
     background-color: whitesmoke;
     border: 0;
-    border-radius: 25px;
+    border-radius: 15px;
     font-size: 18px;
     padding: 15px;
-    height: 33px;
-    width: 307px;
+    height: 32px;
+    width: 461px;
+    margin-top: -17px;
+    margin-left: 16%;
   }
   
   .searchIcon {
     height: 37px;
     width: 50px;
-    background-color: white;
     display: grid;
     place-items: center;
+    margin-top: -5px;
   }
   
   input:focus {
@@ -26,16 +28,16 @@
   }
   .searchIcon svg {
     font-size: 35px;
+    margin-top: -30px;
   }
   
   .dataResult {
-    margin-top: 5px;
+    margin-top: -15px;
     width: 300px;
-    height: 200px;
+    height: 41px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    overflow: hidden;
-    overflow-y: auto;
+    margin-left: 45%;
   }
   
   .dataResult::-webkit-scrollbar {
@@ -47,7 +49,8 @@
     height: 50px;
     display: flex;
     align-items: center;
-    color: black;
+    color: gray;
+    background-color: white;
   }
   
   .dataItem p {

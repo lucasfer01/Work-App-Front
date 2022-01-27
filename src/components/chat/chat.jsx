@@ -4,36 +4,37 @@ import { profileUser } from "../../actions/profileActions";
 import "./chat.css";
 import axios from "axios";
 import socket from "../socket";
+import { getProfile } from "../../controllers";
 
 
-export default function Chat({ userProfile, userid}) {
+
+export default function Chat({receiverId}) {
     const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
-
+    const senderUserId = user.uid;
     const [chat, setChat] = useState({
-        transmitter: user.uid,
-        receiver: userid,
+        sender: user.uid,
+        receiver: receiverId,
         message: "",
     });
 
-    console.log("user", user);
-    console.log("messages", messages);
-
     useEffect(() => {
-        socket.emit("register", user.uid);
-        socket.on("message", (data) => {
-            console.log("data: ", data);
+        socket.emit("register", senderUserId);
+        socket.emit("chat-history", { userId1: senderUserId, userId2: receiverId });
+        socket.on("chat-history", async (data) => {
+            const chatHistory = await data;
+            setMessages(chatHistory);
+        });
+        socket.on("response", (data) => {
+            console.log("response: ", data);
             setMessages(messages => [...messages, data]);
             setChat({
                 ...chat,
-                receiver: data.transmitter,
+                receiver: data.sender,
             })
         });
-        return () => {
-            socket.off("message");
-        }
-    }, []);
+    }, [receiverId]);
 
     const divRef = useRef(null)
 
@@ -51,10 +52,7 @@ export default function Chat({ userProfile, userid}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessages(messages => [...messages, chat]);
-        socket.emit("message", {
-            ...chat,
-            isResponse: true,
-        });
+        socket.emit("message", chat);
     }
 
     return (
@@ -64,8 +62,9 @@ export default function Chat({ userProfile, userid}) {
                     {
                         messages.map((m, i) => {
                             return (
-                                <div key={i} className={m.isResponse ? "chat-message-response" : "chat-message"}>
-                                    <p className="user-name-message">{m.userName}</p>
+                                <div key={i} className={m.sender === user.uid ? "chat-message" : "chat-message-response"}>
+                                    <p className="user-name-message">{m.sender}</p>
+
                                     <p className="message-body">{m.message}</p>
                                 </div>
                             )

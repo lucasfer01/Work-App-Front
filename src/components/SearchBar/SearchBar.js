@@ -61,7 +61,7 @@ export const SearchBar = () => {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a key={value.job_id} href='#' className="dataItem" target="_blank">
+              <a key={value.job_id} href={`/job/${value.job_id}`} className="dataItem" target="_blank" rel="noreferrer">
                 <p>{value.job_name} </p>
               </a>
             );

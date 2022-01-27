@@ -1,145 +1,284 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { profileUser } from "../../actions/profileActions";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
-import { FaRegGrinBeam } from "react-icons/fa";
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaCity } from "react-icons/fa";
-import { BsGeoAlt } from "react-icons/bs";
-import { BsHouseDoor } from "react-icons/bs";
+import { BsGeoAlt, BsGithub } from "react-icons/bs";
 import { BsTelephone } from "react-icons/bs";
 import { BsFillGearFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
 import { ImUserTie } from "react-icons/im";
-import "./profileDetails.css"
+import "./profileDetails.css";
 import Cards from "../Cards/Cards";
 import EditUbicacion from "../EditUbicacion/EditUbicacion";
 import Boton from "../Boton/Boton";
 import Chat from "../chat/chat";
-import { FormJobs } from "../formJobs/FormJobs"
+import { LoadingScreen } from "../loadingScreen/LoadingScreen";
+import Feed from "../NewNav/Feed/Feed";
+import Jobs from "../Jobs/Jobs";
+import { DEF_BANNER, IMG } from "../../enviroment";
+import { FormJobs } from "../formJobs/FormJobs";
+import ChatMessages from "../ChatWindow/ChatMessages";
+import { Workerpost } from "../Workerpost/Workerpost";
+import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
+import {
+  makeStyles,
+  Container,
+  Fab,
+  Modal,
+  Tooltip,
+  Button,
+} from "@material-ui/core";
+import BuildIcon from '@material-ui/icons/Build';
 
+const useStyles = makeStyles((theme) => ({
+  fab: {
+    bottom: "-5px",
+    left: "125px",
+  },
+  container: {
+    width: 320,
+    height: 380,
+    backgroundColor: "white",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100vw",
+      height: "100vh",
+    },
+  },
+}));
 
 
 export const ProfileDetails = () => {
+  const classes = useStyles();
   const [viewChat, setViewChat] = useState(false);
-  const {userId} = useParams()
-  
-  let user= useSelector((state) => state.profile.user)
-  let { email }= useSelector((state) => state.auth)
+  const [postOrWorkerpost, setPostOrWorkerpost] = useState({ show: 'post' });
+  const [open, setOpen] = useState(false);
+  const { userId } = useParams();
+  const myId = useSelector((state) => state.auth.uid);
 
-
-
-
-
-  
+  let user = useSelector((state) => state.profile.user);
+  let { email } = useSelector((state) => state.auth);
+  const loader = useSelector((state) => state.ui.loading);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileUser(userId))
-    console.log("dispatch profile")
-  }, []);
+    dispatch(profileUser(userId));
+    console.log(user.workerPosts);
+  }, [userId, dispatch]);
 
-  console.log("user", user)
-  console.log("email", email)
-
-
-  const contactUser = () =>{
-    //alert(`Contactando a ${user.usr_username}`) //cambiar a enlace a wsp u otra app
-    console.log("Ver chat")
+  const contactUser = () => {
     setViewChat(!viewChat);
-  }
+  };
 
-  function button(){
-    if(user?.usr_email === email){
-      return(
-        <div>
-        <Link to={`/editprofile/${user.usr_id}`}>
-            <button type="button" className="boton-portada">
-                    <BsFillGearFill /> Editar Perfil
-                </button>
-            </Link>
-            <Boton
-                data-toggle="modal"
-                data-target="#editUbicacion"
-                colorBtn='btn_azul'
-              >
-                Editar Ubicación
-              </Boton>
-              <Link to='/addjob'> 
-              <Boton
-              data-toggle="modal"
-              colorBtn='btn_azul'
-              >
-                Agregar trabajo
-              </Boton>
-              </Link> 
-        <EditUbicacion profile = {user} id = {userId}/>
-        </div>
-
-      )
-    } else return (
-      <button className="btn-prof" onClick={contactUser}>
-            <span className="text" >CONTACTAR</span>
-            </button>
-    )
-  }
-
-  return (
-   <div>
-     <section className='seccion-perfil-usuario'>
-         <div className='perfil-usuario-header'>
-             <div className='perfil-usuario-portada'>
-             <div className='perfil-usuario-avatar'>
-                 <img src={user?.usr_photo} alt="img-avatar" width="50px"/>
-                 <button type="button" className="boton-avatar">
-                      <FaImage />
-                 </button>
-              </div>
-              {button()}
-
-              
-
-              {viewChat && <Chat userPRofile={user} />}
-
+  function button() {
+    if (user?.usr_email === email) {
+      return (
+        <>
+        <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
+        <Fab color="primary" className={classes.fab}>
+          <BuildIcon />
+        </Fab>
+      </Tooltip>
+      <Modal open={open}>
+        <Container className={classes.container}>
+        <div className="boton-portada">
+          <Link to={`/editprofile/${user.usr_id}`}>
+            <div className="btn-pro">
+            <Button type="button" color="primary"  variant="outlined">
+              <BsFillGearFill /> Editar Perfil
+            </Button>
             </div>
-        </div>
-      <div className='perfil-usuario-body'>
-          <div className='perfil-usuario-bio'>
-                
-              <h3 className='titulo'>{user?.usr_username}</h3>
-              <p className='texto'>{user?.usr_description}</p>
+          </Link>
+          <div className="btn-pro">
+          <Button
+            variant="outlined"
+            data-toggle="modal"
+            data-target="#editUbicacion"
+            color="primary"
+          >
+            Editar Ubicación
+          </Button>
           </div>
-          <div className='perfil-usuario-footer'>
-              <ul className='lista-datos'>
-                  <li><BsHouseDoor className='icono' />Direccion de usuario:</li>
-                  <li><BsTelephone  className='icono'/> Telefono:</li>
-                  <li><FaCity className='icono' /> Trabaja en:</li>
-                  <li><ImUserTie className="icono" />Cargo:</li>
-              </ul>
-              <ul className='lista-datos'>
-                  <li><FaCalendarAlt className='icono' /> Fecha de nacimiento:</li>
-                  <li><BsGeoAlt className='icono' /> Ubicacion:</li>
-                  <li><ImUsers className="icono" /> Sexo:</li>
-                  <li><FaRegGrinBeam className="icono" /> sociales:</li>
-              </ul>
+          {/* <Link to="/addjob"> */}
+          <div className="btn-pro">
+          <Button
+            variant="outlined"
+            data-toggle="modal"
+            color="primary"
+            data-toggle="modal"
+            data-target="#addJobModal"
+          >
+            Agregar trabajo
+          </Button>
           </div>
-          <div>
-           <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards>
-           </div>
-           <div>
-          <Cards key="post" profiledata={user?.posts} profileType={"posts"}></Cards>
+          {/*  </Link> */}
+          <div className="btn-pro">
+          <Link to={`/profile/${userId}/alert`}>
+            <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
+          </Link>
+          <EditUbicacion profile={user} id={userId} />
+
+          <FormJobs />
           </div>
-          <div className='redes-sociales'>
-              <a href='www.facebook.com' class="boton-redes facebook"><FaFacebook className='icons'/></a>
-              <a href='www.linkeding.com' class="boton-redes linkeding"><FaLinkedin className='icons' /></a>
-              <a href='www.instagram.com' class="boton-redes instagram"><FaInstagram className="icons" /></a>
-          </div>
+          <div className="btn-pro">
+          <Button color="primary" variant="outlined">
+        <Link to='/create-workerpost'>Crear Workerpost</Link>
+      </Button>
       </div>
-    </section>
-</div>
+          <div className="btn-salir">
+          <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              </div>
+        </div>
+        </Container>
+        </Modal>
+        </>
+      );
+    }
+  }
+  return loader ? (
+    <LoadingScreen />
+  ) : (
+    <div>
+      <section className="seccion-perfil-usuario">
+        <div className="perfil-usuario-header">
+          <div className="perfil-usuario-portada">
+            <img
+              className="imagen-portada"
+              src={user?.usr_banner ? user.usr_banner : DEF_BANNER}
+              alt="portada"
+            ></img>
+            <div className="perfil-usuario-avatar">
+              <img
+                src={user?.usr_photo ? user.usr_photo : IMG}
+                alt="img-avatar"
+                width="50px"
+              />
+            </div>
+            {button()}
+            {
+              viewChat && (
+                <ChatMessages
+                  myId={myId}
+                  receiverId={user.usr_id}
+                  receiverName={user.usr_name}
+                  receiverPhoto={user.usr_photo}
+                />
+              )
+            }
+          </div>
+        </div>
+        <div className="perfil-usuario-body">
+          <div className="perfil-usuario-bio">
+            <h3 className="titulo">{user?.usr_username}</h3>
+            <p className="texto">{user?.usr_description}</p>
+          </div>
+          <div className="perfil-usuario-footer">
+            <ul className="lista-datos">
+              <li>
+                <ImUsers className="icono" />
+                Sexo: {user?.usr_gender}
+              </li>
+              <li>
+                <ImUserTie className="icono" />
+                Cargo: {user?.usr_charge}
+              </li>
+            </ul>
+            <ul className="lista-datos">
+              <li>
+                <BsGeoAlt className="icono" />
+                País: {user?.usr_country}
+              </li>
+              <li>
+                <BsTelephone className="icono" />
+                Telefono: {user?.usr_phone}
+              </li>
+            </ul>
+          </div>
+          {/* <div> */}
+          {/* <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards> */}
+          {/* </div> */}
+          <div>{/* Aquí van los workerposts */}</div>
+              <div className="vtn1">
+                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({show: 'post'})}>Posts</Button>
+                </div>
+                <div className="vtn2">
+                <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({show: 'workerpost'})}>WorkerPost</Button>
+              </div>
+              <div className="divChat2">
+                {
+                  user?.usr_email !== email && (
+                    <ChatWindowv2 receiverData={user} />
+                  )
+                }
+              </div>
+          <div className="div-posted">
+            {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts}/>}
+          </div>
+          <div className="redes-sociales">
+            {user.usr_social?.linkedin && (
+              <a
+                href={
+                  user.usr_social?.linkedin ? user.usr_social.linkedin : null
+                }
+                target="_blank"
+                className="boton-redes linkeding"
+                rel="noreferrer"
+              >
+                {user.usr_social.linkedin && <FaLinkedin className="icons" />}
+              </a>
+            )}
+            {user.usr_social?.github && (
+              <a
+              href={user?.usr_social?.github ? user?.usr_social.github : null}
+              target="_blank"
+              className="boton-redes github"
+              rel="noreferrer"
+              >
+                <BsGithub fill="#000" className="icons" />
+              </a>
+            )}
+            {user.usr_social?.instagram && (
+              <a
+              href={
+                  user.usr_social?.instagram ? user.usr_social.instagram : null
+                }
+                target="_blank"
+                className="boton-redes instagram"
+                rel="noreferrer"
+                >
+                <FaInstagram className="icons" />
+              </a>
+            )}
+            {user.usr_social?.facebook && (
+              <a
+              href={
+                  user?.usr_social?.facebook ? user?.usr_social.facebook : null
+                }
+                target="_blank"
+                className="boton-redes facebook"
+                rel="noreferrer"
+                >
+                <FaFacebook className="icons" />
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
