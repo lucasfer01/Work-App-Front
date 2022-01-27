@@ -86,6 +86,8 @@ const NewNav = () => {
   const [unreadNotifications, setUnreadNotifications] = useState([]);
   const naviagte = useNavigate();
 
+  let numberUnreadMessages = 0;
+
   console.log("unreadmess", unreadMessages);
   console.log("unreadnot", unreadNotifications);
 
@@ -168,7 +170,7 @@ const NewNav = () => {
     </AppBar>
       {
           displayNotifications && (
-            <div style={{position: "fixed", right: "30px", zIndex: "100"}}>
+            <div style={{position: "fixed", top: "40px",right: "30px", zIndex: "100"}}>
               <Notification />
             </div>
           )

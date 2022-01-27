@@ -51,6 +51,9 @@ const ChatWindowv2 = ({ receiverData }) => {
     console.log("userChats", users);
     const [displayInBox, setDisplayInBox] = useState(false);
     const [data, setData] = useState([]);
+    let numBerUsers = users.length;
+
+    console.log("receiverData", users);
 
     useEffect(() => {
         socket.emit("data", myId);
