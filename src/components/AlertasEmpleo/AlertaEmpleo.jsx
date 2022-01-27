@@ -3,9 +3,12 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { addAlerts } from '../../controllers';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AlertaEmpleo = () => {
     const myAlerts = useSelector((state) => state.profile.ownProfile?.usr_alerts);
+
+    const navigate = useNavigate();
 
     console.log("my alerts", myAlerts);
 
@@ -50,11 +53,13 @@ const AlertaEmpleo = () => {
     };
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         const add = async () => {
             await addAlerts(uid, {usr_alerts: alerts});
         }
         add();
         setNewAlert("");
+        navigate(-1)
         
     };
 

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { POST_URL, POST_FRONT_URL } from '../../enviroment';
 import { startUploading } from '../../helpers/imageUpload';
+import Boton from '../Boton/Boton';
 
 export function EditarPost() {
   // Obtenemos Id de url
@@ -62,46 +63,53 @@ export function EditarPost() {
   }
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <label>Titulo</label>
-      <input type="text" name='post_title' value={post.post_title} onChange={handleOnChange} />
+    <div className='editPost_main' style={{position: "relative", top: "90px", display: "grid", justifyContent: "center", alignItems: "center"}}>
+    <form onSubmit={handleOnSubmit} style ={{borderRadius: "10px", padding: "20px", backgroundColor: "#24303C", color: "white"}}>
+      <div>
+        <label>Titulo</label>
+        <input type="text" name='post_title' value={post.post_title} onChange={handleOnChange} />
+      </div>
+      <div>
+        <label>Resumen</label>
+        <input type="text" name='post_shortdescription' value={post.post_shortdescription} onChange={handleOnChange} />
+      </div>
+      <div>
+        <label>Urgencia</label>
+        <select value={post.post_priority} onChange={handleOnChange} name="post_priority">
+          <option value="Urgente">Urgente</option>
+          <option value="Poco Urgente">Poco Urgente</option>
+          <option value="Sin Urgencia">Sin Urgencia</option>
+        </select>
+      </div>
+      <div>
+        <label>Fotos</label>
+        {post.post_photo ? post.post_photo.map(foto =>
+          <div key={foto}>
+            <img src={foto} alt="foto post" width='300px' />
+            <button onClick={() => {
+              // temporal
+              const temporalPhotos = post.post_photo;
 
-      <label>Resumen</label>
-      <input type="text" name='post_shortdescription' value={post.post_shortdescription} onChange={handleOnChange} />
+              // Borramos la foto a partir de la ubicacion de la foto
+              temporalPhotos.splice(temporalPhotos.indexOf(foto), 1);
 
-      <label>Urgencia</label>
-      <select value={post.post_priority} onChange={handleOnChange} name="post_priority">
-        <option value="Urgente">Urgente</option>
-        <option value="Poco Urgente">Poco Urgente</option>
-        <option value="Sin Urgencia">Sin Urgencia</option>
-      </select>
-
-      <label>Fotos</label>
-      {post.post_photo ? post.post_photo.map(foto =>
-        <div key={foto}>
-          <img src={foto} alt="foto post" width='300px' />
-          <button onClick={() => {
-            // temporal
-            const temporalPhotos = post.post_photo;
-
-            // Borramos la foto a partir de la ubicacion de la foto
-            temporalPhotos.splice(temporalPhotos.indexOf(foto), 1);
-
-            // Seteamos el nuevo estado
-            setPost({
-              ...post,
-              post_photo: temporalPhotos
-            })
-          }}>X</button>
-        </div>
-      )
-        : ''}
-
+              // Seteamos el nuevo estado
+              setPost({
+                ...post,
+                post_photo: temporalPhotos
+              })
+            }}>X</button>
+          </div>
+          )
+          : ''}
+      </div>
       <div>
         <input type="file" onChange={handleAddPhoto} />
         {uploading && <h3>Cargando Archivo...</h3>}
       </div>
 
-      <button type='submit'>Actualizar post</button>
-    </form>)
+      <Boton colorBtn='btn_azulLine' type='submit'>Actualizar post</Boton>
+    </form>
+    </div>
+    )
 }
