@@ -188,6 +188,7 @@ const NewNav = () => {
     socket.emit("read-notifications", { myId, postId: e.target.value });
     socket.emit("unregister", myId);
     socket.emit("register", myId);
+    setDisplayNotifications(false);
   }
 
   return (
@@ -235,7 +236,7 @@ const NewNav = () => {
         displayNotifications && (
           notifications?.map(notif => {
             return (
-              <div>
+              <div className={newNavStyles.notbox}>
                 <Notification
                   key={notif?.id}
                   post={notif?.post}
