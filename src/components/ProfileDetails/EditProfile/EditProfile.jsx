@@ -1,3 +1,4 @@
+import { EvStationOutlined } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
@@ -209,7 +210,7 @@ export function EditProfile() {
         </div>
         <div className="divs">
           <label>Sexo</label>
-          <select className="selecx" name="usr_gender" id="usr_gender" onChange={onInputChange}>
+          <select className="selecx" name="usr_gender" id="usr_gender" value = {updatedUser.usr_gender} onChange={onInputChange}>
             <option value=" --- " selected></option>
             <option value="Hombre">Hombre</option>
             <option value="Mujer">Mujer</option>
@@ -218,7 +219,7 @@ export function EditProfile() {
         </div>
         <div className="divs">
           <label>Pais</label>
-          <select className="selecx" name="usr_country" id="usr_country" onChange={onInputChange}>
+          <select className="selecx" name="usr_country" id="usr_country" value = {updatedUser.usr_country} onChange={onInputChange}>
             <option value=" --- " selected></option>
             {countries.map((c) => {
               return (
