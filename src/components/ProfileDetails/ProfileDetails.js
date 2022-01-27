@@ -85,12 +85,10 @@ export const ProfileDetails = () => {
   let { email } = useSelector((state) => state.auth);
   const loader = useSelector((state) => state.ui.loading);
 
-  console.log('user', inputRange)
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(profileUser(userId));
-    console.log(user.workerPosts);
   }, [userId, dispatch]);
 
   const contactUser = () => {
@@ -197,7 +195,6 @@ export const ProfileDetails = () => {
           <div className="perfil-usuario-bio">
             <h3 className="titulo">{user?.usr_username}</h3>
             <p className="texto">{user?.usr_description}</p>
-
           </div>
           <div className={classes.puntuarbox}>
             {userId === myId ? '' : <div className={classes.puntuar} >

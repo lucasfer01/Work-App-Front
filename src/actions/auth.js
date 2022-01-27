@@ -69,7 +69,6 @@ export const registerUserDB = async (user) => {
     /* usr_photo: photoURL, */
   };
 
-  console.log(data);
 
   await axios
     .post(POST_USER, data)
