@@ -13,9 +13,11 @@ import { useSelector, useDispatch } from 'react-redux';
 // Actions
 import { finishLoading, startLoading } from '../../actions/ui';
 // loading screen
-import {LoadingScreen} from '../loadingScreen/LoadingScreen';
+import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 // Spinner
 import spinnerGif from './assets/loading-buffering.gif';
+// Estilos
+import formStyle from './workerpost.module.css';
 
 
 export function EditarWorkerpost() {
@@ -97,37 +99,44 @@ export function EditarWorkerpost() {
             .catch(error => console.log(error));
     }
 
-    return loader ? <LoadingScreen/> : <form onSubmit={handleOnSubmit}>
-        <label>Titulo</label>
-        <input type="text" name='wp_title' value={workerpostState.wp_title} onChange={handleOnChange} />
+    return loader ? <LoadingScreen /> : <div className={formStyle.contenedor}>
+        <form className={formStyle.form} onSubmit={handleOnSubmit}>
+            <div className={formStyle.contenedorSection}>
+                <label className={formStyle.label}>Titulo</label>
+                <input type="text" name='wp_title' value={workerpostState.wp_title} onChange={handleOnChange} />
+            </div>
 
-        <label>Descripcion</label>
-        <textarea name="wp_description" style={{ resize: 'none' }} value={workerpostState.wp_description} onChange={handleOnChange}></textarea>
+            <div className={formStyle.contenedorSection}>
+                <label className={formStyle.label}>Descripcion</label>
+                <textarea name="wp_description" style={{ resize: 'none' }} value={workerpostState.wp_description} onChange={handleOnChange}></textarea>
+            </div>
 
-        <label>Fotos</label>
-        {workerpostState.wp_photo.length ? workerpostState.wp_photo.map(foto => <div key={foto}>
-            <img src={foto} alt='Foto Workerpost' width='300px' />
-            <button onClick={() => {
-                // Array de fotos temporal
-                const tempFotos = workerpostState.wp_photo;
+            <div className={formStyle.contenedorSection}>
+                <label className={formStyle.label}>Fotos</label>
+                {workerpostState.wp_photo.length ? workerpostState.wp_photo.map(foto => <div key={foto}>
+                    <img src={foto} alt='Foto Workerpost' width='250px' />
+                    <button onClick={() => {
+                        // Array de fotos temporal
+                        const tempFotos = workerpostState.wp_photo;
 
-                // Borramos la foto del array
-                tempFotos.splice(tempFotos.indexOf(foto, 1));
+                        // Borramos la foto del array
+                        tempFotos.splice(tempFotos.indexOf(foto, 1));
 
-                // Seteamos el nuevo estado
-                setWorkerpostState({
-                    ...workerpostState,
-                    wp_photo: tempFotos
-                })
-            }}>X</button>
-        </div>) : ''}
+                        // Seteamos el nuevo estado
+                        setWorkerpostState({
+                            ...workerpostState,
+                            wp_photo: tempFotos
+                        })
+                    }}>X</button>
+                </div>) : ''}
+                <input type="file" onChange={handleAddPhoto} />
+                {uploading && <h3>Cargando Archivo...</h3>}
+            </div>
 
-        <input type="file" onChange={handleAddPhoto} />
-        {uploading && <h3>Cargando Archivo...</h3>}
-
-        <div style={{display:'flex', justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-            <button onClick={() => setSpinner(true)} type='submit'>Actualizar Workepost</button>
-            {spinner && <img src={spinnerGif} alt='spinner' width='16px' />}
-        </div>
-    </form>;
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                <button className={formStyle.button} onClick={() => setSpinner(true)} type='submit'>Actualizar Workepost</button>
+                {spinner && <img src={spinnerGif} alt='spinner' width='16px' />}
+            </div>
+        </form>
+    </div>
 }
