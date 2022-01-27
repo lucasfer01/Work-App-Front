@@ -225,6 +225,17 @@
       margin-left: 0%;
       margin-top: 4%;
    }
+   
+   .btn-pro{
+       margin-bottom: 20px;
+       margin-top: 20px;
+       margin-left: 30px;
+   }
+
+   .btn-salir{
+       margin-top: 25px;
+       margin-left: 30%;
+   }
 
 @media (max-width: 750px) {
     .seccion-perfil-usuario .lista-datos {
