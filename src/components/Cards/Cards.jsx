@@ -5,6 +5,7 @@ import { getJobs } from "../../actions/formJobs";
 import JobCard from "../JobCard/JobCard";
 import PostCard from "../PostCard/PostCard";
 import styles from "./Cards.module.css";
+import Feed from "../NewNav/Feed/Feed";
 
 export default function Cards(profiledata) {
     const dispatch = useDispatch();
@@ -35,13 +36,13 @@ export default function Cards(profiledata) {
     const storePosts = useSelector(state => state.posts.filterPost);
 
     //preuba
-    const pruebaJob = useSelector(state => state);
-    console.log('state',pruebaJob);
+    /* const pruebaJob = useSelector(state => state);
+    console.log('state',pruebaJob); */
 
     useEffect(()=>{
         const effect = async () => {
-            setPosts(storePosts);
             await dispatch(getJobs());
+            setPosts(storePosts);
         }
 
         effect();
@@ -67,23 +68,7 @@ export default function Cards(profiledata) {
         );
     } else if (type === "posts") {
         return (
-            <div className={styles.postsContainer}>
-                {
-                    data?.map((post) => {
-                        return (
-                            <PostCard
-                                key={post.post_id}
-                                id={post.post_id}
-                                title={post.post_title}
-                                description={post.post_description}
-                                photo={post.post_photo ? post.post_photo[0] : ""}
-                                fee={post.post_fee}
-                                priority={post.post_priority}
-                            />
-                        );
-                    })
-                }
-            </div>
+            <Feed posts={posts} />
         );
     }
 
@@ -117,9 +102,10 @@ export default function Cards(profiledata) {
                                 id={post.post_id}
                                 title={post.post_title}
                                 description={post.post_description}
-                                photo={post.post_photo}
+                                photo={post.post_photo ? post.post_photo[0] : ""}
                                 fee={post.post_fee}
                                 priority={post.post_priority}
+                                authorId={post.usr_id}
                             />
                         );
                     })

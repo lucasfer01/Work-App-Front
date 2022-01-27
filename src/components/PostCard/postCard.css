@@ -12,7 +12,8 @@
 .imagen{
     height: 190px;
     width: 100%;
-    background-size: cover;
+    /* background-size: cover; */
+    object-fit: cover;
 }
 
 .info{

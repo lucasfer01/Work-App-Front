@@ -1,3 +1,7 @@
+.left-prof{
+    width: 17%;
+}
+
 .seccion-perfil-usuario .perfil-usuario-body,
 .seccion-perfil-usuario{
     display: flex;
@@ -6,18 +10,27 @@
     align-items: center;
 }
 
-.seccion-perfil-usuario .perfil-usuario-header{
+.imagen-portada{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 20px 20px;
+}
+
+.seccion-perfil-usuario .perfil-usuario-header{
+    width: 66%;
     display: flex;
     justify-content: center;
     background: linear-gradient(#317FFF, transparent);
     margin-bottom: 1.25rem;
+    margin-left: 16%;
+    margin-top: -74%;
 }
 
 .seccion-perfil-usuario .perfil-usuario-portada{
     display: block;
     position: relative;
-    width: 90%;
+    width: 93%;
     height: 17rem;
     background: linear-gradient(45deg, #BC3CFF, #317FFF);
     border-radius: 0 0 20px 20px;
@@ -25,8 +38,8 @@
 
 .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 60px;
+    right: 8.40rem;
     border: 0;
     border-radius: 8px;
     padding: 12px 25px;
@@ -56,6 +69,7 @@
     position: relative;
     border-radius: 50%;
     height: 163px;
+    object-fit: cover;
 }
 
 .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar{
@@ -75,6 +89,7 @@
     width: 70%;
     position: relative;
     max-width: 750px;
+    margin-left: 18%;
 }
 
 .seccion-perfil-usuario .perfil-usuario-body .titulo{
@@ -217,6 +232,38 @@
       margin-left: 0%;
       margin-top: 4%;
    }
+   
+   .btn-pro{
+       margin-bottom: 20px;
+       margin-top: 20px;
+       margin-left: 30px;
+   }
+
+   .btn-salir{
+       margin-top: 25px;
+       margin-left: 30%;
+   }
+
+   
+
+   .div-posted{
+       width: 100%;
+   }
+
+   .vtn1{
+       margin-left: -15%;
+       margin-top: 10px;
+   }
+
+   .vtn2{
+    margin-left: 18%;
+    margin-top: -35px;
+    }
+
+.divChat2{
+    margin-left: 55%;
+    margin-top: -23px;
+}
 
 @media (max-width: 750px) {
     .seccion-perfil-usuario .lista-datos {

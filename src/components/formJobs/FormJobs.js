@@ -14,25 +14,30 @@ export const FormJobs = () => {
     id: null,
   });
   const [hideList, setHideList] = useState(false);
+  const [jobMsg, setJobMsg] = useState("light");
 
   const { job, id } = formValues;
-
-  useEffect(() => {
-    dispatch(getJobs());
-  }, [dispatch]);
 
   const saveNewJob = (e) => {
     e.preventDefault();
     if (!id) {
-      dispatch(setError("Please select one job that are in the list"));
+      setJobMsg("danger");
+      dispatch(setError("Porfavor seleccione un trabajo de la lista"));
       return false;
     }
-    console.log(uid, id);
-    saveJob(uid, id);
-    setFormValues({
-      job: "",
-      id: null,
-    });
+    try {
+      saveJob(uid, id);
+      setFormValues({
+        job: "",
+        id: null,
+      });
+      setJobMsg("success");
+      dispatch(setError("Trabajo agregado correctamente"));
+      window.location.reload();
+    } catch (error) {
+      setJobMsg("danger");
+      dispatch(setError("Error en el servidor, porfavor intentelo mas tarde!"));
+    }
   };
 
   const handleInputChange = ({ target }) => {
@@ -49,16 +54,23 @@ export const FormJobs = () => {
     dispatch(removeError());
   };
 
+  useEffect(() => {
+    if (allJobs.length <= 0) {
+      dispatch(getJobs());
+    }
+  }, [dispatch, allJobs]);
+
   return (
     <div>
-      <button
+      {/*       <button
         type="button"
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#addJobModal"
+        style={{ zIndex: 99999 }}
       >
         Add a job
-      </button>
+      </button> */}
 
       <div
         className="modal fade"
@@ -85,7 +97,7 @@ export const FormJobs = () => {
               <div className="mb-3 addJob">
                 {msgError && (
                   <div
-                    className="alert alert-danger alert-dismissible fade show"
+                    className={`alert alert-${jobMsg} alert-dismissible fade show`}
                     role="alert"
                   >
                     {msgError}
@@ -101,12 +113,14 @@ export const FormJobs = () => {
                   </div>
                 )}
                 {/* ---- */}
-                <label>Write and select one job</label>
+                <label style={{ color: "#000" }}>
+                  Escribe y selecciona un trabajo de la lista
+                </label>
                 <input
                   type="text"
                   name="job"
                   className="form-control"
-                  placeholder="Example: Plumber"
+                  placeholder="Ejemplo: Plomero"
                   autoComplete="off"
                   value={job}
                   onChange={handleInputChange}

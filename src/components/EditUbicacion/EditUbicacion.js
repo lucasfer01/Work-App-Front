@@ -6,6 +6,7 @@ import Geocode from 'react-geocode'
 import axios from "axios";
 import { POST_USER } from "../../enviroment";
 import {useSelector} from 'react-redux'
+import {useNavigate} from 'react-router'
 
 // Renderizar este componente como un pop up, no como una ruta
 
@@ -15,6 +16,8 @@ export default function EditUbicacion({profile, id}){
     const [position, setPosition] = React.useState('')
     const [disabled, setDisabled] = React.useState(true)
     const [perfil, setPerfil] = React.useState('')
+
+    const navigate = useNavigate(); 
     
     React.useEffect(()=>{setPerfil(profile)},[profile]); 
  
@@ -26,13 +29,14 @@ export default function EditUbicacion({profile, id}){
         a += 1; 
         if (a > 20) return 0
         if(position){
-          setState(position)}
+          setPerfil({...perfil, usr_location: position}); 
+        }
         else {
             if (window.navigator) {
-                window.navigator.geolocation.getCurrentPosition((pos=>setPosition({lat: pos.coords.latitude, lng: pos.coords.longitude})),(err=>alert("error al acceder a la ubicación: ", err.message))) 
+                window.navigator.geolocation.getCurrentPosition((pos=>{setPosition({lat: pos.coords.latitude, lng: pos.coords.longitude})}),(err=>alert("error al acceder a la ubicación: ", err.message))) 
             }
         }
-        }, [1]) 
+        }, [position]) 
 
     function getCords(){
         Geocode.fromAddress(state).then(
@@ -48,9 +52,9 @@ export default function EditUbicacion({profile, id}){
 
     async function onSubmit(){
 
-        console.log('position', position)
+     
         setPerfil({...perfil, usr_location: position})
-        console.log('perfil', perfil)
+        console.log("perfil enviado", perfil)
         
         await axios
         .put((POST_USER + "/"  + id), perfil)
@@ -60,6 +64,8 @@ export default function EditUbicacion({profile, id}){
         .catch(function (error) {
           console.log(error);
         });
+
+        window.location.replace('');
     }
 
     return (
@@ -87,7 +93,7 @@ export default function EditUbicacion({profile, id}){
                 <input type='checkbox' defaultChecked onChange={event => setDisabled(event.target.checked)}/>
                 <span> Usar ubicación actual</span>
                 <input onKeyPress={(event) => {if(event.key === "Enter")return getCords()}} disabled={disabled} type='text' placeholder='ubicación personalizada' style={{width: '200px'}} value = {state} onChange={event => setState(event.target.value)}/>
-            <Boton colorBtn='btn_azul' style={{width: '50px'}} onClick={getCords}>elegir</Boton>
+            <Boton colorBtn='btn_azul' style={{width: '100px'}} onClick={getCords}>elegir</Boton>
             </div>
             <div className='editUbicacion_map'>
                 <Mapa position={position}/>

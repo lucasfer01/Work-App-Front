@@ -1,7 +1,7 @@
 import io from "socket.io-client";
+import {BASE_URL} from "../../enviroment";
 
-// let ENDPOINT = "http://localhost:3000";
-let ENDPOINT = "https://workapp-back-end.herokuapp.com/";
+let ENDPOINT = BASE_URL;
 
 
 let socket = io(ENDPOINT);
