@@ -26,10 +26,10 @@ import { ImList } from "react-icons/im";
 
 const useStyles = makeStyles((theme) => ({
   divnav: {
-    position: "sticky",
-    top: "10px",
-    zIndex: 2,
-    opacity: 0.5,
+    position: "fixed",
+    top: "0",
+    zIndex: 5,
+    height: "65px",
   },
   toolbar: {
     display: "flex",
@@ -87,14 +87,10 @@ const useStyles = makeStyles((theme) => ({
   leftbar: {
     display: "flex",
     width: "12vw",
-  },
-  sub: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100vw",
     position: "fixed",
-    zIndex: 2,
-  }
+    zIndex: 3,
+  },
+
 }));
 
 const NewNav = () => {
@@ -221,9 +217,7 @@ const NewNav = () => {
     <div >
       <AppBar className={classes.divnav}>
         <Toolbar className={classes.toolbar}>
-          <div className={classes.showleft} onClick={handleLeftBar}>
-            <ImList />
-          </div>
+          <Leftbar isOpen={showLeftBar} />
           <Link to="/">
             <Typography variant="h6" className={classes.logoLg}>
               WorkApp
@@ -261,29 +255,24 @@ const NewNav = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.sub}>
-        {
-          showLeftBar && <div className={classes.leftbar}>
-            <Leftbar />
-          </div>
-        }
-        {
-          displayNotifications && (
-            notifications?.map(notif => {
-              return (
-                <div className={newNavStyles.notbox}>
-                  <Notification
-                    key={notif?.id}
-                    post={notif?.post}
-                    jobs={notif?.jobs}
-                  />
-                  <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
-                </div>
-              )
-            })
-          )
-        }
+      <div style={{ height: "65px" }}>
       </div>
+      {
+        displayNotifications && (
+          notifications?.map(notif => {
+            return (
+              <div className={newNavStyles.notbox}>
+                <Notification
+                  key={notif?.id}
+                  post={notif?.post}
+                  jobs={notif?.jobs}
+                />
+                <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
+              </div>
+            )
+          })
+        )
+      }
     </div>
   );
 };

@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { getJobs } from "../../controllers";
 import JobCard from "../JobCard/JobCard";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+    jobscontainer: {
+        width: "65vw",
+    }
+  }));
 
 export default function Jobs() {
     const [jobs, setJobs] = useState([]);
+    const classes = useStyles();
 
     useEffect(() => {
         const getJobsData = async () => {
@@ -20,7 +27,7 @@ export default function Jobs() {
     }, []);
 
     return (
-        <div>
+        <div className={classes.jobscontainer}>
             {
                 jobs.map((job) => {
                     return (

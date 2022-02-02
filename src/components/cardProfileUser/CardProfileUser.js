@@ -42,7 +42,7 @@ export const CardProfileUser = (userData) => {
   };
 
   return (
-    <div style={userData.style}>
+    <div className="divcardprofile">
       <div className="card card__user-profile mt-3 mb-1">
         <img src={img_url} className="img-fluid" alt="job" />
         <div className="card-body">
