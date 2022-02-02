@@ -18,9 +18,9 @@ const admins = Allusers.filter((u) => u.usr_role === "admin")
     return (
         <div className="container-fluid2">
           <div className="row2" style={{display: "grid", gridTemplateColumns: "17fr 80fr"}}>
-            <div style={{width: '100%'}}>
+            {/* <div style={{width: '100%'}}>
               <Leftbar/>
-            </div>
+            </div> */}
             <div style={{display: "grid",gridTemplateColumns: "repeat(4, 1fr)", marginTop:'5rem'}}>
               {admins?.map((userData) => (
                 <CardProfileUser

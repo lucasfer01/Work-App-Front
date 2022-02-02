@@ -53,9 +53,6 @@ export default function Home() {
   return (loader ? <LoadingScreen /> :
     <div>
       <Grid container>
-        <Grid item sm={2} xs={2}>
-          <Leftbar />
-        </Grid>
         <Grid item sm={7} xs={10}>
           {
             type === "posts" && (

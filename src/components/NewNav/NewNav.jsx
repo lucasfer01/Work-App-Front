@@ -21,8 +21,16 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
 import socket from "../socket";
 import Notification from "../Messenger/Notification/Notification";
+import Leftbar from "./Leftbar/Leftbar";
+import { ImList } from "react-icons/im";
 
 const useStyles = makeStyles((theme) => ({
+  divnav: {
+    position: "sticky",
+    top: "10px",
+    zIndex: 2,
+    opacity: 0.5,
+  },
   toolbar: {
     display: "flex",
     justifyContent: "space-between",
@@ -76,6 +84,17 @@ const useStyles = makeStyles((theme) => ({
   badge: {
     marginRight: theme.spacing(4),
   },
+  leftbar: {
+    display: "flex",
+    width: "12vw",
+  },
+  sub: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100vw",
+    position: "fixed",
+    zIndex: 2,
+  }
 }));
 
 const NewNav = () => {
@@ -96,6 +115,8 @@ const NewNav = () => {
     badgeContent: notifications.length ? "!" : "",
     badgeColor: notifications.length ? "secondary" : "transparent",
   });
+
+  const [showLeftBar, setShowLeftBar] = useState(false);
 
 
   useEffect(() => {
@@ -191,10 +212,18 @@ const NewNav = () => {
     setDisplayNotifications(false);
   }
 
+  const handleLeftBar = (e) => {
+    e.preventDefault();
+    setShowLeftBar(!showLeftBar);
+  }
+
   return (
-    <div>
-      <AppBar style={{ position: "sticky" }}>
+    <div >
+      <AppBar className={classes.divnav}>
         <Toolbar className={classes.toolbar}>
+          <div className={classes.showleft} onClick={handleLeftBar}>
+            <ImList />
+          </div>
           <Link to="/">
             <Typography variant="h6" className={classes.logoLg}>
               WorkApp
@@ -232,22 +261,29 @@ const NewNav = () => {
           </div>
         </Toolbar>
       </AppBar>
-      {
-        displayNotifications && (
-          notifications?.map(notif => {
-            return (
-              <div className={newNavStyles.notbox}>
-                <Notification
-                  key={notif?.id}
-                  post={notif?.post}
-                  jobs={notif?.jobs}
-                />
-                <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
-              </div>
-            )
-          })
-        )
-      }
+      <div className={classes.sub}>
+        {
+          showLeftBar && <div className={classes.leftbar}>
+            <Leftbar />
+          </div>
+        }
+        {
+          displayNotifications && (
+            notifications?.map(notif => {
+              return (
+                <div className={newNavStyles.notbox}>
+                  <Notification
+                    key={notif?.id}
+                    post={notif?.post}
+                    jobs={notif?.jobs}
+                  />
+                  <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
+                </div>
+              )
+            })
+          )
+        }
+      </div>
     </div>
   );
 };
