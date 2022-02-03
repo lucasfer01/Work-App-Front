@@ -7,7 +7,7 @@ import { profileUser } from '../../actions/profileActions';
 import OrdenadorDistancia from '../../helpers/distanciaPuntos';
 import './Filtros.css'
 
-export default function Filtros({}){
+export default function Filtros(){
 
     const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ export default function Filtros({}){
     // console.log("usuario filtros",usuario)
     React.useEffect(()=>{
         dispatch(getPosts()); 
-    },[1])
+    },[])
 
  
     React.useEffect(()=>{
