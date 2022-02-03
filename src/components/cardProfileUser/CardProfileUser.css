@@ -1,5 +1,9 @@
+.divcardprofile {
+  width: 16vw;
+}
+
 .card {
-  width: 18rem;
+  width: 16vw;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 

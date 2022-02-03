@@ -66,6 +66,10 @@ const ChatMessages = (props) => {
             setMessages(chatHistory);
         });
         socket.on("response", (data) => {
+            let newMess = {
+                ...data,
+                date: new Date().toLocaleTimeString().slice(0, -3)
+            }
             setMessages(messages => [...messages, data]);
         });
     }, [chatId]);
@@ -110,6 +114,7 @@ const ChatMessages = (props) => {
                                     key={message.id}
                                     text={message.message}
                                     own={message.sender === myId ? true : false}
+                                    date={message.createdAt}
                                 />
                             ))
                         }
@@ -128,7 +133,7 @@ const ChatMessages = (props) => {
                         placeholder='Write something...'>
                         </textarea>
                         <button onClick={handleSubmit} className='chatSubmitButton' >
-                            Send
+                            Enviar
                         </button>
                     </div>
                 </div>

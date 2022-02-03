@@ -81,7 +81,6 @@ export default function Filtros({}){
                 <option className='options' value='Poco Urgente'>Poco Urgente</option>
                 <option className='options' value='Sin Urgencia'>Sin Urgencia</option>
             </select> 
-
         </div>
         <div className='div-oficio'>
             <span className='priority'>Oficio: </span>

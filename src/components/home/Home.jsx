@@ -51,12 +51,8 @@ export default function Home() {
 
 
   return (loader ? <LoadingScreen /> :
-    <div>
-      <Grid container>
-        <Grid item sm={2} xs={2}>
-          <Leftbar />
-        </Grid>
-        <Grid item sm={7} xs={10}>
+    <div className={styles.homecontainer}>
+        <div>
           {
             type === "posts" && (
               <Feed />
@@ -69,10 +65,9 @@ export default function Home() {
               </div>
             )
           }
-        </Grid>
+        </div>
         <Grid item sm={3} className={classes.right}>
         </Grid>
-      </Grid>
       <Add />
     </div>
   );

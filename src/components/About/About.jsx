@@ -5,6 +5,7 @@ import { BASE_URL } from '../../enviroment'
 import { useEffect } from "react";
 import { getUsers } from "../../actions/getUsers";
 import Leftbar from "../NewNav/Leftbar/Leftbar";
+import "./About.css";
 
 export const About = () => {
   const dispatch = useDispatch();
@@ -16,12 +17,8 @@ export const About = () => {
 const admins = Allusers.filter((u) => u.usr_role === "admin")
 
     return (
-        <div className="container-fluid2">
-          <div className="row2" style={{display: "grid", gridTemplateColumns: "17fr 80fr"}}>
-            <div style={{width: '100%'}}>
-              <Leftbar/>
-            </div>
-            <div style={{display: "grid",gridTemplateColumns: "repeat(4, 1fr)", marginTop:'5rem'}}>
+      <div className="about">
+        <div className="divabout">
               {admins?.map((userData) => (
                 <CardProfileUser
                   key={userData.usr_id}
@@ -29,11 +26,9 @@ const admins = Allusers.filter((u) => u.usr_role === "admin")
                   name={userData.usr_username}
                   desc={userData.usr_description}
                   img_url={userData.usr_photo && userData.usr_photo}
-                  style = {{width: '90%', margin: '10px'}}
                 />
                 ))}
-            </div>
-          </div>
         </div>
+      </div>
       );
 }

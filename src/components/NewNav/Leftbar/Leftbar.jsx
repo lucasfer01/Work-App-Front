@@ -1,4 +1,4 @@
-import { Container, makeStyles, Typography } from "@material-ui/core";
+import { Container, makeStyles, Typography, Theme } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import {
   ExitToApp,
@@ -6,21 +6,27 @@ import {
   Home,
   Person,
   Face,
-  ArrowUpward 
+  ArrowUpward
 } from "@material-ui/icons";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../../actions/auth";
 // Estilos
 import navStyles from '../Styles/newNav.module.css';
+import { useEffect } from "react";
+import { ImList } from "react-icons/im";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    position: "fixed",
+    top: "65px",
+    left: "0",
+    zIndex: 3,
     height: "100vh",
+    width: "12vw",
     color: "white",
     paddingTop: theme.spacing(10),
     backgroundColor: theme.palette.primary.main,
-    position: "sticky",
-    top: 0,
     [theme.breakpoints.up("sm")]: {
       backgroundColor: "white",
       color: "#555",
@@ -56,10 +62,23 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  link: {
+    width: "100%",
+    textDecoration: "none",
+  },
+  showleft: {
+    cursor: "pointer",
+    width: "2vw",
+    height: "2vw",
+    "&:hover": {
+      color: "#555",
+    },
+  },
 }));
 
 const Leftbar = () => {
   const { uid } = useSelector((state) => state.auth)
+  const [open, setOpen] = useState(false);
 
   const classes = useStyles();
 
@@ -68,48 +87,58 @@ const Leftbar = () => {
     dispatch(startLogout());
   };
 
+  const handleOpen = (e) => {
+    e.preventDefault();
+    setOpen(!open);
+  }
+
   return (
-    <Container style={{padding:'0', paddingTop: '4.0rem', backgroundColor:'#fff'}} className={classes.container}>
-      <div className={navStyles.item}>
-        <Link style={{textDecoration:'none'}} to="/home">
-          <Home className={classes.icon} />
-          <Typography className={classes.text}><p className={classes.parr}>Home</p>
-          </Typography>
-        </Link>
+    <div>
+      <div className={classes.showleft} onClick={handleOpen}>
+        <ImList />
       </div>
-      <div className={navStyles.item}>
-        <Link style={{textDecoration:'none'}} to="/jobs">
-          <Work className={classes.icon} />
-          <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
-          </Typography>
-        </Link>
-      </div>
-      <div className={navStyles.item}>
-        <Link style={{textDecoration:'none'}} to={`/profile/${uid}`}>
-          <Person className={classes.icon} />
-          <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
-          </Typography>
-        </Link>
-      </div>
-      <div className={navStyles.item}>
-        <Link style={{textDecoration:'none'}} to="/about">
-          <Face className={classes.icon} />
-          <Typography className={classes.text}><p className={classes.parr}>Nosotros</p>
-          </Typography>
-        </Link>
-      </div>
-      <div className={navStyles.item}>
-        <Link style={{textDecoration:'none'}} to={`/upgradePlan`}>
-          <ArrowUpward className={classes.icon} />
-          <Typography className={classes.text}><p className={classes.parr}>Mejorar Plan</p>
-          </Typography>
-        </Link>
-      </div>
-      <div className={navStyles.item}>
-        <ExitToApp className={classes.icon} />
-        <Typography className={classes.text} onClick={handleLogout}>Logout</Typography>
-      </div>
-    </Container>
+      <Container style={{ padding: '0', paddingTop: '1vw', backgroundColor: '#fff', display: open ? "block" : "none" }} className={classes.container}>
+        <div className={navStyles.item} onClick={handleOpen}>
+          <Link to="/home" style={{textDecoration: "none"}}  className={classes.link}>
+              <Home className={classes.icon} />
+              <Typography className={classes.text}><p className={classes.parr}>Home</p>
+              </Typography>
+          </Link>
+        </div>
+        <div className={navStyles.item} onClick={handleOpen}>
+          <Link style={{textDecoration: "none"}} className={classes.link} to="/jobs">
+            <Work className={classes.icon} />
+            <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
+            </Typography>
+          </Link>
+        </div>
+        <div className={navStyles.item} onClick={handleOpen}>
+          <Link style={{textDecoration: "none"}} className={classes.link} to={`/profile/${uid}`}>
+            <Person className={classes.icon} />
+            <Typography className={classes.text}><p className={classes.parr}>Perfil</p>
+            </Typography>
+          </Link>
+        </div>
+        <div className={navStyles.item} onClick={handleOpen}>
+          <Link style={{textDecoration: "none"}} className={classes.link} to="/about">
+            <Face className={classes.icon} />
+            <Typography className={classes.text}><p className={classes.parr}>Nosotros</p>
+            </Typography>
+          </Link>
+        </div>
+        <div className={navStyles.item} onClick={handleOpen}>
+          <Link style={{textDecoration: "none"}} className={classes.link} to={`/upgradePlan`}>
+            <ArrowUpward className={classes.icon} />
+            <Typography className={classes.text}><p className={classes.parr}>Mejorar Plan</p>
+            </Typography>
+          </Link>
+        </div>
+        <div className={navStyles.item}>
+          <ExitToApp className={classes.icon} />
+          <Typography className={classes.text} onClick={handleLogout}>Cerrar sesión</Typography>
+        </div>
+      </Container>
+    </div>
   );
 };
 

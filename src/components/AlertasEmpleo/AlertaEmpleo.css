@@ -1,0 +1,60 @@
+.container {
+    width: 40vw;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #24303c;
+    position: absolute;
+    top: 30%;
+    left: 27%;
+    border-radius: 2vw;
+    border: #251e1e 0.35vw solid;
+}
+
+.title {
+    color: whitesmoke;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputtext {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.submit {
+    width: 80px;
+    height: 30px;
+    background-color: rgb(109, 109, 170);
+    margin-left: 40px;
+    border-radius: 5px;
+    border: black 0.1px solid;
+}
+
+.submit:hover {
+    background-color: rgb(216, 216, 230);
+}
+
+.alerts {
+    display: flex;
+    flex-direction: column;
+}
+
+.added {
+    color: rgb(13, 13, 15);
+    background-color: rgb(82, 86, 99);
+    margin: 10px;
+    border-radius: 5px;
+    max-width: 140px;
+}
+
+.job {
+    color: rgb(159, 159, 179);
+    background-color: rgb(32, 60, 151);
+    width: 140px;
+}
