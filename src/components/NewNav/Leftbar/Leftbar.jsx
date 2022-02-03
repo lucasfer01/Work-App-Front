@@ -1,4 +1,4 @@
-import { Container, makeStyles, Typography } from "@material-ui/core";
+import { Container, makeStyles, Typography, Theme } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import {
   ExitToApp,
@@ -65,7 +65,15 @@ const useStyles = makeStyles((theme) => ({
   link: {
     width: "100%",
     textDecoration: "none",
-  }
+  },
+  showleft: {
+    cursor: "pointer",
+    width: "2vw",
+    height: "2vw",
+    "&:hover": {
+      color: "#555",
+    },
+  },
 }));
 
 const Leftbar = () => {

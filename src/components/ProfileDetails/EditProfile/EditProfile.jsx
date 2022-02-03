@@ -133,9 +133,6 @@ export function EditProfile() {
 
   return (
     <div>
-      <div className="divEdit-leftb">
-       <Leftbar />
-      </div>
       <form className="form-register">
         <div>
           <h2>Editar Perfil</h2>

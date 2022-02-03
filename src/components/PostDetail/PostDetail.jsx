@@ -19,15 +19,22 @@ import { LoadingScreen } from '../loadingScreen/LoadingScreen';
 // Actions
 import { finishLoading, startLoading } from '../../actions/ui'; // ui.loading
 import ChatMessages from "../ChatWindow/ChatMessages";
-import { IMG} from "../../enviroment";
+import { IMG } from "../../enviroment";
 import ChatWindowv2 from "../ChatWindow/ChatWindowv2";
 import Leftbar from "../NewNav/Leftbar/Leftbar"
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100vw",
+    height: "100vh",
+  },
   card: {
-    marginTop: "-41%",
-    width: "60%",
-    marginLeft: "29%",
+    width: "40vw",
+    height: "80vh",
     boxShadow: "0 1rem 1rem rgba(0, 0, 0, 0.2)",
   },
   font: {
@@ -46,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Poppins', sans-serif",
     fontWeight: "400",
     color: "gray",
+    marginBottom: "15px",
   },
   fontStatus: {
     fontFamily: "'Poppins', sans-serif",
@@ -58,6 +66,11 @@ const useStyles = makeStyles((theme) => ({
       height: 150,
     },
   },
+  chatbtn: {
+    position: "absolute",
+    bottom: "0.5vh",
+    right: "34vw",
+  }
 }));
 
 export default function PostDetail() {
@@ -68,7 +81,7 @@ export default function PostDetail() {
   const [author, setAuthor] = useState({});
   const [viewChat, setViewChat] = useState(false);
 
-  let photo = author.usr_photo ? author.usr_photo : IMG;
+  let photo = author?.usr_photo ? author?.usr_photo : IMG;
 
   // Dispatch
   const dispatch = useDispatch();
@@ -106,19 +119,11 @@ export default function PostDetail() {
   }, [id, authorId]);
 
   return (loader ? <LoadingScreen /> :
-    <>
-    <div className="divleftDetail">
-    <Leftbar />
-    </div>
-      {post.post_id ?
+    <div className={classes.container}>
+      {post?.post_id ?
         <Card className={classes.card}>
           <CardActionArea>
-            {post.post_photo.length > 0 ? post.post_photo.map(foto => {
-              return (
-                <CardMedia className={classes.media} image={foto} title="My Post" />
-              )
-            }) : <span>No hay fotos en esta publicación</span>}
-            <Typography className={classes.font} gutterBottom variant="h5">
+          <Typography className={classes.font} gutterBottom variant="h5">
               <img className='conversationImg'
                 src={photo}
                 alt=""
@@ -126,9 +131,17 @@ export default function PostDetail() {
               {author?.usr_username}
             </Typography>
             <Typography className={classes.fontTitle} gutterBottom variant="h5">
-              {post.post_title}
+              {post?.post_title}
             </Typography>
+            {post.post_photo.length > 0 ? post.post_photo.map(foto => {
+              return (
+                <CardMedia className={classes.media} image={foto} title="My Post" />
+              )
+            }) : <span>No hay fotos en esta publicación</span>}
             <CardContent>
+              <Typography className={classes.fontDesc} variant="body2">
+                {post.post_shortdescription}
+              </Typography>
               <Typography className={classes.fontDesc} variant="body2">
                 {post.post_description}
               </Typography>
@@ -140,8 +153,7 @@ export default function PostDetail() {
             </CardContent>
             <CardContent>
               <Typography className={classes.fontDesc} variant="body2">
-                Fecha de publicación:
-                {post.createdAt.slice(0, 10)}
+                Fecha de publicación: {convertDate(post.createdAt)}
               </Typography>
             </CardContent>
             <CardContent>
@@ -163,17 +175,19 @@ export default function PostDetail() {
         </div>
         <span>Abrir Chat</span>
       </button> */}
-      <ChatWindowv2 receiverData={author} />
       {
-        viewChat && (
-          <ChatMessages
-            myId={myId}
-            receiverId={authorId}
-            receiverName={author.usr_username}
-            receiverPhoto={author.usr_photo}
-          />
-        )
+        myId !== authorId && <div className={classes.chatbtn}>
+          <ChatWindowv2 receiverData={author} />
+        </div>
       }
-    </>
+      
+    </div>
   );
 };
+
+function convertDate(date) {
+  let data = date.slice(0, 10);
+  let newDate = data.split('-');
+  let newDate2 = newDate[2] + '/' + newDate[1] + '/' + newDate[0];
+  return newDate2;
+}

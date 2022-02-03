@@ -75,55 +75,52 @@ export function FormWorkerpost() {
 
     return (
         <div>
-            <div className='div-left'>
-        <Leftbar />
-        </div>
-    <form className='form-register2' onSubmit={handleOnSubmit}>
-        <div>
-        <h2>Workerpost</h2>
-        </div>
-        <div>
-        <label className='labels'>Titulo</label>
-        <input className='controls2' type="text" name='wp_title' value={workerpost.wp_title} onChange={handleOnChange} />
-        </div>
-        <div>
-        <label className='labels'>Descripcion</label>
-        <input
-            className="controls2"
-            name="wp_description"
-            type="text"
-            value={workerpost.wp_description}
-            onChange={handleOnChange}
-          />
-        </div>
-        <div>
-        <label className='labels'>Fotos</label>
-        <input className='controls2' type="file" onChange={handleAddPhoto} />
-        {uploading && <h3>Cargando Archivo...</h3>}
+            <form className='form-register2' onSubmit={handleOnSubmit}>
+                <div>
+                    <h2>Workerpost</h2>
+                </div>
+                <div>
+                    <label className='labels'>Titulo</label>
+                    <input className='controls2' type="text" name='wp_title' value={workerpost.wp_title} onChange={handleOnChange} />
+                </div>
+                <div>
+                    <label className='labels'>Descripcion</label>
+                    <input
+                        className="controls2"
+                        name="wp_description"
+                        type="text"
+                        value={workerpost.wp_description}
+                        onChange={handleOnChange}
+                    />
+                </div>
+                <div>
+                    <label className='labels'>Fotos</label>
+                    <input className='controls2' type="file" onChange={handleAddPhoto} />
+                    {uploading && <h3>Cargando Archivo...</h3>}
 
-        {workerpost.wp_photo.length ? workerpost.wp_photo.map(foto => <div key={foto}>
-            <img src={foto} alt="Foto workerpost" width='300px' />
-            <button onClick={() => {
-                // temporal
-                const temporalPhotos = workerpost.wp_photo;
+                    {workerpost.wp_photo.length ? workerpost.wp_photo.map(foto => <div key={foto}>
+                        <img src={foto} alt="Foto workerpost" width='300px' />
+                        <button onClick={() => {
+                            // temporal
+                            const temporalPhotos = workerpost.wp_photo;
 
-                // Borramos la foto a partir de la ubicacion de la foto
-                temporalPhotos.splice(temporalPhotos.indexOf(foto), 1);
+                            // Borramos la foto a partir de la ubicacion de la foto
+                            temporalPhotos.splice(temporalPhotos.indexOf(foto), 1);
 
-                // Seteamos el nuevo estado
-                setWorkerpost({
-                    ...workerpost,
-                    wp_photo: temporalPhotos
-                })
-            }}>X</button>
-        </div>) : ''}
+                            // Seteamos el nuevo estado
+                            setWorkerpost({
+                                ...workerpost,
+                                wp_photo: temporalPhotos
+                            })
+                        }}>X</button>
+                    </div>) : ''}
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <Boton colorBtn="btn_azul" onClick={() => setLoader(true)} type='submit'>Crear Workerpost</Boton>
+                    {loader && <img src={spinner} width='16px' alt='loader' />}
+                </div>
+            </form>
         </div>
-
-        <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', flexDirection:'column'}}>
-            <Boton colorBtn="btn_azul" onClick={() => setLoader(true)} type='submit'>Crear Workerpost</Boton>
-            {loader && <img src={spinner} width='16px' alt='loader'/>}
-        </div>
-    </form>
-    </div>
     )
 }
