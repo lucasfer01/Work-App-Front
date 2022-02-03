@@ -16,6 +16,7 @@ Por ultimo tenemos los chat y las notificaciones donde incorporamos `Socket.io` 
 
 ### Landing
 
+
 <img src='./readme/landing.jpeg' />
 
 ### Home
@@ -59,3 +60,4 @@ Por ultimo tenemos los chat y las notificaciones donde incorporamos `Socket.io` 
 - [Jehison Gutierrez](https://github.com/jehison98)
 
 - [Nahuel Cernadas](https://github.com/Nahuel-199)
+
