@@ -38,19 +38,12 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
-    bottom: "-5px",
-    left: "-50px",
+    top: "10px",
   },
   container: {
     width: 320,
     height: 380,
     backgroundColor: "white",
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    margin: "auto",
     [theme.breakpoints.down("sm")]: {
       width: "100vw",
       height: "100vh",
@@ -170,9 +163,9 @@ export const ProfileDetails = () => {
     <LoadingScreen />
   ) : (
     <div>
-      <div className="left-prof">
+      {/* <div className="left-prof">
         <Leftbar />
-      </div>
+      </div> */}
       <section className="seccion-perfil-usuario">
         <div className="perfil-usuario-header">
           <div className="perfil-usuario-portada">
