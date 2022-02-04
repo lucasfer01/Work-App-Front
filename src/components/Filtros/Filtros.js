@@ -65,6 +65,9 @@ export default function Filtros(){
         setFormValues({ ...formValues, job: value.job_name, id: value.job_id });
         // console.log("oficio", value.job_id)
         setFiltro({...filtro, oficio: value.job_id})
+        if (value.legth === 0) {
+          setFiltro({...filtro, oficio: null})
+        }
         setHideList(true);
     };
     React.useEffect(() => {

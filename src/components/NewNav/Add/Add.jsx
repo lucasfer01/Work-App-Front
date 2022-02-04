@@ -187,6 +187,7 @@ const Add = () => {
 
   const handleChangePhoto = (e) => {
     const file = e.target.files[0];
+    console.log("file", file)
     setFile(file);
   }
 
@@ -195,10 +196,12 @@ const Add = () => {
 
     if (post.post_photo.length < 4) {
       const urlFoto = await startUploading(file);
-      setPost({
-        ...post,
-        post_photo: [...post.post_photo, urlFoto]
-      })
+      if (!post.post_photo.includes(urlFoto)) {
+        setPost({
+          ...post,
+          post_photo: [...post.post_photo, urlFoto]
+        })
+      }
     }
     setFile("");
   }
@@ -277,7 +280,7 @@ const Add = () => {
             <div className={classes.jobsBox}>
               {
                 jobList.slice(0, 8).map(job => (
-                    <input key={job.job_id} className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
+                  <input key={job.job_id} className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                 ))
               }
             </div>

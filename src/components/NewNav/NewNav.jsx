@@ -259,7 +259,7 @@ const NewNav = () => {
       </div>
       {
         displayNotifications && (
-          notifications?.map(notif => {
+          notifications?.length > 0 ? notifications.map(notif => {
             return (
               <div className={newNavStyles.notbox}>
                 <Notification
@@ -270,7 +270,7 @@ const NewNav = () => {
                 <button value={notif?.post.post_id} onClick={handleReadNotifications}>Leída</button>
               </div>
             )
-          })
+          }) : <div className={newNavStyles.notbox}>Aún no tienes notificaciones</div>
         )
       }
     </div>
