@@ -49,6 +49,7 @@ const Feed = ({profilePosts}) => {
             photo={post.post_photo}
             authorId={post.usr_id}
             priority={post.post_priority}
+            jobs={post.jobs}
           />
         ))
       }

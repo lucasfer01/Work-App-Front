@@ -38,16 +38,28 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
-    top: "10px",
+    width: "3vw",
+    height: "3vw",
+  },
+  configIcon: {
+    width: "1.6vw",
+    height: "1.6vw",
   },
   container: {
-    width: 320,
-    height: 380,
+    width: "20vw",
+    height: "50vh",
     backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       width: "100vw",
       height: "100vh",
     },
+    marginTop: "20vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "2vh",
+    borderRadius: "2vw",
   },
   puntuar: {
     display: "flex",
@@ -92,67 +104,55 @@ export const ProfileDetails = () => {
     if (user?.usr_email === email) {
       return (
         <>
-          <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
-            <Fab color="primary" className={classes.fab}>
-              <BuildIcon />
-            </Fab>
-          </Tooltip>
           <Modal open={open}>
             <Container className={classes.container}>
-              <div className="boton-portada">
-                <Link to={`/editprofile/${user.usr_id}`}>
-                  <div className="btn-pro">
-                    <Button type="button" color="primary" variant="outlined">
-                      <BsFillGearFill /> Editar Perfil
-                    </Button>
-                  </div>
-                </Link>
-                <div className="btn-pro">
-                  <Button
-                    variant="outlined"
-                    data-toggle="modal"
-                    data-target="#editUbicacion"
-                    color="primary"
-                  >
-                    Editar Ubicación
-                  </Button>
-                </div>
-                {/* <Link to="/addjob"> */}
-                <div className="btn-pro">
-                  <Button
-                    variant="outlined"
-                    data-toggle="modal"
-                    color="primary"
-                    data-toggle="modal"
-                    data-target="#addJobModal"
-                  >
-                    Agregar trabajo
-                  </Button>
-                </div>
-                {/*  </Link> */}
-                <div className="btn-pro">
-                  <Link to={`/profile/${userId}/alert`}>
-                    <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
-                  </Link>
-                  <EditUbicacion profile={user} id={userId} />
 
-                  <FormJobs />
-                </div>
-                <div className="btn-pro">
-                  <Button color="primary" variant="outlined">
-                    <Link to='/create-workerpost'>Crear Workerpost</Link>
-                  </Button>
-                </div>
-                <div className="btn-salir">
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => setOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </div>
+              <Link to={`/editprofile/${user.usr_id}`}>
+
+                <Button type="button" color="primary" variant="outlined">
+                  <BsFillGearFill /> Editar Perfil
+                </Button>
+
+              </Link>
+
+              <Button
+                variant="outlined"
+                data-toggle="modal"
+                data-target="#editUbicacion"
+                color="primary"
+              >
+                Editar Ubicación
+              </Button>
+
+              {/* <Link to="/addjob"> */}
+
+              <Button
+                variant="outlined"
+                data-toggle="modal"
+                color="primary"
+                data-toggle="modal"
+                data-target="#addJobModal"
+              >
+                Agregar trabajo
+              </Button>
+              <Link to={`/profile/${userId}/alert`}>
+                <Button color="primary" variant="outlined"> Crear Alerta de Empleo </Button>
+              </Link>
+              <EditUbicacion profile={user} id={userId} />
+              <FormJobs />
+              <Link style={{marginTop: "-1.7vh"}} to='/create-workerpost'>
+                <Button color="primary" variant="outlined">
+                  Crear Workerpost
+                </Button>
+              </Link>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => setOpen(false)}
+                style={{ marginTop: "3vh"}}
+              >
+                Cancel
+              </Button>
             </Container>
           </Modal>
         </>
@@ -163,9 +163,6 @@ export const ProfileDetails = () => {
     <LoadingScreen />
   ) : (
     <div>
-      {/* <div className="left-prof">
-        <Leftbar />
-      </div> */}
       <section className="seccion-perfil-usuario">
         <div className="perfil-usuario-header">
           <div className="perfil-usuario-portada">
@@ -185,9 +182,71 @@ export const ProfileDetails = () => {
           </div>
         </div>
         <div className="perfil-usuario-body">
-          <div className="perfil-usuario-bio">
-            <h3 className="titulo">{user?.usr_username}</h3>
-            <p className="texto">{user?.usr_description}</p>
+          <div className="datos-usuario">
+            <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
+              <Fab color="primary" className={classes.fab}>
+                <BuildIcon className={classes.configIcon} />
+              </Fab>
+            </Tooltip>
+            <div className="perfil-usuario-bio">
+              <h3 className="titulo">{user?.usr_username}</h3>
+              <p className="texto">{user?.usr_description}</p>
+              <div className="myjobs">
+                {
+                  user?.jobs?.map(job => (
+                      <span className="myjob">{job.job_name}</span>
+                  ))
+                }
+              </div>
+            </div>
+            <div className="perfil-social">
+              {user.usr_social?.linkedin && (
+                <a
+                  href={
+                    user.usr_social?.linkedin ? user.usr_social.linkedin : null
+                  }
+                  target="_blank"
+                  className="boton-redes linkeding"
+                  rel="noreferrer"
+                >
+                  {user.usr_social.linkedin && <FaLinkedin className="icons" />}
+                </a>
+              )}
+              {user.usr_social?.github && (
+                <a
+                  href={user?.usr_social?.github ? user?.usr_social.github : null}
+                  target="_blank"
+                  className="boton-redes github"
+                  rel="noreferrer"
+                >
+                  <BsGithub fill="#000" className="icons" />
+                </a>
+              )}
+              {user.usr_social?.instagram && (
+                <a
+                  href={
+                    user.usr_social?.instagram ? user.usr_social.instagram : null
+                  }
+                  target="_blank"
+                  className="boton-redes instagram"
+                  rel="noreferrer"
+                >
+                  <FaInstagram className="icons" />
+                </a>
+              )}
+              {user.usr_social?.facebook && (
+                <a
+                  href={
+                    user?.usr_social?.facebook ? user?.usr_social.facebook : null
+                  }
+                  target="_blank"
+                  className="boton-redes facebook"
+                  rel="noreferrer"
+                >
+                  <FaFacebook className="icons" />
+                </a>
+              )}
+            </div>
           </div>
           <div className={classes.puntuarbox}>
             {userId === myId ? '' : <div className={classes.puntuar} >
@@ -205,7 +264,7 @@ export const ProfileDetails = () => {
             </div>}
             {
               user?.usr_email !== email && (
-                <div>
+                <div style={{marginTop: "30px"}}>
                   <ChatWindowv2 receiverData={user} />
                 </div>
               )
@@ -237,66 +296,19 @@ export const ProfileDetails = () => {
           {/* <Cards key="job" profiledata={user?.jobs} profileType={"jobs"}></Cards> */}
           {/* </div> */}
           <div>{/* Aquí van los workerposts */}</div>
-          <div className="vtn1">
-            <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({ show: 'post' })}>Posts</Button>
-          </div>
-          <div className="vtn2">
-            <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({ show: 'workerpost' })}>WorkerPost</Button>
+          <div className="btns-posts">
+            <div className="vtn1">
+              <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'workerpost' && setPostOrWorkerpost({ show: 'post' })}>Posts</Button>
+            </div>
+            <div className="vtn2">
+              <Button color="primary" variant="outlined" onClick={() => postOrWorkerpost.show === 'post' && setPostOrWorkerpost({ show: 'workerpost' })}>WorkerPost</Button>
+            </div>
           </div>
           <div className="div-posted">
             {postOrWorkerpost.show === 'post' ? <Feed key="feed" profilePosts={user?.posts} /> : <Workerpost workerposts={user.workerPosts} />}
           </div>
-          <div className="redes-sociales">
-            {user.usr_social?.linkedin && (
-              <a
-                href={
-                  user.usr_social?.linkedin ? user.usr_social.linkedin : null
-                }
-                target="_blank"
-                className="boton-redes linkeding"
-                rel="noreferrer"
-              >
-                {user.usr_social.linkedin && <FaLinkedin className="icons" />}
-              </a>
-            )}
-            {user.usr_social?.github && (
-              <a
-                href={user?.usr_social?.github ? user?.usr_social.github : null}
-                target="_blank"
-                className="boton-redes github"
-                rel="noreferrer"
-              >
-                <BsGithub fill="#000" className="icons" />
-              </a>
-            )}
-            {user.usr_social?.instagram && (
-              <a
-                href={
-                  user.usr_social?.instagram ? user.usr_social.instagram : null
-                }
-                target="_blank"
-                className="boton-redes instagram"
-                rel="noreferrer"
-              >
-                <FaInstagram className="icons" />
-              </a>
-            )}
-            {user.usr_social?.facebook && (
-              <a
-                href={
-                  user?.usr_social?.facebook ? user?.usr_social.facebook : null
-                }
-                target="_blank"
-                className="boton-redes facebook"
-                rel="noreferrer"
-              >
-                <FaFacebook className="icons" />
-              </a>
-            )}
-          </div>
         </div>
       </section>
-
     </div>
   );
 };

@@ -2,10 +2,23 @@
     width: 17%;
 }
 
+.datos-usuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+}
+
+.perfil-social {
+    display: flex;
+    flex-direction: column;
+
+}
+
 .seccion-perfil-usuario .perfil-usuario-body,
 .seccion-perfil-usuario{
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
 }
@@ -38,7 +51,7 @@
 
 .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
     position: absolute;
-    top: 60px;
+    top: 40vh;
     right: 8.40rem;
     border: 0;
     border-radius: 8px;
@@ -46,6 +59,11 @@
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .seccion-perfil-usuario .perfil-usuario-avatar{
@@ -109,16 +127,37 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 1.5rem 2rem;
+    padding: 3rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
     background-color: #fff;
     border-radius: 15px;
-    width: 100%;
+    width: 50vw;
 }
 
 .seccion-perfil-usuario .perfil-usuario-bio{
-  margin-bottom: 1.25rem;
   text-align: center;
+  display: flex;
+    flex-direction: column;
+}
+
+.myjobs {
+    margin-top: 20px;
+    margin-bottom: -20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.myjob {
+    background-color: #b5e48c;
+    max-width: 10vw;
+    padding: 4px;
+    border-radius: 1vw;
+    border: 0.2vw #02c39a solid;
+    font-size: 1vw;
+    
 }
 
 .seccion-perfil-usuario .perfil-usuario-footer{
@@ -140,27 +179,27 @@
     vertical-align: middle;
 }
 
-.seccion-perfil-usuario .redes-sociales{
-    position: absolute;
-    right: calc(0px - 50px - 1rem);
-    top: 0;
-    display: flex;
-    flex-direction: column;
-}
 
-.seccion-perfil-usuario .redes-sociales .boton-redes{
+
+.boton-redes{
     border: 0;
     background-color: #fff;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 2.3vw;
+    height: 2.3vw;
+    margin: 0.4vw;
     border-radius: 50%;
     color: #fff;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
     font-size: 1.3rem;
+}
+
+.icons {
+    width: 1.6vw;
+    height: 1.6vw;
 }
 
 .seccion-perfil-usuario .redes-sociales .boton-redes + .boton-redes{
@@ -252,19 +291,29 @@
    }
 
    .vtn1{
-       margin-left: -15%;
-       margin-top: 10px;
+       margin-top: 0;
    }
 
    .vtn2{
-    margin-left: 18%;
-    margin-top: -35px;
+    margin-top: 0;
     }
 
 .divChat2{
     margin-left: 55%;
     margin-top: -23px;
 }
+
+.btns-posts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5vw;
+    gap: 2vw;
+    margin-bottom: 3vh;
+}
+
+
 
 @media (max-width: 750px) {
     .seccion-perfil-usuario .lista-datos {

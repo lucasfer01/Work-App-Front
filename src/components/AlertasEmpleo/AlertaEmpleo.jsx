@@ -65,7 +65,7 @@ const AlertaEmpleo = () => {
     };
 
     return (
-        <div className='container'>
+        <div className='alerta-container'>
             <h2 className='title'>Agregar alertas</h2>
             <div>
                 <form className='form'>
