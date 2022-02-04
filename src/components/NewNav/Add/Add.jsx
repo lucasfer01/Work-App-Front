@@ -14,7 +14,7 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-import { Add as AddIcon } from "@material-ui/icons";
+import { Add as AddIcon, NoEncryption } from "@material-ui/icons";
 import { useState } from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 import { postPost, getPosts } from '../../../actions/formEmpleador';
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     right: 20,
   },
   container: {
-    width: 500,
-    height: 800,
+    width: "35vw",
+    height: "80vh",
     backgroundColor: "white",
     position: "absolute",
     top: 0,
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100vw",
       height: "100vh",
     },
+    overflowY: "scroll",
   },
   form: {
     padding: theme.spacing(2),
@@ -58,12 +59,20 @@ const useStyles = makeStyles((theme) => ({
   },
   trabajos: {
     width: "100%",
-    background: "transparent",
-    color: "gray",
+    textAlign: "start",
+    backgroundColor: "#d8f3dc",
+    color: "#495057",
+    border: "none",
+    "&:hover": {
+      backgroundColor: "#ced4da",
+    }
   },
   jobsBox: {
-    maxHeight: "10em",
-    overflowY: "scroll",
+    position: "absolute",
+    top: "8vh",
+    width: "28vw",
+    zIndex: 2,
+    backgroundColor: "white",
   },
   addedBox: {
     display: "flex",
@@ -73,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
   added: {
     display: "flex",
     gap: "10px",
+    backgroundColor: "#d8f3dc",
+    padding: "4px",
+    borderRadius: "0.5vw",
   },
   radios: {
     display: "flex",
@@ -88,15 +100,28 @@ const useStyles = makeStyles((theme) => ({
   photobox: {
     display: "flex",
     flexDirection: "row",
-    width: "4em",
+    width: "5em",
     height: "4em",
     border: "1px solid #ccc",
     borderRadius: "3px",
+    backgroundColor: "#d8f3dc",
   },
   photo: {
-    maxWidth: "100%",
+    width: "4em",
     maxHeight: "100%",
   },
+  xbtn: {
+    position: "relative",
+    top: "0",
+    height: "25px",
+    width: "20px",
+    marginLeft: "5px",
+    borderRadius: "5px",
+    color: "red",
+  },
+  textField: {
+    width: "28vw",
+  }
 }));
 
 function Alert(props) {
@@ -238,23 +263,21 @@ const Add = () => {
       </Tooltip>
       <Modal open={open}>
         <Container className={classes.container}>
-          <form style={{marginTop:'3rem'}} className={classes.form} autoComplete="off">
+          <form className={classes.form} autoComplete="off">
             <div className={classes.item}>
               <TextField
                 id="standard-basic"
                 label="Rubro del trabajo "
+                className={classes.textField}
                 size="small"
-                style={{ width: "100%" }}
                 value={newJob}
                 onChange={handleJobChange}
               />
             </div>
             <div className={classes.jobsBox}>
               {
-                jobList.map(job => (
-                  <div key={job.job_id}>
-                    <input className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
-                  </div>
+                jobList.slice(0, 8).map(job => (
+                    <input key={job.job_id} className={classes.trabajos} type="button" value={job.job_name} onClick={handleAddJob} />
                 ))
               }
             </div>
@@ -275,7 +298,7 @@ const Add = () => {
                 id="standard-basic"
                 label="Tituto del trabajo"
                 size="small"
-                style={{ width: "100%" }}
+                className={classes.textField}
                 onChange={event => setPost({ ...post, post_title: event.target.value })}
               />
             </div>
@@ -284,7 +307,7 @@ const Add = () => {
                 id="standard-basic"
                 label="Resumen del trabajo"
                 size="small"
-                style={{ width: "100%" }}
+                className={classes.textField}
                 value={post.post_shortdescription} onChange={(event) => setPost({ ...post, post_shortdescription: event.target.value })}
               />
             </div>
@@ -295,7 +318,7 @@ const Add = () => {
                 rows={4}
                 label="Description"
                 size="small"
-                style={{ width: "100%" }}
+                className={classes.textField}
                 value={post.post_description} onChange={(event) => setPost({ ...post, post_description: event.target.value })}
               />
             </div>
@@ -332,7 +355,7 @@ const Add = () => {
                     return (
                       <div key={i} className={classes.photobox}>
                         <img className={classes.photo} src={photo} alt="img not found" />
-                        <button value={photo} onClick={handleDeletePhoto}>X</button>
+                        <button className={classes.xbtn} value={photo} onClick={handleDeletePhoto}>X</button>
                       </div>
                     )
                   })

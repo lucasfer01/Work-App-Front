@@ -100,7 +100,7 @@ export function FormWorkerpost() {
 
                     {workerpost.wp_photo.length ? workerpost.wp_photo.map(foto => <div key={foto}>
                         <img src={foto} alt="Foto workerpost" width='300px' />
-                        <button onClick={() => {
+                        <button style={{width: "35px", backgroundColor: "red"}} onClick={() => {
                             // temporal
                             const temporalPhotos = workerpost.wp_photo;
 

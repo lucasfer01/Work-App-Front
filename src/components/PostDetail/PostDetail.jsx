@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   card: {
-    width: "40vw",
+    width: "45vw",
     height: "80vh",
     boxShadow: "0 1rem 1rem rgba(0, 0, 0, 0.2)",
   },
@@ -61,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#d74949",
   },
   media: {
-    height: 250,
+    maxHeight: "100%",
+    maxWidth: "24%",
+    border: "1.5px solid #d74949",
+    borderRadius: "0.5vw",
     [theme.breakpoints.down("sm")]: {
       height: 150,
     },
@@ -70,6 +73,16 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: "0.5vh",
     right: "34vw",
+  },
+  boximages: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "43vw",
+    height: "20vh",
+    gap: "0.5vw",
+    marginBottom: "2vh",
   }
 }));
 
@@ -123,7 +136,7 @@ export default function PostDetail() {
       {post?.post_id ?
         <Card className={classes.card}>
           <CardActionArea>
-          <Typography className={classes.font} gutterBottom variant="h5">
+            <Typography className={classes.font} gutterBottom variant="h5">
               <img className='conversationImg'
                 src={photo}
                 alt=""
@@ -133,12 +146,17 @@ export default function PostDetail() {
             <Typography className={classes.fontTitle} gutterBottom variant="h5">
               {post?.post_title}
             </Typography>
-            {post.post_photo.length > 0 ? post.post_photo.map(foto => {
-              return (
-                <CardMedia className={classes.media} image={foto} title="My Post" />
-              )
-            }) : <span>No hay fotos en esta publicación</span>}
+            <Typography style={{marginLeft: "15px"}} variant="body2">
+              Oficio requerido: {post?.jobs?.map(job => job.job_name).join(', ')}
+            </Typography>
             <CardContent>
+              <dic className={classes.boximages}>
+                {post.post_photo.length > 0 ? post.post_photo.map(foto => {
+                  return (
+                    <img className={classes.media} src={foto} />
+                  )
+                }) : <span>No hay fotos en esta publicación</span>}
+              </dic>
               <Typography className={classes.fontDesc} variant="body2">
                 {post.post_shortdescription}
               </Typography>
@@ -180,7 +198,7 @@ export default function PostDetail() {
           <ChatWindowv2 receiverData={author} />
         </div>
       }
-      
+
     </div>
   );
 };

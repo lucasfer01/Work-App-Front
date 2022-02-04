@@ -114,9 +114,14 @@ const Post = (props) => {
           {props.title}
         </Typography>
         <CardContent>
+        <Typography variant="body2">
+            {props.jobs?.map(job => "#" + job.job_name).join(' ')}
+        </Typography>
+        </CardContent>
+        <CardContent>
           <Typography variant="body2">
             {props.shortdescription}
-          </Typography>
+          </Typography>{/*  */}
         </CardContent>
         <CardContent>
           <Typography variant="body2">

@@ -56,7 +56,9 @@ export default function Filtros(){
     const { job, id } = formValues;
 
     const handleInputChange = ({ target }) => {
-        setFormValues({ ...formValues, [target.name]: target.value, id: null });
+        setFormValues({ 
+          ...formValues, 
+          [target.name]: target.value, id: null });
         setHideList(false);
       };
     const selectJob = (value) => {

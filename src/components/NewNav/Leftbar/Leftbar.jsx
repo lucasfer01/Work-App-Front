@@ -108,7 +108,7 @@ const Leftbar = () => {
         <div className={navStyles.item} onClick={handleOpen}>
           <Link style={{textDecoration: "none"}} className={classes.link} to="/jobs">
             <Work className={classes.icon} />
-            <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajo</p>
+            <Typography className={classes.text}><p className={classes.parr}>Buscar Trabajador</p>
             </Typography>
           </Link>
         </div>
