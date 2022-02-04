@@ -140,7 +140,7 @@ export const ProfileDetails = () => {
               </Link>
               <EditUbicacion profile={user} id={userId} />
               <FormJobs />
-              <Link style={{marginTop: "-1.7vh"}} to='/create-workerpost'>
+              <Link style={{ marginTop: "-1.7vh" }} to='/create-workerpost'>
                 <Button color="primary" variant="outlined">
                   Crear Workerpost
                 </Button>
@@ -149,7 +149,7 @@ export const ProfileDetails = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={() => setOpen(false)}
-                style={{ marginTop: "3vh"}}
+                style={{ marginTop: "3vh" }}
               >
                 Cancel
               </Button>
@@ -183,18 +183,22 @@ export const ProfileDetails = () => {
         </div>
         <div className="perfil-usuario-body">
           <div className="datos-usuario">
-            <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
-              <Fab color="primary" className={classes.fab}>
-                <BuildIcon className={classes.configIcon} />
-              </Fab>
-            </Tooltip>
+            {
+              myId === userId && (
+                <Tooltip title="Configuraciones" aria-label="configuraciones" onClick={() => setOpen(true)}>
+                  <Fab color="primary" className={classes.fab}>
+                    <BuildIcon className={classes.configIcon} />
+                  </Fab>
+                </Tooltip>
+              )
+            }
             <div className="perfil-usuario-bio">
               <h3 className="titulo">{user?.usr_username}</h3>
               <p className="texto">{user?.usr_description}</p>
               <div className="myjobs">
                 {
                   user?.jobs?.map(job => (
-                      <span className="myjob">{job.job_name}</span>
+                    <span className="myjob">{job.job_name}</span>
                   ))
                 }
               </div>
@@ -264,7 +268,7 @@ export const ProfileDetails = () => {
             </div>}
             {
               user?.usr_email !== email && (
-                <div style={{marginTop: "30px"}}>
+                <div style={{ marginTop: "30px" }}>
                   <ChatWindowv2 receiverData={user} />
                 </div>
               )
